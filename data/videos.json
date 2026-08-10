@@ -3,9 +3,22 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.15.1",
-    "updated": "2026-08-10T02:13:15Z"
+    "updated": "2026-08-10T11:58:52Z"
   },
   "videos": [
+    {
+      "id": "wI3TcjdYMYw",
+      "title": "Nunu ADC vs Xerath EUW Master 96 LP | Patch 26.15",
+      "published": "2026-08-10T10:00:14+00:00",
+      "role": "adc",
+      "enemy": "Xerath",
+      "enemyName": "Xerath",
+      "patch": "26.15",
+      "rank": "Master",
+      "lp": 96,
+      "region": "EUW",
+      "result": null
+    },
     {
       "id": "cyJuSRMsGLU",
       "title": "Nunu ADC vs Ziggs EUW Master 80 LP | Patch 26.15",
