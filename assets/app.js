@@ -31,6 +31,9 @@
       loss: "Défaite",
       langLabel: "Passer en anglais",
       navRoles: "Rôles",
+      requestBtn: "❄ Demander ce replay",
+      requestSent: "Demande envoyée ! Le matchup est noté.",
+      requestAlready: "Déjà demandé depuis ce navigateur ✓",
       roleNames: { top: "Top", jungle: "Jungle", mid: "Mid", adc: "ADC", support: "Support" },
       docTitle: "Gyn Replays — Matchups Nunu"
     },
@@ -52,6 +55,9 @@
       loss: "Loss",
       langLabel: "Switch to French",
       navRoles: "Roles",
+      requestBtn: "❄ Request this replay",
+      requestSent: "Request sent! The matchup is noted.",
+      requestAlready: "Already requested from this browser ✓",
       roleNames: { top: "Top", jungle: "Jungle", mid: "Mid", adc: "ADC", support: "Support" },
       docTitle: "Gyn Replays — Nunu Matchups"
     }
@@ -67,6 +73,13 @@
     byRole: {},      // role -> { champId -> [videos] }
     rosters: {},     // role -> [{id, name, videos}] triés
     tabs: {}         // role -> bouton d'onglet (construits une seule fois)
+  };
+
+  // Boîte à demandes : un Google Form sert de compteur invisible — le site
+  // poste la réponse en arrière-plan (no-cors), personne ne quitte la page.
+  var REQUEST_FORM = {
+    action: "https://docs.google.com/forms/d/e/1FAIpQLSfhCu3IENMib5voI5VtjSON8ABal8hN5xpaTPRSadGZlR2Z3g/formResponse",
+    field: "entry.605874030"
   };
 
   // Secours locaux (data URI) si Data Dragon ou i.ytimg sont injoignables.
@@ -378,6 +391,9 @@
 
     var list = $("video-list");
     list.innerHTML = "";
+    if (!entry.videos.length) {
+      list.appendChild(buildRequestBox(entry));
+    }
     entry.videos
       .slice()
       .sort(function (a, b) { return a.published < b.published ? 1 : -1; })
@@ -407,6 +423,42 @@
       panel.scrollIntoView({ behavior: prefersReducedMotion() ? "auto" : "smooth", block: "nearest" });
       $("panel-title").focus({ preventScroll: true });
     }
+  }
+
+  function requestKey(role, champ) { return "gyn-req-" + role + "-" + champ; }
+
+  function buildRequestBox(entry) {
+    var box = document.createElement("div");
+    box.className = "request-box";
+    var note = document.createElement("p");
+    note.className = "request-note";
+    var already = false;
+    try { already = !!localStorage.getItem(requestKey(state.role, entry.id)); } catch (e) { /* stockage bloqué */ }
+    if (already) {
+      note.classList.add("already");
+      note.textContent = t().requestAlready;
+      box.appendChild(note);
+      return box;
+    }
+    var role = state.role;
+    var champ = entry.id;
+    var label = "Nunu " + t().roleNames[role] + " vs " + entry.name;
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "request-btn";
+    btn.textContent = t().requestBtn;
+    btn.addEventListener("click", function () {
+      btn.disabled = true;
+      var body = new URLSearchParams();
+      body.append(REQUEST_FORM.field, label);
+      fetch(REQUEST_FORM.action, { method: "POST", mode: "no-cors", body: body })
+        .catch(function () { /* réponse opaque en no-cors : rien à lire */ });
+      try { localStorage.setItem(requestKey(role, champ), "1"); } catch (e) { /* stockage bloqué */ }
+      note.textContent = t().requestSent;
+      box.replaceChild(note, btn);
+    });
+    box.appendChild(btn);
+    return box;
   }
 
   function renderChrome() {

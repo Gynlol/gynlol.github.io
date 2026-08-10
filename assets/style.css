@@ -427,6 +427,27 @@ main { flex: 1; padding-top: 28px; padding-bottom: 48px; }
 .chip.loss { color: var(--loss); background: rgba(255, 122, 122, 0.12); }
 .chip.date { background: none; padding-left: 0; }
 
+/* Demande de replay (matchup sans vidéo) */
+
+.request-box { padding: 4px 0 8px; }
+.request-btn {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  padding: 12px 20px;
+  min-height: 44px;
+  transition: background-color 140ms ease;
+}
+.request-btn:hover { background: var(--accent-dim); }
+.request-btn:disabled { opacity: 0.6; cursor: default; }
+.request-note { color: var(--win); font-size: 14px; padding: 10px 0; }
+.request-note.already { color: var(--muted); }
+
 /* ---------- Pied ---------- */
 
 .footer { border-top: 1px solid var(--line); }
