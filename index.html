@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gyn Replays — Matchups Nunu</title>
+  <meta name="description" content="Tous les matchups Nunu en replay, classés par rôle et par champion ennemi. Mis à jour automatiquement depuis la chaîne YouTube Gyn Replays.">
+  <meta property="og:title" content="Gyn Replays — Matchups Nunu">
+  <meta property="og:description" content="Trouve le replay du matchup exact que tu vas affronter : Top, Jungle, Mid, ADC, Support.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2v28M4 9l24 14M4 23L28 9M16 8l-4-4m4 4 4-4M16 24l-4 4m4-4 4 4M7 12l-5 1m5 7-5-1m23-7 5 1m-5 7 5-1' stroke='%236fd3ff' stroke-width='2.4' stroke-linecap='round' fill='none'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Polices en chargement non bloquant : si fonts.googleapis.com traîne,
+       la page s'affiche quand même avec les polices système. -->
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-row shell">
+      <a class="brand" href="#" id="brand-link">
+        <svg class="brand-flake" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2v28M4 9l24 14M4 23L28 9M16 8l-4-4m4 4 4-4M16 24l-4 4m4-4 4 4" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none"/></svg>
+        <span class="brand-text">
+          <span class="brand-name">Gyn Replays</span>
+          <span class="brand-sub" data-i18n="brandSub">Matchups Nunu</span>
+        </span>
+      </a>
+      <div class="topbar-actions">
+        <button id="lang-toggle" type="button" aria-label="Switch language"></button>
+        <a class="yt-link" href="https://www.youtube.com/@GynReplays" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M23 7.2s-.2-1.6-.9-2.3c-.9-.9-1.9-.9-2.4-1C16.6 3.6 12 3.6 12 3.6s-4.6 0-7.7.3c-.5.1-1.5.1-2.4 1-.7.7-.9 2.3-.9 2.3S.8 9.1.8 11v1.8c0 1.9.2 3.8.2 3.8s.2 1.6.9 2.3c.9.9 2 .9 2.5 1 1.8.2 7.6.3 7.6.3s4.6 0 7.7-.4c.5-.1 1.5-.1 2.4-1 .7-.7.9-2.3.9-2.3s.2-1.9.2-3.8V11c0-1.9-.2-3.8-.2-3.8zM9.7 14.9V8.5l6.3 3.2-6.3 3.2z"/></svg>
+          <span>YouTube</span>
+        </a>
+      </div>
+    </div>
+    <nav class="roles shell" id="role-tabs" aria-label="Rôles"></nav>
+  </header>
+
+  <main class="shell">
+    <section class="latest" id="latest-section" hidden>
+      <h2 class="section-title" data-i18n="latest">Derniers replays</h2>
+      <div class="latest-row" id="latest-row"></div>
+    </section>
+
+    <section class="matchups">
+      <div class="matchups-head">
+        <div>
+          <h1 class="role-title" id="role-title"></h1>
+          <p class="coverage" id="coverage-line"></p>
+        </div>
+        <input type="search" id="search" class="search" autocomplete="off">
+      </div>
+      <div class="grid" id="grid"></div>
+      <p class="no-results" id="no-results" hidden></p>
+    </section>
+
+    <section class="panel" id="matchup-panel" hidden>
+      <div class="panel-head">
+        <img class="panel-portrait" id="panel-portrait" alt="" width="72" height="72">
+        <div>
+          <h2 class="panel-title" id="panel-title" tabindex="-1"></h2>
+          <p class="panel-sub" id="panel-sub"></p>
+        </div>
+        <button class="panel-close" id="panel-close" type="button" aria-label="Fermer">✕</button>
+      </div>
+      <div class="video-list" id="video-list"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="shell footer-inner">
+      <p><span data-i18n="footerAuto">Mis à jour automatiquement depuis la chaîne</span> <a href="https://www.youtube.com/@GynReplays" target="_blank" rel="noopener">@GynReplays</a> · <span id="footer-updated"></span></p>
+      <a class="subscribe" href="https://www.youtube.com/@GynReplays?sub_confirmation=1" target="_blank" rel="noopener" data-i18n="subscribe">Abonne-toi ❄</a>
+    </div>
+  </footer>
+
+  <noscript>
+    <p class="noscript">Ce site a besoin de JavaScript pour afficher les matchups. / This site needs JavaScript to display matchups.</p>
+  </noscript>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>

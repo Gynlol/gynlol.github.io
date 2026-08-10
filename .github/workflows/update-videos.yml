@@ -1,0 +1,46 @@
+name: Mise à jour des vidéos
+
+on:
+  schedule:
+    - cron: "23 * * * *"   # toutes les heures, à h+23
+  workflow_dispatch: {}     # bouton « Run workflow » pour lancer à la main
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-videos
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Lire le flux RSS et mettre à jour videos.json
+        run: python scripts/update_videos.py
+
+      - name: Committer si changement
+        run: |
+          if git diff --quiet -- data/videos.json; then
+            echo "Aucun changement."
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add data/videos.json
+            git commit -m "MAJ automatique des vidéos"
+            # Un commit humain a pu arriver entre le checkout et le push :
+            # on se resynchronise et on réessaie au lieu d'échouer.
+            for i in 1 2 3; do
+              if git push; then
+                exit 0
+              fi
+              git pull --rebase origin main || { git rebase --abort; exit 1; }
+            done
+            git push
+          fi

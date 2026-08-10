@@ -1,0 +1,49 @@
+{
+  "meta": {
+    "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
+    "channelUrl": "https://www.youtube.com/@GynReplays",
+    "ddragonVersion": "16.15.1",
+    "updated": "2026-08-10T02:13:15Z"
+  },
+  "videos": [
+    {
+      "id": "cyJuSRMsGLU",
+      "title": "Nunu ADC vs Ziggs EUW Master 80 LP | Patch 26.15",
+      "published": "2026-08-09T10:00:15+00:00",
+      "role": "adc",
+      "enemy": "Ziggs",
+      "enemyName": "Ziggs",
+      "patch": "26.15",
+      "rank": "Master",
+      "lp": 80,
+      "region": "EUW",
+      "result": null
+    },
+    {
+      "id": "olGU8Ee0yAo",
+      "title": "Nunu ADC vs Sivir EUW Master  64 LP | Patch 26.15",
+      "published": "2026-08-08T10:00:22+00:00",
+      "role": "adc",
+      "enemy": "Sivir",
+      "enemyName": "Sivir",
+      "patch": "26.15",
+      "rank": "Master",
+      "lp": 64,
+      "region": "EUW",
+      "result": null
+    },
+    {
+      "id": "17_1rZhEu_w",
+      "title": "Nunu ADC vs Ezreal EUW Master 37 LP | Patch 26.15",
+      "published": "2026-08-07T10:00:39+00:00",
+      "role": "adc",
+      "enemy": "Ezreal",
+      "enemyName": "Ezreal",
+      "patch": "26.15",
+      "rank": "Master",
+      "lp": 37,
+      "region": "EUW",
+      "result": null
+    }
+  ]
+}
