@@ -1,5 +1,10 @@
 # Guide de mise en ligne (pas à pas, ~20 min)
 
+> ✅ **Déjà fait le 10/08/2026** — le site est en ligne sur
+> <https://gynlol.github.io> (dépôt `Gynlol/gynlol.github.io`, poussé via
+> une clé de déploiement locale, Pages et le robot horaire activés).
+> Ce guide reste comme référence si tout est à refaire un jour.
+
 Tout est déjà prêt dans ce dossier. Il reste : installer Git (si besoin),
 créer un compte GitHub, y envoyer le dossier, et activer 2 réglages.
 Aucun code à écrire.
