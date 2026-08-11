@@ -25,14 +25,17 @@ jobs:
       - name: Lire le flux RSS et mettre à jour videos.json
         run: python scripts/update_videos.py
 
+      - name: Regénérer les pages de référencement
+        run: python scripts/gen_seo.py
+
       - name: Committer si changement
         run: |
-          if git diff --quiet -- data/videos.json; then
+          git add data/videos.json matchups sitemap.xml
+          if git diff --cached --quiet; then
             echo "Aucun changement."
           else
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add data/videos.json
             git commit -m "MAJ automatique des vidéos"
             # Un commit humain a pu arriver entre le checkout et le push :
             # on se resynchronise et on réessaie au lieu d'échouer.

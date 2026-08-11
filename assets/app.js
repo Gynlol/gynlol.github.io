@@ -377,6 +377,7 @@
     if (!entry) { panel.hidden = true; return; }
 
     panel.hidden = false;
+    document.title = "Nunu " + t().roleNames[state.role] + " vs " + entry.name + " — Gyn Replays";
     var portrait = $("panel-portrait");
     if (!portrait.dataset.fallbackBound) {
       withFallback(portrait, FALLBACK_ICON);
