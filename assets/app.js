@@ -462,6 +462,23 @@
     return box;
   }
 
+  // Liens réels vers les pages matchups (référencement + accès direct) —
+  // construits une fois : la liste ne dépend que des données chargées.
+  function buildMatchupLinks() {
+    var nav = $("matchup-links");
+    if (!nav) return;
+    nav.innerHTML = "";
+    ROLES.forEach(function (role) {
+      state.rosters[role].forEach(function (c) {
+        if (!c.videos.length) return;
+        var a = document.createElement("a");
+        a.href = "/matchups/" + role + "/" + c.id.toLowerCase() + "/";
+        a.textContent = "Nunu " + I18N.fr.roleNames[role] + " vs " + c.name;
+        nav.appendChild(a);
+      });
+    });
+  }
+
   function renderChrome() {
     document.documentElement.lang = state.lang;
     document.title = t().docTitle;
@@ -567,6 +584,7 @@
     state.lang = detectLang();
     buildIndexes();
     buildTabs();
+    buildMatchupLinks();
     var wanted = readHash();
     state.role = wanted.role || defaultRole();
     state.champ = wanted.champ;

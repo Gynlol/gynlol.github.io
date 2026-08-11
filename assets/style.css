@@ -451,6 +451,14 @@ main { flex: 1; padding-top: 28px; padding-bottom: 48px; }
 /* ---------- Pied ---------- */
 
 .footer { border-top: 1px solid var(--line); }
+.matchup-links {
+  padding-top: 16px;
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 2;
+}
+.matchup-links a { color: var(--muted); margin-right: 14px; white-space: nowrap; }
+.matchup-links a:hover { color: var(--accent); }
 .footer-inner {
   display: flex;
   align-items: center;
