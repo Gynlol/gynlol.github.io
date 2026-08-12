@@ -86,5 +86,16 @@
   </noscript>
 
   <script src="assets/app.js"></script>
+  <!-- GoatCounter : compteur de visites sans cookies (pas de bandeau RGPD).
+       Le hash (#adc/ziggs) est compté comme une page pour voir les matchups consultés. -->
+  <script>
+    window.goatcounter = { path: function () { return location.pathname + location.search + location.hash; } };
+    window.addEventListener("hashchange", function () {
+      if (window.goatcounter.count) {
+        window.goatcounter.count({ path: location.pathname + location.search + location.hash });
+      }
+    });
+  </script>
+  <script data-goatcounter="https://gyn.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
