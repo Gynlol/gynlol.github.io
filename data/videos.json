@@ -3,9 +3,22 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.16.1",
-    "updated": "2026-08-11T19:51:02Z"
+    "updated": "2026-08-12T14:34:20Z"
   },
   "videos": [
+    {
+      "id": "LcSovKmWuSc",
+      "title": "Nunu TOP vs Dr.Mundo EUW Master 87 LP | Patch 26.15",
+      "published": "2026-08-12T10:00:08+00:00",
+      "role": "top",
+      "enemy": "DrMundo",
+      "enemyName": "Dr. Mundo",
+      "patch": "26.15",
+      "rank": "Master",
+      "lp": 87,
+      "region": "EUW",
+      "result": null
+    },
     {
       "id": "pkic9qoaSmM",
       "title": "Nunu ADC vs Viktor EUW Master 122 LP | Patch 26.15",
