@@ -3,9 +3,22 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.16.1",
-    "updated": "2026-08-12T14:34:20Z"
+    "updated": "2026-08-13T14:35:41Z"
   },
   "videos": [
+    {
+      "id": "8C91drE6K2c",
+      "title": "Nunu TOP vs Teemo EUW Master 66 LP | Patch 26.15",
+      "published": "2026-08-13T10:00:25+00:00",
+      "role": "top",
+      "enemy": "Teemo",
+      "enemyName": "Teemo",
+      "patch": "26.15",
+      "rank": "Master",
+      "lp": 66,
+      "region": "EUW",
+      "result": null
+    },
     {
       "id": "LcSovKmWuSc",
       "title": "Nunu TOP vs Dr.Mundo EUW Master 87 LP | Patch 26.15",
