@@ -3,9 +3,22 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.16.1",
-    "updated": "2026-08-13T14:35:41Z"
+    "updated": "2026-08-14T12:31:51Z"
   },
   "videos": [
+    {
+      "id": "luc7LZpcBUU",
+      "title": "Nunu ADC vs Kalista EUW Master 54 LP | Patch 26.15",
+      "published": "2026-08-14T10:00:13+00:00",
+      "role": "adc",
+      "enemy": "Kalista",
+      "enemyName": "Kalista",
+      "patch": "26.15",
+      "rank": "Master",
+      "lp": 54,
+      "region": "EUW",
+      "result": null
+    },
     {
       "id": "8C91drE6K2c",
       "title": "Nunu TOP vs Teemo EUW Master 66 LP | Patch 26.15",
