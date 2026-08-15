@@ -3,9 +3,22 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.16.1",
-    "updated": "2026-08-14T12:31:51Z"
+    "updated": "2026-08-15T10:58:04Z"
   },
   "videos": [
+    {
+      "id": "BOqfMwjX9K0",
+      "title": "Nunu Mid vs Viktor EUW Master 12 LP | Patch 26.15",
+      "published": "2026-08-15T10:00:01+00:00",
+      "role": "mid",
+      "enemy": "Viktor",
+      "enemyName": "Viktor",
+      "patch": "26.15",
+      "rank": "Master",
+      "lp": 12,
+      "region": "EUW",
+      "result": null
+    },
     {
       "id": "luc7LZpcBUU",
       "title": "Nunu ADC vs Kalista EUW Master 54 LP | Patch 26.15",
