@@ -3,9 +3,22 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.16.1",
-    "updated": "2026-08-15T10:58:04Z"
+    "updated": "2026-08-16T10:59:17Z"
   },
   "videos": [
+    {
+      "id": "38bpUFfZHnU",
+      "title": "Nunu Top vs Mordekaiser | Road to Master : Silver 1 60lp",
+      "published": "2026-08-16T10:00:26+00:00",
+      "role": "top",
+      "enemy": "Mordekaiser",
+      "enemyName": "Mordekaiser",
+      "patch": null,
+      "rank": "Master",
+      "lp": 60,
+      "region": null,
+      "result": null
+    },
     {
       "id": "BOqfMwjX9K0",
       "title": "Nunu Mid vs Viktor EUW Master 12 LP | Patch 26.15",
