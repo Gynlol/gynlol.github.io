@@ -3,9 +3,22 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.16.1",
-    "updated": "2026-08-16T10:59:17Z"
+    "updated": "2026-08-17T10:52:31Z"
   },
   "videos": [
+    {
+      "id": "FzFtqe9hWqw",
+      "title": "Nunu Top vs Darius | Road to Master : Gold 4 10lp",
+      "published": "2026-08-17T10:00:19+00:00",
+      "role": "top",
+      "enemy": "Darius",
+      "enemyName": "Darius",
+      "patch": null,
+      "rank": "Master",
+      "lp": 10,
+      "region": null,
+      "result": null
+    },
     {
       "id": "38bpUFfZHnU",
       "title": "Nunu Top vs Mordekaiser | Road to Master : Silver 1 60lp",
