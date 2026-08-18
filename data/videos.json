@@ -3,9 +3,22 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.16.1",
-    "updated": "2026-08-17T10:52:31Z"
+    "updated": "2026-08-18T11:12:40Z"
   },
   "videos": [
+    {
+      "id": "LnJlzdUz0Sw",
+      "title": "Nunu Top vs Cho'Gath | Unranked to Master : Gold 4 55lp",
+      "published": "2026-08-18T10:00:14+00:00",
+      "role": "top",
+      "enemy": "Chogath",
+      "enemyName": "Cho'Gath",
+      "patch": null,
+      "rank": "Master",
+      "lp": 55,
+      "region": null,
+      "result": null
+    },
     {
       "id": "FzFtqe9hWqw",
       "title": "Nunu Top vs Darius | Road to Master : Gold 4 10lp",
