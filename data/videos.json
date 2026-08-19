@@ -3,9 +3,22 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.16.1",
-    "updated": "2026-08-18T11:12:40Z"
+    "updated": "2026-08-19T11:11:56Z"
   },
   "videos": [
+    {
+      "id": "oGTs6XVahU4",
+      "title": "Nunu ADC vs Twitch EUW Master 27 LP | Patch 26.16",
+      "published": "2026-08-19T10:00:31+00:00",
+      "role": "adc",
+      "enemy": "Twitch",
+      "enemyName": "Twitch",
+      "patch": "26.16",
+      "rank": "Master",
+      "lp": 27,
+      "region": "EUW",
+      "result": null
+    },
     {
       "id": "LnJlzdUz0Sw",
       "title": "Nunu Top vs Cho'Gath | Unranked to Master : Gold 4 55lp",
