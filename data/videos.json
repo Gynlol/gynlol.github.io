@@ -3,9 +3,22 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.16.1",
-    "updated": "2026-08-19T11:11:56Z"
+    "updated": "2026-08-20T10:01:21Z"
   },
   "videos": [
+    {
+      "id": "5iL4DtS3o3o",
+      "title": "Nunu Top vs Teemo | Unranked to Master : Gold 4 42lp | Patch 25.16",
+      "published": "2026-08-20T10:00:08+00:00",
+      "role": "top",
+      "enemy": "Teemo",
+      "enemyName": "Teemo",
+      "patch": "25.16",
+      "rank": "Master",
+      "lp": 42,
+      "region": null,
+      "result": null
+    },
     {
       "id": "oGTs6XVahU4",
       "title": "Nunu ADC vs Twitch EUW Master 27 LP | Patch 26.16",
