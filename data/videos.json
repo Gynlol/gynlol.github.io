@@ -3,9 +3,22 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.16.1",
-    "updated": "2026-08-20T10:01:21Z"
+    "updated": "2026-08-21T10:02:15Z"
   },
   "videos": [
+    {
+      "id": "CQGtl7hxHNc",
+      "title": "Nunu ADC vs Karthus EUW Master 50 LP | Patch 26.16",
+      "published": "2026-08-21T10:00:15+00:00",
+      "role": "adc",
+      "enemy": "Karthus",
+      "enemyName": "Karthus",
+      "patch": "26.16",
+      "rank": "Master",
+      "lp": 50,
+      "region": "EUW",
+      "result": null
+    },
     {
       "id": "5iL4DtS3o3o",
       "title": "Nunu Top vs Teemo | Unranked to Master : Gold 4 42lp | Patch 25.16",
