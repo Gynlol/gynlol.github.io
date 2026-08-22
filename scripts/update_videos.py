@@ -52,6 +52,8 @@ STOPWORDS = {
     "vn", "sea", "me", "pbe",
     "iron", "bronze", "silver", "gold", "platinum", "plat", "emerald",
     "diamond", "master", "grandmaster", "gm", "challenger", "unranked",
+    "fer", "argent", "platine", "emeraude", "diamant", "maitre", "chall",
+    "dia", "golden", "grandmaitre", "road", "climb",
     "patch", "win", "loss", "lose", "defeat", "victory", "lp",
     "fr", "en", "replay", "gameplay", "guide", "montage",
 }
@@ -95,8 +97,32 @@ def display_names(champs):
     return {c["id"]: c["name"] for c in champs["champions"]}
 
 
-RANK_WORDS = (r"Iron|Bronze|Silver|Gold|Platinum|Plat|Emerald|Diamond"
-              r"|Grandmaster|Master|Challenger")
+# Les 10 rangs, du plus bas au plus haut. La série va de Gold à Master, mais
+# tout le palier est prévu : un titre en Bronze ou en Challenger sera lu
+# pareil. Les alias couvrent les abréviations et l'orthographe FR (les
+# accents sont retirés avant comparaison).
+RANK_TIERS = [
+    ("Iron", ["iron", "fer"]),
+    ("Bronze", ["bronze"]),
+    ("Silver", ["silver", "argent"]),
+    ("Gold", ["gold", "golden"]),
+    ("Platinum", ["platinum", "platine", "plat"]),
+    ("Emerald", ["emerald", "emeraude"]),
+    ("Diamond", ["diamond", "diamant", "dia"]),
+    ("Master", ["master", "maitre"]),
+    ("Grandmaster", ["grandmaster", "grand master", "grand maitre",
+                     "grandmaitre", "gm"]),
+    ("Challenger", ["challenger", "chall"]),
+]
+RANK_ORDER = [r for r, _ in RANK_TIERS]
+# Master et au-dessus n'ont pas de division dans le jeu.
+APEX_RANKS = {"Master", "Grandmaster", "Challenger"}
+RANK_BY_ALIAS = {a: r for r, aliases in RANK_TIERS for a in aliases}
+# Alias les plus longs d'abord : « grand master » avant « master », sinon
+# l'alternance s'arrête sur le préfixe le plus court.
+RANK_WORDS = "|".join(
+    re.escape(a).replace(r"\ ", r"\s+")
+    for a in sorted(RANK_BY_ALIAS, key=len, reverse=True))
 # Le rang qui compte est celui collé aux LP (« Gold 4 42 LP »). Un rang cité
 # ailleurs est souvent un OBJECTIF de série (« Unranked to Master »), pas le
 # rang de la game : on ne le retient qu'en dernier recours, et jamais quand
@@ -116,12 +142,13 @@ ROMAN = {"i": "1", "ii": "2", "iii": "3", "iv": "4"}
 
 
 def norm_rank(word):
-    w = word.capitalize()
-    return "Platinum" if w == "Plat" else w
+    key = re.sub(r"\s+", " ", strip_accents(word).strip().lower())
+    return RANK_BY_ALIAS.get(key)
 
 
-def norm_div(word):
-    if not word:
+def norm_div(rank, word):
+    """Division 1-4, jamais au-dessus de Diamond."""
+    if not word or rank in APEX_RANKS:
         return None
     return ROMAN.get(word.lower(), word)
 
@@ -130,7 +157,8 @@ def parse_rank(rest):
     """(rang, division, lp) — priorité au rang qui porte les LP."""
     m = RANK_LP_RE.search(rest)
     if m:
-        return norm_rank(m.group(1)), norm_div(m.group(2)), int(m.group(3))
+        rank = norm_rank(m.group(1))
+        return rank, norm_div(rank, m.group(2)), int(m.group(3))
 
     lm = LP_RE.search(rest)
     lp = int(lm.group(1)) if lm else None
@@ -138,7 +166,9 @@ def parse_rank(rest):
     # Rang + division explicite (« Gold 4 ») sans LP collés.
     m = RANK_DIV_RE.search(rest)
     if m and not GOAL_RE.search(rest[:m.start()]):
-        return norm_rank(m.group(1)), norm_div(m.group(2)), lp
+        rank = norm_rank(m.group(1))
+        if rank not in APEX_RANKS:
+            return rank, norm_div(rank, m.group(2)), lp
 
     # Dernier recours : premier rang non amené par « to / vers / → ».
     fallback = None

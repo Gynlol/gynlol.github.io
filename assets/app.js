@@ -232,7 +232,7 @@
     box.className = "chips";
     if (withRole) box.appendChild(chip("role", t().roleNames[v.role]));
     if (v.patch) box.appendChild(chip("", "Patch " + v.patch));
-    if (v.rank) box.appendChild(chip("", rankLabel(v)));
+    if (v.rank) box.appendChild(chip("rank rank-" + v.rank.toLowerCase(), rankLabel(v)));
     if (v.result === "win") box.appendChild(chip("win", t().win));
     if (v.result === "loss") box.appendChild(chip("loss", t().loss));
     box.appendChild(chip("date", fmtDate(v.published)));

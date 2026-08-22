@@ -8,7 +8,8 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from update_videos import CHAMPIONS_PATH, build_name_index, display_names, load_json, parse_title
+from update_videos import (CHAMPIONS_PATH, RANK_ORDER, build_name_index,
+                           display_names, load_json, parse_rank, parse_title)
 
 CASES = [
     # (titre, attendu) — attendu : None = hors gabarit (ignoré), sinon un
@@ -82,6 +83,53 @@ CASES = [
 ]
 
 
+# Le climb passe par les 10 paliers : chacun doit être lu, avec sa division
+# (absente à partir de Master, qui n'en a pas dans le jeu) et ses LP.
+RANK_CASES = [
+    (" EUW Iron 4 0 LP", ("Iron", "4", 0)),
+    (" | Road to Master : Bronze III 12 LP", ("Bronze", "3", 12)),
+    (" | Road to Master : Silver 1 60lp", ("Silver", "1", 60)),
+    (" | Unranked to Master : Gold 4 42lp | Patch 25.16", ("Gold", "4", 42)),
+    (" EUW Platinum 2 74 LP", ("Platinum", "2", 74)),
+    (" EUW Platine 4 55 LP", ("Platinum", "4", 55)),
+    (" Plat 3 20lp", ("Platinum", "3", 20)),
+    (" EUW Emerald 2 31 LP", ("Emerald", "2", 31)),
+    (" Emeraude IV 7 LP", ("Emerald", "4", 7)),
+    (" Diamant 1 88 LP", ("Diamond", "1", 88)),
+    (" EUW Master 122 LP", ("Master", None, 122)),
+    (" Maitre 15 LP", ("Master", None, 15)),
+    (" Grand Master 402 LP", ("Grandmaster", None, 402)),
+    (" GM 350 LP", ("Grandmaster", None, 350)),
+    (" EUW Challenger 1204 LP", ("Challenger", None, 1204)),
+    # Objectif de serie sans rang reel : faute de mieux, on garde l'objectif
+    (" | Unranked to Master | Patch 25.16", ("Master", None, None)),
+    # Master n'a pas de division : le « 1 » de 100 n'en est pas une
+    (" EUW Master 100 LP", ("Master", None, 100)),
+    (" EUW Grandmaster 402 LP", ("Grandmaster", None, 402)),
+]
+
+
+def check_ranks():
+    """Chaque palier a son cas : un titre en Bronze doit sortir Bronze."""
+    failures = 0
+    for rest, want in RANK_CASES:
+        got = parse_rank(rest)
+        ok = got == want
+        if not ok:
+            failures += 1
+        print("{} rang {!r} -> {}{}".format(
+            "OK " if ok else "FAIL", rest, got,
+            "" if ok else " (attendu {})".format(want)))
+    seen = {w[0] for _, w in RANK_CASES}
+    for tier in RANK_ORDER:
+        if tier not in seen:
+            print("FAIL rang {} n'a aucun cas de test".format(tier))
+            failures += 1
+    print("\n{}/{} cas de rang passent".format(
+        len(RANK_CASES) - failures, len(RANK_CASES)))
+    return failures
+
+
 def main():
     champs = load_json(CHAMPIONS_PATH)
     index = build_name_index(champs)
@@ -107,7 +155,8 @@ def main():
         if not ok:
             failures += 1
         print(f"{mark} {title!r} -> {detail}")
-    print(f"\n{len(CASES) - failures}/{len(CASES)} cas passent")
+    print(f"\n{len(CASES) - failures}/{len(CASES)} cas de titre passent")
+    failures += check_ranks()
     sys.exit(1 if failures else 0)
 
 

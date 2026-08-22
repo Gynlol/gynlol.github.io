@@ -43,10 +43,36 @@ h1 .vs{color:#6fd3ff}
 .card .meta{padding:12px 14px 12px 0;min-width:0}
 .card .title{font-weight:600;font-size:14.5px;line-height:1.4}
 .card .chips{color:#9db0c4;font-size:12.5px;margin-top:8px}
+.rk{border-radius:4px;padding:1px 7px;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
+{RANK_CSS}
 .cta{display:inline-block;border:1px solid #6fd3ff;border-radius:6px;padding:11px 18px;margin:18px 12px 0 0;font-weight:600;font-size:13px;letter-spacing:.06em;text-transform:uppercase}
 footer{border-top:1px solid #1d2735;color:#8593a5;font-size:13px;padding:18px 0}
 @media(max-width:640px){.card{flex-direction:column}.card img{width:100%}.card .meta{padding:0 14px 12px}}
 """.strip()
+
+
+
+# Les 10 paliers, mêmes teintes que le SPA (assets/style.css) : la couleur
+# du rang doit être la même sur la page matchup et sur le site.
+RANK_COLORS = {
+    "iron": "#a7aeb8", "bronze": "#cd9061", "silver": "#c2cedb",
+    "gold": "#ffc95c", "platinum": "#5fe0d0", "emerald": "#4fd97f",
+    "diamond": "#8ab8ff", "master": "#c98cff", "grandmaster": "#ff8f8f",
+    "challenger": "#ffe6a3",
+}
+
+
+def hex_rgba(color, alpha):
+    r, g, b = (int(color[i:i + 2], 16) for i in (1, 3, 5))
+    return f"rgba({r},{g},{b},{alpha})"
+
+
+RANK_CSS = "".join(
+    f".rk-{k}{{color:{c};background:{hex_rgba(c, 0.14)}}}"
+    for k, c in RANK_COLORS.items()
+) + ".rk-challenger{box-shadow:inset 0 0 0 1px rgba(255,230,163,.45)}"
+
+PAGE_CSS = PAGE_CSS.replace("{RANK_CSS}", RANK_CSS)
 
 
 def esc(s):
@@ -117,17 +143,19 @@ def matchup_page(role, enemy_id, enemy_name, videos):
 
     cards = []
     for v in videos:
+        rk = rank_label(v)
         chips = " · ".join(x for x in [
-            f"Patch {v['patch']}" if v.get("patch") else "",
-            rank_label(v),
-            fmt_date_fr(v.get("published", "")),
+            esc(f"Patch {v['patch']}") if v.get("patch") else "",
+            (f'<span class="rk rk-{esc(v["rank"].lower())}">{esc(rk)}</span>'
+             if rk else ""),
+            esc(fmt_date_fr(v.get("published", ""))),
         ] if x.strip())
         cards.append(
             f'<a class="card" href="https://www.youtube.com/watch?v={esc(v["id"])}" '
             f'target="_blank" rel="noopener">'
             f'<img src="https://i.ytimg.com/vi/{esc(v["id"])}/mqdefault.jpg" alt="" loading="lazy">'
             f'<span class="meta"><span class="title">{esc(v["title"])}</span>'
-            f'<span class="chips">{esc(chips)}</span></span></a>'
+            f'<span class="chips">{chips}</span></span></a>'
         )
 
     return f"""<!doctype html>
