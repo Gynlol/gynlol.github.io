@@ -79,13 +79,27 @@ def video_ld(v):
     }
 
 
+def rank_label(v, lp=True):
+    """« Gold 4 42 LP » — la division n'existe que sous Master."""
+    if not v.get("rank"):
+        return ""
+    s = v["rank"]
+    if v.get("division"):
+        s += f" {v['division']}"
+    if lp and v.get("lp") is not None:
+        s += f" {v['lp']} LP"
+    return s
+
+
 def matchup_page(role, enemy_id, enemy_name, videos):
     role_name = ROLE_NAMES[role]
     n = len(videos)
     latest = videos[0]
     url = f"{SITE}/matchups/{role}/{enemy_id.lower()}/"
-    title = f"Nunu {role_name} vs {enemy_name} — replay Master League of Legends | Gyn Replays"
-    rank = latest.get("rank") or "haut elo"
+    # Le rang réel vient de la dernière vidéo : la série passe par tous les
+    # paliers, écrire « Master » en dur mentirait sur les games en Gold.
+    rank = rank_label(latest, lp=False) or "haut elo"
+    title = f"Nunu {role_name} vs {enemy_name} — replay ranked League of Legends | Gyn Replays"
     patch = latest.get("patch")
     desc = (f"Comment jouer le matchup Nunu {role_name} contre {enemy_name} : "
             f"{n} replay{'s' if n > 1 else ''} complet{'s' if n > 1 else ''} en {rank} EUW"
@@ -105,7 +119,7 @@ def matchup_page(role, enemy_id, enemy_name, videos):
     for v in videos:
         chips = " · ".join(x for x in [
             f"Patch {v['patch']}" if v.get("patch") else "",
-            (v.get("rank") or "") + (f" {v['lp']} LP" if v.get("lp") is not None else ""),
+            rank_label(v),
             fmt_date_fr(v.get("published", "")),
         ] if x.strip())
         cards.append(

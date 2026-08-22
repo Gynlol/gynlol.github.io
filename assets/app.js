@@ -219,12 +219,20 @@
     return s;
   }
 
+  // « Gold 4 42 LP » — la division n'existe que sous Master.
+  function rankLabel(v) {
+    var s = v.rank;
+    if (v.division) s += " " + v.division;
+    if (v.lp !== null && v.lp !== undefined) s += " " + v.lp + " LP";
+    return s;
+  }
+
   function videoChips(v, withRole) {
     var box = document.createElement("div");
     box.className = "chips";
     if (withRole) box.appendChild(chip("role", t().roleNames[v.role]));
     if (v.patch) box.appendChild(chip("", "Patch " + v.patch));
-    if (v.rank) box.appendChild(chip("", v.rank + (v.lp !== null && v.lp !== undefined ? " " + v.lp + " LP" : "")));
+    if (v.rank) box.appendChild(chip("", rankLabel(v)));
     if (v.result === "win") box.appendChild(chip("win", t().win));
     if (v.result === "loss") box.appendChild(chip("loss", t().loss));
     box.appendChild(chip("date", fmtDate(v.published)));

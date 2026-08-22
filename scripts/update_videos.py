@@ -95,6 +95,62 @@ def display_names(champs):
     return {c["id"]: c["name"] for c in champs["champions"]}
 
 
+RANK_WORDS = (r"Iron|Bronze|Silver|Gold|Platinum|Plat|Emerald|Diamond"
+              r"|Grandmaster|Master|Challenger")
+# Le rang qui compte est celui collé aux LP (« Gold 4 42 LP »). Un rang cité
+# ailleurs est souvent un OBJECTIF de série (« Unranked to Master »), pas le
+# rang de la game : on ne le retient qu'en dernier recours, et jamais quand
+# il est amené par « to / vers / → ».
+RANK_LP_RE = re.compile(
+    # La division, quand elle est là, est un mot entier suivi d'un séparateur :
+    # sinon le « 1 » de « Master 100 LP » passerait pour une division.
+    r"\b(" + RANK_WORDS + r")\b\s*(?:(IV|III|II|I|[1-4])\b[\s,:;.–—-]+)?"
+    r"[\s,:;.–—-]*(\d+)\s*LP\b",
+    re.IGNORECASE)
+RANK_DIV_RE = re.compile(
+    r"\b(" + RANK_WORDS + r")\b\s*(IV|III|II|I|[1-4])\b", re.IGNORECASE)
+RANK_ANY_RE = re.compile(r"\b(" + RANK_WORDS + r")\b", re.IGNORECASE)
+GOAL_RE = re.compile(r"(?:\bto\b|\bvers\b|→|->)\s*$", re.IGNORECASE)
+LP_RE = re.compile(r"(\d+)\s*LP\b", re.IGNORECASE)
+ROMAN = {"i": "1", "ii": "2", "iii": "3", "iv": "4"}
+
+
+def norm_rank(word):
+    w = word.capitalize()
+    return "Platinum" if w == "Plat" else w
+
+
+def norm_div(word):
+    if not word:
+        return None
+    return ROMAN.get(word.lower(), word)
+
+
+def parse_rank(rest):
+    """(rang, division, lp) — priorité au rang qui porte les LP."""
+    m = RANK_LP_RE.search(rest)
+    if m:
+        return norm_rank(m.group(1)), norm_div(m.group(2)), int(m.group(3))
+
+    lm = LP_RE.search(rest)
+    lp = int(lm.group(1)) if lm else None
+
+    # Rang + division explicite (« Gold 4 ») sans LP collés.
+    m = RANK_DIV_RE.search(rest)
+    if m and not GOAL_RE.search(rest[:m.start()]):
+        return norm_rank(m.group(1)), norm_div(m.group(2)), lp
+
+    # Dernier recours : premier rang non amené par « to / vers / → ».
+    fallback = None
+    for m in RANK_ANY_RE.finditer(rest):
+        if GOAL_RE.search(rest[:m.start()]):
+            if fallback is None:
+                fallback = norm_rank(m.group(1))
+            continue
+        return norm_rank(m.group(1)), None, lp
+    return fallback, None, lp
+
+
 def parse_title(title, name_index, names):
     """Retourne (video_fields | None). None = hors gabarit, à ignorer."""
     m = TITLE_RE.match(title)
@@ -157,16 +213,7 @@ def parse_title(title, name_index, names):
     pm = re.search(r"patch\s+([\d.]+)", rest, re.IGNORECASE)
     if pm:
         patch = pm.group(1).rstrip(".")
-    rank = None
-    rm = re.search(
-        r"\b(Iron|Bronze|Silver|Gold|Platinum|Emerald|Diamond|Master|Grandmaster|Challenger)\b",
-        rest, re.IGNORECASE)
-    if rm:
-        rank = rm.group(1).capitalize()
-    lp = None
-    lm = re.search(r"(\d+)\s*LP\b", rest, re.IGNORECASE)
-    if lm:
-        lp = int(lm.group(1))
+    rank, division, lp = parse_rank(rest)
     region = None
     gm = re.search(r"\b(EUW|EUNE|NA|KR|OCE|BR|LAN|LAS|TR|RU|JP|VN|SEA|ME)\b", rest)
     if gm:
@@ -183,6 +230,7 @@ def parse_title(title, name_index, names):
         "enemyName": enemy_name,
         "patch": patch,
         "rank": rank,
+        "division": division,
         "lp": lp,
         "region": region,
         "result": result,

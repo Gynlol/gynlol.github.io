@@ -49,6 +49,21 @@ CASES = [
      {"role": "adc", "enemy": "Ziggs", "rank": "Master", "lp": 80}),
     ("Nunu ADC vs Jinx [WIN] EUW Master 100 LP",
      {"role": "adc", "enemy": "Jinx", "result": "win", "region": "EUW", "rank": "Master", "lp": 100}),
+    # Titre de série : le rang de l'OBJECTIF (« Unranked to Master ») ne doit
+    # pas écraser le rang réel, qui est celui collé aux LP.
+    ("Nunu Top vs Teemo | Unranked to Master : Gold 4 42lp | Patch 25.16",
+     {"role": "top", "enemy": "Teemo", "rank": "Gold", "division": "4",
+      "lp": 42, "patch": "25.16"}),
+    ("Nunu Jungle vs Sett | Unranked to Master — Platinum II 88 LP",
+     {"role": "jungle", "enemy": "Sett", "rank": "Platinum", "division": "2",
+      "lp": 88}),
+    # Objectif seul, sans rang réel : on garde l'objectif faute de mieux
+    ("Nunu Top vs Garen | Unranked to Master | Patch 25.16",
+     {"role": "top", "enemy": "Garen", "rank": "Master", "lp": None}),
+    # Rang sans division : la division reste vide (Master et au-dessus)
+    ("Nunu ADC vs Viktor EUW Master 122 LP",
+     {"role": "adc", "enemy": "Viktor", "rank": "Master", "division": None,
+      "lp": 122}),
     # Accents : orthographe FR d'un champion connu
     ("Nunu ADC vs Séraphine EUW Master 12 LP",
      {"role": "adc", "enemy": "Seraphine"}),
