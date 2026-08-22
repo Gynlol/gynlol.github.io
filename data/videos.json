@@ -14,7 +14,8 @@
       "enemy": "Volibear",
       "enemyName": "Volibear",
       "patch": "25.16",
-      "rank": "Master",
+      "rank": "Gold",
+      "division": "4",
       "lp": 85,
       "region": null,
       "result": null
@@ -28,6 +29,7 @@
       "enemyName": "Karthus",
       "patch": "26.16",
       "rank": "Master",
+      "division": null,
       "lp": 50,
       "region": "EUW",
       "result": null
@@ -40,7 +42,8 @@
       "enemy": "Teemo",
       "enemyName": "Teemo",
       "patch": "25.16",
-      "rank": "Master",
+      "rank": "Gold",
+      "division": "4",
       "lp": 42,
       "region": null,
       "result": null
@@ -54,6 +57,7 @@
       "enemyName": "Twitch",
       "patch": "26.16",
       "rank": "Master",
+      "division": null,
       "lp": 27,
       "region": "EUW",
       "result": null
@@ -66,7 +70,8 @@
       "enemy": "Chogath",
       "enemyName": "Cho'Gath",
       "patch": null,
-      "rank": "Master",
+      "rank": "Gold",
+      "division": "4",
       "lp": 55,
       "region": null,
       "result": null
@@ -79,7 +84,8 @@
       "enemy": "Darius",
       "enemyName": "Darius",
       "patch": null,
-      "rank": "Master",
+      "rank": "Gold",
+      "division": "4",
       "lp": 10,
       "region": null,
       "result": null
@@ -92,7 +98,8 @@
       "enemy": "Mordekaiser",
       "enemyName": "Mordekaiser",
       "patch": null,
-      "rank": "Master",
+      "rank": "Silver",
+      "division": "1",
       "lp": 60,
       "region": null,
       "result": null
@@ -106,6 +113,7 @@
       "enemyName": "Viktor",
       "patch": "26.15",
       "rank": "Master",
+      "division": null,
       "lp": 12,
       "region": "EUW",
       "result": null
@@ -119,6 +127,7 @@
       "enemyName": "Kalista",
       "patch": "26.15",
       "rank": "Master",
+      "division": null,
       "lp": 54,
       "region": "EUW",
       "result": null
@@ -132,6 +141,7 @@
       "enemyName": "Teemo",
       "patch": "26.15",
       "rank": "Master",
+      "division": null,
       "lp": 66,
       "region": "EUW",
       "result": null
@@ -145,6 +155,7 @@
       "enemyName": "Dr. Mundo",
       "patch": "26.15",
       "rank": "Master",
+      "division": null,
       "lp": 87,
       "region": "EUW",
       "result": null
@@ -158,6 +169,7 @@
       "enemyName": "Viktor",
       "patch": "26.15",
       "rank": "Master",
+      "division": null,
       "lp": 122,
       "region": "EUW",
       "result": null
@@ -171,6 +183,7 @@
       "enemyName": "Xerath",
       "patch": "26.15",
       "rank": "Master",
+      "division": null,
       "lp": 96,
       "region": "EUW",
       "result": null
@@ -184,6 +197,7 @@
       "enemyName": "Ziggs",
       "patch": "26.15",
       "rank": "Master",
+      "division": null,
       "lp": 80,
       "region": "EUW",
       "result": null
@@ -197,6 +211,7 @@
       "enemyName": "Sivir",
       "patch": "26.15",
       "rank": "Master",
+      "division": null,
       "lp": 64,
       "region": "EUW",
       "result": null
@@ -210,6 +225,7 @@
       "enemyName": "Ezreal",
       "patch": "26.15",
       "rank": "Master",
+      "division": null,
       "lp": 37,
       "region": "EUW",
       "result": null
