@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.16.1",
-    "updated": "2026-08-22T10:59:06Z"
+    "updated": "2026-08-23T11:00:05Z"
   },
   "videos": [
+    {
+      "id": "uhhKHGCRRX8",
+      "title": "Nunu Top vs Nasus | Unranked to Master : Gold 3 10lp | Patch 25.16",
+      "published": "2026-08-23T10:00:38+00:00",
+      "role": "top",
+      "enemy": "Nasus",
+      "enemyName": "Nasus",
+      "patch": "25.16",
+      "rank": "Gold",
+      "division": "3",
+      "lp": 10,
+      "region": null,
+      "result": null
+    },
     {
       "id": "xVo3Ehb3-R4",
       "title": "Nunu Top vs Volibear | Unranked to Master : Gold 4 85lp | Patch 25.16",
