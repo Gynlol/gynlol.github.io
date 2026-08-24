@@ -61,6 +61,19 @@ Tout se passe dans `data/notes.json`, en clair, sans rien relancer côté site
 - Fichier absent ou JSON cassé = site normal, sans notes ni bans (aucune
   page blanche).
 
+## Cache du navigateur
+
+GitHub Pages sert tout avec `Cache-Control: max-age=600`. Deux garde-fous :
+
+- `index.html` appelle les assets avec un numéro de version
+  (`assets/app.js?v=20260824`) — **le bumper à chaque modification de
+  `app.js` ou `style.css`**, sinon un navigateur qui a l'ancien fichier
+  garde l'ancien site.
+- les `data/*.json` sont chargés en `cache: "no-cache"` : le navigateur
+  revalide à chaque visite (304 si rien n'a changé).
+
+En cas de doute sur un poste : rechargement forcé (Ctrl+Maj+R).
+
 ## Commandes utiles
 
 ```bash

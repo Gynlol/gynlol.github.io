@@ -700,12 +700,17 @@
     return;
   }
 
+  // « no-cache » = on revalide toujours auprès du serveur (304 si rien n'a
+  // changé) : sinon les 10 minutes de cache de GitHub Pages font afficher
+  // d'anciennes données après une mise à jour.
+  var FRESH = { cache: "no-cache" };
+
   Promise.all([
-    fetch("data/champions.json").then(function (r) { return r.json(); }),
-    fetch("data/videos.json").then(function (r) { return r.json(); }),
+    fetch("data/champions.json", FRESH).then(function (r) { return r.json(); }),
+    fetch("data/videos.json", FRESH).then(function (r) { return r.json(); }),
     // Fichier annexe écrit à la main : s'il manque ou s'il est mal formé, le
     // site s'affiche quand même — sans les notes ni les bans.
-    fetch("data/notes.json").then(function (r) { return r.ok ? r.json() : {}; })
+    fetch("data/notes.json", FRESH).then(function (r) { return r.ok ? r.json() : {}; })
       .catch(function () { return {}; })
   ]).then(function (results) {
     state.champs = results[0];
