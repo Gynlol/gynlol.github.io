@@ -34,6 +34,13 @@
       requestBtn: "❄ Demander ce replay",
       requestSent: "Demande envoyée ! Le matchup est noté.",
       requestAlready: "Déjà demandé depuis ce navigateur ✓",
+      notesTitle: "À savoir",
+      ban: "BAN",
+      banTitle: "Ban permanent",
+      banSub: "Ban permanent — pas de replay, et il n'y en aura pas",
+      banText: function (role) { return "Je le ban à chaque game quand je joue " + role + ". Tu ne verras donc pas ce matchup en replay."; },
+      banLine: function (names, role) { return "Mon ban en " + role + " : " + names; },
+      tileBan: function (name, role) { return name + " — mon ban en " + role; },
       roleNames: { top: "Top", jungle: "Jungle", mid: "Mid", adc: "ADC", support: "Support" },
       docTitle: "Gyn Replays — Matchups Nunu"
     },
@@ -58,6 +65,13 @@
       requestBtn: "❄ Request this replay",
       requestSent: "Request sent! The matchup is noted.",
       requestAlready: "Already requested from this browser ✓",
+      notesTitle: "Good to know",
+      ban: "BAN",
+      banTitle: "Permanent ban",
+      banSub: "Permanent ban — no replay, and there won't be one",
+      banText: function (role) { return "I ban them every game when I play " + role + ", so this matchup will never show up in the replays."; },
+      banLine: function (names, role) { return "My " + role + " ban: " + names; },
+      tileBan: function (name, role) { return name + " — my " + role + " ban"; },
       roleNames: { top: "Top", jungle: "Jungle", mid: "Mid", adc: "ADC", support: "Support" },
       docTitle: "Gyn Replays — Nunu Matchups"
     }
@@ -70,6 +84,9 @@
     search: "",
     data: null,
     champs: null,
+    notes: {},       // "role/ChampId" -> { fr: [...], en: [...] }
+    bans: {},        // role -> { champId: true } — bans de rôle, écrits à la main
+    banNames: {},    // role -> [noms] — un ban peut ne pas figurer dans la grille du rôle
     byRole: {},      // role -> { champId -> [videos] }
     rosters: {},     // role -> [{id, name, videos}] triés
     tabs: {}         // role -> bouton d'onglet (construits une seule fois)
@@ -133,9 +150,43 @@
 
   /* ---------- Construction des index ---------- */
 
+  // Les bans sont écrits à la main dans data/notes.json (« Trundle », « soraka »…) :
+  // on les rattache à l'id officiel du champion, sinon un simple e/E casse la ligne.
+  function buildBans(namesById) {  // namesById sert aussi à nommer un ban absent de la grille
+    var byNorm = {};
+    Object.keys(namesById).forEach(function (id) {
+      byNorm[normName(id)] = id;
+      byNorm[normName(namesById[id])] = id;
+    });
+    ROLES.forEach(function (role) { state.bans[role] = {}; state.banNames[role] = []; });
+    var raw = (state.notesFile && state.notesFile.bans) || {};
+    Object.keys(raw).forEach(function (role) {
+      if (ROLES.indexOf(role) === -1 || !raw[role]) return;
+      raw[role].forEach(function (name) {
+        var id = byNorm[normName(String(name))];
+        if (!id) return;
+        state.bans[role][id] = true;
+        state.banNames[role].push(namesById[id]);
+      });
+    });
+  }
+
+  function isBanned(role, champId) {
+    return !!(state.bans[role] && state.bans[role][champId]);
+  }
+
+  function notesFor(role, champId) {
+    var entry = (state.notesFile && state.notesFile.notes) || {};
+    var n = entry[role + "/" + champId];
+    if (!n) return [];
+    var list = n[state.lang] || n.fr || n.en || [];
+    return Array.isArray(list) ? list : [];
+  }
+
   function buildIndexes() {
     var namesById = {};
     state.champs.champions.forEach(function (c) { namesById[c.id] = c.name; });
+    buildBans(namesById);
 
     ROLES.forEach(function (role) { state.byRole[role] = {}; });
     state.data.videos.forEach(function (v) {
@@ -310,7 +361,13 @@
 
     var titleEl = $("role-title");
     titleEl.innerHTML = "Nunu <span class=\"vs\">vs</span> " + t().roleNames[state.role];
-    $("coverage-line").innerHTML = t().coverage(covered, roster.length);
+    var cov = t().coverage(covered, roster.length);
+    var bannedNames = state.banNames[state.role] || [];
+    if (bannedNames.length) {
+      cov += ' <span class="ban-line">' +
+        t().banLine(bannedNames.join(", "), t().roleNames[state.role]) + "</span>";
+    }
+    $("coverage-line").innerHTML = cov;
 
     var grid = $("grid");
     grid.innerHTML = "";
@@ -322,9 +379,13 @@
       var tile = document.createElement("button");
       tile.type = "button";
       tile.dataset.champ = c.id;
-      tile.className = "tile" + (c.videos.length ? "" : " off") + (c.id === state.champ ? " selected" : "");
-      tile.setAttribute("aria-label", t().tileLabel(c.name, c.videos.length));
-      tile.title = c.videos.length ? "" : t().noVideo;
+      var banned = isBanned(state.role, c.id);
+      tile.className = "tile" + (c.videos.length ? "" : " off") +
+        (banned ? " ban" : "") + (c.id === state.champ ? " selected" : "");
+      tile.setAttribute("aria-label", banned
+        ? t().tileBan(c.name, t().roleNames[state.role])
+        : t().tileLabel(c.name, c.videos.length));
+      tile.title = banned ? t().banTitle : (c.videos.length ? "" : t().noVideo);
 
       var img = document.createElement("img");
       img.src = iconUrl(c.id);
@@ -339,7 +400,12 @@
       });
       tile.appendChild(img);
 
-      if (c.videos.length > 1) {
+      if (banned) {
+        var flag = document.createElement("span");
+        flag.className = "tile-ban";
+        flag.textContent = t().ban;
+        tile.appendChild(flag);
+      } else if (c.videos.length > 1) {
         var badge = document.createElement("span");
         badge.className = "tile-count";
         badge.textContent = String(c.videos.length);
@@ -395,12 +461,21 @@
     portrait.alt = entry.name;
     $("panel-title").innerHTML = "Nunu " + t().roleNames[state.role] +
       " <span class=\"vs\">vs</span> " + entry.name.replace(/&/g, "&amp;").replace(/</g, "&lt;");
-    $("panel-sub").textContent = entry.videos.length ? t().matchupSub(entry.videos.length) : t().noVideo;
+    if (isBanned(state.role, entry.id)) {
+      $("panel-title").innerHTML += ' <span class="title-ban">' + t().ban + "</span>";
+    }
+    $("panel-sub").textContent = entry.videos.length
+      ? t().matchupSub(entry.videos.length)
+      : (isBanned(state.role, entry.id) ? t().banSub : t().noVideo);
     $("panel-close").setAttribute("aria-label", t().close);
+
+    renderNotes(entry);
 
     var list = $("video-list");
     list.innerHTML = "";
-    if (!entry.videos.length) {
+    // Pas de bouton « demander ce replay » sur un ban de rôle : le replay
+    // n'existera jamais, la carte « Ban permanent » le dit déjà.
+    if (!entry.videos.length && !isBanned(state.role, entry.id)) {
       list.appendChild(buildRequestBox(entry));
     }
     entry.videos
@@ -432,6 +507,42 @@
       panel.scrollIntoView({ behavior: prefersReducedMotion() ? "auto" : "smooth", block: "nearest" });
       $("panel-title").focus({ preventScroll: true });
     }
+  }
+
+  // Grille « à savoir » : les notes écrites à la main dans data/notes.json,
+  // précédées de la carte de ban quand le champion est un ban de rôle.
+  function noteCard(title, text, kind) {
+    var card = document.createElement("article");
+    card.className = "note note-" + (kind || "info");
+    var h = document.createElement("h4");
+    h.className = "note-title";
+    h.textContent = title;
+    var p = document.createElement("p");
+    p.className = "note-text";
+    p.textContent = text;
+    card.appendChild(h);
+    if (text) card.appendChild(p);
+    return card;
+  }
+
+  function renderNotes(entry) {
+    var col = $("notes-col");
+    var grid = $("notes-grid");
+    grid.innerHTML = "";
+    var banned = isBanned(state.role, entry.id);
+    if (banned) {
+      grid.appendChild(noteCard(t().banTitle, t().banText(t().roleNames[state.role]), "ban"));
+    }
+    notesFor(state.role, entry.id).forEach(function (n) {
+      if (!n || !n.t) return;
+      grid.appendChild(noteCard(String(n.t), n.d ? String(n.d) : "", n.k));
+    });
+    $("notes-title").textContent = t().notesTitle;
+    col.hidden = grid.children.length === 0;
+    // Matchup sans replay : la liste vide laisserait une colonne creuse,
+    // les notes reprennent toute la largeur du panneau.
+    var body = document.querySelector(".panel-body");
+    if (body) body.classList.toggle("solo", !entry.videos.length && !col.hidden);
   }
 
   function requestKey(role, champ) { return "gyn-req-" + role + "-" + champ; }
@@ -471,12 +582,15 @@
   }
 
   // Liens réels vers les pages matchups (référencement + accès direct) —
-  // construits une fois : la liste ne dépend que des données chargées.
-  function buildMatchupLinks() {
+  // limités au rôle affiché : tous rôles confondus, le pied de page devient un
+  // pavé de texte dès que le nombre d'adversaires monte. Les pages des autres
+  // rôles restent accessibles par les onglets et listées dans sitemap.xml.
+  function renderMatchupLinks() {
     var nav = $("matchup-links");
     if (!nav) return;
+    var role = state.role;
     nav.innerHTML = "";
-    ROLES.forEach(function (role) {
+    if (role && state.rosters[role]) {
       state.rosters[role].forEach(function (c) {
         if (!c.videos.length) return;
         var a = document.createElement("a");
@@ -484,7 +598,9 @@
         a.textContent = "Nunu " + I18N.fr.roleNames[role] + " vs " + c.name;
         nav.appendChild(a);
       });
-    });
+    }
+    // Rôle sans replay : on masque le bloc, sinon son padding laisse un trou.
+    nav.hidden = nav.children.length === 0;
   }
 
   function renderChrome() {
@@ -512,6 +628,7 @@
     renderLatest();
     renderGrid();
     renderPanel(false);
+    renderMatchupLinks();
   }
 
   /* ---------- Événements ---------- */
@@ -585,14 +702,18 @@
 
   Promise.all([
     fetch("data/champions.json").then(function (r) { return r.json(); }),
-    fetch("data/videos.json").then(function (r) { return r.json(); })
+    fetch("data/videos.json").then(function (r) { return r.json(); }),
+    // Fichier annexe écrit à la main : s'il manque ou s'il est mal formé, le
+    // site s'affiche quand même — sans les notes ni les bans.
+    fetch("data/notes.json").then(function (r) { return r.ok ? r.json() : {}; })
+      .catch(function () { return {}; })
   ]).then(function (results) {
     state.champs = results[0];
     state.data = results[1];
+    state.notesFile = results[2] || {};
     state.lang = detectLang();
     buildIndexes();
     buildTabs();
-    buildMatchupLinks();
     var wanted = readHash();
     state.role = wanted.role || defaultRole();
     state.champ = wanted.champ;

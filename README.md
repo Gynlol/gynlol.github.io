@@ -21,7 +21,45 @@ Site statique qui répertorie tous les matchups Nunu de la chaîne
   Le commit redéploie automatiquement GitHub Pages.
 - `data/champions.json` — la liste des champions par rôle (grilles) ;
   regénérable via `scripts/gen_champions.py`.
+- `data/notes.json` — **écrit à la main** (le robot n'y touche jamais) : les
+  bans de rôle et les « à savoir » affichés à droite de chaque matchup.
 - `index.html` + `assets/` — le site (vanilla HTML/CSS/JS, bilingue FR/EN).
+
+## Écrire les « à savoir » et les bans
+
+Tout se passe dans `data/notes.json`, en clair, sans rien relancer côté site
+(les pages de référencement, elles, se regénèrent avec `gen_seo.py`).
+
+```jsonc
+"bans": { "top": ["Trundle"], "mid": ["Anivia"],
+          "adc": ["Soraka"], "support": ["Soraka"] },
+
+"notes": {
+  "top/Darius": {                       // "<rôle>/<id du champion>"
+    "fr": [
+      { "t": "Niveau 1-2", "d": "Le détail.", "k": "moins" },
+      { "t": "Ce qui marche", "d": "Le détail.", "k": "plus" }
+    ],
+    "en": [ /* facultatif : sans traduction, le FR s'affiche aussi en EN */ ]
+  }
+}
+```
+
+- `t` = titre court, `d` = le texte, `k` = couleur du liseré : `plus` (vert),
+  `moins` (rouge), `info` (bleu, par défaut).
+- Un champion listé dans `bans` sort **en rouge avec une pastille BAN** dans
+  la grille du rôle concerné, même sans replay, et une carte « Ban permanent »
+  ouvre sa colonne « À savoir ». Le ban est par rôle : Trundle est rouge au
+  Top et normal en Jungle.
+- Le ban n'ajoute **pas** le champion à la grille du rôle : Soraka n'est pas
+  une ADC, elle reste absente de la grille ADC — seule la ligne rouge
+  « Mon ban en ADC : Soraka » sous le compteur le signale.
+- L'id du champion est celui de `data/champions.json` (`Chogath`,
+  `MonkeyKing`, `KSante`…) ; la casse et les accents sont tolérés.
+- La clé `_exemple/Darius` du fichier est un gabarit à copier : elle ne
+  correspond à aucun rôle, donc elle ne s'affiche nulle part.
+- Fichier absent ou JSON cassé = site normal, sans notes ni bans (aucune
+  page blanche).
 
 ## Commandes utiles
 

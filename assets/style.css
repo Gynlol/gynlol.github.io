@@ -13,6 +13,8 @@
   --chip-text: #9db0c4; /* ≥ 4.5:1 sur --chip (AA petits textes) */
   --win: #39d98a;
   --loss: #ff7a7a;
+  --ban: #ff5a5a;
+  --ban-dim: rgba(255, 90, 90, 0.13);
   --font-display: "Chakra Petch", "Segoe UI", sans-serif;
   --font-body: "Inter", "Segoe UI", sans-serif;
 }
@@ -324,6 +326,31 @@ main { flex: 1; padding-top: 28px; padding-bottom: 48px; }
 .tile.off .tile-name { color: var(--muted); }
 .tile.off:hover { border-color: #2c3a4f; }
 
+/* Ban de rôle : le champion reste lisible (pas de grisé « sans replay »),
+   il est rouge et porte sa pastille BAN. */
+.tile.ban { border-color: rgba(255, 90, 90, 0.55); background: linear-gradient(180deg, var(--ban-dim), transparent 70%); }
+.tile.ban:hover { border-color: var(--ban); }
+.tile.ban.selected { border-color: var(--ban); box-shadow: 0 0 0 1px var(--ban); }
+.tile.ban.off img { filter: grayscale(0.5) brightness(0.75); }
+.tile.ban .tile-name, .tile.ban.off .tile-name { color: var(--ban); font-weight: 600; }
+.tile .tile-ban {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background: var(--ban);
+  color: #1a0508;
+  font-family: var(--font-display);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  padding: 3px 4px;
+  border-radius: 3px;
+}
+
+.ban-line { color: var(--ban); }
+.ban-line::before { content: "·"; color: var(--muted); margin: 0 6px; }
+
 .no-results { color: var(--muted); padding: 24px 0; }
 
 /* Panneau matchup — signature : bord gauche biseauté */
@@ -381,7 +408,61 @@ main { flex: 1; padding-top: 28px; padding-bottom: 48px; }
 }
 .panel-close:hover { color: var(--text); border-color: var(--accent); }
 
+.title-ban {
+  display: inline-block;
+  vertical-align: middle;
+  background: var(--ban);
+  color: #1a0508;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  line-height: 1;
+  padding: 4px 6px;
+  border-radius: 4px;
+  margin-left: 6px;
+}
+
+/* Vidéos à gauche, grille « à savoir » à droite ; empilé sous 980px. */
+.panel-body { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 22px; align-items: start; }
+
 .video-list { display: flex; flex-direction: column; gap: 12px; padding-left: 12px; }
+
+.panel-body.solo { grid-template-columns: 1fr; }
+.panel-body.solo .video-list:empty { display: none; }
+.panel-body.solo .notes-col { padding-left: 12px; }
+.panel-body.solo .notes-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+
+.notes-col { min-width: 0; }
+.notes-title {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+.notes-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
+.note {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  border-radius: 6px;
+  padding: 10px 12px;
+}
+.note-title {
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+.note-text { font-size: 13px; line-height: 1.5; color: var(--chip-text); }
+.note-plus { border-left-color: var(--win); }
+.note-plus .note-title { color: var(--win); }
+.note-moins { border-left-color: var(--loss); }
+.note-moins .note-title { color: var(--loss); }
+.note-ban { border-left-color: var(--ban); background: var(--ban-dim); }
+.note-ban .note-title { color: var(--ban); }
 
 .video-card {
   display: flex;
@@ -532,6 +613,12 @@ main { flex: 1; padding-top: 28px; padding-bottom: 48px; }
   .panel { padding: 16px; }
   .panel-title { font-size: 17px; }
   .panel-portrait { width: 56px; height: 56px; }
+}
+
+@media (max-width: 980px) {
+  .panel-body { grid-template-columns: 1fr; }
+  .notes-col { padding-left: 12px; }
+  .notes-grid { grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); }
 }
 
 /* ---------- Motion ---------- */

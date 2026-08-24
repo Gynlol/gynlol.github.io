@@ -1,0 +1,31 @@
+{
+  "_format": [
+    "Fichier ECRIT A LA MAIN (le job horaire n'y touche jamais).",
+    "bans   : role -> liste d'ids de champions bannis quand Nathan joue ce role.",
+    "         Le champion apparait en rouge dans la grille du role, meme sans replay.",
+    "notes  : cle '<role>/<ChampionId>' -> { fr: [...], en: [...] }.",
+    "         Une note = { t: titre court, d: le detail, k: 'plus' | 'moins' | 'info' }.",
+    "         k colore le liseré : plus = vert (ce qui marche), moins = rouge (le piege),",
+    "         info = bleu (par defaut si k est absent).",
+    "         'en' est facultatif : sans traduction, la version fr est affichee aux deux langues.",
+    "L'id du champion est celui de data/champions.json (Chogath, MonkeyKing, KSante...)."
+  ],
+  "bans": {
+    "top": ["Trundle"],
+    "mid": ["Anivia"],
+    "adc": ["Soraka"],
+    "support": ["Soraka"]
+  },
+  "notes": {
+    "_exemple/Darius": {
+      "fr": [
+        { "t": "Niveau 1-2", "d": "Exemple : ne pas contester le buff bleu, il gagne le trade.", "k": "moins" },
+        { "t": "Boule de neige", "d": "Exemple : le knock-up passe par-dessus son E.", "k": "plus" }
+      ],
+      "en": [
+        { "t": "Level 1-2", "d": "Example: don't contest blue buff, he wins the trade.", "k": "moins" },
+        { "t": "Snowball", "d": "Example: the knock-up goes through his E.", "k": "plus" }
+      ]
+    }
+  }
+}

@@ -45,6 +45,15 @@ h1 .vs{color:#6fd3ff}
 .card .chips{color:#9db0c4;font-size:12.5px;margin-top:8px}
 .rk{border-radius:4px;padding:1px 7px;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
 {RANK_CSS}
+.ban{display:inline-block;background:#ff5a5a;color:#1a0508;font-size:11px;font-weight:700;letter-spacing:.1em;padding:4px 6px;border-radius:4px;vertical-align:middle;margin-left:6px}
+.notes{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;margin:22px 0 4px}
+.notes h2{grid-column:1/-1;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:#8593a5;font-weight:700}
+.note{background:#101722;border:1px solid #1d2735;border-left:3px solid #6fd3ff;border-radius:6px;padding:10px 12px}
+.note b{display:block;font-size:12.5px;color:#6fd3ff;margin-bottom:4px}
+.note p{font-size:13px;line-height:1.5;color:#9db0c4}
+.note.plus{border-left-color:#39d98a}.note.plus b{color:#39d98a}
+.note.moins{border-left-color:#ff7a7a}.note.moins b{color:#ff7a7a}
+.note.ban{border-left-color:#ff5a5a;background:rgba(255,90,90,.13)}.note.ban b{color:#ff5a5a}
 .cta{display:inline-block;border:1px solid #6fd3ff;border-radius:6px;padding:11px 18px;margin:18px 12px 0 0;font-weight:600;font-size:13px;letter-spacing:.06em;text-transform:uppercase}
 footer{border-top:1px solid #1d2735;color:#8593a5;font-size:13px;padding:18px 0}
 @media(max-width:640px){.card{flex-direction:column}.card img{width:100%}.card .meta{padding:0 14px 12px}}
@@ -117,6 +126,40 @@ def rank_label(v, lp=True):
     return s
 
 
+def load_notes():
+    """data/notes.json est écrit à la main : absent ou cassé, on s'en passe."""
+    try:
+        raw = load("notes.json")
+    except (OSError, ValueError):
+        return {}, {}
+    bans = {}
+    for role, names in (raw.get("bans") or {}).items():
+        if role in ROLE_NAMES:
+            bans[role] = {re.sub(r"[^a-z0-9]", "", str(n).lower()) for n in (names or [])}
+    return bans, raw.get("notes") or {}
+
+
+BANS, NOTES = {}, {}
+
+
+def notes_block(role, enemy_id, enemy_name, banned):
+    cards = []
+    if banned:
+        cards.append(
+            f'<div class="note ban"><b>Ban permanent</b><p>Je le ban à chaque game '
+            f'quand je joue {esc(ROLE_NAMES[role])}. Tu ne verras donc pas ce matchup en replay.</p></div>')
+    entry = NOTES.get(f"{role}/{enemy_id}") or {}
+    for n in (entry.get("fr") or entry.get("en") or []):
+        if not isinstance(n, dict) or not n.get("t"):
+            continue
+        kind = n.get("k") if n.get("k") in ("plus", "moins", "info") else "info"
+        cards.append(f'<div class="note {kind}"><b>{esc(str(n["t"]))}</b>'
+                     + (f'<p>{esc(str(n["d"]))}</p>' if n.get("d") else "") + "</div>")
+    if not cards:
+        return ""
+    return '<div class="notes"><h2>À savoir</h2>' + "".join(cards) + "</div>"
+
+
 def matchup_page(role, enemy_id, enemy_name, videos):
     role_name = ROLE_NAMES[role]
     n = len(videos)
@@ -140,6 +183,9 @@ def matchup_page(role, enemy_id, enemy_name, videos):
             for i, v in enumerate(videos)
         ],
     }
+
+    banned = re.sub(r"[^a-z0-9]", "", enemy_id.lower()) in BANS.get(role, set())
+    notes = notes_block(role, enemy_id, enemy_name, banned)
 
     cards = []
     for v in videos:
@@ -178,8 +224,9 @@ def matchup_page(role, enemy_id, enemy_name, videos):
 <body>
 <header><div class="shell"><a class="brand" href="{SITE}/">Gyn Replays <span>— Matchups Nunu</span></a></div></header>
 <main class="shell">
-<h1>Nunu {esc(role_name)} <span class="vs">vs</span> {esc(enemy_name)}</h1>
+<h1>Nunu {esc(role_name)} <span class="vs">vs</span> {esc(enemy_name)}{'<span class="ban">BAN</span>' if banned else ''}</h1>
 <p class="sub">{n} replay{"s" if n > 1 else ""} complet{"s" if n > 1 else ""} du matchup, du plus récent au plus ancien — gameplay réel en {esc(rank)}, aucune sélection de moments.</p>
+{notes}
 {"".join(cards)}
 <a class="cta" href="{SITE}/#{role}/{esc(enemy_id.lower())}">Tous les matchups Nunu</a>
 <a class="cta" href="https://www.youtube.com/@GynReplays?sub_confirmation=1">S'abonner à la chaîne</a>
@@ -192,6 +239,8 @@ def matchup_page(role, enemy_id, enemy_name, videos):
 
 
 def main():
+    global BANS, NOTES
+    BANS, NOTES = load_notes()
     champs = load("champions.json")
     data = load("videos.json")
     names = {c["id"]: c["name"] for c in champs["champions"]}
