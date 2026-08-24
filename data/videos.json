@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.16.1",
-    "updated": "2026-08-23T11:00:05Z"
+    "updated": "2026-08-24T11:03:44Z"
   },
   "videos": [
+    {
+      "id": "cYBts7F3wUk",
+      "title": "Nunu Top vs Gwen | Unranked to Master : Gold 3 40lp | Patch 25.16",
+      "published": "2026-08-24T10:00:24+00:00",
+      "role": "top",
+      "enemy": "Gwen",
+      "enemyName": "Gwen",
+      "patch": "25.16",
+      "rank": "Gold",
+      "division": "3",
+      "lp": 40,
+      "region": null,
+      "result": null
+    },
     {
       "id": "uhhKHGCRRX8",
       "title": "Nunu Top vs Nasus | Unranked to Master : Gold 3 10lp | Patch 25.16",
