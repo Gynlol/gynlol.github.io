@@ -33,7 +33,16 @@
     "top/Teemo": "facile",
     "top/Volibear": "dur",
 
-    "mid/Viktor": "facile"
+    "mid/Viktor": "facile",
+
+    "adc/Ezreal": "facile",
+    "adc/Kalista": "dur",
+    "adc/Karthus": "facile",
+    "adc/Sivir": "moyen",
+    "adc/Twitch": "facile",
+    "adc/Viktor": "facile",
+    "adc/Xerath": "facile",
+    "adc/Ziggs": "facile"
   },
 
   "notes": {
