@@ -674,6 +674,8 @@ main { flex: 1; padding-top: 28px; padding-bottom: 48px; }
   align-items: center;
   white-space: nowrap;
 }
+/* display:inline-flex écrase le display:none du navigateur pour [hidden]. */
+.translate-link[hidden] { display: none; }
 .translate-link:hover { color: var(--accent); border-color: var(--accent); }
 @media (max-width: 720px) {
   .translate-link { font-size: 10.5px; padding: 0 8px; }
