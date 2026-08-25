@@ -8,7 +8,12 @@
     "         k colore le liseré : plus = vert (ce qui marche), moins = rouge (le piege),",
     "         info = bleu (par defaut si k est absent).",
     "         'en' est facultatif : sans traduction, la version fr est affichee aux deux langues.",
-    "L'id du champion est celui de data/champions.json (Chogath, MonkeyKing, KSante...)."
+    "niveaux: cle '<role>/<ChampionId>' -> 'facile' | 'moyen' | 'dur'.",
+    "         Affiche en gros au-dessus du matchup et sous la tuile du champion :",
+    "         facile = vert, moyen = orange, dur = rouge. Traduit tout seul en anglais.",
+    "L'id du champion est celui de data/champions.json (Chogath, MonkeyKing, KSante...).",
+    "Les notes s'ecrivent en FRANCAIS uniquement : le site propose un bouton de",
+    "traduction quand le visiteur passe en anglais."
   ],
   "bans": {
     "top": ["Trundle"],
@@ -16,6 +21,10 @@
     "adc": ["Soraka"],
     "support": ["Soraka"]
   },
+  "niveaux": {
+    "_exemple/Darius": "moyen"
+  },
+
   "notes": {
     "_exemple/Darius": {
       "fr": [

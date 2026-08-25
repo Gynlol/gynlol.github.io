@@ -34,6 +34,10 @@
       requestSent: "Demande envoyée ! Le matchup est noté.",
       requestAlready: "Déjà demandé depuis ce navigateur ✓",
       notesTitle: "À savoir",
+      levelTitle: "Difficulté",
+      levels: { facile: "Facile", moyen: "Moyen", dur: "Dur" },
+      translate: "",
+      translateHint: "",
       ban: "BAN",
       banTitle: "Ban permanent",
       banSub: "Ban permanent — pas de replay, et il n'y en aura pas",
@@ -65,6 +69,10 @@
       requestSent: "Request sent! The matchup is noted.",
       requestAlready: "Already requested from this browser ✓",
       notesTitle: "Good to know",
+      levelTitle: "Difficulty",
+      levels: { facile: "Easy", moyen: "Medium", dur: "Hard" },
+      translate: "Translate",
+      translateHint: "Matchup notes are written in French — open this page in Google Translate",
       ban: "BAN",
       banTitle: "Permanent ban",
       banSub: "Permanent ban — no replay, and there won't be one",
@@ -84,6 +92,7 @@
     data: null,
     champs: null,
     notes: {},       // "role/ChampId" -> { fr: [...], en: [...] }
+    levels: {},      // "role/ChampId" -> "facile" | "moyen" | "dur"
     bans: {},        // role -> { champId: true } — bans de rôle, écrits à la main
     banNames: {},    // role -> [noms] — un ban peut ne pas figurer dans la grille du rôle
     byRole: {},      // role -> { champId -> [videos] }
@@ -172,6 +181,28 @@
 
   function isBanned(role, champId) {
     return !!(state.bans[role] && state.bans[role][champId]);
+  }
+
+  // Difficulté écrite à la main dans data/notes.json (clé « niveaux ») :
+  // facile / moyen / dur, tolérant sur la casse, les accents et l'anglais.
+  var LEVEL_ALIASES = {
+    facile: "facile", easy: "facile", ez: "facile",
+    moyen: "moyen", moyenne: "moyen", medium: "moyen", moy: "moyen",
+    dur: "dur", dure: "dur", difficile: "dur", hard: "dur"
+  };
+
+  function levelFor(role, champId) {
+    var raw = (state.notesFile && state.notesFile.niveaux) || {};
+    var v = raw[role + "/" + champId];
+    if (!v) return null;
+    return LEVEL_ALIASES[normName(String(v))] || null;
+  }
+
+  function levelBadge(level, klass) {
+    var el = document.createElement("span");
+    el.className = (klass || "level-badge") + " lvl-" + level;
+    el.textContent = t().levels[level];
+    return el;
   }
 
   function notesFor(role, champId) {
@@ -381,9 +412,10 @@
       var banned = isBanned(state.role, c.id);
       tile.className = "tile" + (c.videos.length ? "" : " off") +
         (banned ? " ban" : "") + (c.id === state.champ ? " selected" : "");
-      tile.setAttribute("aria-label", banned
+      var lvlLabel = levelFor(state.role, c.id);
+      tile.setAttribute("aria-label", (lvlLabel ? t().levels[lvlLabel] + " — " : "") + (banned
         ? t().tileBan(c.name, t().roleNames[state.role])
-        : t().tileLabel(c.name, c.videos.length));
+        : t().tileLabel(c.name, c.videos.length)));
       tile.title = banned ? t().banTitle : (c.videos.length ? "" : t().noVideo);
 
       var img = document.createElement("img");
@@ -415,6 +447,13 @@
       name.className = "tile-name";
       name.textContent = c.name;
       tile.appendChild(name);
+
+      // La difficulté prime sur tout le reste : elle se lit sans ouvrir le matchup.
+      var lvl = levelFor(state.role, c.id);
+      if (lvl) {
+        tile.classList.add("has-level");
+        tile.appendChild(levelBadge(lvl, "tile-level"));
+      }
 
       tile.addEventListener("click", function () {
         var deselecting = state.champ === c.id;
@@ -463,9 +502,13 @@
     if (isBanned(state.role, entry.id)) {
       $("panel-title").innerHTML += ' <span class="title-ban">' + t().ban + "</span>";
     }
-    $("panel-sub").textContent = entry.videos.length
+    var sub = $("panel-sub");
+    sub.textContent = "";
+    var panelLvl = levelFor(state.role, entry.id);
+    if (panelLvl) sub.appendChild(levelBadge(panelLvl, "level-badge"));
+    sub.appendChild(document.createTextNode(entry.videos.length
       ? t().matchupSub(entry.videos.length)
-      : (isBanned(state.role, entry.id) ? t().banSub : t().noVideo);
+      : (isBanned(state.role, entry.id) ? t().banSub : t().noVideo)));
     $("panel-close").setAttribute("aria-label", t().close);
 
     renderNotes(entry);
@@ -619,6 +662,30 @@
     $("search").placeholder = t().searchPlaceholder;
     var updated = state.data.meta.updated;
     $("footer-updated").textContent = updated ? t().updatedAt(fmtDate(updated)) : "";
+    renderTranslateLink();
+  }
+
+  // Les notes de matchup sont écrites en français une seule fois. En anglais,
+  // le site propose la page passée par Google Traduction plutôt qu'une
+  // deuxième version à tenir à jour.
+  function translateUrl() {
+    var host = location.hostname;
+    if (host.indexOf(".") === -1) return null;  // localhost : pas de proxy possible
+    var proxy = host.replace(/-/g, "--").replace(/\./g, "-") + ".translate.goog";
+    return "https://" + proxy + location.pathname + location.search +
+      (location.search ? "&" : "?") + "_x_tr_sl=fr&_x_tr_tl=en&_x_tr_hl=en" + location.hash;
+  }
+
+  function renderTranslateLink() {
+    var link = $("translate-link");
+    if (!link) return;
+    var url = state.lang === "en" ? translateUrl() : null;
+    if (!url) { link.hidden = true; return; }
+    link.hidden = false;
+    link.href = url;
+    link.textContent = "🌐 " + t().translate;
+    link.title = t().translateHint;
+    link.setAttribute("aria-label", t().translateHint);
   }
 
   function renderAll() {

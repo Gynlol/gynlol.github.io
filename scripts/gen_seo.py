@@ -54,6 +54,8 @@ h1 .vs{color:#6fd3ff}
 .note.plus{border-left-color:#39d98a}.note.plus b{color:#39d98a}
 .note.moins{border-left-color:#ff7a7a}.note.moins b{color:#ff7a7a}
 .note.ban{border-left-color:#ff5a5a;background:rgba(255,90,90,.13)}.note.ban b{color:#ff5a5a}
+.lvl{display:inline-block;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#0a0e14;border-radius:4px;font-size:12.5px;line-height:1;padding:5px 9px;margin-right:10px;vertical-align:middle}
+.lvl-facile{background:#39d98a}.lvl-moyen{background:#ffab3d}.lvl-dur{background:#ff5a5a}
 .cta{display:inline-block;border:1px solid #6fd3ff;border-radius:6px;padding:11px 18px;margin:18px 12px 0 0;font-weight:600;font-size:13px;letter-spacing:.06em;text-transform:uppercase}
 footer{border-top:1px solid #1d2735;color:#8593a5;font-size:13px;padding:18px 0}
 @media(max-width:640px){.card{flex-direction:column}.card img{width:100%}.card .meta{padding:0 14px 12px}}
@@ -131,15 +133,27 @@ def load_notes():
     try:
         raw = load("notes.json")
     except (OSError, ValueError):
-        return {}, {}
+        return {}, {}, {}
     bans = {}
     for role, names in (raw.get("bans") or {}).items():
         if role in ROLE_NAMES:
             bans[role] = {re.sub(r"[^a-z0-9]", "", str(n).lower()) for n in (names or [])}
-    return bans, raw.get("notes") or {}
+    levels = {}
+    for key, val in (raw.get("niveaux") or {}).items():
+        lvl = LEVEL_ALIASES.get(re.sub(r"[^a-z0-9]", "", str(val).lower()))
+        if lvl:
+            levels[key] = lvl
+    return bans, raw.get("notes") or {}, levels
 
 
-BANS, NOTES = {}, {}
+LEVEL_ALIASES = {
+    "facile": "facile", "easy": "facile", "ez": "facile",
+    "moyen": "moyen", "moyenne": "moyen", "medium": "moyen", "moy": "moyen",
+    "dur": "dur", "dure": "dur", "difficile": "dur", "hard": "dur",
+}
+LEVEL_LABELS = {"facile": "Facile", "moyen": "Moyen", "dur": "Dur"}
+
+BANS, NOTES, LEVELS = {}, {}, {}
 
 
 def notes_block(role, enemy_id, enemy_name, banned):
@@ -186,6 +200,8 @@ def matchup_page(role, enemy_id, enemy_name, videos):
 
     banned = re.sub(r"[^a-z0-9]", "", enemy_id.lower()) in BANS.get(role, set())
     notes = notes_block(role, enemy_id, enemy_name, banned)
+    level = LEVELS.get(f"{role}/{enemy_id}")
+    level_badge = f'<span class="lvl lvl-{level}">{LEVEL_LABELS[level]}</span>' if level else ""
 
     cards = []
     for v in videos:
@@ -225,7 +241,7 @@ def matchup_page(role, enemy_id, enemy_name, videos):
 <header><div class="shell"><a class="brand" href="{SITE}/">Gyn Replays <span>— Matchups Nunu</span></a></div></header>
 <main class="shell">
 <h1>Nunu {esc(role_name)} <span class="vs">vs</span> {esc(enemy_name)}{'<span class="ban">BAN</span>' if banned else ''}</h1>
-<p class="sub">{n} replay{"s" if n > 1 else ""} complet{"s" if n > 1 else ""} du matchup, du plus récent au plus ancien — gameplay réel en {esc(rank)}, aucune sélection de moments.</p>
+<p class="sub">{level_badge}{n} replay{"s" if n > 1 else ""} complet{"s" if n > 1 else ""} du matchup, du plus récent au plus ancien — gameplay réel en {esc(rank)}, aucune sélection de moments.</p>
 {notes}
 {"".join(cards)}
 <a class="cta" href="{SITE}/#{role}/{esc(enemy_id.lower())}">Tous les matchups Nunu</a>
@@ -239,8 +255,8 @@ def matchup_page(role, enemy_id, enemy_name, videos):
 
 
 def main():
-    global BANS, NOTES
-    BANS, NOTES = load_notes()
+    global BANS, NOTES, LEVELS
+    BANS, NOTES, LEVELS = load_notes()
     champs = load("champions.json")
     data = load("videos.json")
     names = {c["id"]: c["name"] for c in champs["champions"]}

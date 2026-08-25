@@ -34,6 +34,11 @@ Tout se passe dans `data/notes.json`, en clair, sans rien relancer côté site
 "bans": { "top": ["Trundle"], "mid": ["Anivia"],
           "adc": ["Soraka"], "support": ["Soraka"] },
 
+"niveaux": {                            // difficulté du matchup
+  "top/Darius": "dur",                  // facile (vert) | moyen (orange) | dur (rouge)
+  "adc/Ziggs": "facile"
+},
+
 "notes": {
   "top/Darius": {                       // "<rôle>/<id du champion>"
     "fr": [
@@ -47,6 +52,14 @@ Tout se passe dans `data/notes.json`, en clair, sans rien relancer côté site
 
 - `t` = titre court, `d` = le texte, `k` = couleur du liseré : `plus` (vert),
   `moins` (rouge), `info` (bleu, par défaut).
+- `niveaux` = la première chose qu'on lit : pastille de couleur sous la tuile
+  du champion dans la grille **et** en tête du matchup ouvert (et sur la page
+  de référencement). Les valeurs anglaises `easy` / `medium` / `hard` sont
+  acceptées, la casse et les accents aussi.
+- **Les notes s'écrivent en français uniquement.** La clé `en` reste possible
+  mais n'est plus tenue à jour : en mode anglais, le site affiche le texte
+  français et propose un bouton « 🌐 Translate » qui rouvre la page via
+  Google Traduction (`*.translate.goog`).
 - Un champion listé dans `bans` sort **en rouge avec une pastille BAN** dans
   la grille du rôle concerné, même sans replay, et une carte « Ban permanent »
   ouvre sa colonne « À savoir ». Le ban est par rôle : Trundle est rouge au

@@ -15,6 +15,9 @@
   --loss: #ff7a7a;
   --ban: #ff5a5a;
   --ban-dim: rgba(255, 90, 90, 0.13);
+  --lvl-facile: #39d98a;
+  --lvl-moyen: #ffab3d;
+  --lvl-dur: #ff5a5a;
   --font-display: "Chakra Petch", "Segoe UI", sans-serif;
   --font-body: "Inter", "Segoe UI", sans-serif;
 }
@@ -630,4 +633,58 @@ main { flex: 1; padding-top: 28px; padding-bottom: 48px; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   * { transition: none !important; animation: none !important; }
+}
+
+
+/* ---------- Difficulté du matchup ----------
+   Facile / Moyen / Dur : c'est la première chose qu'on lit, dans la grille
+   comme en tête du matchup. Texte foncé sur aplat plein (contraste AA). */
+.level-badge, .tile-level {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #0a0e14;
+  border-radius: 4px;
+  display: inline-block;
+}
+.level-badge {
+  font-size: 12.5px;
+  line-height: 1;
+  padding: 5px 9px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+.tile .tile-level {
+  font-size: 9.5px;
+  line-height: 1;
+  padding: 3px 6px;
+  margin-top: 1px;
+  max-width: calc(100% - 8px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.lvl-facile { background: var(--lvl-facile); }
+.lvl-moyen { background: var(--lvl-moyen); }
+.lvl-dur { background: var(--lvl-dur); }
+/* Un matchup noté reste lisible même sans replay : on ne le grise plus à fond. */
+.tile.has-level.off img { filter: grayscale(0.5) brightness(0.75); }
+.tile.has-level.off .tile-name { color: var(--text); }
+
+/* Lien de traduction : n'apparaît qu'en anglais, les notes étant en français. */
+.translate-link {
+  font-size: 11.5px;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0 10px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+.translate-link:hover { color: var(--accent); border-color: var(--accent); }
+@media (max-width: 720px) {
+  .translate-link { font-size: 10.5px; padding: 0 8px; }
 }
