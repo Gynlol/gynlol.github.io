@@ -18,6 +18,7 @@
   --lvl-facile: #39d98a;
   --lvl-moyen: #ffab3d;
   --lvl-dur: #ff5a5a;
+  --lvl-tresdur: #8d0f1c;
   --font-display: "Chakra Petch", "Segoe UI", sans-serif;
   --font-body: "Inter", "Segoe UI", sans-serif;
 }
@@ -657,10 +658,11 @@ main { flex: 1; padding-top: 28px; padding-bottom: 48px; }
 }
 .tile .tile-level {
   font-size: 9.5px;
+  letter-spacing: 0.05em;
   line-height: 1;
-  padding: 3px 6px;
+  padding: 3px 5px;
   margin-top: 1px;
-  max-width: calc(100% - 8px);
+  max-width: calc(100% - 4px);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -668,6 +670,8 @@ main { flex: 1; padding-top: 28px; padding-bottom: 48px; }
 .lvl-facile { background: var(--lvl-facile); }
 .lvl-moyen { background: var(--lvl-moyen); }
 .lvl-dur { background: var(--lvl-dur); }
+/* Cran au-dessus de « Dur » : rouge sombre, donc texte clair pour rester lisible. */
+.lvl-tresdur { background: var(--lvl-tresdur); color: #ffe3e6; }
 /* Un matchup noté reste lisible même sans replay : on ne le grise plus à fond. */
 .tile.has-level.off img { filter: grayscale(0.5) brightness(0.75); }
 .tile.has-level.off .tile-name { color: var(--text); }

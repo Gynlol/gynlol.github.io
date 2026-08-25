@@ -22,7 +22,18 @@
     "support": ["Soraka"]
   },
   "niveaux": {
-    "_exemple/Darius": "moyen"
+    "_exemple/Darius": "moyen",
+
+    "top/Chogath": "tresdur",
+    "top/Darius": "moyen",
+    "top/DrMundo": "facile",
+    "top/Gwen": "facile",
+    "top/Mordekaiser": "facile",
+    "top/Nasus": "moyen",
+    "top/Teemo": "facile",
+    "top/Volibear": "dur",
+
+    "mid/Viktor": "facile"
   },
 
   "notes": {

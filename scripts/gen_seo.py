@@ -56,6 +56,7 @@ h1 .vs{color:#6fd3ff}
 .note.ban{border-left-color:#ff5a5a;background:rgba(255,90,90,.13)}.note.ban b{color:#ff5a5a}
 .lvl{display:inline-block;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#0a0e14;border-radius:4px;font-size:12.5px;line-height:1;padding:5px 9px;margin-right:10px;vertical-align:middle}
 .lvl-facile{background:#39d98a}.lvl-moyen{background:#ffab3d}.lvl-dur{background:#ff5a5a}
+.lvl-tresdur{background:#8d0f1c;color:#ffe3e6}
 .cta{display:inline-block;border:1px solid #6fd3ff;border-radius:6px;padding:11px 18px;margin:18px 12px 0 0;font-weight:600;font-size:13px;letter-spacing:.06em;text-transform:uppercase}
 footer{border-top:1px solid #1d2735;color:#8593a5;font-size:13px;padding:18px 0}
 @media(max-width:640px){.card{flex-direction:column}.card img{width:100%}.card .meta{padding:0 14px 12px}}
@@ -141,8 +142,10 @@ def load_notes():
     levels = {}
     for key, val in (raw.get("niveaux") or {}).items():
         lvl = LEVEL_ALIASES.get(re.sub(r"[^a-z0-9]", "", str(val).lower()))
-        if lvl:
-            levels[key] = lvl
+        parts = str(key).split("/")
+        if lvl and len(parts) == 2:
+            # Clé normalisée : « top/Dr. Mundo » et « top/DrMundo » se valent.
+            levels[parts[0].strip().lower() + "/" + re.sub(r"[^a-z0-9]", "", parts[1].lower())] = lvl
     return bans, raw.get("notes") or {}, levels
 
 
@@ -150,8 +153,9 @@ LEVEL_ALIASES = {
     "facile": "facile", "easy": "facile", "ez": "facile",
     "moyen": "moyen", "moyenne": "moyen", "medium": "moyen", "moy": "moyen",
     "dur": "dur", "dure": "dur", "difficile": "dur", "hard": "dur",
+    "tresdur": "tresdur", "tresdure": "tresdur", "veryhard": "tresdur", "enfer": "tresdur",
 }
-LEVEL_LABELS = {"facile": "Facile", "moyen": "Moyen", "dur": "Dur"}
+LEVEL_LABELS = {"facile": "Facile", "moyen": "Moyen", "dur": "Dur", "tresdur": "Très dur"}
 
 BANS, NOTES, LEVELS = {}, {}, {}
 
@@ -200,7 +204,7 @@ def matchup_page(role, enemy_id, enemy_name, videos):
 
     banned = re.sub(r"[^a-z0-9]", "", enemy_id.lower()) in BANS.get(role, set())
     notes = notes_block(role, enemy_id, enemy_name, banned)
-    level = LEVELS.get(f"{role}/{enemy_id}")
+    level = LEVELS.get(f"{role}/" + re.sub(r"[^a-z0-9]", "", enemy_id.lower()))
     level_badge = f'<span class="lvl lvl-{level}">{LEVEL_LABELS[level]}</span>' if level else ""
 
     cards = []

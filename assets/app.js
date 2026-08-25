@@ -35,7 +35,7 @@
       requestAlready: "Déjà demandé depuis ce navigateur ✓",
       notesTitle: "À savoir",
       levelTitle: "Difficulté",
-      levels: { facile: "Facile", moyen: "Moyen", dur: "Dur" },
+      levels: { facile: "Facile", moyen: "Moyen", dur: "Dur", tresdur: "Très dur" },
       translate: "",
       translateHint: "",
       ban: "BAN",
@@ -70,7 +70,7 @@
       requestAlready: "Already requested from this browser ✓",
       notesTitle: "Good to know",
       levelTitle: "Difficulty",
-      levels: { facile: "Easy", moyen: "Medium", dur: "Hard" },
+      levels: { facile: "Easy", moyen: "Medium", dur: "Hard", tresdur: "Very hard" },
       translate: "Translate",
       translateHint: "Matchup notes are written in French — open this page in Google Translate",
       ban: "BAN",
@@ -188,14 +188,33 @@
   var LEVEL_ALIASES = {
     facile: "facile", easy: "facile", ez: "facile",
     moyen: "moyen", moyenne: "moyen", medium: "moyen", moy: "moyen",
-    dur: "dur", dure: "dur", difficile: "dur", hard: "dur"
+    dur: "dur", dure: "dur", difficile: "dur", hard: "dur",
+    tresdur: "tresdur", tresdure: "tresdur", veryhard: "tresdur", enfer: "tresdur"
   };
 
-  function levelFor(role, champId) {
+  // Clés tolérantes : « top/Dr. Mundo », « TOP/drmundo » ou « top/DrMundo »
+  // désignent la même case — le fichier est écrit à la main.
+  function buildLevels(namesById) {
+    state.levels = {};
     var raw = (state.notesFile && state.notesFile.niveaux) || {};
-    var v = raw[role + "/" + champId];
-    if (!v) return null;
-    return LEVEL_ALIASES[normName(String(v))] || null;
+    var byNorm = {};
+    Object.keys(namesById).forEach(function (id) {
+      byNorm[normName(id)] = id;
+      byNorm[normName(namesById[id])] = id;
+    });
+    Object.keys(raw).forEach(function (key) {
+      var parts = String(key).split("/");
+      if (parts.length !== 2) return;
+      var role = normName(parts[0]);
+      var id = byNorm[normName(parts[1])];
+      var lvl = LEVEL_ALIASES[normName(String(raw[key]))];
+      if (!id || !lvl || ROLES.indexOf(role) === -1) return;
+      state.levels[role + "/" + id] = lvl;
+    });
+  }
+
+  function levelFor(role, champId) {
+    return state.levels[role + "/" + champId] || null;
   }
 
   function levelBadge(level, klass) {
@@ -217,6 +236,7 @@
     var namesById = {};
     state.champs.champions.forEach(function (c) { namesById[c.id] = c.name; });
     buildBans(namesById);
+    buildLevels(namesById);
 
     ROLES.forEach(function (role) { state.byRole[role] = {}; });
     state.data.videos.forEach(function (v) {
@@ -505,7 +525,10 @@
     var sub = $("panel-sub");
     sub.textContent = "";
     var panelLvl = levelFor(state.role, entry.id);
-    if (panelLvl) sub.appendChild(levelBadge(panelLvl, "level-badge"));
+    if (panelLvl) {
+      sub.appendChild(levelBadge(panelLvl, "level-badge"));
+      sub.appendChild(document.createTextNode(" "));  // sinon « Très dur1 replay » à la lecture d'écran
+    }
     sub.appendChild(document.createTextNode(entry.videos.length
       ? t().matchupSub(entry.videos.length)
       : (isBanned(state.role, entry.id) ? t().banSub : t().noVideo)));
