@@ -468,13 +468,6 @@
       name.textContent = c.name;
       tile.appendChild(name);
 
-      // La difficulté prime sur tout le reste : elle se lit sans ouvrir le matchup.
-      var lvl = levelFor(state.role, c.id);
-      if (lvl) {
-        tile.classList.add("has-level");
-        tile.appendChild(levelBadge(lvl, "tile-level"));
-      }
-
       tile.addEventListener("click", function () {
         var deselecting = state.champ === c.id;
         state.champ = deselecting ? null : c.id;

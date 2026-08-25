@@ -638,9 +638,10 @@ main { flex: 1; padding-top: 28px; padding-bottom: 48px; }
 
 
 /* ---------- Difficulté du matchup ----------
-   Facile / Moyen / Dur : c'est la première chose qu'on lit, dans la grille
-   comme en tête du matchup. Texte foncé sur aplat plein (contraste AA). */
-.level-badge, .tile-level {
+   Facile / Moyen / Dur / Très dur : affiché en tête du matchup ouvert
+   seulement — les tuiles de la grille restent nues. Texte foncé sur aplat
+   plein (contraste AA), sauf « Très dur » qui inverse. */
+.level-badge {
   font-family: var(--font-display);
   font-weight: 700;
   letter-spacing: 0.1em;
@@ -656,26 +657,11 @@ main { flex: 1; padding-top: 28px; padding-bottom: 48px; }
   margin-right: 10px;
   vertical-align: middle;
 }
-.tile .tile-level {
-  font-size: 9.5px;
-  letter-spacing: 0.05em;
-  line-height: 1;
-  padding: 3px 5px;
-  margin-top: 1px;
-  max-width: calc(100% - 4px);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
 .lvl-facile { background: var(--lvl-facile); }
 .lvl-moyen { background: var(--lvl-moyen); }
 .lvl-dur { background: var(--lvl-dur); }
 /* Cran au-dessus de « Dur » : rouge sombre, donc texte clair pour rester lisible. */
 .lvl-tresdur { background: var(--lvl-tresdur); color: #ffe3e6; }
-/* Un matchup noté reste lisible même sans replay : on ne le grise plus à fond. */
-.tile.has-level.off img { filter: grayscale(0.5) brightness(0.75); }
-.tile.has-level.off .tile-name { color: var(--text); }
-
 /* Lien de traduction : n'apparaît qu'en anglais, les notes étant en français. */
 .translate-link {
   font-size: 11.5px;
