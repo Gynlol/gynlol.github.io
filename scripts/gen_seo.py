@@ -22,8 +22,8 @@ ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 DATA_DIR = os.path.join(ROOT, "data")
 OUT_DIR = os.path.join(ROOT, "matchups")
 
-ROLE_NAMES = {"top": "Top", "jungle": "Jungle", "mid": "Mid", "adc": "ADC", "support": "Support"}
-ROLE_ORDER = ["top", "jungle", "mid", "adc", "support"]
+ROLE_NAMES = {"top": "Top", "mid": "Mid", "adc": "ADC", "support": "Support"}
+ROLE_ORDER = ["top", "mid", "adc", "support"]
 
 PAGE_CSS = """
 *{margin:0;padding:0;box-sizing:border-box}

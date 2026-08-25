@@ -4,7 +4,7 @@
 
 Site statique qui répertorie tous les matchups Nunu de la chaîne
 [@GynReplays](https://www.youtube.com/@GynReplays), classés par rôle
-(Top / Jungle / Mid / ADC / Support) puis par champion ennemi.
+(Top / Mid / ADC / Support) puis par champion ennemi.
 
 ## Comment ça marche
 
@@ -50,7 +50,7 @@ Tout se passe dans `data/notes.json`, en clair, sans rien relancer côté site
 - Un champion listé dans `bans` sort **en rouge avec une pastille BAN** dans
   la grille du rôle concerné, même sans replay, et une carte « Ban permanent »
   ouvre sa colonne « À savoir ». Le ban est par rôle : Trundle est rouge au
-  Top et normal en Jungle.
+  Top et normal au Mid.
 - Le ban n'ajoute **pas** le champion à la grille du rôle : Soraka n'est pas
   une ADC, elle reste absente de la grille ADC — seule la ligne rouge
   « Mon ban en ADC : Soraka » sous le compteur le signale.

@@ -2,11 +2,10 @@
 (function () {
   "use strict";
 
-  var ROLES = ["top", "jungle", "mid", "adc", "support"];
+  var ROLES = ["top", "mid", "adc", "support"];
 
   var ROLE_ICONS = {
     top: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 2h8L7.5 4.5H4.5v3L2 10V2z" fill="currentColor"/><path d="M14 14H6l2.5-2.5h3v-3L14 6v8z" fill="currentColor" opacity=".45"/></svg>',
-    jungle: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1c1.8 2.4 2.6 4.8 2.6 7.2 0 2.1-.9 4.4-2.6 6.8-1.7-2.4-2.6-4.7-2.6-6.8C5.4 5.8 6.2 3.4 8 1z" fill="currentColor"/><path d="M12.8 4c.8 1.7 1 3.3.4 5-.5 1.4-1.5 2.7-3 3.9.5-1.6.8-3 .8-4.4 0-1.5.6-3 1.8-4.5zM3.2 4c1.2 1.5 1.8 3 1.8 4.5 0 1.4.3 2.8.8 4.4-1.5-1.2-2.5-2.5-3-3.9-.6-1.7-.4-3.3.4-5z" fill="currentColor" opacity=".45"/></svg>',
     mid: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 14v-4l8-8h4L2 14z" fill="currentColor"/><path d="M2 2h5L4.5 4.5H2V2zm12 12H9l2.5-2.5H14V14z" fill="currentColor" opacity=".45"/></svg>',
     adc: '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="2.2" fill="currentColor"/><path d="M8 1v3M8 12v3M1 8h3M12 8h3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
     support: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1l6 2.5v4c0 3.2-2.4 6-6 7.5-3.6-1.5-6-4.3-6-7.5v-4L8 1z" fill="currentColor"/></svg>'
@@ -41,7 +40,7 @@
       banText: function (role) { return "Je le ban à chaque game quand je joue " + role + ". Tu ne verras donc pas ce matchup en replay."; },
       banLine: function (names, role) { return "Mon ban en " + role + " : " + names; },
       tileBan: function (name, role) { return name + " — mon ban en " + role; },
-      roleNames: { top: "Top", jungle: "Jungle", mid: "Mid", adc: "ADC", support: "Support" },
+      roleNames: { top: "Top", mid: "Mid", adc: "ADC", support: "Support" },
       docTitle: "Gyn Replays — Matchups Nunu"
     },
     en: {
@@ -72,7 +71,7 @@
       banText: function (role) { return "I ban them every game when I play " + role + ", so this matchup will never show up in the replays."; },
       banLine: function (names, role) { return "My " + role + " ban: " + names; },
       tileBan: function (name, role) { return name + " — my " + role + " ban"; },
-      roleNames: { top: "Top", jungle: "Jungle", mid: "Mid", adc: "ADC", support: "Support" },
+      roleNames: { top: "Top", mid: "Mid", adc: "ADC", support: "Support" },
       docTitle: "Gyn Replays — Nunu Matchups"
     }
   };
