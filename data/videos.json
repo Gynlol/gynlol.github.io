@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.17.1",
-    "updated": "2026-08-25T19:49:57Z"
+    "updated": "2026-08-26T11:03:54Z"
   },
   "videos": [
+    {
+      "id": "k6Qdrk4yY0s",
+      "title": "Nunu Top vs Urgot | Unranked to Master : Gold 2 77lp | Patch 25.16",
+      "published": "2026-08-26T10:00:30+00:00",
+      "role": "top",
+      "enemy": "Urgot",
+      "enemyName": "Urgot",
+      "patch": "25.16",
+      "rank": "Gold",
+      "division": "2",
+      "lp": 77,
+      "region": null,
+      "result": null
+    },
     {
       "id": "VfYDOcBiWhI",
       "title": "Nunu Top vs Nasus | Unranked to Master : Gold 3 90lp | Patch 25.16",
