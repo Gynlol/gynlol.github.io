@@ -89,3 +89,64 @@
 - Captures réelles (Edge headless, la pane ne compositait pas — pas affichée côté client) : `qa/desktop-home.png`, `qa/desktop-matchup-full.png`, `qa/mobile-home.png`, `qa/mobile-full.png` — relues à l'œil
 - Reduced-motion : media query globale + `scrollIntoView` conditionné à `prefers-reduced-motion` (non émulé en navigateur, vérifié sur code)
 - Revue adversariale : 27 agents, **23 constats confirmés / 0 réfuté → 23 corrigés** (parseur ×5, front JS ×4, HTML/CSS/a11y ×10, CI+guide ×4) ; détail dans le rapport de run et `git` du projet
+
+## Runes & build (ajout du 2026-08-27)
+
+**Décision de portée** — demandé explicitement : « un endroit réservé aux runes
+et build **sans rapport avec les lanes** ». Donc une vue à part (`#setup`), pas
+une colonne de plus dans le panneau de matchup, et aucune donnée par rôle.
+
+**Décisions de forme**
+
+- Page de runes **dessinée comme en jeu** : l'arbre entier est affiché, les
+  runes non prises restant visibles mais éteintes (opacité 0,26 + niveaux de
+  gris). Une simple file d'icônes prises ne se reconnaît pas — c'est le
+  contraste pris/pas pris qui donne la forme de la page.
+- **Ma page / mon build** portent le biseau glace du panneau de matchup et une
+  pastille pleine ; les variantes sont neutres. Un seul signe distingue le
+  défaut des variantes, pas trois.
+- Chaque variante porte **une phrase** (`pourquoi`) : sans elle, une deuxième
+  page de runes n'apprend rien.
+- Build : icônes **avec le nom sous chaque objet** (pas d'infobulle seule — sur
+  téléphone il n'y a pas de survol) et chevron d'ordre d'achat sur le cœur.
+
+**Décisions techniques**
+
+- Le fichier tenu à la main (`setup.json`) ne contient que des **noms** ; un
+  script (`gen_setup.py`) les résout contre Data Dragon vers `setup-built.json`.
+  Alternative écartée : résoudre côté navigateur, qui imposait de télécharger
+  `item.json` (≈ 1 Mo) à chaque visiteur de la page.
+- `setup-built.json` est **chargé à la première ouverture de la vue** seulement :
+  la page d'accueil ne paie pas les runes pour quelqu'un venu voir un replay.
+- Le générateur **vérifie chaque URL d'icône** (HEAD) avant d'écrire, et liste
+  les noms non résolus dans le journal du job — jamais de rejet silencieux, même
+  règle que la résolution des champions.
+- Étape ajoutée au job horaire : une modification à la main de `setup.json` est
+  en ligne dans l'heure sans rien lancer sur le PC.
+
+**QA — 2026-08-27**
+
+- Rendu vérifié sur un jeu d'exemple complet (3 pages de runes, 3 builds, 27
+  runes prises sur 91 affichées, 25 objets, 0 nom non résolu, 76/76 icônes
+  joignables), puis sur le contenu réel.
+- Débordement horizontal : **0** à 1280, 375 et 320 px (mesuré dans le
+  navigateur : `scrollWidth == clientWidth`, aucun élément au-delà du viewport).
+  Corrigé en cours de route : la barre du haut débordait à cause du troisième
+  bouton (libellé court sur téléphone, nom de la chaîne masqué sous 360 px), et
+  les deux arbres côte à côte ne tenaient pas sous 720 px (l'arbre principal
+  prend sa propre ligne).
+- Bilingue vérifié FR/EN (arbres, runes, objets, titres, libellés du bouton).
+- Console : aucune erreur. Cibles tactiles de la barre : 44 px de haut.
+- **Piège connu re-rencontré** : `#matchup-links` portait `hidden` mais restait
+  affiché sous la vue runes (`display:flex` écrase `[hidden]`). Règle
+  `.matchup-links[hidden] { display: none; }` ajoutée — même leçon que le bouton
+  Translate, deuxième occurrence.
+- **Limite honnête** : capture desktop réelle (`qa/setup-desktop.png`). La
+  capture mobile (`qa/setup-mobile.png`) est **rognée à droite par l'outil de
+  capture** (le navigateur headless de ce PC met en page plus large que la
+  fenêtre demandée — la page d'accueil non modifiée est rognée pareil) ; le
+  contrôle mobile qui fait foi est la mesure DOM ci-dessus, pas cette image.
+- Contenu affiché : la **page de runes réelle** (Domination / Électrocution,
+  secondaire Inspiration, 2 adaptatifs + 65 vie), résolue 33/33 icônes. Les
+  pages d'exemple ont été retirées. **Les builds restent à saisir** : rien n'est
+  inventé, et la section « Builds » ne s'affiche pas tant qu'elle est vide.

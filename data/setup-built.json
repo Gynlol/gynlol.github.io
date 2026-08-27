@@ -1,0 +1,450 @@
+{
+  "meta": {
+    "ddragonVersion": "16.17.1",
+    "source": "data/setup.json"
+  },
+  "trees": {
+    "8100": {
+      "id": 8100,
+      "key": "Domination",
+      "name": {
+        "fr": "Domination",
+        "en": "Domination"
+      },
+      "icon": "perk-images/Styles/7200_Domination.png",
+      "slots": [
+        [
+          {
+            "id": 8112,
+            "key": "Electrocute",
+            "name": {
+              "fr": "Électrocution",
+              "en": "Electrocute"
+            },
+            "icon": "perk-images/Styles/Domination/Electrocute/Electrocute.png",
+            "tree": 8100,
+            "row": 0
+          },
+          {
+            "id": 8128,
+            "key": "DarkHarvest",
+            "name": {
+              "fr": "Moisson noire",
+              "en": "Dark Harvest"
+            },
+            "icon": "perk-images/Styles/Domination/DarkHarvest/DarkHarvest.png",
+            "tree": 8100,
+            "row": 0
+          },
+          {
+            "id": 9923,
+            "key": "HailOfBlades",
+            "name": {
+              "fr": "Déluge de lames",
+              "en": "Hail of Blades"
+            },
+            "icon": "perk-images/Styles/Domination/HailOfBlades/HailOfBlades.png",
+            "tree": 8100,
+            "row": 0
+          }
+        ],
+        [
+          {
+            "id": 8126,
+            "key": "CheapShot",
+            "name": {
+              "fr": "Coup bas",
+              "en": "Cheap Shot"
+            },
+            "icon": "perk-images/Styles/Domination/CheapShot/CheapShot.png",
+            "tree": 8100,
+            "row": 1
+          },
+          {
+            "id": 8139,
+            "key": "TasteOfBlood",
+            "name": {
+              "fr": "Goût du sang",
+              "en": "Taste of Blood"
+            },
+            "icon": "perk-images/Styles/Domination/TasteOfBlood/GreenTerror_TasteOfBlood.png",
+            "tree": 8100,
+            "row": 1
+          },
+          {
+            "id": 8143,
+            "key": "SuddenImpact",
+            "name": {
+              "fr": "Ruée offensive",
+              "en": "Sudden Impact"
+            },
+            "icon": "perk-images/Styles/Domination/SuddenImpact/SuddenImpact.png",
+            "tree": 8100,
+            "row": 1
+          }
+        ],
+        [
+          {
+            "id": 8137,
+            "key": "SixthSense",
+            "name": {
+              "fr": "Sixième sens",
+              "en": "Sixth Sense"
+            },
+            "icon": "perk-images/Styles/Domination/SixthSense/SixthSense.png",
+            "tree": 8100,
+            "row": 2
+          },
+          {
+            "id": 8140,
+            "key": "GrislyMementos",
+            "name": {
+              "fr": "Souvenirs épouvantables",
+              "en": "Grisly Mementos"
+            },
+            "icon": "perk-images/Styles/Domination/GrislyMementos/GrislyMementos.png",
+            "tree": 8100,
+            "row": 2
+          },
+          {
+            "id": 8141,
+            "key": "DeepWard",
+            "name": {
+              "fr": "Balise de profondeur",
+              "en": "Deep Ward"
+            },
+            "icon": "perk-images/Styles/Domination/DeepWard/DeepWard.png",
+            "tree": 8100,
+            "row": 2
+          }
+        ],
+        [
+          {
+            "id": 8135,
+            "key": "TreasureHunter",
+            "name": {
+              "fr": "Chasseur de trésors",
+              "en": "Treasure Hunter"
+            },
+            "icon": "perk-images/Styles/Domination/TreasureHunter/TreasureHunter.png",
+            "tree": 8100,
+            "row": 3
+          },
+          {
+            "id": 8105,
+            "key": "RelentlessHunter",
+            "name": {
+              "fr": "Chasseur acharné",
+              "en": "Relentless Hunter"
+            },
+            "icon": "perk-images/Styles/Domination/RelentlessHunter/RelentlessHunter.png",
+            "tree": 8100,
+            "row": 3
+          },
+          {
+            "id": 8106,
+            "key": "UltimateHunter",
+            "name": {
+              "fr": "Chasseur ultime",
+              "en": "Ultimate Hunter"
+            },
+            "icon": "perk-images/Styles/Domination/UltimateHunter/UltimateHunter.png",
+            "tree": 8100,
+            "row": 3
+          }
+        ]
+      ]
+    },
+    "8300": {
+      "id": 8300,
+      "key": "Inspiration",
+      "name": {
+        "fr": "Inspiration",
+        "en": "Inspiration"
+      },
+      "icon": "perk-images/Styles/7203_Whimsy.png",
+      "slots": [
+        [
+          {
+            "id": 8351,
+            "key": "GlacialAugment",
+            "name": {
+              "fr": "Optimisation glaciale",
+              "en": "Glacial Augment"
+            },
+            "icon": "perk-images/Styles/Inspiration/GlacialAugment/GlacialAugment.png",
+            "tree": 8300,
+            "row": 0
+          },
+          {
+            "id": 8360,
+            "key": "UnsealedSpellbook",
+            "name": {
+              "fr": "Grimoire déchaîné",
+              "en": "Unsealed Spellbook"
+            },
+            "icon": "perk-images/Styles/Inspiration/UnsealedSpellbook/UnsealedSpellbook.png",
+            "tree": 8300,
+            "row": 0
+          },
+          {
+            "id": 8369,
+            "key": "FirstStrike",
+            "name": {
+              "fr": "Premier coup",
+              "en": "First Strike"
+            },
+            "icon": "perk-images/Styles/Inspiration/FirstStrike/FirstStrike.png",
+            "tree": 8300,
+            "row": 0
+          }
+        ],
+        [
+          {
+            "id": 8306,
+            "key": "HextechFlashtraption",
+            "name": {
+              "fr": "Canaliportation Hextech",
+              "en": "Hextech Flashtraption"
+            },
+            "icon": "perk-images/Styles/Inspiration/HextechFlashtraption/HextechFlashtraption.png",
+            "tree": 8300,
+            "row": 1
+          },
+          {
+            "id": 8304,
+            "key": "MagicalFootwear",
+            "name": {
+              "fr": "Chaussures magiques",
+              "en": "Magical Footwear"
+            },
+            "icon": "perk-images/Styles/Inspiration/MagicalFootwear/MagicalFootwear.png",
+            "tree": 8300,
+            "row": 1
+          },
+          {
+            "id": 8321,
+            "key": "CashBack",
+            "name": {
+              "fr": "Remise immédiate",
+              "en": "Cash Back"
+            },
+            "icon": "perk-images/Styles/Inspiration/CashBack/CashBack2.png",
+            "tree": 8300,
+            "row": 1
+          }
+        ],
+        [
+          {
+            "id": 8313,
+            "key": "PerfectTiming",
+            "name": {
+              "fr": "Triple tonique",
+              "en": "Triple Tonic"
+            },
+            "icon": "perk-images/Styles/Inspiration/PerfectTiming/AlchemistCabinet.png",
+            "tree": 8300,
+            "row": 2
+          },
+          {
+            "id": 8352,
+            "key": "TimeWarpTonic",
+            "name": {
+              "fr": "Philtre de chronodistorsion",
+              "en": "Time Warp Tonic"
+            },
+            "icon": "perk-images/Styles/Inspiration/TimeWarpTonic/TimeWarpTonic.png",
+            "tree": 8300,
+            "row": 2
+          },
+          {
+            "id": 8345,
+            "key": "BiscuitDelivery",
+            "name": {
+              "fr": "Livraison de biscuits",
+              "en": "Biscuit Delivery"
+            },
+            "icon": "perk-images/Styles/Inspiration/BiscuitDelivery/BiscuitDelivery.png",
+            "tree": 8300,
+            "row": 2
+          }
+        ],
+        [
+          {
+            "id": 8347,
+            "key": "CosmicInsight",
+            "name": {
+              "fr": "Savoir cosmique",
+              "en": "Cosmic Insight"
+            },
+            "icon": "perk-images/Styles/Inspiration/CosmicInsight/CosmicInsight.png",
+            "tree": 8300,
+            "row": 3
+          },
+          {
+            "id": 8410,
+            "key": "ApproachVelocity",
+            "name": {
+              "fr": "Vitesse d'approche",
+              "en": "Approach Velocity"
+            },
+            "icon": "perk-images/Styles/Resolve/ApproachVelocity/ApproachVelocity.png",
+            "tree": 8300,
+            "row": 3
+          },
+          {
+            "id": 8316,
+            "key": "JackOfAllTrades",
+            "name": {
+              "fr": "Polyvalence",
+              "en": "Jack Of All Trades"
+            },
+            "icon": "perk-images/Styles/Inspiration/JackOfAllTrades/JackofAllTrades2.png",
+            "tree": 8300,
+            "row": 3
+          }
+        ]
+      ]
+    }
+  },
+  "shards": [
+    [
+      {
+        "key": "adaptatif",
+        "icon": "perk-images/StatMods/StatModsAdaptiveForceIcon.png",
+        "name": {
+          "fr": "Force adaptative",
+          "en": "Adaptive Force"
+        }
+      },
+      {
+        "key": "attaque",
+        "icon": "perk-images/StatMods/StatModsAttackSpeedIcon.png",
+        "name": {
+          "fr": "Vitesse d'attaque",
+          "en": "Attack Speed"
+        }
+      },
+      {
+        "key": "acceleration",
+        "icon": "perk-images/StatMods/StatModsCDRScalingIcon.png",
+        "name": {
+          "fr": "Accélération de compétences",
+          "en": "Ability Haste"
+        }
+      }
+    ],
+    [
+      {
+        "key": "adaptatif",
+        "icon": "perk-images/StatMods/StatModsAdaptiveForceIcon.png",
+        "name": {
+          "fr": "Force adaptative",
+          "en": "Adaptive Force"
+        }
+      },
+      {
+        "key": "deplacement",
+        "icon": "perk-images/StatMods/StatModsMovementSpeedIcon.png",
+        "name": {
+          "fr": "Vitesse de déplacement",
+          "en": "Move Speed"
+        }
+      },
+      {
+        "key": "viescaling",
+        "icon": "perk-images/StatMods/StatModsHealthScalingIcon.png",
+        "name": {
+          "fr": "Vie (par niveau)",
+          "en": "Health Scaling"
+        }
+      }
+    ],
+    [
+      {
+        "key": "vie",
+        "icon": "perk-images/StatMods/StatModsHealthPlusIcon.png",
+        "name": {
+          "fr": "Vie",
+          "en": "Health"
+        }
+      },
+      {
+        "key": "tenacite",
+        "icon": "perk-images/StatMods/StatModsTenacityIcon.png",
+        "name": {
+          "fr": "Ténacité",
+          "en": "Tenacity"
+        }
+      },
+      {
+        "key": "viescaling",
+        "icon": "perk-images/StatMods/StatModsHealthScalingIcon.png",
+        "name": {
+          "fr": "Vie (par niveau)",
+          "en": "Health Scaling"
+        }
+      }
+    ]
+  ],
+  "runes": {
+    "pages": [
+      {
+        "nom": "Ma page de runes Nunu",
+        "pourquoi": "Électrocution ouvre des angles de kill facilement en lane, et le E la proc sans effort.",
+        "pourquoiEn": "",
+        "principal": {
+          "tree": 8100,
+          "picks": [
+            8112,
+            8126,
+            8137,
+            8105
+          ],
+          "inconnues": []
+        },
+        "secondaire": {
+          "tree": 8300,
+          "picks": [
+            8306,
+            8313
+          ],
+          "inconnues": []
+        },
+        "fragments": [
+          {
+            "key": "adaptatif",
+            "icon": "perk-images/StatMods/StatModsAdaptiveForceIcon.png",
+            "row": 0,
+            "name": {
+              "fr": "Force adaptative",
+              "en": "Adaptive Force"
+            }
+          },
+          {
+            "key": "adaptatif",
+            "icon": "perk-images/StatMods/StatModsAdaptiveForceIcon.png",
+            "row": 0,
+            "name": {
+              "fr": "Force adaptative",
+              "en": "Adaptive Force"
+            }
+          },
+          {
+            "key": "vie",
+            "icon": "perk-images/StatMods/StatModsHealthPlusIcon.png",
+            "row": 2,
+            "name": {
+              "fr": "Vie",
+              "en": "Health"
+            }
+          }
+        ],
+        "mienne": true
+      }
+    ]
+  },
+  "builds": {
+    "pages": []
+  }
+}

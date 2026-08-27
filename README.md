@@ -23,6 +23,9 @@ Site statique qui répertorie tous les matchups Nunu de la chaîne
   regénérable via `scripts/gen_champions.py`.
 - `data/notes.json` — **écrit à la main** (le robot n'y touche jamais) : les
   bans de rôle et les « à savoir » affichés à droite de chaque matchup.
+- `data/setup.json` — **écrit à la main** : mes runes et mes builds, en noms
+  clairs. `scripts/gen_setup.py` les résout en `data/setup-built.json`, le
+  fichier que le site lit (voir « Runes et builds » plus bas).
 - `index.html` + `assets/` — le site (vanilla HTML/CSS/JS, bilingue FR/EN).
 
 ## Écrire les « à savoir » et les bans
@@ -74,6 +77,63 @@ Tout se passe dans `data/notes.json`, en clair, sans rien relancer côté site
 - Fichier absent ou JSON cassé = site normal, sans notes ni bans (aucune
   page blanche).
 
+## Runes et builds (page « Runes & build »)
+
+Une vue à part, sans rapport avec les rôles : bouton **Runes & build** dans la
+barre du haut, adresse directe `https://gynlol.github.io/#setup`. Ma page et
+mon build sont mis en avant (liseré glace + pastille), les variantes viennent
+en dessous avec la phrase qui dit quand les prendre.
+
+Tout s'écrit dans `data/setup.json`, **en noms clairs**, français ou anglais,
+accents et casse libres — `Comète arcanique` comme `Arcane Comet` :
+
+```jsonc
+"runes": {
+  "mienne": {
+    "nom": "Ma page",
+    "pourquoi": "La phrase qui dit quand la prendre.",
+    "principal":  { "arbre": "Sorcellerie", "runes": ["Comète arcanique", "Ruban de mana", "Transcendance", "Brûlure"] },
+    "secondaire": { "arbre": "Inspiration", "runes": ["Livraison de biscuits", "Savoir cosmique"] },
+    "fragments": ["adaptatif", "adaptatif", "vie"]   // offense, flex, défense
+  },
+  "alternatives": [ /* même forme */ ]
+},
+"builds": {
+  "mien": {
+    "nom": "Mon build",
+    "pourquoi": "…",
+    "depart": ["Anneau de Doran", "Potion de soin"],
+    "coeur": ["Tourment de Liandry", "Sceptre de Rylai"],   // dans l'ordre d'achat
+    "bottes": "Chaussures de sorcier",
+    "situationnel": ["Sablier de Zhonya"]
+  },
+  "alternatives": [ /* même forme */ ]
+}
+```
+
+- La **première rune** de `principal` est la rune clef. L'arbre est déduit des
+  runes si `arbre` est absent.
+- `fragments` : `adaptatif`, `attaque`, `acceleration`, `deplacement`,
+  `viescaling`, `vie`, `tenacite` (noms anglais acceptés).
+- `pourquoi` s'écrit en français ; `pourquoiEn` est facultatif — sans lui, le
+  visiteur anglais lit le français et a le bouton « 🌐 Translate ».
+
+Après modification :
+
+```bash
+python scripts/gen_setup.py
+```
+
+Le script résout les noms contre Data Dragon et écrit `data/setup-built.json`
+(icônes, identifiants, arbres complets) — **c'est ce fichier que le site lit**,
+jamais `setup.json`. Le robot horaire le relance tout seul : une modification
+faite à la main est en ligne dans l'heure, sans rien lancer sur le PC.
+
+Un nom que Data Dragon ne connaît pas **n'efface rien** : il s'affiche en texte
+sans icône et le job le liste dans son journal (`PROBLÈME : rune inconnue…`).
+Le script vérifie aussi chaque URL d'icône avant d'écrire, donc une image morte
+se voit dans le journal du job, pas sur la page du visiteur.
+
 ## Cache du navigateur
 
 GitHub Pages sert tout avec `Cache-Control: max-age=600`. Deux garde-fous :
@@ -91,6 +151,7 @@ En cas de doute sur un poste : rechargement forcé (Ctrl+Maj+R).
 
 ```bash
 python scripts/update_videos.py   # mise à jour manuelle des vidéos
+python scripts/gen_setup.py       # résout runes et builds (data/setup.json)
 python scripts/test_parse.py      # jeu de tests du parseur de titres
 python -m http.server 8123        # servir le site en local
 ```

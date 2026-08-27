@@ -1,0 +1,58 @@
+{
+  "_format": [
+    "Fichier ECRIT A LA MAIN. Le job horaire ne le modifie jamais : il le lit,",
+    "resout les noms contre Data Dragon et ecrit data/setup-built.json.",
+    "",
+    "On ecrit des NOMS EN CLAIR, francais ou anglais, accents et casse libres :",
+    "'Comete arcanique' comme 'Arcane Comet' marchent. Un nom que Data Dragon ne",
+    "connait pas n'efface rien : il s'affiche en texte sans icone, et le job le",
+    "signale dans son journal.",
+    "",
+    "runes.mienne  : LA page mise en avant. runes.alternatives : les autres.",
+    "  principal   = arbre principal, PREMIERE rune = la rune clef.",
+    "  secondaire  = arbre secondaire (2 runes).",
+    "  fragments   = les 3 petits bonus, dans l'ordre : offense, flex, defense.",
+    "                valeurs : adaptatif, attaque, acceleration, deplacement,",
+    "                viescaling, vie, tenacite (les noms anglais marchent aussi).",
+    "  pourquoi    = LA phrase qui dit quand prendre cette page. C'est elle qui",
+    "                rend la page utile ; pourquoiEn est facultatif.",
+    "",
+    "builds.mien / builds.alternatives : depart, coeur (dans l'ordre d'achat),",
+    "  bottes, situationnel (ce qu'on ajoute selon la partie).",
+    "",
+    "Apres modification : python scripts/gen_setup.py (ou attendre le passage",
+    "horaire du robot, qui le relance tout seul)."
+  ],
+  "runes": {
+    "mienne": {
+      "nom": "Ma page de runes Nunu",
+      "pourquoi": "Électrocution ouvre des angles de kill facilement en lane, et le E la proc sans effort.",
+      "principal": {
+        "arbre": "Domination",
+        "runes": [
+          "Electrocute",
+          "Cheap Shot",
+          "Sixth Sense",
+          "Relentless Hunter"
+        ]
+      },
+      "secondaire": {
+        "arbre": "Inspiration",
+        "runes": [
+          "Hextech Flashtraption",
+          "Triple Tonic"
+        ]
+      },
+      "fragments": [
+        "adaptatif",
+        "adaptatif",
+        "vie"
+      ]
+    },
+    "alternatives": []
+  },
+  "builds": {
+    "mien": null,
+    "alternatives": []
+  }
+}

@@ -28,9 +28,15 @@ jobs:
       - name: Regénérer les pages de référencement
         run: python scripts/gen_seo.py
 
+      # setup.json est écrit à la main : le job ne fait que le résoudre contre
+      # Data Dragon, pour qu'une modification à la main soit en ligne dans l'heure
+      # sans rien lancer côté PC.
+      - name: Résoudre les runes et les builds
+        run: python scripts/gen_setup.py
+
       - name: Committer si changement
         run: |
-          git add data/videos.json matchups sitemap.xml
+          git add data/videos.json data/setup-built.json matchups sitemap.xml
           if git diff --cached --quiet; then
             echo "Aucun changement."
           else

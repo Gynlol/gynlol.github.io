@@ -1,7 +1,7 @@
 {
   "_format": [
     "Fichier ECRIT A LA MAIN (le job horaire n'y touche jamais).",
-    "bans   : role -> liste d'ids de champions bannis quand Nathan joue ce role.",
+    "bans   : role -> liste d'ids de champions bannis quand je joue ce role.",
     "         Le champion apparait en rouge dans la grille du role, meme sans replay.",
     "notes  : cle '<role>/<ChampionId>' -> { fr: [...], en: [...] }.",
     "         Une note = { t: titre court, d: le detail, k: 'plus' | 'moins' | 'info' }.",

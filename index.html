@@ -19,7 +19,7 @@
        la page s'affiche quand même avec les polices système. -->
   <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
-  <link rel="stylesheet" href="assets/style.css?v=20260825e">
+  <link rel="stylesheet" href="assets/style.css?v=20260826b">
 </head>
 <body>
   <header class="topbar">
@@ -32,6 +32,7 @@
         </span>
       </a>
       <div class="topbar-actions">
+        <button class="setup-link" id="setup-toggle" type="button">Runes &amp; build</button>
         <button id="lang-toggle" type="button" aria-label="Switch language"></button>
         <a class="translate-link" id="translate-link" href="#" rel="nofollow noopener" hidden></a>
         <a class="yt-link" href="https://www.youtube.com/@GynReplays" target="_blank" rel="noopener">
@@ -59,6 +60,22 @@
       </div>
       <div class="grid" id="grid"></div>
       <p class="no-results" id="no-results" hidden></p>
+    </section>
+
+    <section class="setup" id="setup-view" hidden>
+      <h1 class="setup-title" id="setup-title">Mes runes et mes builds</h1>
+      <p class="setup-intro" id="setup-intro"></p>
+      <p class="setup-status" id="setup-status" hidden></p>
+
+      <div class="setup-block" id="runes-block" hidden>
+        <h2 class="section-title" id="runes-title">Pages de runes</h2>
+        <div class="setup-cards" id="rune-cards"></div>
+      </div>
+
+      <div class="setup-block" id="builds-block" hidden>
+        <h2 class="section-title" id="builds-title">Builds</h2>
+        <div class="setup-cards" id="build-cards"></div>
+      </div>
     </section>
 
     <section class="panel" id="matchup-panel" hidden>
@@ -92,7 +109,7 @@
     <p class="noscript">Ce site a besoin de JavaScript pour afficher les matchups. / This site needs JavaScript to display matchups.</p>
   </noscript>
 
-  <script src="assets/app.js?v=20260825e"></script>
+  <script src="assets/app.js?v=20260826b"></script>
   <!-- GoatCounter : compteur de visites sans cookies (pas de bandeau RGPD).
        Le hash (#adc/ziggs) est compté comme une page pour voir les matchups consultés. -->
   <script>

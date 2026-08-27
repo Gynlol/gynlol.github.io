@@ -532,33 +532,15 @@ main { flex: 1; padding-top: 28px; padding-bottom: 48px; }
   box-shadow: inset 0 0 0 1px rgba(255, 230, 163, 0.45);
 }
 
-/* Demande de replay (matchup sans vidéo) */
-
-.request-box { padding: 4px 0 8px; }
-.request-btn {
-  font-family: var(--font-display);
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--accent);
-  border: 1px solid var(--accent);
-  border-radius: 6px;
-  padding: 12px 20px;
-  min-height: 44px;
-  transition: background-color 140ms ease;
-}
-.request-btn:hover { background: var(--accent-dim); }
-.request-btn:disabled { opacity: 0.6; cursor: default; }
-.request-note { color: var(--win); font-size: 14px; padding: 10px 0; }
-.request-note.already { color: var(--muted); }
-
 /* ---------- Pied ---------- */
 
 .footer { border-top: 1px solid var(--line); }
 /* Les liens sont ajoutés sans texte entre eux : sans conteneur flex qui
    retourne à la ligne, la liste forme une seule ligne insécable et fait
    défiler toute la page horizontalement. */
+/* display:flex écrase le display:none du navigateur pour [hidden] : sans cette
+   règle, les liens de matchups restent visibles sous la vue runes & build. */
+.matchup-links[hidden] { display: none; }
 .matchup-links {
   display: flex;
   flex-wrap: wrap;
@@ -627,7 +609,8 @@ main { flex: 1; padding-top: 28px; padding-bottom: 48px; }
 
 /* ---------- Motion ---------- */
 
-.tile, .video-card, .latest-card, .role-tab, .yt-link, #lang-toggle, .subscribe, .panel-close {
+.tile, .video-card, .latest-card, .role-tab, .yt-link, #lang-toggle, .subscribe, .panel-close,
+.setup-link {
   transition: border-color 140ms ease, color 140ms ease, background-color 140ms ease;
 }
 
@@ -679,4 +662,209 @@ main { flex: 1; padding-top: 28px; padding-bottom: 48px; }
 .translate-link:hover { color: var(--accent); border-color: var(--accent); }
 @media (max-width: 720px) {
   .translate-link { font-size: 10.5px; padding: 0 8px; }
+}
+
+
+/* ---------- Runes & build ----------
+   Vue à part, sans rapport avec les rôles : ma page et mon build d'abord, les
+   variantes ensuite. La page de runes est dessinée comme en jeu — les runes
+   non prises restent visibles mais éteintes, sinon on ne lit pas la forme de
+   la page, seulement une liste d'icônes. */
+
+.setup-link {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 8px 12px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+.setup-link:hover { border-color: var(--accent); color: var(--accent-soft); }
+.setup-link[aria-current="true"] { border-color: var(--accent); color: var(--accent); }
+
+.setup-title {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.setup-intro { color: var(--muted); max-width: 62ch; margin: 8px 0 28px; }
+.setup-status { color: var(--muted); padding: 24px 0; }
+.setup-block { margin-bottom: 36px; }
+/* Deux colonnes dès que la largeur le permet : une page de runes fait ~520 px,
+   étalée sur toute la largeur elle laisse un grand vide à droite. Le min() évite
+   qu'une colonne de 520 px force un défilement sur téléphone. */
+.setup-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(520px, 100%), 1fr));
+  gap: 16px;
+  align-items: start;
+}
+
+.setup-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 18px 20px;
+  position: relative;
+  overflow: hidden;
+}
+/* Même biseau glace que le panneau de matchup, réservé à MA page / MON build :
+   c'est la seule chose qui distingue le choix par défaut des variantes. */
+.setup-card.is-mine { border-color: rgba(111, 211, 255, 0.35); }
+.setup-card.is-mine::before {
+  content: "";
+  position: absolute;
+  left: -6px;
+  top: -8px;
+  height: 88px;
+  width: 14px;
+  background: var(--accent);
+  transform: skewX(-8deg);
+  pointer-events: none;
+}
+.setup-card.is-mine .setup-card-head,
+.setup-card.is-mine .rune-page,
+.setup-card.is-mine .build-body { padding-left: 12px; }
+
+.setup-card-title { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.setup-card-title h3 {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+.setup-badge {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--chip-text);
+  background: var(--chip);
+  border-radius: 4px;
+  padding: 3px 8px;
+}
+.is-mine .setup-badge { color: #0a0e14; background: var(--accent); }
+.setup-why { color: var(--muted); margin-top: 6px; max-width: 70ch; }
+
+/* Page de runes */
+
+.rune-page {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px 20px;
+  margin-top: 18px;
+}
+.rune-tree { min-width: 0; }
+.tree-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.tree-head img { width: 24px; height: 24px; }
+.rune-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.rune-row.keystones { gap: 12px; margin-bottom: 14px; }
+
+/* Une rune non prise reste lisible en forme mais s'efface : c'est le contraste
+   entre les deux qui dessine la page. */
+.rune { display: inline-flex; opacity: 0.26; filter: grayscale(1); }
+.rune img { border-radius: 50%; }
+.rune.on { opacity: 1; filter: none; }
+.rune.on img { box-shadow: 0 0 0 2px var(--accent); }
+.rune-row.keystones .rune.on img { box-shadow: 0 0 0 2px var(--accent), 0 0 14px var(--accent-dim); }
+
+.rune-unknown {
+  display: inline-block;
+  font-size: 12px;
+  color: var(--chip-text);
+  background: var(--chip);
+  border-radius: 4px;
+  padding: 3px 8px;
+  margin-top: 6px;
+}
+
+/* Build */
+
+.build-body { margin-top: 16px; display: grid; gap: 16px; }
+.build-row h4 {
+  font-family: var(--font-display);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.item-row { list-style: none; display: flex; flex-wrap: wrap; gap: 12px; }
+.item-row.ordered { gap: 12px 22px; }
+.item { width: 68px; text-align: center; position: relative; }
+.item img { width: 44px; height: 44px; border-radius: 6px; margin: 0 auto; background: var(--chip); }
+.item-name { display: block; font-size: 11px; line-height: 1.25; color: var(--muted); margin-top: 5px; }
+/* Le chevron dit l'ordre d'achat sans numéroter : il se loge dans l'écart. */
+.item-row.ordered .item + .item::before {
+  content: "\203A";
+  position: absolute;
+  left: -15px;
+  top: 10px;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1;
+}
+
+.setup-link .lbl-short { display: none; }
+
+@media (max-width: 720px) {
+  .setup-title { font-size: 20px; }
+  .setup-card { padding: 16px; }
+  /* L'arbre principal prend sa propre ligne : ses 4 runes clefs ne tiennent
+     pas à côté de l'arbre secondaire sur un téléphone. */
+  .rune-page { gap: 20px; }
+  .rune-page .rune-tree.primary { flex-basis: 100%; }
+  .rune-row { gap: 7px; margin-bottom: 8px; }
+  .rune-row.keystones { gap: 8px; }
+  .item { width: 62px; }
+  .item img { width: 40px; height: 40px; }
+  .setup-link { font-size: 11px; padding: 8px 9px; }
+  .setup-link .lbl-full { display: none; }
+  .setup-link .lbl-short { display: inline; }
+  /* Trois boutons dans la barre au lieu de deux : on resserre les écarts et le
+     nom de la chaine, sinon la page entiere defile de cote. */
+  .topbar-actions { gap: 6px; }
+  .brand-name { font-size: 15px; }
+}
+
+/* Très petits téléphones (320 px) : le nom de la chaine et les écarts cèdent
+   les derniers pixels, sinon la barre pousse la page de côté. */
+@media (max-width: 400px) {
+  .brand-name { font-size: 13px; letter-spacing: 0.05em; }
+  .topbar-actions { gap: 5px; }
+  .setup-link { padding: 8px 8px; }
+  .yt-link { padding: 8px 9px; }
+  /* On ne resserre pas le sélecteur de langue : à 320 px, « FR / EN » passe à
+     la ligne et le bouton double de hauteur. */
+  #lang-toggle { white-space: nowrap; }
+}
+
+/* Sous 360 px, le nom de la chaine cede la place : il ne reste que le flocon,
+   la barre garde ses trois boutons entiers et la page ne defile plus de cote. */
+@media (max-width: 360px) {
+  .brand-name { display: none; }
 }
