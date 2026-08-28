@@ -776,8 +776,8 @@
     timg.src = DD_IMG + tree.icon;
     timg.alt = "";
     timg.loading = "lazy";
-    timg.width = 24;
-    timg.height = 24;
+    timg.width = 32;
+    timg.height = 32;
     head.appendChild(timg);
     var tname = document.createElement("span");
     tname.textContent = tree.name[state.lang] || tree.name.fr;
@@ -792,8 +792,11 @@
       rowEl.className = "rune-row" + (keystoneRow ? " keystones" : "");
       row.forEach(function (rune) {
         var on = side.picks.indexOf(rune.id) !== -1;
+        // 32 px et non 30 : les runes mineures de Data Dragon font 64 px, donc
+        // 32 est une réduction exacte de moitié. Toute autre taille rééchantillonne
+        // l'image et la rend floue.
         rowEl.appendChild(runeIcon(rune.icon, rune.name[state.lang] || rune.name.fr, on,
-          keystoneRow ? 44 : 30));
+          keystoneRow ? 44 : 32));
       });
       col.appendChild(rowEl);
     });
@@ -820,7 +823,9 @@
       rowEl.className = "rune-row";
       row.forEach(function (shard) {
         var on = !!picked && picked.key === shard.key;
-        rowEl.appendChild(runeIcon(shard.icon, locName(shard), on, 26));
+        // Les icônes de fragments ne font que 32 px à la source : on les affiche
+        // à leur taille réelle, sinon elles sont redessinées et bavent.
+        rowEl.appendChild(runeIcon(shard.icon, locName(shard), on, 32));
       });
       col.appendChild(rowEl);
     });

@@ -181,6 +181,9 @@ main { flex: 1; padding-top: 28px; padding-bottom: 48px; }
   font-family: var(--font-display);
   font-size: 13px;
   font-weight: 600;
+  /* 13 px × 1,5 = 19,5 px : le demi-pixel se propageait à tout ce qui suit et
+     faisait rendre la page de runes entre deux pixels. Interligne entier. */
+  line-height: 20px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--muted);
@@ -697,7 +700,9 @@ main { flex: 1; padding-top: 28px; padding-bottom: 48px; }
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
-.setup-intro { color: var(--muted); max-width: 62ch; margin: 8px 0 28px; }
+/* 15 px × 1,5 = 22,5 px : sur téléphone l'intro passe à trois lignes et le
+   demi-pixel redescend sur la page de runes. Interligne entier, ici aussi. */
+.setup-intro { color: var(--muted); max-width: 62ch; margin: 8px 0 28px; line-height: 24px; }
 .setup-status { color: var(--muted); padding: 24px 0; }
 .setup-block { margin-bottom: 36px; }
 /* Deux colonnes dès que la largeur le permet : une page de runes fait ~520 px,
@@ -753,6 +758,7 @@ main { flex: 1; padding-top: 28px; padding-bottom: 48px; }
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.1em;
+  line-height: 18px;
   text-transform: uppercase;
   color: var(--chip-text);
   background: var(--chip);
@@ -774,14 +780,17 @@ main { flex: 1; padding-top: 28px; padding-bottom: 48px; }
   position: relative;
   padding-left: 16px;
   color: var(--text-soft);
-  font-size: 14.5px;
-  line-height: 1.6;
+  /* Tailles et interlignes en pixels ENTIERS : une ligne de 23,2 px décale
+     toute la page de runes d'un demi-pixel, et le navigateur rééchantillonne
+     alors chaque icône — c'est ce qui donnait l'impression de flou. */
+  font-size: 15px;
+  line-height: 24px;
 }
 .setup-why li::before {
   content: "";
   position: absolute;
   left: 0;
-  top: 0.62em;
+  top: 9px;
   width: 6px;
   height: 6px;
   border-radius: 50%;
@@ -798,18 +807,29 @@ main { flex: 1; padding-top: 28px; padding-bottom: 48px; }
   margin-top: 20px;
   align-items: start;
 }
-.rune-tree { min-width: 0; display: flex; flex-direction: column; }
+/* padding-top réserve la place de la tête, qui est sortie du flux : ainsi la
+   largeur de la colonne vient des lignes de runes (nombres entiers) et non
+   d'un mot en petites capitales espacées, dont la largeur fractionnaire
+   décalait la colonne suivante d'un demi-pixel — donc floue. */
+/* min-width entier : la tête est hors du flux, la colonne doit donc réserver
+   la place du plus long nom d'arbre (« Sorcellerie », « Inspiration »).
+   132 px les couvre tous, en FR comme en EN. */
+.rune-tree { min-width: 132px; display: flex; flex-direction: column; position: relative; padding-top: 44px; }
 /* Un filet entre les colonnes : sans lui, trois colonnes de ronds se lisent
    comme une seule grille en désordre. */
 .rune-tree + .rune-tree { border-left: 1px solid var(--line); padding-left: 24px; }
+.rune-tree + .rune-tree .tree-head { left: 24px; }
 /* Hauteur fixe : la colonne Fragments n'a pas d'icône d'arbre, sans cela sa
    première ligne remonte de quelques pixels et les trois colonnes décrochent. */
 .tree-head {
+  position: absolute;
+  top: 0;
+  left: 0;
   display: flex;
   align-items: center;
   gap: 8px;
-  height: 26px;
-  margin-bottom: 14px;
+  white-space: nowrap;
+  height: 32px;
   font-family: var(--font-display);
   font-size: 12px;
   font-weight: 600;
@@ -817,7 +837,8 @@ main { flex: 1; padding-top: 28px; padding-bottom: 48px; }
   text-transform: uppercase;
   color: var(--muted);
 }
-.tree-head img { width: 24px; height: 24px; }
+/* Taille réelle de l'icône Data Dragon : à 24 px elle était redessinée. */
+.tree-head img { width: 32px; height: 32px; flex: none; }
 /* Même hauteur pour toutes les lignes, quelle que soit la taille des icônes
    (44 px pour les runes clefs, 30 px pour les mineures, 26 px pour les
    fragments) : la ligne n de chaque colonne tombe à la même hauteur. */
@@ -831,10 +852,9 @@ main { flex: 1; padding-top: 28px; padding-bottom: 48px; }
 
 /* Une rune non prise reste lisible en forme mais s'efface : c'est le contraste
    entre les deux qui dessine la page. */
-.rune { display: inline-flex; opacity: 0.26; filter: grayscale(1); }
-.rune img { border-radius: 50%; }
-.rune.on { opacity: 1; filter: none; }
-.rune.on img { box-shadow: 0 0 0 2px var(--accent); }
+.rune { display: inline-flex; border-radius: 50%; }
+.rune img { border-radius: 50%; opacity: 0.3; filter: grayscale(1) contrast(1.2); }
+.rune.on img { opacity: 1; filter: none; box-shadow: 0 0 0 2px var(--accent); }
 .rune-row.keystones .rune.on img { box-shadow: 0 0 0 2px var(--accent), 0 0 14px var(--accent-dim); }
 
 .rune-unknown {
@@ -886,9 +906,10 @@ main { flex: 1; padding-top: 28px; padding-bottom: 48px; }
   .rune-page .rune-tree.primary { flex-basis: 100%; }
   /* Les colonnes passent à la ligne : un filet à gauche ne relierait plus rien. */
   .rune-tree + .rune-tree { border-left: 0; padding-left: 0; }
+  .rune-tree + .rune-tree .tree-head { left: 0; }
   .rune-row { gap: 7px; min-height: 40px; }
   .rune-row.keystones { gap: 8px; }
-  .setup-why li { font-size: 14px; }
+  .setup-why li { font-size: 14px; line-height: 22px; }
   .item { width: 62px; }
   .item img { width: 40px; height: 40px; }
   .setup-link { font-size: 11px; padding: 8px 9px; }
