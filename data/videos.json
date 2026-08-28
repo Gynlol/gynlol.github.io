@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.17.1",
-    "updated": "2026-08-28T01:32:46Z"
+    "updated": "2026-08-28T14:30:48Z"
   },
   "videos": [
+    {
+      "id": "ZwdLPp6ddDc",
+      "title": "Nunu Top vs Fiora | Unranked to Master : Gold 1 47lp | Patch 25.16",
+      "published": "2026-08-28T10:00:18+00:00",
+      "role": "top",
+      "enemy": "Fiora",
+      "enemyName": "Fiora",
+      "patch": "25.16",
+      "rank": "Gold",
+      "division": "1",
+      "lp": 47,
+      "region": null,
+      "result": null
+    },
     {
       "id": "HI3tNjBmsSw",
       "title": "Nunu Top vs Irelia | Unranked to Master : Gold 1 17lp | Patch 25.16",
