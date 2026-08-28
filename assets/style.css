@@ -730,6 +730,8 @@ main { flex: 1; padding-top: 28px; padding-bottom: 48px; }
   /* Seule sur sa ligne, une carte étirée sur 1080 px laisse son contenu perdu
      à gauche : elle s'arrête à la largeur qu'une page de runes demande. */
   max-width: 760px;
+  /* MA page prend la ligne entière, les variantes se partagent celle du dessous :
+     la hiérarchie se voit avant même de lire les titres. */
   background: var(--panel);
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -739,7 +741,7 @@ main { flex: 1; padding-top: 28px; padding-bottom: 48px; }
 }
 /* Même biseau glace que le panneau de matchup, réservé à MA page / MON build :
    c'est la seule chose qui distingue le choix par défaut des variantes. */
-.setup-card.is-mine { border-color: rgba(111, 211, 255, 0.35); }
+.setup-card.is-mine { grid-column: 1 / -1; border-color: rgba(111, 211, 255, 0.35); }
 .setup-card.is-mine::before {
   content: "";
   position: absolute;
@@ -754,6 +756,19 @@ main { flex: 1; padding-top: 28px; padding-bottom: 48px; }
 .setup-card.is-mine .setup-card-head,
 .setup-card.is-mine .rune-page,
 .setup-card.is-mine .build-body { padding-left: 12px; }
+
+/* Une variante ne rivalise pas avec ma page : fond plus sourd, titre plus
+   petit et moins clair, étiquette sans pastille. Les runes, elles, gardent
+   leur contraste — c'est ce qu'on vient lire. */
+.setup-card:not(.is-mine) { background: rgba(16, 23, 34, 0.55); }
+.setup-card:not(.is-mine) .setup-card-title h3 { font-size: 13px; color: var(--muted); }
+.setup-card:not(.is-mine) .setup-badge {
+  background: none;
+  padding: 3px 0;
+  font-size: 10px;
+  color: var(--muted);
+  opacity: 0.75;
+}
 
 .setup-card-title { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 .setup-card-title h3 {

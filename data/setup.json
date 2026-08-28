@@ -56,10 +56,7 @@
     },
     "alternatives": [
       {
-        "nom": "Sorcellerie — vitesse et rivière",
-        "pourquoi": [
-          "Waterwalking + Célérité : on traverse la rivière plus vite et on garde les bonus de vitesse plus longtemps."
-        ],
+        "nom": "Sorcellerie",
         "principal": {
           "arbre": "Domination",
           "runes": [
@@ -83,10 +80,7 @@
         ]
       },
       {
-        "nom": "Volonté — tenir la lane",
-        "pourquoi": [
-          "Armure d'os + Revitalisation : quand la lane tape fort et qu'il faut encaisser les échanges."
-        ],
+        "nom": "Volonté",
         "principal": {
           "arbre": "Domination",
           "runes": [
