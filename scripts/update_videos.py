@@ -16,6 +16,7 @@ import os
 import re
 import sys
 import unicodedata
+import time
 import urllib.request
 import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
@@ -267,10 +268,30 @@ def parse_title(title, name_index, names):
     }
 
 
-def fetch(url):
+def fetch(url, tries=4):
+    """Lecture réseau avec reprises.
+
+    Le flux RSS de YouTube refuse ou coupe régulièrement les requêtes venues
+    des machines de GitHub Actions. Sans reprise, un incident réseau de trois
+    secondes fait échouer tout le passage horaire, et la vidéo du jour n'entre
+    pas sur le site avant le passage suivant — qui peut être des heures plus
+    tard. Quatre essais espacés coûtent au pire une minute.
+    """
     req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (matchup-site-updater)"})
-    with urllib.request.urlopen(req, timeout=30) as r:
-        return r.read()
+    last = None
+    for attempt in range(tries):
+        try:
+            with urllib.request.urlopen(req, timeout=30) as r:
+                return r.read()
+        except Exception as exc:
+            last = exc
+            if attempt == tries - 1:
+                break
+            wait = 5 * (attempt + 1)
+            print("avertissement : %s injoignable (%s) — nouvel essai dans %ds"
+                  % (url, exc, wait), file=sys.stderr)
+            time.sleep(wait)
+    raise last
 
 
 def fetch_feed():

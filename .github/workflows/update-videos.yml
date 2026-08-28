@@ -2,7 +2,12 @@ name: Mise à jour des vidéos
 
 on:
   schedule:
-    - cron: "23 * * * *"   # toutes les heures, à h+23
+    # GitHub ne tient PAS la promesse d'un cron horaire : les passages observés
+    # sont espacés de 2 à 3 h, avec des trous de 24 h. On demande donc quatre
+    # créneaux par heure — il en passe assez pour tenir le rythme réel — et on
+    # insiste autour de 10 h UTC, l'heure de publication des replays.
+    - cron: "8,23,38,53 * * * *"
+    - cron: "2,12,17,27,32,42,47,57 10-12 * * *"
   workflow_dispatch: {}     # bouton « Run workflow » pour lancer à la main
 
 permissions:
