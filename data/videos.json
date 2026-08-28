@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.17.1",
-    "updated": "2026-08-26T11:03:54Z"
+    "updated": "2026-08-28T01:32:46Z"
   },
   "videos": [
+    {
+      "id": "HI3tNjBmsSw",
+      "title": "Nunu Top vs Irelia | Unranked to Master : Gold 1 17lp | Patch 25.16",
+      "published": "2026-08-27T10:00:28+00:00",
+      "role": "top",
+      "enemy": "Irelia",
+      "enemyName": "Irelia",
+      "patch": "25.16",
+      "rank": "Gold",
+      "division": "1",
+      "lp": 17,
+      "region": null,
+      "result": null
+    },
     {
       "id": "k6Qdrk4yY0s",
       "title": "Nunu Top vs Urgot | Unranked to Master : Gold 2 77lp | Patch 25.16",
