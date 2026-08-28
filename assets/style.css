@@ -757,18 +757,12 @@ main { flex: 1; padding-top: 28px; padding-bottom: 48px; }
 .setup-card.is-mine .rune-page,
 .setup-card.is-mine .build-body { padding-left: 12px; }
 
-/* Une variante ne rivalise pas avec ma page : fond plus sourd, titre plus
-   petit et moins clair, étiquette sans pastille. Les runes, elles, gardent
-   leur contraste — c'est ce qu'on vient lire. */
+/* Une variante ne rivalise pas avec ma page : fond plus sourd et titre plus
+   petit, moins clair. La pastille grise de « variante » est gardée telle
+   quelle — elle plaît, et elle dit ce qu'est la carte d'un coup d'œil. Les
+   runes, elles, gardent leur contraste : c'est ce qu'on vient lire. */
 .setup-card:not(.is-mine) { background: rgba(16, 23, 34, 0.55); }
 .setup-card:not(.is-mine) .setup-card-title h3 { font-size: 13px; color: var(--muted); }
-.setup-card:not(.is-mine) .setup-badge {
-  background: none;
-  padding: 3px 0;
-  font-size: 10px;
-  color: var(--muted);
-  opacity: 0.75;
-}
 
 .setup-card-title { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 .setup-card-title h3 {
