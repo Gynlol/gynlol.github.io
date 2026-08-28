@@ -155,6 +155,168 @@
         ]
       ]
     },
+    "8200": {
+      "id": 8200,
+      "key": "Sorcery",
+      "name": {
+        "fr": "Sorcellerie",
+        "en": "Sorcery"
+      },
+      "icon": "perk-images/Styles/7202_Sorcery.png",
+      "slots": [
+        [
+          {
+            "id": 8214,
+            "key": "SummonAery",
+            "name": {
+              "fr": "Invocation d'Aery",
+              "en": "Summon Aery"
+            },
+            "icon": "perk-images/Styles/Sorcery/SummonAery/SummonAery.png",
+            "tree": 8200,
+            "row": 0
+          },
+          {
+            "id": 8229,
+            "key": "ArcaneComet",
+            "name": {
+              "fr": "Comète arcanique",
+              "en": "Arcane Comet"
+            },
+            "icon": "perk-images/Styles/Sorcery/ArcaneComet/ArcaneComet.png",
+            "tree": 8200,
+            "row": 0
+          },
+          {
+            "id": 8230,
+            "key": "PhaseRush",
+            "name": {
+              "fr": "Assaut du maraudeur",
+              "en": "Stormraider's Surge"
+            },
+            "icon": "perk-images/Styles/Sorcery/PhaseRush/StormraidersSurgeRuneIcon2.png",
+            "tree": 8200,
+            "row": 0
+          },
+          {
+            "id": 8992,
+            "key": "DeathfireTouch",
+            "name": {
+              "fr": "Toucher de feu mortel",
+              "en": "Deathfire Touch"
+            },
+            "icon": "perk-images/Styles/Sorcery/DeathfireTouch/DEATHFIRE_TOUCH_KEYSTONE.png",
+            "tree": 8200,
+            "row": 0
+          }
+        ],
+        [
+          {
+            "id": 8224,
+            "key": "NullifyingOrb",
+            "name": {
+              "fr": "Arcaniste axiomatique",
+              "en": "Axiom Arcanist"
+            },
+            "icon": "perk-images/Styles/Sorcery/NullifyingOrb/Axiom_Arcanist.png",
+            "tree": 8200,
+            "row": 1
+          },
+          {
+            "id": 8226,
+            "key": "ManaflowBand",
+            "name": {
+              "fr": "Ruban de mana",
+              "en": "Manaflow Band"
+            },
+            "icon": "perk-images/Styles/Sorcery/ManaflowBand/ManaflowBand.png",
+            "tree": 8200,
+            "row": 1
+          },
+          {
+            "id": 8275,
+            "key": "NimbusCloak",
+            "name": {
+              "fr": "Manteau nuageux",
+              "en": "Nimbus Cloak"
+            },
+            "icon": "perk-images/Styles/Sorcery/NimbusCloak/6361.png",
+            "tree": 8200,
+            "row": 1
+          }
+        ],
+        [
+          {
+            "id": 8210,
+            "key": "Transcendence",
+            "name": {
+              "fr": "Transcendance",
+              "en": "Transcendence"
+            },
+            "icon": "perk-images/Styles/Sorcery/Transcendence/Transcendence.png",
+            "tree": 8200,
+            "row": 2
+          },
+          {
+            "id": 8234,
+            "key": "Celerity",
+            "name": {
+              "fr": "Célérité",
+              "en": "Celerity"
+            },
+            "icon": "perk-images/Styles/Sorcery/Celerity/CelerityTemp.png",
+            "tree": 8200,
+            "row": 2
+          },
+          {
+            "id": 8233,
+            "key": "AbsoluteFocus",
+            "name": {
+              "fr": "Concentration absolue",
+              "en": "Absolute Focus"
+            },
+            "icon": "perk-images/Styles/Sorcery/AbsoluteFocus/AbsoluteFocus.png",
+            "tree": 8200,
+            "row": 2
+          }
+        ],
+        [
+          {
+            "id": 8237,
+            "key": "Scorch",
+            "name": {
+              "fr": "Brûlure",
+              "en": "Scorch"
+            },
+            "icon": "perk-images/Styles/Sorcery/Scorch/Scorch.png",
+            "tree": 8200,
+            "row": 3
+          },
+          {
+            "id": 8232,
+            "key": "Waterwalking",
+            "name": {
+              "fr": "Marche sur l'eau",
+              "en": "Waterwalking"
+            },
+            "icon": "perk-images/Styles/Sorcery/Waterwalking/Waterwalking.png",
+            "tree": 8200,
+            "row": 3
+          },
+          {
+            "id": 8236,
+            "key": "GatheringStorm",
+            "name": {
+              "fr": "Tempête menaçante",
+              "en": "Gathering Storm"
+            },
+            "icon": "perk-images/Styles/Sorcery/GatheringStorm/GatheringStorm.png",
+            "tree": 8200,
+            "row": 3
+          }
+        ]
+      ]
+    },
     "8300": {
       "id": 8300,
       "key": "Inspiration",
@@ -305,6 +467,157 @@
           }
         ]
       ]
+    },
+    "8400": {
+      "id": 8400,
+      "key": "Resolve",
+      "name": {
+        "fr": "Volonté",
+        "en": "Resolve"
+      },
+      "icon": "perk-images/Styles/7204_Resolve.png",
+      "slots": [
+        [
+          {
+            "id": 8437,
+            "key": "GraspOfTheUndying",
+            "name": {
+              "fr": "Poigne de l'immortel",
+              "en": "Grasp of the Undying"
+            },
+            "icon": "perk-images/Styles/Resolve/GraspOfTheUndying/GraspOfTheUndying.png",
+            "tree": 8400,
+            "row": 0
+          },
+          {
+            "id": 8439,
+            "key": "Aftershock",
+            "name": {
+              "fr": "Après-coup",
+              "en": "Aftershock"
+            },
+            "icon": "perk-images/Styles/Resolve/VeteranAftershock/VeteranAftershock.png",
+            "tree": 8400,
+            "row": 0
+          },
+          {
+            "id": 8465,
+            "key": "Guardian",
+            "name": {
+              "fr": "Gardien",
+              "en": "Guardian"
+            },
+            "icon": "perk-images/Styles/Resolve/Guardian/Guardian.png",
+            "tree": 8400,
+            "row": 0
+          }
+        ],
+        [
+          {
+            "id": 8446,
+            "key": "Demolish",
+            "name": {
+              "fr": "Démolition",
+              "en": "Demolish"
+            },
+            "icon": "perk-images/Styles/Resolve/Demolish/Demolish.png",
+            "tree": 8400,
+            "row": 1
+          },
+          {
+            "id": 8463,
+            "key": "FontOfLife",
+            "name": {
+              "fr": "Fontaine de vie",
+              "en": "Font of Life"
+            },
+            "icon": "perk-images/Styles/Resolve/FontOfLife/FontOfLife.png",
+            "tree": 8400,
+            "row": 1
+          },
+          {
+            "id": 8401,
+            "key": "ShieldBash",
+            "name": {
+              "fr": "Coup de bouclier",
+              "en": "Shield Bash"
+            },
+            "icon": "perk-images/Styles/Resolve/MirrorShell/MirrorShell.png",
+            "tree": 8400,
+            "row": 1
+          }
+        ],
+        [
+          {
+            "id": 8429,
+            "key": "Conditioning",
+            "name": {
+              "fr": "Conditionnement",
+              "en": "Conditioning"
+            },
+            "icon": "perk-images/Styles/Resolve/Conditioning/Conditioning.png",
+            "tree": 8400,
+            "row": 2
+          },
+          {
+            "id": 8444,
+            "key": "SecondWind",
+            "name": {
+              "fr": "Second souffle",
+              "en": "Second Wind"
+            },
+            "icon": "perk-images/Styles/Resolve/SecondWind/SecondWind.png",
+            "tree": 8400,
+            "row": 2
+          },
+          {
+            "id": 8473,
+            "key": "BonePlating",
+            "name": {
+              "fr": "Plaque d'os",
+              "en": "Bone Plating"
+            },
+            "icon": "perk-images/Styles/Resolve/BonePlating/BonePlating.png",
+            "tree": 8400,
+            "row": 2
+          }
+        ],
+        [
+          {
+            "id": 8451,
+            "key": "Overgrowth",
+            "name": {
+              "fr": "Surcroissance",
+              "en": "Overgrowth"
+            },
+            "icon": "perk-images/Styles/Resolve/Overgrowth/Overgrowth.png",
+            "tree": 8400,
+            "row": 3
+          },
+          {
+            "id": 8453,
+            "key": "Revitalize",
+            "name": {
+              "fr": "Revitalisation",
+              "en": "Revitalize"
+            },
+            "icon": "perk-images/Styles/Resolve/Revitalize/Revitalize.png",
+            "tree": 8400,
+            "row": 3
+          },
+          {
+            "id": 8242,
+            "key": "Unflinching",
+            "name": {
+              "fr": "Inébranlable",
+              "en": "Unflinching"
+            },
+            "icon": "perk-images/Styles/Sorcery/Unflinching/Unflinching.png",
+            "tree": 8400,
+            "row": 3
+          }
+        ]
+      ]
     }
   },
   "shards": [
@@ -444,6 +757,116 @@
           }
         ],
         "mienne": true
+      },
+      {
+        "nom": "Sorcellerie — vitesse et rivière",
+        "pourquoi": [
+          "Waterwalking + Célérité : on traverse la rivière plus vite et on garde les bonus de vitesse plus longtemps."
+        ],
+        "pourquoiEn": [],
+        "principal": {
+          "tree": 8100,
+          "picks": [
+            8112,
+            8126,
+            8137,
+            8105
+          ],
+          "inconnues": []
+        },
+        "secondaire": {
+          "tree": 8200,
+          "picks": [
+            8232,
+            8234
+          ],
+          "inconnues": []
+        },
+        "fragments": [
+          {
+            "key": "adaptatif",
+            "icon": "perk-images/StatMods/StatModsAdaptiveForceIcon.png",
+            "row": 0,
+            "name": {
+              "fr": "Force adaptative",
+              "en": "Adaptive Force"
+            }
+          },
+          {
+            "key": "adaptatif",
+            "icon": "perk-images/StatMods/StatModsAdaptiveForceIcon.png",
+            "row": 0,
+            "name": {
+              "fr": "Force adaptative",
+              "en": "Adaptive Force"
+            }
+          },
+          {
+            "key": "vie",
+            "icon": "perk-images/StatMods/StatModsHealthPlusIcon.png",
+            "row": 2,
+            "name": {
+              "fr": "Vie",
+              "en": "Health"
+            }
+          }
+        ],
+        "mienne": false
+      },
+      {
+        "nom": "Volonté — tenir la lane",
+        "pourquoi": [
+          "Armure d'os + Revitalisation : quand la lane tape fort et qu'il faut encaisser les échanges."
+        ],
+        "pourquoiEn": [],
+        "principal": {
+          "tree": 8100,
+          "picks": [
+            8112,
+            8126,
+            8137,
+            8105
+          ],
+          "inconnues": []
+        },
+        "secondaire": {
+          "tree": 8400,
+          "picks": [
+            8473,
+            8453
+          ],
+          "inconnues": []
+        },
+        "fragments": [
+          {
+            "key": "adaptatif",
+            "icon": "perk-images/StatMods/StatModsAdaptiveForceIcon.png",
+            "row": 0,
+            "name": {
+              "fr": "Force adaptative",
+              "en": "Adaptive Force"
+            }
+          },
+          {
+            "key": "adaptatif",
+            "icon": "perk-images/StatMods/StatModsAdaptiveForceIcon.png",
+            "row": 0,
+            "name": {
+              "fr": "Force adaptative",
+              "en": "Adaptive Force"
+            }
+          },
+          {
+            "key": "vie",
+            "icon": "perk-images/StatMods/StatModsHealthPlusIcon.png",
+            "row": 2,
+            "name": {
+              "fr": "Vie",
+              "en": "Health"
+            }
+          }
+        ],
+        "mienne": false
       }
     ]
   },

@@ -49,6 +49,17 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
 
 .shell { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+/* Une fenêtre de largeur impaire (c'est le cas dès qu'une barre de défilement
+   mange 15 px) centre le contenu sur un demi-pixel, et tout ce qui est dedans
+   — les icônes de runes en particulier — est redessiné entre deux pixels.
+   La marge est donc arrondie au pixel entier : un demi-pixel de décentrage
+   que personne ne voit, contre un flou que tout le monde voit. */
+@supports (margin-left: round(down, 1px, 1px)) {
+  .shell {
+    margin-left: round(down, calc((100% - min(1120px, 100%)) / 2), 1px);
+    margin-right: auto;
+  }
+}
 
 /* ---------- Barre ---------- */
 
@@ -803,7 +814,9 @@ main { flex: 1; padding-top: 28px; padding-bottom: 48px; }
 .rune-page {
   display: flex;
   flex-wrap: wrap;
-  gap: 24px;
+  /* Écart de colonne serré : à deux cartes par ligne, la page ne dispose que
+     de ~480 px et les trois colonnes doivent y tenir sans passer à la ligne. */
+  gap: 24px 16px;
   margin-top: 20px;
   align-items: start;
 }
@@ -813,12 +826,15 @@ main { flex: 1; padding-top: 28px; padding-bottom: 48px; }
    décalait la colonne suivante d'un demi-pixel — donc floue. */
 /* min-width entier : la tête est hors du flux, la colonne doit donc réserver
    la place du plus long nom d'arbre (« Sorcellerie », « Inspiration »).
-   132 px les couvre tous, en FR comme en EN. */
-.rune-tree { min-width: 132px; display: flex; flex-direction: column; position: relative; padding-top: 44px; }
+   144 px les couvre tous, en FR comme en EN ; le libellé étant hors du flux,
+   les deux ou trois pixels d'un mot plus long débordent dans l'écart. La
+   colonne des fragments n'a pas d'icône et se contente de ses lignes. */
+.rune-tree { min-width: 144px; display: flex; flex-direction: column; position: relative; padding-top: 44px; }
 /* Un filet entre les colonnes : sans lui, trois colonnes de ronds se lisent
    comme une seule grille en désordre. */
-.rune-tree + .rune-tree { border-left: 1px solid var(--line); padding-left: 24px; }
-.rune-tree + .rune-tree .tree-head { left: 24px; }
+.rune-tree + .rune-tree { border-left: 1px solid var(--line); padding-left: 16px; }
+.rune-tree + .rune-tree .tree-head { left: 16px; }
+.rune-tree.shards { min-width: 116px; }
 /* Hauteur fixe : la colonne Fragments n'a pas d'icône d'arbre, sans cela sa
    première ligne remonte de quelques pixels et les trois colonnes décrochent. */
 .tree-head {
@@ -833,7 +849,7 @@ main { flex: 1; padding-top: 28px; padding-bottom: 48px; }
   font-family: var(--font-display);
   font-size: 12px;
   font-weight: 600;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--muted);
 }
@@ -848,7 +864,7 @@ main { flex: 1; padding-top: 28px; padding-bottom: 48px; }
   gap: 10px;
   min-height: 44px;
 }
-.rune-row.keystones { gap: 12px; }
+.rune-row.keystones { gap: 10px; }
 
 /* Une rune non prise reste lisible en forme mais s'efface : c'est le contraste
    entre les deux qui dessine la page. */
