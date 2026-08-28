@@ -391,8 +391,11 @@
     "pages": [
       {
         "nom": "Ma page de runes Nunu",
-        "pourquoi": "Électrocution ouvre des angles de kill facilement en lane, et le E la proc sans effort.",
-        "pourquoiEn": "",
+        "pourquoi": [
+          "Électrocution donne des angles de kill en lane, et le E la proc facilement.",
+          "En utilisant la snowball juste après l'HexFlash, on gagne un boost de vitesse d'environ 150 MS."
+        ],
+        "pourquoiEn": [],
         "principal": {
           "tree": 8100,
           "picks": [

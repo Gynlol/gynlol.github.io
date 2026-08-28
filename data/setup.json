@@ -15,7 +15,9 @@
     "                valeurs : adaptatif, attaque, acceleration, deplacement,",
     "                viescaling, vie, tenacite (les noms anglais marchent aussi).",
     "  pourquoi    = LA phrase qui dit quand prendre cette page. C'est elle qui",
-    "                rend la page utile ; pourquoiEn est facultatif.",
+    "                rend la page utile. Une chaîne = une ligne ; une LISTE de",
+    "                chaînes = plusieurs points, affichés l'un sous l'autre.",
+    "                pourquoiEn est facultatif, même format.",
     "",
     "builds.mien / builds.alternatives : depart, coeur (dans l'ordre d'achat),",
     "  bottes, situationnel (ce qu'on ajoute selon la partie).",
@@ -26,7 +28,10 @@
   "runes": {
     "mienne": {
       "nom": "Ma page de runes Nunu",
-      "pourquoi": "Électrocution ouvre des angles de kill facilement en lane, et le E la proc sans effort.",
+      "pourquoi": [
+        "Électrocution donne des angles de kill en lane, et le E la proc facilement.",
+        "En utilisant la snowball juste après l'HexFlash, on gagne un boost de vitesse d'environ 150 MS."
+      ],
       "principal": {
         "arbre": "Domination",
         "runes": [

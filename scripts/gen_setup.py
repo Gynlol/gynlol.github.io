@@ -242,12 +242,26 @@ def resolve_side(dex, side, problems, context):
     }
 
 
+def whys(value):
+    """`pourquoi` accepte une phrase ou une liste de phrases.
+
+    La sortie est toujours une liste : le site n'a plus qu'un seul cas à
+    dessiner, et une page tenue à la main peut gagner une ligne sans toucher
+    au code. Les entrées vides sont retirées.
+    """
+    if value is None:
+        return []
+    if isinstance(value, str):
+        value = [value]
+    return [str(v).strip() for v in value if str(v).strip()]
+
+
 def resolve_runepage(dex, page, problems, label):
     context = page.get("nom") or label
     return {
         "nom": page.get("nom") or label,
-        "pourquoi": page.get("pourquoi") or "",
-        "pourquoiEn": page.get("pourquoiEn") or "",
+        "pourquoi": whys(page.get("pourquoi")),
+        "pourquoiEn": whys(page.get("pourquoiEn")),
         "principal": resolve_side(dex, page.get("principal"), problems, context),
         "secondaire": resolve_side(dex, page.get("secondaire"), problems, context),
         "fragments": [resolve_shard(f, problems, context) for f in (page.get("fragments") or [])],
@@ -264,8 +278,8 @@ def resolve_build(dex, build, problems, label):
     bottes = build.get("bottes")
     return {
         "nom": build.get("nom") or label,
-        "pourquoi": build.get("pourquoi") or "",
-        "pourquoiEn": build.get("pourquoiEn") or "",
+        "pourquoi": whys(build.get("pourquoi")),
+        "pourquoiEn": whys(build.get("pourquoiEn")),
         "depart": group("depart"),
         "coeur": group("coeur"),
         "bottes": resolve_item(dex, bottes, problems, context) if bottes else None,

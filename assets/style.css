@@ -6,6 +6,7 @@
   --line: #1d2735;
   --text: #e9f0f7;
   --muted: #8593a5;
+  --text-soft: #c2cedd; /* texte de lecture secondaire, plus lisible que --muted */
   --accent: #6fd3ff;
   --accent-soft: #a5e3ff;
   --accent-dim: rgba(111, 211, 255, 0.14);
@@ -710,6 +711,9 @@ main { flex: 1; padding-top: 28px; padding-bottom: 48px; }
 }
 
 .setup-card {
+  /* Seule sur sa ligne, une carte étirée sur 1080 px laisse son contenu perdu
+     à gauche : elle s'arrête à la largeur qu'une page de runes demande. */
+  max-width: 760px;
   background: var(--panel);
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -756,22 +760,56 @@ main { flex: 1; padding-top: 28px; padding-bottom: 48px; }
   padding: 3px 8px;
 }
 .is-mine .setup-badge { color: #0a0e14; background: var(--accent); }
-.setup-why { color: var(--muted); margin-top: 6px; max-width: 70ch; }
+/* Le « pourquoi » porte un ou plusieurs points. Liste alignée sur une seule
+   marge, texte plus contrasté que le gris d'étiquette : c'est du texte à lire,
+   pas une légende. */
+.setup-why {
+  list-style: none;
+  margin-top: 10px;
+  max-width: 64ch;
+  display: grid;
+  gap: 6px;
+}
+.setup-why li {
+  position: relative;
+  padding-left: 16px;
+  color: var(--text-soft);
+  font-size: 14.5px;
+  line-height: 1.6;
+}
+.setup-why li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.75;
+}
 
 /* Page de runes */
 
 .rune-page {
   display: flex;
   flex-wrap: wrap;
-  gap: 24px 20px;
-  margin-top: 18px;
+  gap: 24px;
+  margin-top: 20px;
+  align-items: start;
 }
-.rune-tree { min-width: 0; }
+.rune-tree { min-width: 0; display: flex; flex-direction: column; }
+/* Un filet entre les colonnes : sans lui, trois colonnes de ronds se lisent
+   comme une seule grille en désordre. */
+.rune-tree + .rune-tree { border-left: 1px solid var(--line); padding-left: 24px; }
+/* Hauteur fixe : la colonne Fragments n'a pas d'icône d'arbre, sans cela sa
+   première ligne remonte de quelques pixels et les trois colonnes décrochent. */
 .tree-head {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 12px;
+  height: 26px;
+  margin-bottom: 14px;
   font-family: var(--font-display);
   font-size: 12px;
   font-weight: 600;
@@ -780,8 +818,16 @@ main { flex: 1; padding-top: 28px; padding-bottom: 48px; }
   color: var(--muted);
 }
 .tree-head img { width: 24px; height: 24px; }
-.rune-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-.rune-row.keystones { gap: 12px; margin-bottom: 14px; }
+/* Même hauteur pour toutes les lignes, quelle que soit la taille des icônes
+   (44 px pour les runes clefs, 30 px pour les mineures, 26 px pour les
+   fragments) : la ligne n de chaque colonne tombe à la même hauteur. */
+.rune-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+}
+.rune-row.keystones { gap: 12px; }
 
 /* Une rune non prise reste lisible en forme mais s'efface : c'est le contraste
    entre les deux qui dessine la page. */
@@ -836,10 +882,13 @@ main { flex: 1; padding-top: 28px; padding-bottom: 48px; }
   .setup-card { padding: 16px; }
   /* L'arbre principal prend sa propre ligne : ses 4 runes clefs ne tiennent
      pas à côté de l'arbre secondaire sur un téléphone. */
-  .rune-page { gap: 20px; }
+  .rune-page { gap: 18px; }
   .rune-page .rune-tree.primary { flex-basis: 100%; }
-  .rune-row { gap: 7px; margin-bottom: 8px; }
+  /* Les colonnes passent à la ligne : un filet à gauche ne relierait plus rien. */
+  .rune-tree + .rune-tree { border-left: 0; padding-left: 0; }
+  .rune-row { gap: 7px; min-height: 40px; }
   .rune-row.keystones { gap: 8px; }
+  .setup-why li { font-size: 14px; }
   .item { width: 62px; }
   .item img { width: 40px; height: 40px; }
   .setup-link { font-size: 11px; padding: 8px 9px; }

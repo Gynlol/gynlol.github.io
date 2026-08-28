@@ -91,7 +91,7 @@ accents et casse libres — `Comète arcanique` comme `Arcane Comet` :
 "runes": {
   "mienne": {
     "nom": "Ma page",
-    "pourquoi": "La phrase qui dit quand la prendre.",
+    "pourquoi": ["La phrase qui dit quand la prendre.", "Une deuxième ligne si besoin."],
     "principal":  { "arbre": "Sorcellerie", "runes": ["Comète arcanique", "Ruban de mana", "Transcendance", "Brûlure"] },
     "secondaire": { "arbre": "Inspiration", "runes": ["Livraison de biscuits", "Savoir cosmique"] },
     "fragments": ["adaptatif", "adaptatif", "vie"]   // offense, flex, défense
@@ -115,8 +115,10 @@ accents et casse libres — `Comète arcanique` comme `Arcane Comet` :
   runes si `arbre` est absent.
 - `fragments` : `adaptatif`, `attaque`, `acceleration`, `deplacement`,
   `viescaling`, `vie`, `tenacite` (noms anglais acceptés).
-- `pourquoi` s'écrit en français ; `pourquoiEn` est facultatif — sans lui, le
-  visiteur anglais lit le français et a le bouton « 🌐 Translate ».
+- `pourquoi` accepte **une phrase ou une liste de phrases** : chaque entrée
+  devient une ligne à puce sous le titre de la carte.
+- `pourquoi` s'écrit en français ; `pourquoiEn` est facultatif (même format) —
+  sans lui, le visiteur anglais lit le français et a le bouton « 🌐 Translate ».
 
 Après modification :
 

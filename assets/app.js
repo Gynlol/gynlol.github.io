@@ -842,18 +842,28 @@
       line.appendChild(b);
     }
     head.appendChild(line);
-    if (why) {
-      var p = document.createElement("p");
-      p.className = "setup-why";
-      p.textContent = why;
-      head.appendChild(p);
+    // « pourquoi » peut porter plusieurs points : un par ligne, alignés sur la
+    // même marge, plutôt qu'un paragraphe qui se lit comme une seule phrase.
+    if (why.length) {
+      var ul = document.createElement("ul");
+      ul.className = "setup-why";
+      why.forEach(function (line2) {
+        var li = document.createElement("li");
+        li.textContent = line2;
+        ul.appendChild(li);
+      });
+      head.appendChild(ul);
     }
     return head;
   }
 
+  // Le générateur écrit des listes, mais un fichier plus ancien peut encore
+  // porter une chaîne : les deux formes sortent d'ici en tableau.
   function whyText(entry) {
-    if (state.lang === "en" && entry.pourquoiEn) return entry.pourquoiEn;
-    return entry.pourquoi || "";
+    var raw = (state.lang === "en" && entry.pourquoiEn && entry.pourquoiEn.length)
+      ? entry.pourquoiEn : entry.pourquoi;
+    if (!raw) return [];
+    return (typeof raw === "string" ? [raw] : raw).filter(function (x) { return !!x; });
   }
 
   function runeCard(page) {
