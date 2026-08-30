@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.17.1",
-    "updated": "2026-08-29T10:08:31Z"
+    "updated": "2026-08-30T10:12:13Z"
   },
   "videos": [
+    {
+      "id": "ylXHM3PSuM4",
+      "title": "Nunu Top vs Aatrox | Unranked to Master : Platinum 4 47lp | Patch 26.16",
+      "published": "2026-08-30T10:00:05+00:00",
+      "role": "top",
+      "enemy": "Aatrox",
+      "enemyName": "Aatrox",
+      "patch": "26.16",
+      "rank": "Platinum",
+      "division": "4",
+      "lp": 47,
+      "region": null,
+      "result": null
+    },
     {
       "id": "xHgs2mrrOik",
       "title": "Nunu Top vs Teemo | Unranked to Master : Platinum 4 17lp | Patch 26.16",
