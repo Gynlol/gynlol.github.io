@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.17.1",
-    "updated": "2026-08-30T10:12:13Z"
+    "updated": "2026-08-31T10:08:41Z"
   },
   "videos": [
+    {
+      "id": "nGYyLMKXQeM",
+      "title": "Nunu Top vs Akali | Unranked to Master : Platinum 3 7lp | Patch 26.16",
+      "published": "2026-08-31T10:00:30+00:00",
+      "role": "top",
+      "enemy": "Akali",
+      "enemyName": "Akali",
+      "patch": "26.16",
+      "rank": "Platinum",
+      "division": "3",
+      "lp": 7,
+      "region": null,
+      "result": null
+    },
     {
       "id": "ylXHM3PSuM4",
       "title": "Nunu Top vs Aatrox | Unranked to Master : Platinum 4 47lp | Patch 26.16",
