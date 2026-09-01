@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.17.1",
-    "updated": "2026-08-31T10:08:41Z"
+    "updated": "2026-09-01T10:17:04Z"
   },
   "videos": [
+    {
+      "id": "8LA91fg7zUM",
+      "title": "Nunu Top vs Camille | Unranked to Master : Platinum 3 67lp | Patch 26.16",
+      "published": "2026-09-01T10:00:21+00:00",
+      "role": "top",
+      "enemy": "Camille",
+      "enemyName": "Camille",
+      "patch": "26.16",
+      "rank": "Platinum",
+      "division": "3",
+      "lp": 67,
+      "region": null,
+      "result": null
+    },
     {
       "id": "nGYyLMKXQeM",
       "title": "Nunu Top vs Akali | Unranked to Master : Platinum 3 7lp | Patch 26.16",
