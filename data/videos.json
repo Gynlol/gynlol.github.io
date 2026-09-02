@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.17.1",
-    "updated": "2026-09-01T10:17:04Z"
+    "updated": "2026-09-02T10:18:01Z"
   },
   "videos": [
+    {
+      "id": "deW4QGulXTs",
+      "title": "Nunu Top vs Irelia | Unranked to Master : Platinum 2 17lp | Patch 26.17",
+      "published": "2026-09-02T10:00:38+00:00",
+      "role": "top",
+      "enemy": "Irelia",
+      "enemyName": "Irelia",
+      "patch": "26.17",
+      "rank": "Platinum",
+      "division": "2",
+      "lp": 17,
+      "region": null,
+      "result": null
+    },
     {
       "id": "8LA91fg7zUM",
       "title": "Nunu Top vs Camille | Unranked to Master : Platinum 3 67lp | Patch 26.16",
