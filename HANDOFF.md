@@ -31,4 +31,5 @@
   reste en colonne sur mobile.
 - Vérification locale: six images chargées, séquence accessible, six conseils
   visibles, aucun overflow et aucune erreur console en FR.
-- Suite: publier cette version puis vérifier le workflow GitHub Pages.
+- Suite: version `e0dc802` publiée sur GitHub Pages ; au prochain passage,
+  recueillir les prochains conseils Top dictés par Nathan.
