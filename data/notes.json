@@ -90,6 +90,24 @@
           "d": "Achète tes bottes plus tôt que d'habitude dans ce matchup. S'il achète des bottes de célérité, achète-les aussi."
         }
       ]
+    },
+    "top/Volibear": {
+      "fr": [
+        {
+          "d": "Le matchup est dur du niveau 1 à 5, et si t'as pas un lead avant le niveau 6, c'est plus jouable à cause de son R. Il a beaucoup de dégâts en early et peut facilement dodge la snowball avec son boost de movespeed. Donc il faut faire attention."
+        }
+      ]
+    },
+    "top/Chogath": {
+      "fr": [
+        {
+          "d": "Il peut cancel la snowball très facilement grâce à son bump et a deux moyens différents de cancel ton R (bump + silence). Sans grosse erreur du Cho'Gath, le matchup est très dur, mais jouable avec un lead."
+        },
+        {
+          "d": "Je conseille l'Hexflash pour le bonus de vitesse afin de le surprendre et qu'il rate son bump.",
+          "link": "#setup/runes"
+        }
+      ]
     }
   }
 }
