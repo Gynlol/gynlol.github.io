@@ -48,12 +48,13 @@ h1 .vs{color:#6fd3ff}
 .ban{display:inline-block;background:#ff5a5a;color:#1a0508;font-size:11px;font-weight:700;letter-spacing:.1em;padding:4px 6px;border-radius:4px;vertical-align:middle;margin-left:6px}
 .notes{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;margin:22px 0 4px}
 .notes h2{grid-column:1/-1;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:#8593a5;font-weight:700}
-.note{background:#101722;border:1px solid #1d2735;border-left:3px solid #6fd3ff;border-radius:6px;padding:10px 12px}
-.note b{display:block;font-size:12.5px;color:#6fd3ff;margin-bottom:4px}
+.note{position:relative;border-bottom:1px solid #1d2735;padding:10px 0 10px 28px}
+.note:before{content:"—";position:absolute;left:0;top:9px;color:#6fd3ff;font-weight:700}
 .note p{font-size:13px;line-height:1.5;color:#9db0c4}
-.note.plus{border-left-color:#39d98a}.note.plus b{color:#39d98a}
-.note.moins{border-left-color:#ff7a7a}.note.moins b{color:#ff7a7a}
-.note.ban{border-left-color:#ff5a5a;background:rgba(255,90,90,.13)}.note.ban b{color:#ff5a5a}
+.note-link{position:relative;display:inline-flex;align-items:center;min-height:0;margin-top:4px;padding:3px 6px;border:1px solid rgba(111,211,255,.28);border-radius:4px;background:transparent;color:#8593a5;font:500 10px/1.2 'Segoe UI',system-ui,sans-serif;letter-spacing:.02em}
+.note-link:before{content:"";position:absolute;inset:-12px -8px}
+.note-link:hover{border-color:#6fd3ff;color:#a5e3ff}
+.note.ban{background:transparent}
 .lvl{display:inline-block;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#0a0e14;border-radius:4px;font-size:12.5px;line-height:1;padding:5px 9px;margin-right:10px;vertical-align:middle}
 .lvl-facile{background:#39d98a}.lvl-moyen{background:#ffab3d}.lvl-dur{background:#ff5a5a}
 .lvl-tresdur{background:#8d0f1c;color:#ffe3e6}
@@ -163,16 +164,21 @@ BANS, NOTES, LEVELS = {}, {}, {}
 def notes_block(role, enemy_id, enemy_name, banned):
     cards = []
     if banned:
-        cards.append(
-            f'<div class="note ban"><b>Ban permanent</b><p>Je le ban à chaque game '
-            f'quand je joue {esc(ROLE_NAMES[role])}. Tu ne verras donc pas ce matchup en replay.</p></div>')
+        return ""
     entry = NOTES.get(f"{role}/{enemy_id}") or {}
     for n in (entry.get("fr") or entry.get("en") or []):
-        if not isinstance(n, dict) or not n.get("t"):
+        if not isinstance(n, dict):
             continue
-        kind = n.get("k") if n.get("k") in ("plus", "moins", "info") else "info"
-        cards.append(f'<div class="note {kind}"><b>{esc(str(n["t"]))}</b>'
-                     + (f'<p>{esc(str(n["d"]))}</p>' if n.get("d") else "") + "</div>")
+        text = n.get("d") or n.get("t")
+        if not text:
+            continue
+        link = str(n.get("link") or "")
+        if link.startswith("#"):
+            link = SITE + "/" + link
+        elif not re.match(r"^https?://", link, re.I):
+            link = ""
+        link_html = f'<a class="note-link" href="{esc(link)}">Voir les runes</a>' if link else ""
+        cards.append(f'<div class="note"><p>{esc(str(text))}</p>{link_html}</div>')
     if not cards:
         return ""
     return '<div class="notes"><h2>À savoir</h2>' + "".join(cards) + "</div>"
@@ -252,7 +258,13 @@ def matchup_page(role, enemy_id, enemy_name, videos):
 <a class="cta" href="https://www.youtube.com/@GynReplays?sub_confirmation=1">S'abonner à la chaîne</a>
 </main>
 <footer><div class="shell">Mis à jour automatiquement depuis la chaîne <a href="https://www.youtube.com/@GynReplays">@GynReplays</a>.</div></footer>
-<script data-goatcounter="https://gyn.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<script>if (location.hostname !== "localhost" && location.hostname !== "127.0.0.1") {{
+  var goatcounterScript = document.createElement("script");
+  goatcounterScript.dataset.goatcounter = "https://gyn.goatcounter.com/count";
+  goatcounterScript.async = true;
+  goatcounterScript.src = "//gc.zgo.at/count.js";
+  document.body.appendChild(goatcounterScript);
+}}</script>
 </body>
 </html>
 """

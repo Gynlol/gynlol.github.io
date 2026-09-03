@@ -1,27 +1,31 @@
 # DESIGN — nunu-matchups-01
 
 ## Run Context
-- Run mode: fresh build
+- Run mode: continuation
 - Brief: site public répertoriant tous les matchups Nunu de la chaîne YouTube Gyn Replays, classés en 5 rôles (Top/Jungle/Mid/ADC/Support) puis par champion ennemi. Ingestion automatique : toutes les heures, le flux RSS de la chaîne est parsé (rôle + adversaire lus dans le titre) et le site se met à jour seul.
 - Audience: la commu du créateur — joueurs LoL francophones (site bilingue FR/EN) qui veulent progresser sur Nunu en regardant le replay du matchup exact qu'ils vont affronter.
 - Product intent: outil de référence consultable avant une game — trouver le bon replay en < 10 secondes.
 
 ## Brain Use Contract
-- Query terms: `web-design-fast-lane`, `project-design`, `fast-lane`
-- Notes read: `MEMORY.md` (vault), `protocols/web-design-fast-lane.md`, `templates/project-design.md`, mémoires auto `yt-replays-descriptions`, `gyyn-lol-serie`
-- External references: flux RSS réel de la chaîne (3 vidéos, gabarit `Nunu ADC vs Ziggs EUW Master 80 LP | Patch 26.15`), Data Dragon (icônes champions, versions.json)
-- Decisions extracted (validées par le client, 2026-08-10):
+- Query terms: `web-design-fast-lane`, `web-quality-ratchet-harness`, `build Nunu`, `pick général`, `responsive mobile`
+- Notes read: `MEMORY.md` (vault), `meta/brain-runtime-protocol.md`, `meta/project-run-isolation.md`, `meta/agent-collaboration.md`, `protocols/web-design-fast-lane.md`, `protocols/web-quality-ratchet-harness.md`, `frontend/web-craft-standard.md`, `frontend/pattern-convergence-guard.md`, `gotchas/frontend-gotchas.md`, `templates/project-design.md`, `LESSONS.md` du run
+- External references: flux RSS réel de la chaîne relu le 2026-09-02 (27 vidéos classées), Data Dragon 16.17.1 (icônes champions, runes et objets), rendu local dans un navigateur réel à 1280 et 375 px
+- Decisions extracted (validées par le client, 2026-08-10): séparation nette entre catalogue de matchups et vue de builds/pick, avec direction esport sobre et bilingue
   - Hébergement GitHub Pages, automatisation GitHub Actions (cron horaire, RSS public, zéro clé API)
   - Titres hors gabarit **ignorés** (pas de section « Autres »)
   - Design **esport clean & sobre** (l'identité rétro-RPG gyyn a été proposée et refusée)
   - Bilingue FR/EN ; pages matchup = vidéos seules ; grille complète par rôle avec champions sans vidéo grisés
   - Client sans compte GitHub → livrer le dossier prêt à pousser + guide pas à pas
-- Risks identified:
+  - La vue « Runes & build » reste indépendante des rôles ; elle reçoit le build de référence, deux adaptations de composition et les principes de pick communs à tous les matchups
+  - Les conseils de pick sont éditoriaux et généraux : ils expliquent quand verrouiller Nunu et comment définir le plan de partie, sans prétendre remplacer une analyse de patch ou une décision personnelle
+- Risks identified: flux RSS glissant, contenu manuel à maintenir et preuve mobile à refaire après chaque changement de layout
   - RSS ne renvoie que ~15 dernières vidéos → `videos.json` committé est la base persistante, on ne supprime jamais une entrée absente du flux
   - Champion inconnu / nouveau champion → résolution d'id Data Dragon par heuristique + carte d'alias ; échec = vidéo ignorée (choix client) mais loggée dans la sortie du job
   - Cron GitHub Actions : suspendu après ~60 j sans activité du dépôt → documenté dans le guide
   - Screenshots QA : la pane navigateur peut ne pas compositer (pas affichée) → le dire honnêtement si c'est le cas
-- Evidence expected before delivery: parseur exécuté sur le flux réel (3/3 vidéos classées), site servi localement, contrôle console propre, lecture DOM desktop + mobile, audit tap-target/focus/overflow, reduced-motion vérifié, captures si la pane composite.
+  - Le flux peut faire évoluer titres, patch et nombre de vidéos entre deux reprises → régénérer `videos.json`, les pages SEO et le sitemap avant de qualifier le catalogue de complet
+  - Les builds sont des contenus à maintenir manuellement ; le générateur doit résoudre chaque nom et refuser toute icône morte avant publication
+- Evidence expected before delivery: parseur exécuté sur le flux réel (27 vidéos classées), site servi localement, contrôle console propre, lecture DOM desktop + mobile, audit tap-target/focus/overflow, reduced-motion vérifié, captures si la pane composite.
 
 ## Aesthetic Genealogy Contract
 - Neighbor projects audited: `gyyn-edit-01` (identité rétro-RPG — explicitement refusée ici), `deadlock-parry-01` (web app jeu, DA sombre), `gyn-replays-thumbnail-audit-20260809-01` (branding chaîne)
@@ -150,3 +154,406 @@ une colonne de plus dans le panneau de matchup, et aucune donnée par rôle.
   secondaire Inspiration, 2 adaptatifs + 65 vie), résolue 33/33 icônes. Les
   pages d'exemple ont été retirées. **Les builds restent à saisir** : rien n'est
   inventé, et la section « Builds » ne s'affiche pas tant qu'elle est vide.
+
+## Continuation — contenu builds, pick et matchups (2026-09-02)
+
+- Le run est repris explicitement depuis `nunu-matchups-01`, avec `LESSONS.md` relu avant modification ; la lignée précédente [claude] est conservée.
+- Le flux réel a ajouté 5 replays et actualisé 8 métadonnées : 27 vidéos au total, 14 Top, 1 Mid et 8 ADC couverts ; aucun Support n'est annoncé par la source.
+- `data/setup.json` reste la seule source manuelle : le build principal est AP polyvalent (Anneau de Doran → Tourment de Liandry → Sceptre de Rylai → Chaussures de sorcier), accompagné de variantes anti-burst et frontline. Les conseils de pick sont stockés dans cette même vue, en français et en anglais.
+- Les 23 matchups connus reçoivent une première passe de notes « À savoir » et les six nouvelles entrées Top reçoivent un niveau ; ces textes sont des conseils de jeu généraux à affiner si Nathan veut refléter une séquence précise de ses replays.
+- La section de pick est une liste éditoriale à deux colonnes sur desktop et une colonne sur mobile : elle garde la hiérarchie de la page sans ajouter une grille de cartes générique.
+- Preuves réalisées : `gen_setup.py` a produit 3 builds et 3 pages de runes, 0 nom non résolu et 27/27 icônes d'objets chargées ; `gen_seo.py` a régénéré 23 pages matchup et 24 URLs de sitemap ; `test_parse.py` passe à 30/30 titres et 18/18 rangs.
+- Navigateur réel : setup vérifié à 1280 px (0 overflow, 5 principes, 3 builds), puis à 375 et 320 px (`scrollWidth == clientWidth`, respectivement 360 et 305, 0 icône cassée, boutons de barre à 44 px). Un matchup réel (`#adc/ziggs`) ouvre 1 replay et 2 notes ; le hash, la recherche, le changement de rôle, le toggle FR/EN, la fermeture et l'ouverture au clavier ont été testés.
+- La console ne remonte aucune erreur applicative ; le seul avertissement est le compteur GoatCounter qui refuse volontairement de compter sur localhost. La règle `prefers-reduced-motion` est présente et vérifiée sur code ; elle n'a pas été émulée dans ce navigateur. Captures desktop et mobiles relues pour la seconde passe visuelle.
+
+## Continuation — révision éditoriale et builds fournis par Nathan (2026-09-03)
+
+### Brain Use Contract — delta de cette reprise
+
+- Query terms: `conseils matchup tirets`, `build Nunu capture`, `Xflash short`,
+  `onglets runes builds`, `Data Dragon doublons Arena`, `mobile overflow`.
+- Notes read: `MEMORY.md`, `meta/project-run-isolation.md`,
+  `protocols/web-quality-ratchet-harness.md`, `frontend/web-craft-standard.md`,
+  `LESSONS.md` et `HANDOFF.md` du run, ainsi que les instructions des skills
+  `sites-building`, `web-delivery` et `run-close`.
+- Attached references: les trois captures fournies ont été traitées comme
+  références visuelles d'objets et de regroupement ; les phrases de Nathan
+  restent la source d'autorité pour le rôle de chaque alternative. Les
+  captures n'ont pas été interprétées comme des consignes cachées.
+- Decisions extracted: vider entièrement `notes` pour Top, Mid et ADC (les
+  bans et niveaux restent indépendants) ; n'afficher les futurs conseils que
+  sous forme de lignes à tiret, sans code couleur ; séparer les conseils
+  généraux dans un onglet dédié, hors runes et builds ; séparer la vue setup en
+  onglets `#setup/runes`, `#setup/builds` et `#setup/tips` ; ajouter le short
+  Xflash comme lien sur la phrase HexFlash ; définir le build par défaut puis
+  les deux alternatives roam et PV/mana.
+- Risks identified: Nathan doit encore dicter les conseils des matchups Top ;
+  la troisième capture montre une icône qui correspond à Hextech Rocketbelt
+  (2650) alors que le texte demande Rod of Ages. Le contenu suit le texte et
+  affiche Rod of Ages ; ce point doit être confirmé avant publication.
+- Delivery evidence: `gen_setup.py` a produit 3 pages de runes, 3 builds,
+  82/82 icônes vérifiées et 0 nom non résolu ; `gen_seo.py` a régénéré 23 pages
+  matchup et 24 URLs de sitemap ; `test_parse.py` passe 30/30 titres et 18/18
+  rangs ; `node --check`, JSON et `git diff --check` passent. Dans le navigateur
+  réel, les onglets, le hash direct, le lien Xflash, le clavier, le FR/EN, les
+  builds desktop et le rendu mobile ont été contrôlés ; `scrollWidth` égale la
+  largeur client à 390 et 320 px, 0 rune ne reste vide, et une page neuve ne
+  remonte ni erreur ni avertissement de console. `prefers-reduced-motion` reste
+  vérifié sur le code, non émulé dans ce navigateur.
+
+### Décisions de contenu et de forme
+
+- `data/notes.json` est volontairement vide côté conseils : la prochaine passe
+  ajoutera uniquement les textes dictés par Nathan, avec un nombre de lignes
+  libre selon le champion. Le renderer dynamique et le générateur SEO ignorent
+  désormais les anciens types `plus` / `moins` et dessinent un tiret neutre.
+- La page setup présente d'abord l'onglet Runes, avec les principes de pick et
+  le lien Xflash, puis l'onglet Builds affiche séparément les trois chemins.
+  Les onglets sont routables et accessibles au clic comme aux flèches gauche /
+  droite du clavier.
+- Les objets des captures ont été résolus contre Data Dragon 16.17.1 :
+  Stormsurge + Hextech Rocketbelt par défaut ; Shurelya + items de roam en
+  alternative ; Rod of Ages + Liandry et les objets défensifs pour l'alternative
+  PV/mana. Le resolver filtre les objets hors Faille et préfère les ids courts,
+  ce qui évite de servir une icône Arena homonyme.
+
+## Continuation — conseils dictés et troisième onglet (2026-09-03)
+
+### Brain Use Contract — delta de cette reprise
+
+- Query terms: `conseils généraux onglet`, `level 1 invade bot`,
+  `Rod of Ages Proto-Belt Liandry`, `mobile overflow`.
+- Notes read: `MEMORY.md`, `meta/project-run-isolation.md`,
+  `protocols/web-quality-ratchet-harness.md`, `frontend/web-craft-standard.md`,
+  `LESSONS.md` et `HANDOFF.md` du run ; les skills `run-start`,
+  `sites-building`, `web-delivery`, `computer-use` et `run-close`.
+- Attached references: les captures restent des références visuelles de
+  regroupement et d'icônes ; le nouveau texte et l'ordre des objets viennent
+  des corrections explicites de Nathan.
+- Decisions extracted: supprimer les cinq principes de pick inventés ; créer
+  un onglet `#setup/tips` séparé ; conserver seulement les trois conseils
+  dictés ; raccourcir la variante roam ; mettre Rod of Ages au départ puis
+  Proto-Belt → Liandry au cœur du build PV/mana.
+- Risks identified: les conseils Top restent à dicter ; les conseils généraux
+  ne doivent pas être enrichis sans nouvelle formulation de Nathan.
+- Delivery evidence: onglet Conseils testé au clic et par hash direct ; les
+  runes n'affichent plus les conseils généraux ; les trois conseils sont
+  visibles au bon endroit ; les builds affichent la phrase raccourcie et
+  Rod of Ages / Proto-Belt / Liandry ; mesures mobile 390/320 sans overflow,
+  cibles visibles à 44 px ou plus et console neuve vide.
+
+### Décisions de contenu et de forme
+
+- `data/setup.json` porte désormais `conseils.fr` / `conseils.en` avec trois
+  entrées `{t,d}`. Elles sont une traduction structurée des formulations
+  dictées, sans ajout de principe de jeu.
+- Le setup comporte trois onglets indépendants : `Runes`, `Builds`,
+  `Conseils`. Le hash et les flèches gauche/droite suivent ces trois états.
+- L'alternative roam affiche uniquement la phrase courte demandée. La variante
+  PV/mana affiche Rod of Ages dans `Départ`, puis la séquence Proto-Belt →
+  Liandry dans `Cœur`, avec la phrase de mana conservée.
+
+## Continuation — hiérarchie des conseils et retrait de Rod (2026-09-03)
+
+### Brain Use Contract — delta de cette reprise
+
+- Query terms: `Rod no icon depart`, `Level 1 top three choices`,
+  `nested dash list`, `responsive QA`.
+- Notes read: `MEMORY.md`, `meta/project-run-isolation.md`,
+  `protocols/web-quality-ratchet-harness.md`, `frontend/web-craft-standard.md`,
+  `LESSONS.md` et `HANDOFF.md` du run ; les skills `run-start`, `sites-building`,
+  `web-delivery` et `run-close`.
+- Visual references: les trois captures de builds fournies ; elles servent de
+  référence de regroupement, tandis que les formulations et corrections de
+  contenu de Nathan restent l'autorité éditoriale.
+- Decisions extracted: conserver la phrase Rod of Ages mais retirer son icône et
+  toute ligne `Départ` de la variante PV/mana ; garder Proto-Belt → Liandry dans
+  `Cœur` ; modéliser le conseil Top comme un item avec trois sous-tirets ; ne
+  rien inventer dans les conseils généraux.
+- Risks identified: les conseils matchup Top restent à dicter ; les données RSS
+  et les patches peuvent changer entre deux reprises ; la publication distante
+  reste volontairement hors périmètre.
+- Delivery evidence: source et build compilé contiennent 2 conseils principaux,
+  dont 3 sous-points ; la variante PV/mana n'a plus de `depart` ; les contrôles
+  navigateur finaux ont confirmé le rendu FR/EN, les deux breakpoints mobiles,
+  l'absence de débordement, les cibles tactiles et la console vide.
+
+### Décisions de contenu et de forme
+
+- `conseils.fr` et `conseils.en` portent deux entrées principales. Le second
+  titre est `Level 1 au top : trois choix` et ses trois choix sont rendus avec
+  des tirets imbriqués.
+- La phrase d'explication PV/mana reste sous le build ; Rod of Ages n'est pas
+  une carte d'objet ni un objet de départ affiché. Le cœur visible commence par
+  Proto-Belt puis Liandry, et le situationnel reste inchangé.
+
+## Continuation — troisième conseil et grille équilibrée (2026-09-03)
+
+### Brain Use Contract — delta de cette reprise
+
+- Query terms: `third general tip`, `tips grid two rows`, `spacing dash text`,
+  `mobile stack`.
+- Notes read: `MEMORY.md`, `meta/project-run-isolation.md`,
+  `protocols/web-quality-ratchet-harness.md`, `frontend/web-craft-standard.md`,
+  `LESSONS.md` et `HANDOFF.md` du run ; les skills `run-start`, `sites-building`,
+  `web-delivery` et `run-close`.
+- Decisions extracted: ajouter le troisième conseil avec la formulation fournie
+  ; garder les trois choix imbriqués dans le conseil 2 ; sur desktop, faire
+  occuper au conseil 2 les deux rangées pendant que les conseils 1 et 3 restent
+  empilés à gauche ; augmenter les espacements du conseil 2 ; repasser en une
+  colonne sur mobile.
+- Risks identified: les conseils matchup Top restent à dicter ; les données RSS
+  et les patches peuvent changer entre deux reprises ; la publication distante
+  reste volontairement hors périmètre.
+- Delivery evidence: le navigateur réel confirme 3 conseils, 3 sous-points,
+  deux rangées desktop de 200 px et aucune largeur débordante à 390/320 px ; la
+  console neuve reste vide.
+
+### Décisions de contenu et de forme
+
+- Le troisième conseil est stocké comme un item indépendant, avec le titre
+  `Quand tu meurs et recall` et la phrase d'action en dessous.
+- Le conseil 2 garde ses trois choix sous forme de tirets, avec 24 px entre le
+  tiret et le texte et 14 px entre les choix ; les blocs 1 et 3 partagent une
+  hauteur de ligne, face au bloc 2 qui couvre les deux lignes.
+
+## Continuation — quatrième conseil et ligne dédiée (2026-09-03)
+
+### Brain Use Contract — delta de cette reprise
+
+- Query terms: `fourth general tip`, `AP first gold spend`,
+  `boots 300 gold`, `fourth grid row`.
+- Notes read: `MEMORY.md`, `meta/project-run-isolation.md`,
+  `protocols/web-quality-ratchet-harness.md`, `frontend/web-craft-standard.md`,
+  `LESSONS.md` et `HANDOFF.md` du run ; les skills `run-start`, `sites-building`,
+  `web-delivery` et `run-close`.
+- Decisions extracted: ajouter le quatrième conseil avec la règle d'achat
+  fournie ; conserver la composition 1/3 à gauche et 2 sur deux rangées à droite
+  ; placer le nouveau conseil sur une ligne dédiée pleine largeur desktop ;
+  réinitialiser toute position spéciale sur mobile.
+- Risks identified: les conseils matchup Top restent à dicter ; les données RSS
+  et les patches peuvent changer entre deux reprises ; la publication distante
+  reste volontairement hors périmètre.
+- Delivery evidence: la source et le build compilé contiennent 4 conseils, dont
+  3 sous-points dans le second ; le navigateur confirme la ligne dédiée à
+  1294 px, l'empilement à 390/320 px et zéro erreur console.
+
+### Décisions de contenu et de forme
+
+- Le quatrième conseil est intitulé `Comment dépenser tes golds` ; son contenu conserve
+  l'achat d'AP en début de partie, le stat-check, puis l'achat des bottes
+  uniquement lorsqu'aucun achat d'AP n'est possible avec 300 gold, avec un achat
+  anticipé pour roam si la lane est trop dure ou perdue.
+
+## Continuation — message commun des bans (2026-09-03)
+
+### Brain Use Contract — delta de cette reprise
+
+- Query terms: `ban permanent`, `pas de replay`, `bans par lane`, `note matchup`.
+- Notes read: `MEMORY.md`, `meta/project-run-isolation.md`,
+  `protocols/web-quality-ratchet-harness.md`, `frontend/web-craft-standard.md`,
+  `LESSONS.md` et `HANDOFF.md` du run ; les skills `sites-building`,
+  `web-delivery` et `run-close`.
+- Decisions extracted: les champions bannis sur Top, Mid, ADC et Support gardent
+  le titre `Ban permanent` et affichent uniquement une phrase commune ; la phrase
+  qui expliquait le ban selon le rôle est retirée du renderer dynamique et des
+  pages SEO.
+- Risks identified: les conseils matchup Top restent à dicter ; la publication
+  distante reste volontairement hors périmètre.
+- Delivery evidence: Trundle, Anivia et Soraka ont été contrôlés dans les quatre
+  lanes ; le texte commun est visible, l'ancien texte rôle-spécifique est absent,
+  aucun débordement horizontal n'est présent et la console reste vide.
+
+### Décisions de contenu et de forme
+
+- Le sous-titre du panneau de ban conserve `Ban permanent — pas de replay, et il
+  n'y en aura pas` ; aucune carte de ban n'est ajoutée dans la zone de conseils.
+
+## Continuation — zone de conseils masquée pour les bans (2026-09-03)
+
+### Brain Use Contract — delta de cette reprise
+
+- Query terms: `ban panel subtitle`, `hide À savoir`, `no ban note`, `all lanes`.
+- Notes read: `MEMORY.md`, `meta/project-run-isolation.md`,
+  `protocols/web-quality-ratchet-harness.md`, `frontend/web-craft-standard.md`,
+  `LESSONS.md` et `HANDOFF.md` du run ; les skills `sites-building`,
+  `web-delivery` et `run-close`.
+- Decisions extracted: pour un champion banni, ne rendre aucune carte dans la
+  colonne de conseils ; conserver uniquement le sous-titre commun du panneau
+  sous le matchup ; appliquer la règle au renderer dynamique et aux pages SEO.
+- Risks identified: les conseils matchup Top restent à dicter ; la publication
+  distante reste volontairement hors périmètre.
+- Delivery evidence: les bans Trundle, Anivia et Soraka ont été testés en Top,
+  Mid, ADC et Support ; la zone `À savoir` est masquée, la phrase du panneau
+  reste visible, l'ancien texte rôle-spécifique est absent, et la console est vide.
+
+### Décisions de contenu et de forme
+
+- La zone de conseils n'est créée que lorsqu'il existe de vrais conseils pour le
+  matchup ; un ban n'ajoute donc plus de titre ni de carte artificielle.
+
+## Continuation — difficulté Fiora et Irelia (2026-09-03)
+
+### Brain Use Contract — delta de cette reprise
+
+- Query terms: `Fiora très dur`, `Irelia dur`, `badge difficulté`.
+- Notes read: `MEMORY.md`, `meta/project-run-isolation.md`,
+  `protocols/web-quality-ratchet-harness.md`, `frontend/web-craft-standard.md`,
+  `LESSONS.md` et `HANDOFF.md` du run ; les skills `sites-building`,
+  `web-delivery` et `run-close`.
+- Decisions extracted: mettre `top/Fiora` à `tresdur` et `top/Irelia` à `dur` dans
+  la source éditoriale des niveaux, puis régénérer les pages SEO.
+- Risks identified: les conseils matchup Top restent à dicter ; la publication
+  distante reste volontairement hors périmètre.
+- Delivery evidence: le navigateur affiche `Très dur` pour Fiora et `Dur` pour
+  Irelia ; la console est vide et aucun débordement horizontal n'est présent.
+
+### Décisions de contenu et de forme
+
+- Les niveaux restent stockés séparément des notes dans `data/notes.json` et sont
+  traduits automatiquement par le renderer.
+
+## Continuation — conseil du matchup Fiora (2026-09-03)
+
+### Brain Use Contract — delta de cette reprise
+
+- Query terms: `Fiora`, `matchup quasiment impossible`, `niveau 3`, `roam`.
+- Notes read: `MEMORY.md`, `meta/project-run-isolation.md`,
+  `protocols/web-quality-ratchet-harness.md`, `frontend/web-craft-standard.md`,
+  `LESSONS.md` et `HANDOFF.md` du run ; les skills `sites-building`,
+  `web-delivery` et `run-close`.
+- Decisions extracted: ajouter un seul conseil Top à la fiche Fiora, avec le titre
+  et la formulation fournis, en conservant le rendu neutre en tiret.
+- Risks identified: les autres conseils matchup Top restent à dicter ; la
+  publication distante reste volontairement hors périmètre.
+- Delivery evidence: le conseil est visible sur `#top/fiora`, avec le badge
+  `Très dur`, sans erreur console ni débordement horizontal ; la page SEO Fiora
+  a aussi été régénérée.
+
+### Décisions de contenu et de forme
+
+- Titre : `Matchup quasiment impossible si la Fiora joue bien`.
+- Conseil : `Donc regarde un peu comment elle joue. Si elle joue bien, prends ton
+  niveau 3 et roam.`
+
+## Continuation — conseils sans intitulés (2026-09-03)
+
+### Brain Use Contract — delta de cette reprise
+
+- Query terms: `conseils sans titres`, `même police`, `tirets`, `Mordekaiser`,
+  `Nasus`.
+- Notes read: `MEMORY.md`, `meta/project-run-isolation.md`,
+  `protocols/web-quality-ratchet-harness.md`, `frontend/web-craft-standard.md`,
+  `LESSONS.md` et `HANDOFF.md` du run ; les skills `sites-building`,
+  `web-delivery` et `run-close`.
+- Decisions extracted: les conseils matchup sont des textes complets rendus dans
+  un seul paragraphe par tiret ; aucun sous-titre en gras ne doit être ajouté ;
+  le renderer et le générateur SEO acceptent le format `{ d: texte }`.
+- Risks identified: les autres conseils matchup Top restent à dicter ; la
+  publication distante reste volontairement hors périmètre.
+- Delivery evidence: les fiches Fiora, Mordekaiser et Nasus ont été vérifiées ;
+  Mordekaiser affiche deux paragraphes, Fiora et Nasus un paragraphe, sans
+  `h4`, avec la même famille de police, sans erreur console ni overflow.
+
+### Décisions de contenu et de forme
+
+- Les conseils fournis par Nathan sont stockés comme phrases complètes dans `d`;
+  les champs `t` ne servent plus à fabriquer des titres visuels.
+
+## Continuation — espacement des tirets (2026-09-03)
+
+### Brain Use Contract — delta de cette reprise
+
+- Query terms: `espacement tiret texte`, `conseils matchup`, `28 px`, `Fiora`.
+- Notes read: `MEMORY.md`, `meta/project-run-isolation.md`,
+  `protocols/web-quality-ratchet-harness.md`, `frontend/web-craft-standard.md`,
+  `LESSONS.md` et `HANDOFF.md` du run ; les skills `sites-building`,
+  `web-delivery` et `run-close`.
+- Decisions extracted: augmenter l'espace horizontal entre le tiret et le texte
+  à 28 px dans le renderer interactif et dans le CSS des pages SEO ; conserver
+  l'espace vertical existant.
+- Risks identified: les autres conseils matchup Top restent à dicter ; la
+  publication distante reste volontairement hors périmètre.
+- Delivery evidence: la fiche Fiora affiche 28 px de retrait, le texte reste en
+  `Inter`, la page n'a pas de débordement horizontal et les pages SEO ont été
+  régénérées.
+
+### Décisions de contenu et de forme
+
+- Le tiret reste positionné à gauche de chaque conseil ; le retrait du paragraphe
+  est fixé à 28 px pour une séparation lisible sans augmenter la hauteur des blocs.
+
+## Continuation — conseils Teemo et accès aux runes (2026-09-03)
+
+### Brain Use Contract — delta de cette reprise
+
+- Query terms: `Teemo`, `Hexflash`, `bouton Voir les runes`, `cinquième conseil`,
+  `Sceau noir first item`.
+- Notes read: `MEMORY.md`, `meta/project-run-isolation.md`,
+  `protocols/web-quality-ratchet-harness.md`, `frontend/web-craft-standard.md`,
+  `LESSONS.md` et `HANDOFF.md` du run ; les skills `sites-building`,
+  `web-delivery` et `run-close`.
+- Decisions extracted: ajouter cinq conseils texte à la fiche Teemo ; joindre au
+  conseil Hexflash un petit lien interne vers `#setup/runes` ; afficher la
+  consigne Sceau noir en haut de l'onglet Builds ; conserver la même règle dans
+  la version interactive et dans les sorties générées.
+- Risks identified: la publication GitHub Pages doit encore être effectuée ; les
+  prochains conseils Top restent à dicter ; le RSS et les patches peuvent changer.
+- Delivery evidence: la fiche Teemo affiche 5 conseils ; le lien ouvre `#setup/runes`;
+  l'onglet Builds affiche `Sceau noir en first item, toujours.` ; le bouton fait
+  44 px de haut, la console est vide et aucun overflow n'est présent.
+
+### Décisions de contenu et de forme
+
+- Le cinquième conseil Teemo est : `Si tu es en 0-1, ta lane est perdue. Il y a
+  quasiment aucun angle de comeback, donc achète des bottes et roam.`
+- Le bouton du conseil Hexflash est libellé `Voir les runes` et utilise le routage
+  interne du site ; la version SEO renvoie vers la page d'accueil, onglet Runes.
+- La consigne de build est portée par `builds.notice` / `builds.noticeEn` et se
+  place avant les cartes de builds.
+
+## Continuation — synchronisation du replay Mordekaiser et lien compact (2026-09-03)
+
+### Brain Use Contract — delta de cette reprise
+
+- Query terms: `vidéo du jour`, `Mordekaiser`, `flux RSS`, `job GitHub`,
+  `bouton plus petit`.
+- Notes read: `MEMORY.md`, `meta/project-run-isolation.md`,
+  `protocols/web-quality-ratchet-harness.md`, `frontend/web-craft-standard.md`,
+  `LESSONS.md` et `HANDOFF.md` du run ; état du dépôt, flux RSS réel, données
+  déployées et historique GitHub Actions.
+- Decisions extracted: conserver le parseur RSS qui reconnaît le titre exact du
+  replay du jour ; publier `videos.json` même si la génération SEO ou Data
+  Dragon tombe, tout en laissant le job signaler l'échec ; rendre le lien
+  Hexflash compact visuellement sans lui retirer sa zone de clic étendue.
+- Risks identified: GitHub peut décaler les tâches planifiées et YouTube reste
+  une source externe ; la disponibilité immédiate n'est donc pas garantie à la
+  seconde de publication.
+- Delivery evidence: le flux contient `izA4SMQ_8G4`, le titre Mordekaiser est
+  parsé en Top / Platinum 2 / 47 LP / patch 26.17, la page déployée contient ce
+  replay, et le bouton Teemo mesure 20 px visuellement avec fond transparent,
+  sans overflow.
+
+### Décisions de synchronisation
+
+- Le replay Mordekaiser a été ajouté par le job automatique à 12 h 17, après sa
+  publication à 12 h 00 ; le retard venait du déclenchement planifié GitHub,
+  pas d'un échec du parseur.
+- Les étapes auxiliaires du workflow sont tolérantes pour permettre la
+  publication des données vidéo ; une étape finale garde l'échec visible afin
+  que la génération manquante soit retentée et diagnostiquée.
+
+## Continuation — formulation finale du build PV / mana (2026-09-03)
+
+### Brain Use Contract — delta de cette reprise
+
+- Query terms: `Rod of Ages`, `PV mana`, `phrase build`, `bouton compact`.
+- Notes read: `MEMORY.md`, `LESSONS.md` et `HANDOFF.md` du run, ainsi que
+  `data/setup.json` et `data/setup-built.json`.
+- Decisions extracted: la phrase s'arrête après `commence par Rod of Ages.` ;
+  Rod of Ages reste une explication et ne devient ni icône ni ligne de départ.
+- Risks identified: seules les formulations dictées par Nathan font autorité ;
+  la traduction anglaise doit rester alignée sans rallonger la phrase française.
+- Delivery evidence: les deux fichiers de setup contiennent la phrase courte,
+  le build PV / mana n'affiche aucun départ Rod et son cœur reste
+  Proto-Belt → Liandry.

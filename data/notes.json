@@ -4,13 +4,11 @@
     "bans   : role -> liste d'ids de champions bannis quand je joue ce role.",
     "         Le champion apparait en rouge dans la grille du role, meme sans replay.",
     "notes  : cle '<role>/<ChampionId>' -> { fr: [...], en: [...] }.",
-    "         Une note = { t: titre court, d: le detail, k: 'plus' | 'moins' | 'info' }.",
-    "         k colore le liseré : plus = vert (ce qui marche), moins = rouge (le piege),",
-    "         info = bleu (par defaut si k est absent).",
+    "         Chaque conseil = { d: le texte complet du tiret }.",
+    "         Les conseils sont affiches sous forme de tirets, sans code couleur.",
     "         'en' est facultatif : sans traduction, la version fr est affichee aux deux langues.",
     "niveaux: cle '<role>/<ChampionId>' -> 'facile' | 'moyen' | 'dur'.",
-    "         Affiche en gros au-dessus du matchup et sous la tuile du champion :",
-    "         facile = vert, moyen = orange, dur = rouge. Traduit tout seul en anglais.",
+    "         Le niveau reste distinct des conseils et se traduit tout seul en anglais.",
     "L'id du champion est celui de data/champions.json (Chogath, MonkeyKing, KSante...).",
     "Les notes s'ecrivent en FRANCAIS uniquement : le site propose un bouton de",
     "traduction quand le visiteur passe en anglais."
@@ -24,13 +22,19 @@
   "niveaux": {
     "_exemple/Darius": "moyen",
 
+    "top/Aatrox": "moyen",
+    "top/Akali": "moyen",
+    "top/Camille": "moyen",
     "top/Chogath": "tresdur",
     "top/Darius": "moyen",
     "top/DrMundo": "facile",
+    "top/Fiora": "tresdur",
     "top/Gwen": "facile",
+    "top/Irelia": "dur",
     "top/Mordekaiser": "facile",
     "top/Nasus": "moyen",
     "top/Teemo": "facile",
+    "top/Urgot": "moyen",
     "top/Volibear": "dur",
 
     "mid/Viktor": "facile",
@@ -46,14 +50,48 @@
   },
 
   "notes": {
-    "_exemple/Darius": {
+    "top/Fiora": {
       "fr": [
-        { "t": "Niveau 1-2", "d": "Exemple : ne pas contester le buff bleu, il gagne le trade.", "k": "moins" },
-        { "t": "Boule de neige", "d": "Exemple : le knock-up passe par-dessus son E.", "k": "plus" }
-      ],
-      "en": [
-        { "t": "Level 1-2", "d": "Example: don't contest blue buff, he wins the trade.", "k": "moins" },
-        { "t": "Snowball", "d": "Example: the knock-up goes through his E.", "k": "plus" }
+        {
+          "d": "Matchup quasiment impossible si la Fiora joue bien. Donc regarde un peu comment elle joue. Si elle joue bien, prends ton niveau 3 et roam."
+        }
+      ]
+    },
+    "top/Mordekaiser": {
+      "fr": [
+        {
+          "d": "Personnage sans mobilité, donc il faut juste lui mettre des snowball et lui mettre des électrocute avec le E. Dès qu'il y a un angle de kill (mid life), all-in."
+        },
+        {
+          "d": "Attention à partir du niveau 6 : le matchup peut être bizarre avec son R, surtout s'il a acheté de la résistance magique."
+        }
+      ]
+    },
+    "top/Nasus": {
+      "fr": [
+        {
+          "d": "Matchup très facile du niveau 1 à 5, mais à partir du niveau 6, il t'outscale, peu importe l'avance que t'as : c'est quasiment impossible de gagner."
+        }
+      ]
+    },
+    "top/Teemo": {
+      "fr": [
+        {
+          "d": "Perso sans CC, donc très simple. Trade-le en boucle avec le W et le E."
+        },
+        {
+          "d": "Dès qu'il n'a pas de flash, il suffit de lui courir dessus avec le E et d'appuyer sur R pour le tuer."
+        },
+        {
+          "d": "À cause de son spell de movespeed, priorise la rune Hexflash.",
+          "link": "#setup/runes"
+        },
+        {
+          "d": "Achète tes bottes plus tôt que d'habitude dans ce matchup. S'il achète des bottes de célérité, achète-les aussi."
+        },
+        {
+          "d": "Si tu es en 0-1, ta lane est perdue. Il y a quasiment aucun angle de comeback, donc achète des bottes et roam."
+        }
       ]
     }
   }

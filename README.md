@@ -16,16 +16,20 @@ Site statique qui répertorie tous les matchups Nunu de la chaîne
 - `scripts/update_videos.py` — lit le flux RSS public de la chaîne, parse les
   titres `Nunu <rôle> vs <champion> …` et met à jour `videos.json`.
   Les titres hors gabarit sont ignorés (visibles dans le log du job).
-- `.github/workflows/update-videos.yml` — lance ce script **toutes les
-  heures** sur GitHub Actions et committe si quelque chose a changé.
-  Le commit redéploie automatiquement GitHub Pages.
+- `.github/workflows/update-videos.yml` — relance ce script plusieurs fois par
+  heure sur GitHub Actions, avec des reprises réseau. Les horaires GitHub
+  peuvent toutefois être décalés ; une panne de génération SEO ou de Data
+  Dragon ne bloque plus la publication de `videos.json` (le job reste signalé
+  en échec pour être corrigé au passage suivant). Le commit redéploie
+  automatiquement GitHub Pages.
 - `data/champions.json` — la liste des champions par rôle (grilles) ;
   regénérable via `scripts/gen_champions.py`.
 - `data/notes.json` — **écrit à la main** (le robot n'y touche jamais) : les
   bans de rôle et les « à savoir » affichés à droite de chaque matchup.
-- `data/setup.json` — **écrit à la main** : mes runes et mes builds, en noms
-  clairs. `scripts/gen_setup.py` les résout en `data/setup-built.json`, le
-  fichier que le site lit (voir « Runes et builds » plus bas).
+- `data/setup.json` — **écrit à la main** : mes runes, mes builds et mes
+  conseils généraux de jeu, en noms clairs. `scripts/gen_setup.py` les
+  résout en `data/setup-built.json`, le fichier que le site lit (voir « Runes et
+  builds » plus bas).
 - `index.html` + `assets/` — le site (vanilla HTML/CSS/JS, bilingue FR/EN).
 
 ## Écrire les « à savoir » et les bans
@@ -45,16 +49,17 @@ Tout se passe dans `data/notes.json`, en clair, sans rien relancer côté site
 "notes": {
   "top/Darius": {                       // "<rôle>/<id du champion>"
     "fr": [
-      { "t": "Niveau 1-2", "d": "Le détail.", "k": "moins" },
-      { "t": "Ce qui marche", "d": "Le détail.", "k": "plus" }
+      { "t": "Premier timing", "d": "Le conseil matchup à écrire." },
+      { "t": "Fenêtre à jouer", "d": "Un autre conseil, si nécessaire." }
     ],
     "en": [ /* facultatif : sans traduction, le FR s'affiche aussi en EN */ ]
   }
 }
 ```
 
-- `t` = titre court, `d` = le texte, `k` = couleur du liseré : `plus` (vert),
-  `moins` (rouge), `info` (bleu, par défaut).
+- `t` = titre court, `d` = le conseil. Chaque conseil apparaît comme une ligne
+  précédée d'un tiret, sans code couleur ; le nombre de conseils peut varier
+  selon le champion.
 - `niveaux` = la première chose qu'on lit : pastille de couleur sous la tuile
   du champion dans la grille **et** en tête du matchup ouvert (et sur la page
   de référencement). Les valeurs anglaises `easy` / `medium` / `hard` sont
@@ -72,17 +77,23 @@ Tout se passe dans `data/notes.json`, en clair, sans rien relancer côté site
   « Mon ban en ADC : Soraka » sous le compteur le signale.
 - L'id du champion est celui de `data/champions.json` (`Chogath`,
   `MonkeyKing`, `KSante`…) ; la casse et les accents sont tolérés.
-- La clé `_exemple/Darius` du fichier est un gabarit à copier : elle ne
-  correspond à aucun rôle, donc elle ne s'affiche nulle part.
 - Fichier absent ou JSON cassé = site normal, sans notes ni bans (aucune
   page blanche).
 
-## Runes et builds (page « Runes & build »)
+## Runes, builds et conseils généraux (page « Runes & build »)
 
 Une vue à part, sans rapport avec les rôles : bouton **Runes & build** dans la
-barre du haut, adresse directe `https://gynlol.github.io/#setup`. Ma page et
-mon build sont mis en avant (liseré glace + pastille), les variantes viennent
-en dessous avec la phrase qui dit quand les prendre.
+barre du haut, adresses directes `#setup/runes`, `#setup/builds` et
+`#setup/tips`. Les trois contenus ont chacun leur onglet : les conseils
+généraux ne sont pas mélangés aux runes, ma page et mon build sont mis en avant
+(liseré glace + pastille), et les variantes viennent en dessous avec la phrase
+qui dit quand les prendre.
+
+Les conseils généraux sont écrits dans `setup.json` sous `conseils.fr` et
+`conseils.en`. Chaque langue contient un `titre` et une liste `items` de
+`{ "t": "Titre", "d": "Conseil" }` ; un item peut aussi porter `points`, une
+liste affichée en sous-tirets. Le contenu est ajouté à partir des phrases
+dictées par Nathan ; le fichier ne doit pas recevoir de principes inventés.
 
 Tout s'écrit dans `data/setup.json`, **en noms clairs**, français ou anglais,
 accents et casse libres — `Comète arcanique` comme `Arcane Comet` :
@@ -108,6 +119,16 @@ accents et casse libres — `Comète arcanique` comme `Arcane Comet` :
     "situationnel": ["Sablier de Zhonya"]
   },
   "alternatives": [ /* même forme */ ]
+},
+"conseils": {
+  "fr": {
+    "titre": "Conseils généraux",
+    "items": [
+      { "t": "Level 1, invade bot (si ta bot lane n'est pas AFK)", "d": "Le conseil dicté, sans en ajouter d'autre." },
+      { "t": "Level 1 au top : trois choix", "points": ["Premier choix.", "Deuxième choix.", "Troisième choix."] }
+    ]
+  },
+  "en": { "titre": "General tips", "items": [ /* traduction directe */ ] }
 }
 ```
 
@@ -141,7 +162,7 @@ se voit dans le journal du job, pas sur la page du visiteur.
 GitHub Pages sert tout avec `Cache-Control: max-age=600`. Deux garde-fous :
 
 - `index.html` appelle les assets avec un numéro de version
-  (`assets/app.js?v=20260824`) — **le bumper à chaque modification de
+  (`assets/style.css?v=20260903t`, `assets/app.js?v=20260903t`) — **le bumper à chaque modification de
   `app.js` ou `style.css`**, sinon un navigateur qui a l'ancien fichier
   garde l'ancien site.
 - les `data/*.json` sont chargés en `cache: "no-cache"` : le navigateur

@@ -31,15 +31,24 @@ jobs:
         run: python scripts/update_videos.py
 
       - name: Regénérer les pages de référencement
+        id: seo
+        # Une panne de génération SEO ne doit pas empêcher la vidéo fraîche
+        # d'être publiée dans data/videos.json et dans l'interface principale.
+        continue-on-error: true
         run: python scripts/gen_seo.py
 
       # setup.json est écrit à la main : le job ne fait que le résoudre contre
       # Data Dragon, pour qu'une modification à la main soit en ligne dans l'heure
       # sans rien lancer côté PC.
       - name: Résoudre les runes et les builds
+        id: setup
+        # Data Dragon est une dépendance externe : s'il tombe, on committe
+        # quand même le nouveau replay et on laisse le job signaler l'échec.
+        continue-on-error: true
         run: python scripts/gen_setup.py
 
       - name: Committer si changement
+        if: always()
         run: |
           git add data/videos.json data/setup-built.json matchups sitemap.xml
           if git diff --cached --quiet; then
@@ -58,3 +67,9 @@ jobs:
             done
             git push
           fi
+
+      - name: Signaler une génération auxiliaire en échec
+        if: always() && (steps.seo.outcome == 'failure' || steps.setup.outcome == 'failure')
+        run: |
+          echo "Une génération auxiliaire a échoué ; les données vidéo ont tout de même été publiées."
+          exit 1

@@ -170,6 +170,11 @@ class Dex(object):
             url = "%s/cdn/%s/data/%s/item.json" % (DDRAGON, self.version, code)
             raw[lang] = json.loads(fetch(url))["data"]
         for item_id, item_en in raw["en"].items():
+            # Data Dragon place les variantes d'Arena avant les objets de la
+            # Faille et leur donne parfois exactement le même nom. On ne doit
+            # jamais résoudre un build SR vers une icône 22xxxx.
+            if not item_en.get("maps", {}).get("11"):
+                continue
             item_fr = raw["fr"].get(item_id, item_en)
             entry = {
                 "id": item_id,
@@ -177,9 +182,13 @@ class Dex(object):
                 "icon": item_en.get("image", {}).get("full", item_id + ".png"),
             }
             for label in (item_en["name"], item_fr["name"]):
-                # Plusieurs entrées partagent parfois le même nom : on garde la
-                # première, l'ordre de item.json étant stable d'un patch à l'autre.
-                self.items.setdefault(norm(label), entry)
+                # Plusieurs entrées partagent parfois le même nom (objets de
+                # modes spéciaux en 6 chiffres). On préfère toujours l'id SR
+                # court pour que l'icône et le prix correspondent à la Faille.
+                key = norm(label)
+                previous = self.items.get(key)
+                if previous is None or len(str(item_id)) < len(str(previous["id"])):
+                    self.items[key] = entry
 
 
 def resolve_rune(dex, name, problems, context):
@@ -256,12 +265,22 @@ def whys(value):
     return [str(v).strip() for v in value if str(v).strip()]
 
 
+def why_links(value):
+    """Conserve les liens optionnels alignés sur les points de `pourquoi`."""
+    if value is None:
+        return []
+    if isinstance(value, str):
+        value = [value]
+    return [str(v).strip() for v in value]
+
+
 def resolve_runepage(dex, page, problems, label):
     context = page.get("nom") or label
     return {
         "nom": page.get("nom") or label,
         "pourquoi": whys(page.get("pourquoi")),
         "pourquoiEn": whys(page.get("pourquoiEn")),
+        "pourquoiLiens": why_links(page.get("pourquoiLiens")),
         "principal": resolve_side(dex, page.get("principal"), problems, context),
         "secondaire": resolve_side(dex, page.get("secondaire"), problems, context),
         "fragments": [resolve_shard(f, problems, context) for f in (page.get("fragments") or [])],
@@ -280,6 +299,7 @@ def resolve_build(dex, build, problems, label):
         "nom": build.get("nom") or label,
         "pourquoi": whys(build.get("pourquoi")),
         "pourquoiEn": whys(build.get("pourquoiEn")),
+        "pourquoiLiens": why_links(build.get("pourquoiLiens")),
         "depart": group("depart"),
         "coeur": group("coeur"),
         "bottes": resolve_item(dex, bottes, problems, context) if bottes else None,
@@ -371,8 +391,16 @@ def main():
         "meta": {"ddragonVersion": version, "source": "data/setup.json"},
         "trees": trees,
         "shards": shard_rows,
+        # Les conseils généraux sont éditoriaux : ils restent dans le fichier
+        # résolu pour que la page ne charge qu'un seul JSON au lieu de relire
+        # setup.json côté navigateur.
+        "conseils": src.get("conseils") or {},
         "runes": {"pages": rune_pages},
-        "builds": {"pages": build_pages},
+        "builds": {
+            "notice": str(builds_src.get("notice") or "").strip(),
+            "noticeEn": str(builds_src.get("noticeEn") or "").strip(),
+            "pages": build_pages,
+        },
     }
 
     total, bad = check_icons(version, built, problems)

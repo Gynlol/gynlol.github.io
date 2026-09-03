@@ -33,9 +33,16 @@
       setupNav: "Runes & build",
       setupNavShort: "Runes",
       setupTitle: "Mes runes et mes builds",
-      setupIntro: "Ce que je prends sur Nunu, quel que soit le rôle : ma page et mon build en premier, les variantes en dessous.",
+      setupIntro: "Runes, builds et conseils généraux, chacun dans son onglet.",
+      setupRunesTab: "Runes",
+      setupBuildsTab: "Builds",
+      setupTipsTab: "Conseils",
+      setupTabsLabel: "Contenu du guide",
       runesTitle: "Pages de runes",
       buildsTitle: "Builds",
+      tipsTitle: "Conseils généraux",
+      watchShort: "Voir le short Hexflash ↗",
+      viewRunes: "Voir les runes",
       mineRunes: "Ma page",
       mineBuild: "Mon build",
       altLabel: "Variante",
@@ -57,7 +64,6 @@
       ban: "BAN",
       banTitle: "Ban permanent",
       banSub: "Ban permanent — pas de replay, et il n'y en aura pas",
-      banText: function (role) { return "Je le ban à chaque game quand je joue " + role + ". Tu ne verras donc pas ce matchup en replay."; },
       banLine: function (names, role) { return "Mon ban en " + role + " : " + names; },
       tileBan: function (name, role) { return name + " — mon ban en " + role; },
       roleNames: { top: "Top", mid: "Mid", adc: "ADC", support: "Support" },
@@ -84,9 +90,16 @@
       setupNav: "Runes & build",
       setupNavShort: "Runes",
       setupTitle: "My runes and builds",
-      setupIntro: "What I take on Nunu, whatever the role: my page and my build first, the variants below.",
+      setupIntro: "Runes, builds and general tips, each in its own tab.",
+      setupRunesTab: "Runes",
+      setupBuildsTab: "Builds",
+      setupTipsTab: "Tips",
+      setupTabsLabel: "Guide sections",
       runesTitle: "Rune pages",
       buildsTitle: "Builds",
+      tipsTitle: "General tips",
+      watchShort: "Watch the Hexflash short ↗",
+      viewRunes: "View runes",
       mineRunes: "My page",
       mineBuild: "My build",
       altLabel: "Variant",
@@ -108,7 +121,6 @@
       ban: "BAN",
       banTitle: "Permanent ban",
       banSub: "Permanent ban — no replay, and there won't be one",
-      banText: function (role) { return "I ban them every game when I play " + role + ", so this matchup will never show up in the replays."; },
       banLine: function (names, role) { return "My " + role + " ban: " + names; },
       tileBan: function (name, role) { return name + " — my " + role + " ban"; },
       roleNames: { top: "Top", mid: "Mid", adc: "ADC", support: "Support" },
@@ -132,7 +144,8 @@
     tabs: {},        // role -> bouton d'onglet (construits une seule fois)
     view: "matchups",  // "matchups" | "setup" (runes & build, hors matchups)
     setup: null,       // data/setup-built.json, chargé à la première ouverture
-    setupState: "idle" // idle | loading | ok | error
+    setupState: "idle", // idle | loading | ok | error
+    setupSection: "runes" // "runes" | "builds" | "tips"
   };
 
   // Secours locaux (data URI) si Data Dragon ou i.ytimg sont injoignables.
@@ -307,9 +320,9 @@
 
   /* ---------- Hash routing ---------- */
 
-  // #setup, #runes, #build : trois portes vers la même vue, parce qu'un lien
-  // partagé de mémoire ne tombe jamais sur le mot exact.
-  var SETUP_HASHES = ["setup", "runes", "build", "builds"];
+  // #setup, #runes, #build, #tips : plusieurs portes vers la même vue, parce qu'un
+  // lien partagé de mémoire ne tombe jamais toujours sur le même mot exact.
+  var SETUP_HASHES = ["setup", "runes", "build", "builds", "tips", "conseils"];
 
   function readHash() {
     var h;
@@ -320,7 +333,13 @@
     }
     if (!h) return { view: null, role: null, champ: null };
     var parts = h.split("/");
-    if (SETUP_HASHES.indexOf(parts[0]) !== -1) return { view: "setup", role: null, champ: null };
+    if (SETUP_HASHES.indexOf(parts[0]) !== -1) {
+      var section = (parts[0] === "tips" || parts[0] === "conseils" ||
+        parts[1] === "tips" || parts[1] === "conseils") ? "tips" :
+        ((parts[0] === "build" || parts[0] === "builds" || parts[1] === "builds")
+          ? "builds" : "runes");
+      return { view: "setup", role: null, champ: null, setupSection: section };
+    }
     var role = ROLES.indexOf(parts[0]) !== -1 ? parts[0] : null;
     var champ = null;
     if (role && parts[1]) {
@@ -332,12 +351,16 @@
         }
       }
     }
-    return { view: "matchups", role: role, champ: champ };
+    return { view: "matchups", role: role, champ: champ, setupSection: null };
   }
 
   function writeHash() {
     var h = "";
-    if (state.view === "setup") h = "#setup";
+    if (state.view === "setup") {
+      var section = state.setupSection === "tips" ? "tips" :
+        (state.setupSection === "builds" ? "builds" : "runes");
+      h = "#setup/" + section;
+    }
     else if (state.role) h = "#" + state.role + (state.champ ? "/" + state.champ.toLowerCase() : "");
     if (h !== location.hash) {
       if (h) history.replaceState(null, "", h);
@@ -597,19 +620,22 @@
     }
   }
 
-  // Grille « à savoir » : les notes écrites à la main dans data/notes.json,
-  // précédées de la carte de ban quand le champion est un ban de rôle.
-  function noteCard(title, text, kind) {
+  // Grille « à savoir » : les notes écrites à la main dans data/notes.json.
+  function noteCard(text, link) {
     var card = document.createElement("article");
-    card.className = "note note-" + (kind || "info");
-    var h = document.createElement("h4");
-    h.className = "note-title";
-    h.textContent = title;
+    card.className = "note";
     var p = document.createElement("p");
     p.className = "note-text";
     p.textContent = text;
-    card.appendChild(h);
-    if (text) card.appendChild(p);
+    card.appendChild(p);
+    if (link && /^#/.test(link)) {
+      var a = document.createElement("a");
+      a.className = "note-link";
+      a.href = link;
+      a.textContent = t().viewRunes;
+      a.setAttribute("aria-label", t().viewRunes);
+      card.appendChild(a);
+    }
     return card;
   }
 
@@ -617,14 +643,14 @@
     var col = $("notes-col");
     var grid = $("notes-grid");
     grid.innerHTML = "";
-    var banned = isBanned(state.role, entry.id);
-    if (banned) {
-      grid.appendChild(noteCard(t().banTitle, t().banText(t().roleNames[state.role]), "ban"));
+    if (!isBanned(state.role, entry.id)) {
+      notesFor(state.role, entry.id).forEach(function (n) {
+        if (!n) return;
+        var text = n.d || n.t;
+        if (!text) return;
+        grid.appendChild(noteCard(String(text), n.link));
+      });
     }
-    notesFor(state.role, entry.id).forEach(function (n) {
-      if (!n || !n.t) return;
-      grid.appendChild(noteCard(String(n.t), n.d ? String(n.d) : "", n.k));
-    });
     $("notes-title").textContent = t().notesTitle;
     col.hidden = grid.children.length === 0;
     // Matchup sans replay : la liste vide laisserait une colonne creuse,
@@ -748,7 +774,10 @@
     var img = withFallback(document.createElement("img"), FALLBACK_ICON);
     img.src = DD_IMG + icon;
     img.alt = on ? name : "";
-    img.loading = "lazy";
+    // Les pages alternatives sont parfois très basses dans la vue mobile :
+    // un chargement différé les laissait avec des cercles vides dans une
+    // capture pleine page et au premier défilement.
+    img.loading = "eager";
     img.width = size;
     img.height = size;
     box.appendChild(img);
@@ -775,7 +804,7 @@
     var timg = withFallback(document.createElement("img"), FALLBACK_ICON);
     timg.src = DD_IMG + tree.icon;
     timg.alt = "";
-    timg.loading = "lazy";
+    timg.loading = "eager";
     timg.width = 32;
     timg.height = 32;
     head.appendChild(timg);
@@ -832,7 +861,7 @@
     return col;
   }
 
-  function setupCardHead(title, badge, why) {
+  function setupCardHead(title, badge, why, whyLinks) {
     var head = document.createElement("header");
     head.className = "setup-card-head";
     var line = document.createElement("div");
@@ -852,9 +881,23 @@
     if (why.length) {
       var ul = document.createElement("ul");
       ul.className = "setup-why";
-      why.forEach(function (line2) {
+      why.forEach(function (line2, index) {
         var li = document.createElement("li");
-        li.textContent = line2;
+        var copy = document.createElement("span");
+        copy.textContent = line2;
+        li.appendChild(copy);
+        var link = whyLinks && whyLinks[index];
+        if (link && /^https?:\/\//i.test(link)) {
+          var a = document.createElement("a");
+          a.className = "why-link";
+          a.href = link;
+          a.target = "_blank";
+          a.rel = "noopener";
+          a.textContent = t().watchShort;
+          a.setAttribute("aria-label", t().watchShort + " — " + line2);
+          li.appendChild(document.createTextNode(" "));
+          li.appendChild(a);
+        }
         ul.appendChild(li);
       });
       head.appendChild(ul);
@@ -874,7 +917,8 @@
   function runeCard(page) {
     var card = document.createElement("article");
     card.className = "setup-card" + (page.mienne ? " is-mine" : "");
-    card.appendChild(setupCardHead(page.nom, page.mienne ? t().mineRunes : t().altLabel, whyText(page)));
+    card.appendChild(setupCardHead(page.nom, page.mienne ? t().mineRunes : t().altLabel,
+      whyText(page), page.pourquoiLiens));
     var body = document.createElement("div");
     body.className = "rune-page";
     if (page.principal) body.appendChild(runeTreeColumn(page.principal, true));
@@ -895,7 +939,9 @@
     var img = withFallback(document.createElement("img"), FALLBACK_ICON);
     img.src = itemIconUrl(item.icon);
     img.alt = "";
-    img.loading = "lazy";
+    // Les builds sont loin sous les conseils sur mobile : les charger tout de
+    // suite évite une rangée de vignettes vides quand on arrive à la section.
+    img.loading = "eager";
     img.width = 44;
     img.height = 44;
     li.appendChild(img);
@@ -923,7 +969,8 @@
   function buildCard(build) {
     var card = document.createElement("article");
     card.className = "setup-card" + (build.mien ? " is-mine" : "");
-    card.appendChild(setupCardHead(build.nom, build.mien ? t().mineBuild : t().altLabel, whyText(build)));
+    card.appendChild(setupCardHead(build.nom, build.mien ? t().mineBuild : t().altLabel,
+      whyText(build), build.pourquoiLiens));
     var body = document.createElement("div");
     body.className = "build-body";
     [
@@ -936,12 +983,70 @@
     return card;
   }
 
+  function tipsContent() {
+    var raw = state.setup && state.setup.conseils;
+    if (!raw) return null;
+    var content = raw[state.lang] || raw.fr || raw.en;
+    if (!content || !Array.isArray(content.items)) return null;
+    return content;
+  }
+
+  function renderTips() {
+    var block = $("tips-block");
+    var list = $("tips-list");
+    if (!block || !list) return;
+    list.innerHTML = "";
+    var content = tipsContent();
+    if (!content) {
+      block.hidden = true;
+      return;
+    }
+    $("tips-title").textContent = content.titre || "";
+    content.items.forEach(function (tip) {
+      if (!tip || (!tip.t && !tip.d && !Array.isArray(tip.points))) return;
+      var item = document.createElement("li");
+      item.className = "tips-item";
+      var title = document.createElement("h3");
+      title.textContent = tip.t || "";
+      item.appendChild(title);
+      if (Array.isArray(tip.points) && tip.points.length) {
+        var points = document.createElement("ul");
+        points.className = "tips-sublist";
+        tip.points.forEach(function (point) {
+          if (!String(point || "").trim()) return;
+          var pointEl = document.createElement("li");
+          pointEl.textContent = point;
+          points.appendChild(pointEl);
+        });
+        if (points.children.length) item.appendChild(points);
+      } else if (tip.d) {
+        var text = document.createElement("p");
+        text.textContent = tip.d;
+        item.appendChild(text);
+      }
+      list.appendChild(item);
+    });
+    block.hidden = list.children.length === 0;
+  }
+
   function renderSetup() {
     if (!$("setup-view")) return;
     $("setup-title").textContent = t().setupTitle;
     $("setup-intro").textContent = t().setupIntro;
+    $("setup-tab-runes").textContent = t().setupRunesTab;
+    $("setup-tab-builds").textContent = t().setupBuildsTab;
+    $("setup-tab-tips").textContent = t().setupTipsTab;
+    $("setup-switcher").setAttribute("aria-label", t().setupTabsLabel);
     $("runes-title").textContent = t().runesTitle;
     $("builds-title").textContent = t().buildsTitle;
+    $("tips-title").textContent = t().tipsTitle;
+    var buildNotice = $("build-notice");
+    var buildData = state.setup && state.setup.builds;
+    var notice = buildData && (state.lang === "en" ? (buildData.noticeEn || buildData.notice) : buildData.notice);
+    if (buildNotice) {
+      buildNotice.textContent = notice || "";
+      buildNotice.hidden = !notice;
+    }
 
     var status = $("setup-status");
     var runes = $("rune-cards");
@@ -952,15 +1057,49 @@
     if (state.setupState !== "ok") {
       $("runes-block").hidden = true;
       $("builds-block").hidden = true;
+      $("tips-block").hidden = true;
+      $("runes-panel").hidden = true;
+      $("builds-panel").hidden = true;
+      $("tips-panel").hidden = true;
+      $("setup-switcher").hidden = true;
+      if (buildNotice) buildNotice.hidden = true;
       status.hidden = state.setupState === "idle";
       status.textContent = state.setupState === "error" ? t().setupError : t().setupLoading;
       return;
     }
     var runePages = (state.setup.runes && state.setup.runes.pages) || [];
     var buildPages = (state.setup.builds && state.setup.builds.pages) || [];
-    $("runes-block").hidden = !runePages.length;
-    $("builds-block").hidden = !buildPages.length;
-    if (!runePages.length && !buildPages.length) {
+    var hasTips = !!tipsContent() && tipsContent().items.length > 0;
+    var hasRunes = runePages.length > 0;
+    var hasBuilds = buildPages.length > 0;
+    if (state.setupSection === "runes" && !hasRunes) {
+      state.setupSection = hasBuilds ? "builds" : (hasTips ? "tips" : "runes");
+    }
+    if (state.setupSection === "builds" && !hasBuilds) {
+      state.setupSection = hasRunes ? "runes" : (hasTips ? "tips" : "builds");
+    }
+    if (state.setupSection === "tips" && !hasTips) {
+      state.setupSection = hasRunes ? "runes" : (hasBuilds ? "builds" : "tips");
+    }
+    var showRunes = state.setupSection === "runes";
+    var showBuilds = state.setupSection === "builds";
+    var showTips = state.setupSection === "tips";
+
+    $("setup-switcher").hidden = !hasRunes && !hasBuilds && !hasTips;
+    $("setup-tab-runes").hidden = !hasRunes;
+    $("setup-tab-builds").hidden = !hasBuilds;
+    $("setup-tab-tips").hidden = !hasTips;
+    $("setup-tab-runes").setAttribute("aria-selected", showRunes ? "true" : "false");
+    $("setup-tab-builds").setAttribute("aria-selected", showBuilds ? "true" : "false");
+    $("setup-tab-tips").setAttribute("aria-selected", showTips ? "true" : "false");
+    $("runes-panel").hidden = !showRunes || !hasRunes;
+    $("builds-panel").hidden = !showBuilds || !hasBuilds;
+    $("tips-panel").hidden = !showTips || !hasTips;
+    $("runes-block").hidden = !hasRunes;
+    $("builds-block").hidden = !hasBuilds;
+    $("tips-block").hidden = !hasTips;
+    renderTips();
+    if (!hasRunes && !hasBuilds && !hasTips) {
       status.hidden = false;
       status.textContent = t().setupEmpty;
       return;
@@ -1029,6 +1168,34 @@
       window.scrollTo({ top: 0 });
     });
 
+    document.querySelectorAll("[data-setup-section]").forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        var section = tab.getAttribute("data-setup-section");
+        state.view = "setup";
+        state.champ = null;
+        state.setupSection = section === "tips" ? "tips" :
+          (section === "builds" ? "builds" : "runes");
+        loadSetup();
+        writeHash();
+        renderAll();
+        window.scrollTo({ top: 0, behavior: prefersReducedMotion() ? "auto" : "smooth" });
+      });
+      tab.addEventListener("keydown", function (e) {
+        if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+        var tabs = Array.prototype.filter.call(document.querySelectorAll("[data-setup-section]"), function (item) {
+          return !item.hidden;
+        });
+        var index = tabs.indexOf(tab);
+        if (index === -1 || tabs.length < 2) return;
+        e.preventDefault();
+        var next = e.key === "ArrowRight"
+          ? tabs[(index + 1) % tabs.length]
+          : tabs[(index - 1 + tabs.length) % tabs.length];
+        next.focus();
+        next.click();
+      });
+    });
+
     $("search").addEventListener("input", function (e) {
       state.search = e.target.value;
       renderGrid();
@@ -1059,6 +1226,7 @@
       if (wanted.view === "setup") {
         state.view = "setup";
         state.champ = null;
+        state.setupSection = wanted.setupSection || "runes";
         loadSetup();
         renderAll();
         return;
@@ -1121,6 +1289,7 @@
     state.view = wanted.view === "setup" ? "setup" : "matchups";
     state.role = wanted.role || defaultRole();
     state.champ = wanted.champ;
+    state.setupSection = wanted.setupSection || "runes";
     bind();
     renderAll();
     if (state.view === "setup") loadSetup();

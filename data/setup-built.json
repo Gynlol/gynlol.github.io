@@ -700,15 +700,71 @@
       }
     ]
   ],
+  "conseils": {
+    "fr": {
+      "titre": "Conseils généraux",
+      "items": [
+        {
+          "t": "Level 1, invade bot (si ta bot lane n'est pas AFK)",
+          "d": "Attends la limite d'Homeguard, laisse un peu d'avance à ta bot lane, puis snowball vers les buissons du milieu. Si tu touches quelqu'un, ne mets pas plus de deux auto-attaques pour proc l'électrocute et avoir le temps de recall. Une fois que t'as recall, retourne top et tu arriveras pile à temps pour ta wave."
+        },
+        {
+          "t": "Level 1 au top : trois choix",
+          "points": [
+            "Si ton adversaire est dans les buissons, prends la wave le plus vite possible avec ta snowball, tue les 6 d'un coup pour désactiver la lane level 1.",
+            "Si ton adversaire se met au milieu de la lane, que t'as la vision sur lui et qu'il n'a pas de dash, essaie de toucher ta snowball. S'il a un dash, prends la wave.",
+            "Si t'as pris une assist au bot sur le move d'avant, tu auras ton niveau 2 sur la première wave, donc tue les 6 sbires le plus vite possible et trade-le avec ton électrocuter."
+          ]
+        },
+        {
+          "t": "Quand tu meurs et recall",
+          "d": "Regarde toujours au mid, au bot, s'il y a quelque chose à faire avant de retourner sur ta lane."
+        },
+        {
+          "t": "Comment dépenser tes golds",
+          "d": "En début de game, achète uniquement de l'AP, dans le but de stat-check le mec en face. Car à partir d'un ou deux kills, tu peux facilement one-shot ton adversaire. Et achète tes bottes uniquement quand tu ne peux pas acheter d'AP et que t'as 300 gold. Dans le cas où ta lane est trop dure ou perdue, achète tes bottes tôt pour roam."
+        }
+      ]
+    },
+    "en": {
+      "titre": "General tips",
+      "items": [
+        {
+          "t": "Level 1, bot invade (if your bot lane isn't AFK)",
+          "d": "Wait at the edge of Homeguard, give your bot lane a little head start, then snowball toward the middle bushes. If you hit someone, do no more than two auto attacks to proc Electrocute and have time to recall. Once you've recalled, return top and you'll arrive right on time for your wave."
+        },
+        {
+          "t": "Level 1 top: three choices",
+          "points": [
+            "If your opponent is in the bushes, take the wave as fast as possible with your snowball, kill all 6 at once to disable the level 1 lane.",
+            "If your opponent stands in the middle of the lane, you have vision on them and they have no dash, try to hit your snowball. If they have a dash, take the wave.",
+            "If you got an assist bot on the previous move, you will reach level 2 on the first wave, so kill all 6 minions as fast as possible and trade into them with Electrocute."
+          ]
+        },
+        {
+          "t": "When you die and recall",
+          "d": "Always look mid and bot to see if there is something to do before returning to your lane."
+        },
+        {
+          "t": "Spend your gold",
+          "d": "Early game, buy only AP to stat-check the opponent. Once you have one or two kills, you can easily one-shot your opponent. Buy boots only when you cannot buy AP and have 300 gold. If your lane is too hard or lost, buy boots early to roam."
+        }
+      ]
+    }
+  },
   "runes": {
     "pages": [
       {
         "nom": "Ma page de runes Nunu",
         "pourquoi": [
           "Électrocution donne des angles de kill en lane, et le E la proc facilement.",
-          "En utilisant la snowball juste après l'HexFlash, on gagne un boost de vitesse d'environ 150 MS."
+          "En utilisant la snowball juste après l'Hexflash, on gagne un boost de vitesse d'environ 150 MS."
         ],
         "pourquoiEn": [],
+        "pourquoiLiens": [
+          "",
+          "https://www.youtube.com/shorts/82RQBo55Qo4"
+        ],
         "principal": {
           "tree": 8100,
           "picks": [
@@ -762,6 +818,7 @@
         "nom": "Sorcellerie",
         "pourquoi": [],
         "pourquoiEn": [],
+        "pourquoiLiens": [],
         "principal": {
           "tree": 8100,
           "picks": [
@@ -815,6 +872,7 @@
         "nom": "Volonté",
         "pourquoi": [],
         "pourquoiEn": [],
+        "pourquoiLiens": [],
         "principal": {
           "tree": 8100,
           "picks": [
@@ -867,6 +925,276 @@
     ]
   },
   "builds": {
-    "pages": []
+    "notice": "Sceau noir en first item, toujours.",
+    "noticeEn": "Dark Seal as first item, always.",
+    "pages": [
+      {
+        "nom": "Build par défaut",
+        "pourquoi": [
+          "Build par défaut."
+        ],
+        "pourquoiEn": [
+          "Default build."
+        ],
+        "pourquoiLiens": [],
+        "depart": [],
+        "coeur": [
+          {
+            "id": "4646",
+            "name": {
+              "fr": "Onde orageuse",
+              "en": "Stormsurge"
+            },
+            "icon": "4646.png"
+          },
+          {
+            "id": "3152",
+            "name": {
+              "fr": "Ceinture-roquette Hextech",
+              "en": "Hextech Rocketbelt"
+            },
+            "icon": "3152.png"
+          }
+        ],
+        "bottes": null,
+        "situationnel": [
+          {
+            "id": "3089",
+            "name": {
+              "fr": "Coiffe de Rabadon",
+              "en": "Rabadon's Deathcap"
+            },
+            "icon": "3089.png"
+          },
+          {
+            "id": "4645",
+            "name": {
+              "fr": "Flamme-ombre",
+              "en": "Shadowflame"
+            },
+            "icon": "4645.png"
+          },
+          {
+            "id": "3135",
+            "name": {
+              "fr": "Bâton du vide",
+              "en": "Void Staff"
+            },
+            "icon": "3135.png"
+          },
+          {
+            "id": "3157",
+            "name": {
+              "fr": "Sablier de Zhonya",
+              "en": "Zhonya's Hourglass"
+            },
+            "icon": "3157.png"
+          },
+          {
+            "id": "3102",
+            "name": {
+              "fr": "Voile de la banshee",
+              "en": "Banshee's Veil"
+            },
+            "icon": "3102.png"
+          },
+          {
+            "id": "3041",
+            "name": {
+              "fr": "Voleur d'âmes de Mejai",
+              "en": "Mejai's Soulstealer"
+            },
+            "icon": "3041.png"
+          }
+        ],
+        "mien": true
+      },
+      {
+        "nom": "Roam forcé",
+        "pourquoi": [
+          "Quand la lane est perdue ou trop difficile."
+        ],
+        "pourquoiEn": [
+          "When the lane is lost or too difficult."
+        ],
+        "pourquoiLiens": [],
+        "depart": [],
+        "coeur": [
+          {
+            "id": "2065",
+            "name": {
+              "fr": "Chant de guerre de Shurelya",
+              "en": "Shurelya's Battlesong"
+            },
+            "icon": "2065.png"
+          }
+        ],
+        "bottes": null,
+        "situationnel": [
+          {
+            "id": "2524",
+            "name": {
+              "fr": "Flûtes de Bandle",
+              "en": "Bandlepipes"
+            },
+            "icon": "2524.png"
+          },
+          {
+            "id": "3190",
+            "name": {
+              "fr": "Médaillon de l'Iron Solari",
+              "en": "Locket of the Iron Solari"
+            },
+            "icon": "3190.png"
+          },
+          {
+            "id": "3109",
+            "name": {
+              "fr": "Vœu du chevalier",
+              "en": "Knight's Vow"
+            },
+            "icon": "3109.png"
+          },
+          {
+            "id": "8010",
+            "name": {
+              "fr": "Malédiction du sanguinaire",
+              "en": "Bloodletter's Curse"
+            },
+            "icon": "8010.png"
+          },
+          {
+            "id": "8020",
+            "name": {
+              "fr": "Masque abyssal",
+              "en": "Abyssal Mask"
+            },
+            "icon": "8020.png"
+          },
+          {
+            "id": "4633",
+            "name": {
+              "fr": "Créateur de failles",
+              "en": "Riftmaker"
+            },
+            "icon": "4633.png"
+          },
+          {
+            "id": "2504",
+            "name": {
+              "fr": "Rookern kaénique",
+              "en": "Kaenic Rookern"
+            },
+            "icon": "2504.png"
+          },
+          {
+            "id": "3143",
+            "name": {
+              "fr": "Présage de Randuin",
+              "en": "Randuin's Omen"
+            },
+            "icon": "3143.png"
+          }
+        ],
+        "mien": false
+      },
+      {
+        "nom": "Build PV / mana",
+        "pourquoi": [
+          "Si tu ressens trop le manque de mana, commence par Rod of Ages."
+        ],
+        "pourquoiEn": [
+          "If you feel too limited by mana, start with Rod of Ages."
+        ],
+        "pourquoiLiens": [],
+        "depart": [],
+        "coeur": [
+          {
+            "id": "3152",
+            "name": {
+              "fr": "Ceinture-roquette Hextech",
+              "en": "Hextech Rocketbelt"
+            },
+            "icon": "3152.png"
+          },
+          {
+            "id": "6653",
+            "name": {
+              "fr": "Tourment de Liandry",
+              "en": "Liandry's Torment"
+            },
+            "icon": "6653.png"
+          }
+        ],
+        "bottes": null,
+        "situationnel": [
+          {
+            "id": "8010",
+            "name": {
+              "fr": "Malédiction du sanguinaire",
+              "en": "Bloodletter's Curse"
+            },
+            "icon": "8010.png"
+          },
+          {
+            "id": "4633",
+            "name": {
+              "fr": "Créateur de failles",
+              "en": "Riftmaker"
+            },
+            "icon": "4633.png"
+          },
+          {
+            "id": "3742",
+            "name": {
+              "fr": "Plaque du mort",
+              "en": "Dead Man's Plate"
+            },
+            "icon": "3742.png"
+          },
+          {
+            "id": "3143",
+            "name": {
+              "fr": "Présage de Randuin",
+              "en": "Randuin's Omen"
+            },
+            "icon": "3143.png"
+          },
+          {
+            "id": "2502",
+            "name": {
+              "fr": "Désespoir infini",
+              "en": "Unending Despair"
+            },
+            "icon": "2502.png"
+          },
+          {
+            "id": "2504",
+            "name": {
+              "fr": "Rookern kaénique",
+              "en": "Kaenic Rookern"
+            },
+            "icon": "2504.png"
+          },
+          {
+            "id": "3065",
+            "name": {
+              "fr": "Visage spirituel",
+              "en": "Spirit Visage"
+            },
+            "icon": "3065.png"
+          },
+          {
+            "id": "8020",
+            "name": {
+              "fr": "Masque abyssal",
+              "en": "Abyssal Mask"
+            },
+            "icon": "8020.png"
+          }
+        ],
+        "mien": false
+      }
+    ]
   }
 }
