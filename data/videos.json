@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.17.1",
-    "updated": "2026-09-02T10:18:01Z"
+    "updated": "2026-09-03T10:17:52Z"
   },
   "videos": [
+    {
+      "id": "izA4SMQ_8G4",
+      "title": "Nunu Top vs Mordekaiser | Unranked to Master : Platinum 2 47lp | Patch 26.17",
+      "published": "2026-09-03T10:00:25+00:00",
+      "role": "top",
+      "enemy": "Mordekaiser",
+      "enemyName": "Mordekaiser",
+      "patch": "26.17",
+      "rank": "Platinum",
+      "division": "2",
+      "lp": 47,
+      "region": null,
+      "result": null
+    },
     {
       "id": "deW4QGulXTs",
       "title": "Nunu Top vs Irelia | Unranked to Master : Platinum 2 17lp | Patch 26.17",
