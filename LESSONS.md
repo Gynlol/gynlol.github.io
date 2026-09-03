@@ -273,3 +273,13 @@ lazy. Vérifié : 27/27 icônes d'objets chargées dans le navigateur. [codex]
   interactive et les pages SEO pour éviter une copie résiduelle.
 - **Contrôle** : Teemo expose quatre conseils matchup ; l'onglet général en
   expose cinq et contient la phrase une seule fois. [codex]
+
+## 22. Un titre de conseil doit reprendre la formulation dictée (2026-09-03)
+
+- **Symptôme** : le conseil 0-1 avait été déplacé dans l'onglet général sans
+  titre, alors que Nathan souhaitait l'identifier visuellement.
+- **Règle** : ajouter le titre exact `Lane perdu` dans la source française et
+  régénérer la vue résolue ; traduire seulement la version anglaise en `Lost
+  lane`.
+- **Contrôle** : le cinquième bloc affiche `LANE PERDU`, conserve le texte 0-1
+  et reste sans débordement. [codex]

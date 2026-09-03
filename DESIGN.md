@@ -576,3 +576,19 @@ une colonne de plus dans le panneau de matchup, et aucune donnée par rôle.
 - Delivery evidence: `setup-built.json` contient le conseil 0-1 dans l'onglet
   Conseils généraux ; la page Teemo générée ne le contient plus ; les sources
   et les fichiers résolus restent valides.
+
+## Correction — titre du conseil général 0-1 (2026-09-03)
+
+### Brain Use Contract — delta de cette reprise
+
+- Query terms: `Lane perdu`, `cinquième conseil`, `titre conseils généraux`.
+- Notes read: `MEMORY.md`, `LESSONS.md` et `HANDOFF.md` du run.
+- Decisions extracted: utiliser exactement le titre dicté `Lane perdu` pour le
+  cinquième conseil FR ; aligner la version anglaise sur `Lost lane` ; conserver
+  le texte 0-1 et sa place dans l'onglet Conseils généraux.
+- Risks identified: ne pas reformuler le conseil ni le déplacer de nouveau sans
+  nouvelle consigne ; les sorties interactive et SEO doivent rester régénérées
+  depuis les sources.
+- Delivery evidence: le renderer affiche `LANE PERDU`, le bloc contient toujours
+  la phrase 0-1, `tipsCount` vaut 5, le site n'a aucun overflow et la console
+  navigateur est vide.

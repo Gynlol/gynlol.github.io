@@ -725,6 +725,7 @@
           "d": "En début de game, achète uniquement de l'AP, dans le but de stat-check le mec en face. Car à partir d'un ou deux kills, tu peux facilement one-shot ton adversaire. Et achète tes bottes uniquement quand tu ne peux pas acheter d'AP et que t'as 300 gold. Dans le cas où ta lane est trop dure ou perdue, achète tes bottes tôt pour roam."
         },
         {
+          "t": "Lane perdu",
           "d": "Si tu es en 0-1, ta lane est perdue. Il y a quasiment aucun angle de comeback, donc achète des bottes et roam."
         }
       ]
@@ -753,6 +754,7 @@
           "d": "Early game, buy only AP to stat-check the opponent. Once you have one or two kills, you can easily one-shot your opponent. Buy boots only when you cannot buy AP and have 300 gold. If your lane is too hard or lost, buy boots early to roam."
         },
         {
+          "t": "Lost lane",
           "d": "If you are 0-1, your lane is lost. There is almost no comeback angle, so buy boots and roam."
         }
       ]
