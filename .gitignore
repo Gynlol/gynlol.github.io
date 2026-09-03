@@ -2,3 +2,10 @@ __pycache__/
 qa/
 edgetmp/
 work/
+
+# Notes de projet conservées uniquement en local
+README.md
+DESIGN.md
+HANDOFF.md
+LESSONS.md
+GUIDE-DEPLOIEMENT.md
