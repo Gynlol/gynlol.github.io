@@ -557,3 +557,22 @@ une colonne de plus dans le panneau de matchup, et aucune donnée par rôle.
 - Delivery evidence: les deux fichiers de setup contiennent la phrase courte,
   le build PV / mana n'affiche aucun départ Rod et son cœur reste
   Proto-Belt → Liandry.
+
+## Continuation — déplacer le conseil 0-1 dans les conseils généraux (2026-09-03)
+
+### Brain Use Contract — delta de cette reprise
+
+- Query terms: `Si tu es en 0-1`, `Conseils généraux`, `Teemo`, `conseil sans titre`.
+- Notes read: `MEMORY.md`, `LESSONS.md` et `HANDOFF.md` du run ; les notes de
+  qualité web déjà consultées pour la validation du site.
+- Decisions extracted: le conseil 0-1 est un conseil général, pas un conseil
+  spécifique à Teemo ; il est retiré de `data/notes.json` et ajouté comme
+  cinquième entrée titleless dans `data/setup.json`. Le renderer n'ajoute un
+  titre que lorsqu'un champ `t` est fourni, afin de conserver exactement la
+  formulation dictée sans inventer de titre.
+- Risks identified: aucune nouvelle formulation matchup ne doit être ajoutée
+  sans dictée de Nathan ; les sorties interactives et SEO doivent rester
+  synchronisées après chaque déplacement de contenu.
+- Delivery evidence: `setup-built.json` contient le conseil 0-1 dans l'onglet
+  Conseils généraux ; la page Teemo générée ne le contient plus ; les sources
+  et les fichiers résolus restent valides.

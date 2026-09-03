@@ -835,6 +835,12 @@ main { flex: 1; padding-top: 28px; padding-bottom: 48px; }
   padding-left: 0;
   border-right: 0;
 }
+.tips-item:nth-child(5) {
+  grid-column: 1 / -1;
+  grid-row: 4;
+  padding-left: 0;
+  border-right: 0;
+}
 .tips-item::before {
   content: counter(tips, decimal-leading-zero);
   color: var(--accent);
@@ -1118,7 +1124,8 @@ main { flex: 1; padding-top: 28px; padding-bottom: 48px; }
   }
   .tips-item:nth-child(2),
   .tips-item:nth-child(3),
-  .tips-item:nth-child(4) {
+  .tips-item:nth-child(4),
+  .tips-item:nth-child(5) {
     grid-column: auto;
     grid-row: auto;
     padding-left: 0;

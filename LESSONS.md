@@ -262,3 +262,14 @@ lazy. Vérifié : 27/27 icônes d'objets chargées dans le navigateur. [codex]
   affiché.
 - **Contrôle** : source et fichier résolu sont alignés ; le build PV / mana
   affiche Proto-Belt puis Liandry dans le cœur, sans section Départ. [codex]
+
+## 21. Le conseil 0-1 appartient à l'onglet général, pas à Teemo (2026-09-03)
+
+- **Symptôme** : la phrase `Si tu es en 0-1, ta lane est perdue. Il y a
+  quasiment aucun angle de comeback, donc achète des bottes et roam.` était
+  affichée dans la fiche Teemo alors qu'elle décrit une règle générale de lane.
+- **Règle** : déplacer la phrase dans la cinquième entrée de `Conseils
+  généraux`, sans lui inventer un titre, et régénérer à la fois la vue
+  interactive et les pages SEO pour éviter une copie résiduelle.
+- **Contrôle** : Teemo expose quatre conseils matchup ; l'onglet général en
+  expose cinq et contient la phrase une seule fois. [codex]

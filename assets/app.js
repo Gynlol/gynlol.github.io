@@ -1006,9 +1006,11 @@
       if (!tip || (!tip.t && !tip.d && !Array.isArray(tip.points))) return;
       var item = document.createElement("li");
       item.className = "tips-item";
-      var title = document.createElement("h3");
-      title.textContent = tip.t || "";
-      item.appendChild(title);
+      if (tip.t) {
+        var title = document.createElement("h3");
+        title.textContent = tip.t;
+        item.appendChild(title);
+      }
       if (Array.isArray(tip.points) && tip.points.length) {
         var points = document.createElement("ul");
         points.className = "tips-sublist";
