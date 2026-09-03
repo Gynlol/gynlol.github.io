@@ -612,3 +612,21 @@ une colonne de plus dans le panneau de matchup, et aucune donnée par rôle.
   liste 1240 px ; les deux premières colonnes font 620 px et la dernière ligne
   723/517 px. À 390×844, les cinq blocs passent en colonne de 335 px. Les deux
   tailles n'ont aucun overflow et la console ne signale aucun warning ou erreur.
+
+## Continuation — supprimer le doublon du sélecteur de langue (2026-09-03)
+
+### Brain Use Contract — delta de cette reprise
+
+- Query terms: `double bouton traduction`, `FR / EN`, `Translate`, `anglais`.
+- Notes read: `MEMORY.md`, `LESSONS.md` et `HANDOFF.md` du run ; les skills
+  `sites-building` et `web-delivery`.
+- Decisions extracted: conserver l'unique bouton `FR / EN` et retirer le lien
+  externe `🌐 Translate` qui apparaissait seulement en anglais dans la même
+  barre ; supprimer aussi son rendu JavaScript, ses traductions et son CSS
+  devenus inutiles.
+- Risks identified: les notes de matchup restent en français quand la langue
+  de l'interface passe en anglais ; le sélecteur doit toutefois rester
+  réversible et ne créer aucun contrôle supplémentaire.
+- Delivery evidence: diagnostic navigateur avant correction = un `#lang-toggle`
+  et un `#translate-link` visible en anglais ; après correction = un seul
+  `#lang-toggle`, aucun `#translate-link`, passage FR → EN → FR sans overflow.

@@ -684,31 +684,6 @@ main { flex: 1; padding-top: 28px; padding-bottom: 48px; }
 .lvl-dur { background: var(--lvl-dur); }
 /* Cran au-dessus de « Dur » : rouge sombre, donc texte clair pour rester lisible. */
 .lvl-tresdur { background: var(--lvl-tresdur); color: #ffe3e6; }
-/* Lien de traduction : n'apparaît qu'en anglais, les notes étant en français. */
-.translate-link {
-  font-size: 11.5px;
-  color: var(--muted);
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  padding: 0 10px;
-  min-height: 44px;
-  display: inline-flex;
-  align-items: center;
-  white-space: nowrap;
-}
-/* display:inline-flex écrase le display:none du navigateur pour [hidden]. */
-.translate-link[hidden] { display: none; }
-.translate-link:hover { color: var(--accent); border-color: var(--accent); }
-@media (max-width: 720px) {
-  .translate-link {
-    width: 44px;
-    padding: 0;
-    justify-content: center;
-    font-size: 0;
-  }
-  .translate-link::before { content: "🌐"; font-size: 14px; }
-}
-
 
 /* ---------- Runes & build ----------
    Vue à part, sans rapport avec les rôles : ma page et mon build d'abord, les

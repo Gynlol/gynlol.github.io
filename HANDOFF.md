@@ -10,3 +10,13 @@
 - Open risks: Nathan doit encore dicter les conseils Top ; le RSS et les patches peuvent changer entre deux reprises ; les horaires GitHub peuvent être décalés, même si les données vidéo sont maintenant publiées indépendamment des générateurs secondaires.
 - Exact next action: recueillir les prochains conseils Top champion par champion après la mise en ligne de cette correction.
 - Do not change without review: ne pas remplacer `videos.json` par la seule fenêtre RSS ; ne pas résoudre les objets côté navigateur ; ne pas réintroduire de notes matchup sans les phrases de Nathan ; ne pas supprimer la règle `[hidden]`, le filtrage Data Dragon SR ou les breakpoints de la barre mobile sans refaire l'audit 390/320 px.
+
+## Continuation — correction du doublon de traduction (2026-09-03)
+
+- Cause: en anglais, le bouton interne `FR / EN` était accompagné d'un lien
+  externe `🌐 Translate` ajouté pour Google Traduction.
+- Correction: le site conserve uniquement `FR / EN` ; le lien externe, son rendu
+  JavaScript, ses textes et son CSS ont été retirés.
+- Vérification locale: un seul `#lang-toggle` et zéro `#translate-link` en FR
+  comme en EN ; le passage FR → EN → FR reste réversible et sans overflow.
+- Suite: publier cette correction puis vérifier la version GitHub Pages.

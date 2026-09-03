@@ -59,8 +59,6 @@
       notesTitle: "À savoir",
       levelTitle: "Difficulté",
       levels: { facile: "Facile", moyen: "Moyen", dur: "Dur", tresdur: "Très dur" },
-      translate: "",
-      translateHint: "",
       ban: "BAN",
       banTitle: "Ban permanent",
       banSub: "Ban permanent — pas de replay, et il n'y en aura pas",
@@ -116,8 +114,6 @@
       notesTitle: "Good to know",
       levelTitle: "Difficulty",
       levels: { facile: "Easy", moyen: "Medium", dur: "Hard", tresdur: "Very hard" },
-      translate: "Translate",
-      translateHint: "Matchup notes are written in French — open this page in Google Translate",
       ban: "BAN",
       banTitle: "Permanent ban",
       banSub: "Permanent ban — no replay, and there won't be one",
@@ -698,30 +694,6 @@
     $("search").placeholder = t().searchPlaceholder;
     var updated = state.data.meta.updated;
     $("footer-updated").textContent = updated ? t().updatedAt(fmtDate(updated)) : "";
-    renderTranslateLink();
-  }
-
-  // Les notes de matchup sont écrites en français une seule fois. En anglais,
-  // le site propose la page passée par Google Traduction plutôt qu'une
-  // deuxième version à tenir à jour.
-  function translateUrl() {
-    var host = location.hostname;
-    if (host.indexOf(".") === -1) return null;  // localhost : pas de proxy possible
-    var proxy = host.replace(/-/g, "--").replace(/\./g, "-") + ".translate.goog";
-    return "https://" + proxy + location.pathname + location.search +
-      (location.search ? "&" : "?") + "_x_tr_sl=fr&_x_tr_tl=en&_x_tr_hl=en" + location.hash;
-  }
-
-  function renderTranslateLink() {
-    var link = $("translate-link");
-    if (!link) return;
-    var url = state.lang === "en" ? translateUrl() : null;
-    if (!url) { link.hidden = true; return; }
-    link.hidden = false;
-    link.href = url;
-    link.textContent = "🌐 " + t().translate;
-    link.title = t().translateHint;
-    link.setAttribute("aria-label", t().translateHint);
   }
 
   /* ---------- Runes & build (vue hors matchups) ---------- */

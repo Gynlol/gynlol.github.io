@@ -65,9 +65,8 @@ Tout se passe dans `data/notes.json`, en clair, sans rien relancer côté site
   de référencement). Les valeurs anglaises `easy` / `medium` / `hard` sont
   acceptées, la casse et les accents aussi.
 - **Les notes s'écrivent en français uniquement.** La clé `en` reste possible
-  mais n'est plus tenue à jour : en mode anglais, le site affiche le texte
-  français et propose un bouton « 🌐 Translate » qui rouvre la page via
-  Google Traduction (`*.translate.goog`).
+  mais n'est plus tenue à jour : le sélecteur `FR / EN` traduit l'interface,
+  tandis que les notes de matchup restent dans leur formulation française.
 - Un champion listé dans `bans` sort **en rouge avec une pastille BAN** dans
   la grille du rôle concerné, même sans replay, et une carte « Ban permanent »
   ouvre sa colonne « À savoir ». Le ban est par rôle : Trundle est rouge au
@@ -139,7 +138,7 @@ accents et casse libres — `Comète arcanique` comme `Arcane Comet` :
 - `pourquoi` accepte **une phrase ou une liste de phrases** : chaque entrée
   devient une ligne à puce sous le titre de la carte.
 - `pourquoi` s'écrit en français ; `pourquoiEn` est facultatif (même format) —
-  sans lui, le visiteur anglais lit le français et a le bouton « 🌐 Translate ».
+  sans lui, le visiteur anglais lit le français pour cette explication.
 
 Après modification :
 

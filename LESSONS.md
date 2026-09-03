@@ -293,3 +293,15 @@ lazy. Vérifié : 27/27 icônes d'objets chargées dans le navigateur. [codex]
   5/12 au conseil court ; réinitialiser explicitement ces placements sur mobile.
 - **Contrôle** : à 1049 px, la liste occupe 994 px sans overflow, les blocs 04
   et 05 sont côte à côte, et le rendu reste lisible. [codex]
+
+## 24. Un sélecteur de langue ne doit pas afficher une seconde traduction (2026-09-03)
+
+- **Symptôme** : après le passage en anglais, la barre affichait le bouton
+  `FR / EN` et un second lien `🌐 Translate`, ce qui créait un doublon visuel.
+- **Cause observée** : le sélecteur interne et un lien Google Traduction
+  externe étaient rendus ensemble ; le second n'apparaissait qu'en anglais.
+- **Règle** : garder un seul contrôle de langue dans la barre et retirer le
+  lien externe ainsi que toute sa logique de rendu, ses textes et son style.
+- **Contrôle** : le DOM contient un seul `#lang-toggle` et zéro
+  `#translate-link` en FR comme en EN ; le passage FR ↔ EN ne crée pas
+  d'overflow. [codex]
