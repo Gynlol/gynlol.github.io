@@ -727,6 +727,21 @@
         {
           "t": "Lane perdu",
           "d": "Si tu es en 0-1, ta lane est perdue. Il y a quasiment aucun angle de comeback, donc achète des bottes et roam."
+        },
+        {
+          "d": "On start au W, ensuite on prend le E, puis le Q, et on max le Q en premier, puis le E, puis le W.",
+          "spellSequence": {
+            "learn": [
+              "W",
+              "E",
+              "Q"
+            ],
+            "max": [
+              "Q",
+              "E",
+              "W"
+            ]
+          }
         }
       ]
     },
@@ -756,6 +771,21 @@
         {
           "t": "Lost lane",
           "d": "If you are 0-1, your lane is lost. There is almost no comeback angle, so buy boots and roam."
+        },
+        {
+          "d": "Start W, then take E, then Q, and max Q first, then E, then W.",
+          "spellSequence": {
+            "learn": [
+              "W",
+              "E",
+              "Q"
+            ],
+            "max": [
+              "Q",
+              "E",
+              "W"
+            ]
+          }
         }
       ]
     }

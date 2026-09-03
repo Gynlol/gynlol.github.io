@@ -305,3 +305,14 @@ lazy. Vérifié : 27/27 icônes d'objets chargées dans le navigateur. [codex]
 - **Contrôle** : le DOM contient un seul `#lang-toggle` et zéro
   `#translate-link` en FR comme en EN ; le passage FR ↔ EN ne crée pas
   d'overflow. [codex]
+
+## 25. Une séquence de sorts se lit mieux comme un chemin visuel (2026-09-03)
+
+- **Symptôme** : l'ordre de prise et de max des sorts devait être ajouté aux
+  conseils généraux sans devenir une phrase difficile à parcourir.
+- **Règle** : conserver la phrase éditoriale puis afficher deux chemins
+  séparés, avec les icônes officielles, les touches W/E/Q visibles et des
+  libellés accessibles ; prévoir un fallback d'image et une recomposition
+  mobile.
+- **Contrôle** : W → E → Q puis Q → E → W, six icônes chargées, six conseils
+  rendus à 1280 px et 390 px, sans débordement. [codex]

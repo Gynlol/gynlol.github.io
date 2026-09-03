@@ -38,6 +38,8 @@
       setupBuildsTab: "Builds",
       setupTipsTab: "Conseils",
       setupTabsLabel: "Contenu du guide",
+      spellOrderLearn: "Prends",
+      spellOrderMax: "Max",
       runesTitle: "Pages de runes",
       buildsTitle: "Builds",
       tipsTitle: "Conseils généraux",
@@ -93,6 +95,8 @@
       setupBuildsTab: "Builds",
       setupTipsTab: "Tips",
       setupTabsLabel: "Guide sections",
+      spellOrderLearn: "Take",
+      spellOrderMax: "Max",
       runesTitle: "Rune pages",
       buildsTitle: "Builds",
       tipsTitle: "General tips",
@@ -183,6 +187,17 @@
 
   function thumbUrl(videoId) {
     return "https://i.ytimg.com/vi/" + encodeURIComponent(videoId) + "/mqdefault.jpg";
+  }
+
+  var NUNU_SPELLS = {
+    W: { file: "NunuW.png", fr: "La plus grosse boule de neige", en: "Biggest Snowball Ever" },
+    E: { file: "NunuE.png", fr: "Rafale de boules de neige", en: "Snowball Barrage" },
+    Q: { file: "NunuQ.png", fr: "Absorption", en: "Consume" }
+  };
+
+  function spellIconUrl(file) {
+    return "https://ddragon.leagueoflegends.com/cdn/" + state.data.meta.ddragonVersion +
+      "/img/spell/" + encodeURIComponent(file);
   }
 
   function watchUrl(videoId) {
@@ -963,6 +978,66 @@
     return content;
   }
 
+  function spellSequenceEl(sequence) {
+    if (!sequence || typeof sequence !== "object") return null;
+    var rows = [
+      { key: "learn", label: t().spellOrderLearn },
+      { key: "max", label: t().spellOrderMax }
+    ];
+    var wrap = document.createElement("div");
+    wrap.className = "tips-spell-sequence";
+    var hasRow = false;
+    rows.forEach(function (rowData) {
+      var keys = Array.isArray(sequence[rowData.key]) ? sequence[rowData.key] : [];
+      var spells = keys.map(function (key) { return NUNU_SPELLS[String(key).toUpperCase()]; })
+        .filter(Boolean);
+      if (!spells.length) return;
+      hasRow = true;
+      var row = document.createElement("div");
+      row.className = "tips-spell-row";
+      var label = document.createElement("span");
+      label.className = "tips-spell-label";
+      label.textContent = rowData.label;
+      row.appendChild(label);
+      var track = document.createElement("div");
+      track.className = "tips-spell-track";
+      keys.forEach(function (key, index) {
+        var spell = NUNU_SPELLS[String(key).toUpperCase()];
+        if (!spell) return;
+        if (index > 0) {
+          var arrow = document.createElement("span");
+          arrow.className = "tips-spell-arrow";
+          arrow.textContent = "→";
+          arrow.setAttribute("aria-hidden", "true");
+          track.appendChild(arrow);
+        }
+        var step = document.createElement("span");
+        step.className = "tips-spell";
+        var keyName = String(key).toUpperCase();
+        var spellName = spell[state.lang] || spell.fr;
+        step.title = keyName + " — " + spellName;
+        step.setAttribute("role", "img");
+        step.setAttribute("aria-label", keyName + " — " + spellName);
+        var img = withFallback(document.createElement("img"), FALLBACK_ICON);
+        img.src = spellIconUrl(spell.file);
+        img.alt = "";
+        img.width = 42;
+        img.height = 42;
+        img.setAttribute("aria-hidden", "true");
+        step.appendChild(img);
+        var keyEl = document.createElement("span");
+        keyEl.className = "tips-spell-key";
+        keyEl.textContent = keyName;
+        keyEl.setAttribute("aria-hidden", "true");
+        step.appendChild(keyEl);
+        track.appendChild(step);
+      });
+      row.appendChild(track);
+      wrap.appendChild(row);
+    });
+    return hasRow ? wrap : null;
+  }
+
   function renderTips() {
     var block = $("tips-block");
     var list = $("tips-list");
@@ -975,7 +1050,7 @@
     }
     $("tips-title").textContent = content.titre || "";
     content.items.forEach(function (tip) {
-      if (!tip || (!tip.t && !tip.d && !Array.isArray(tip.points))) return;
+      if (!tip || (!tip.t && !tip.d && !Array.isArray(tip.points) && !tip.spellSequence)) return;
       var item = document.createElement("li");
       item.className = "tips-item";
       if (tip.t) {
@@ -998,6 +1073,8 @@
         text.textContent = tip.d;
         item.appendChild(text);
       }
+      var sequence = spellSequenceEl(tip.spellSequence);
+      if (sequence) item.appendChild(sequence);
       list.appendChild(item);
     });
     block.hidden = list.children.length === 0;

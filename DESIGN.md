@@ -630,3 +630,20 @@ une colonne de plus dans le panneau de matchup, et aucune donnée par rôle.
 - Delivery evidence: diagnostic navigateur avant correction = un `#lang-toggle`
   et un `#translate-link` visible en anglais ; après correction = un seul
   `#lang-toggle`, aucun `#translate-link`, passage FR → EN → FR sans overflow.
+
+## Continuation — schématiser l'ordre des sorts (2026-09-03)
+
+### Brain Use Contract — delta de cette reprise
+
+- Query terms: `conseils généraux`, `start W`, `E`, `Q`, `max Q E W`, `logos des spells`.
+- Notes read: `MEMORY.md`, `LESSONS.md` et `HANDOFF.md` du run ; les skills
+  `sites-building` et `web-delivery`.
+- Decisions extracted: ajouter un sixième conseil sans titre inventé, conserver
+  la phrase dictée en français, fournir sa traduction anglaise et représenter
+  séparément l'ordre W → E → Q puis Q → E → W avec les icônes officielles de
+  Nunu.
+- Risks identified: les fichiers d'icônes sont servis par Data Dragon ; le
+  renderer doit garder un fallback et ne pas élargir la page sur téléphone.
+- Delivery evidence: six images Data Dragon chargées en 64 px, séquence
+  accessible `W — ...`, `E — ...`, `Q — ...`, `Q — ...`, `E — ...`, `W — ...` ;
+  rendu vérifié à 1280 px et 390 px, sans overflow et sans erreur console.

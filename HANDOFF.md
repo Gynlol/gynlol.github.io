@@ -19,4 +19,16 @@
   JavaScript, ses textes et son CSS ont été retirés.
 - Vérification locale: un seul `#lang-toggle` et zéro `#translate-link` en FR
   comme en EN ; le passage FR → EN → FR reste réversible et sans overflow.
-- Suite: publier cette correction puis vérifier la version GitHub Pages.
+- Suite: correction publiée sur GitHub Pages ; au prochain passage, recueillir
+  les prochains conseils Top champion par champion.
+
+## Continuation — conseil général sur l'ordre des sorts (2026-09-03)
+
+- Ajout: le sixième conseil général conserve la phrase `On start au W, ensuite
+  on prend le E, puis le Q, et on max le Q en premier, puis le E, puis le W.`
+- Rendu: deux lignes d'icônes Data Dragon, `W → E → Q` pour la prise puis
+  `Q → E → W` pour le max ; la structure passe en pleine largeur desktop et
+  reste en colonne sur mobile.
+- Vérification locale: six images chargées, séquence accessible, six conseils
+  visibles, aucun overflow et aucune erreur console en FR.
+- Suite: publier cette version puis vérifier le workflow GitHub Pages.
