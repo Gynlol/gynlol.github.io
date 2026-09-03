@@ -283,3 +283,13 @@ lazy. Vérifié : 27/27 icônes d'objets chargées dans le navigateur. [codex]
   lane`.
 - **Contrôle** : le cinquième bloc affiche `LANE PERDU`, conserve le texte 0-1
   et reste sans débordement. [codex]
+
+## 23. La densité desktop se règle par topologie, pas seulement par padding (2026-09-03)
+
+- **Symptôme** : l'onglet Conseils laissait une bande vide sur grand écran et
+  les deux derniers conseils occupaient chacun une ligne entière.
+- **Règle** : élargir la surface utile, conserver les deux premières colonnes
+  équilibrées, puis donner à la ligne finale une largeur 7/12 au texte long et
+  5/12 au conseil court ; réinitialiser explicitement ces placements sur mobile.
+- **Contrôle** : à 1049 px, la liste occupe 994 px sans overflow, les blocs 04
+  et 05 sont côte à côte, et le rendu reste lisible. [codex]

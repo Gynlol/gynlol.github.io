@@ -37,7 +37,7 @@
 - Palette tokens: fond `#0a0e14` (nuit), panneaux `#101722`, lignes `#1d2735`, texte `#e9f0f7`, muted `#8593a5`, accent glace `#6fd3ff` (+ hover `#a5e3ff`), win `#39d98a`, chip patch `#22314a`
 - Typography: display « Chakra Petch » (tech/esport, uppercase, letterspacing) pour titres/tabs/compteurs ; « Inter » pour tout le reste. Chiffres tabulaires pour les stats.
 - Materials/textures: aplats mats, une seule élévation (panneau), lueur froide très courte sur hover/focus — pas de glassmorphism, pas de grain
-- Layout geometry: verticale stricte, contenu max 1120 px ; la grille de champions est le seul élément dense ; biseau 8° sur l'indicateur de rôle actif (signature)
+- Layout geometry: verticale stricte, contenu max 1280 px ; la grille de champions et la page Conseils sont les seules surfaces denses ; biseau 8° sur l'indicateur de rôle actif (signature)
 - Motion grammar: transitions 120–160 ms opacity/transform uniquement ; `prefers-reduced-motion` = tout à 0
 - Interaction metaphor: « pick d'ennemi » — on clique le portrait ennemi, le panneau matchup s'ouvre dessous (pas de modal), hash routable `#adc/ziggs`
 - Asset roles: portraits champions = Data Dragon CDN ; miniatures vidéos = i.ytimg.com ; aucun asset local généré hors favicon SVG
@@ -592,3 +592,23 @@ une colonne de plus dans le panneau de matchup, et aucune donnée par rôle.
 - Delivery evidence: le renderer affiche `LANE PERDU`, le bloc contient toujours
   la phrase 0-1, `tipsCount` vaut 5, le site n'a aucun overflow et la console
   navigateur est vide.
+
+## Continuation — densifier la surface desktop des conseils (2026-09-03)
+
+### Brain Use Contract — delta de cette reprise
+
+- Query terms: `place sur PC`, `densité desktop`, `grille conseils`, `mobile`.
+- Notes read: `MEMORY.md`, `protocols/web-quality-ratchet-harness.md`,
+  `frontend/web-craft-standard.md`, `DESIGN.md`, `LESSONS.md` et `HANDOFF.md` du
+  run ; les skills `sites-building` et `web-delivery`.
+- Decisions extracted: élargir le shell à 1280 px, laisser l'onglet Conseils
+  utiliser toute sa largeur utile, augmenter légèrement le rythme desktop et
+  organiser la dernière ligne en 7/12 pour le long conseil Golds et 5/12 pour
+  `Lane perdu`. Le mobile conserve sa colonne unique et ses métriques compactes.
+- Risks identified: l'élargissement global peut changer l'équilibre des pages
+  matchup ; il faut donc vérifier la grille, le panneau matchup, les breakpoints
+  mobile et l'absence de débordement avant publication.
+- Delivery evidence: en aperçu local à 1440×900, le shell mesure 1280 px et la
+  liste 1240 px ; les deux premières colonnes font 620 px et la dernière ligne
+  723/517 px. À 390×844, les cinq blocs passent en colonne de 335 px. Les deux
+  tailles n'ont aucun overflow et la console ne signale aucun warning ou erreur.
