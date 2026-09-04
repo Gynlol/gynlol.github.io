@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.17.1",
-    "updated": "2026-09-03T10:17:52Z"
+    "updated": "2026-09-04T10:17:15Z"
   },
   "videos": [
+    {
+      "id": "L_Q6huSgTS4",
+      "title": "Nunu Top vs Urgot | Unranked to Master : Platinum 2 77lp | Patch 26.17",
+      "published": "2026-09-04T10:00:33+00:00",
+      "role": "top",
+      "enemy": "Urgot",
+      "enemyName": "Urgot",
+      "patch": "26.17",
+      "rank": "Platinum",
+      "division": "2",
+      "lp": 77,
+      "region": null,
+      "result": null
+    },
     {
       "id": "izA4SMQ_8G4",
       "title": "Nunu Top vs Mordekaiser | Unranked to Master : Platinum 2 47lp | Patch 26.17",
