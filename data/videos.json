@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.17.1",
-    "updated": "2026-09-04T10:17:15Z"
+    "updated": "2026-09-05T10:15:00Z"
   },
   "videos": [
+    {
+      "id": "c0EPYgDBDkw",
+      "title": "Nunu Top vs Yorick | Unranked to Master : Platinum 1 97lp | Patch 26.17",
+      "published": "2026-09-05T10:00:16+00:00",
+      "role": "top",
+      "enemy": "Yorick",
+      "enemyName": "Yorick",
+      "patch": "26.17",
+      "rank": "Platinum",
+      "division": "1",
+      "lp": 97,
+      "region": null,
+      "result": null
+    },
     {
       "id": "L_Q6huSgTS4",
       "title": "Nunu Top vs Urgot | Unranked to Master : Platinum 2 77lp | Patch 26.17",
