@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.17.1",
-    "updated": "2026-09-06T10:15:46Z"
+    "updated": "2026-09-07T10:16:48Z"
   },
   "videos": [
+    {
+      "id": "vWH5N-QQKsU",
+      "title": "Nunu Top vs Kled | Unranked to Master : Emeraude 4 17lp | Patch 26.17",
+      "published": "2026-09-07T10:00:02+00:00",
+      "role": "top",
+      "enemy": "Kled",
+      "enemyName": "Kled",
+      "patch": "26.17",
+      "rank": "Emerald",
+      "division": "4",
+      "lp": 17,
+      "region": null,
+      "result": null
+    },
     {
       "id": "nhGXEe8zVMU",
       "title": "Nunu Top vs Yone | Unranked to Master : Emeraude 4 17lp | Patch 26.17",
