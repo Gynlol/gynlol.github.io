@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.17.1",
-    "updated": "2026-09-07T10:16:48Z"
+    "updated": "2026-09-08T10:17:51Z"
   },
   "videos": [
+    {
+      "id": "ENOYPFHK39I",
+      "title": "Nunu Top vs Darius | Unranked to Master : Emeraude 4 37lp | Patch 26.17",
+      "published": "2026-09-08T10:00:15+00:00",
+      "role": "top",
+      "enemy": "Darius",
+      "enemyName": "Darius",
+      "patch": "26.17",
+      "rank": "Emerald",
+      "division": "4",
+      "lp": 37,
+      "region": null,
+      "result": null
+    },
     {
       "id": "vWH5N-QQKsU",
       "title": "Nunu Top vs Kled | Unranked to Master : Emeraude 4 17lp | Patch 26.17",
