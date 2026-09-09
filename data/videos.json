@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.17.1",
-    "updated": "2026-09-08T13:37:23Z"
+    "updated": "2026-09-09T10:18:04Z"
   },
   "videos": [
+    {
+      "id": "SNUmhkzNmPg",
+      "title": "Nunu Top vs Gankplank | Unranked to Master : Emerald 4 67lp | Patch 26.17",
+      "published": "2026-09-09T10:00:30+00:00",
+      "role": "top",
+      "enemy": "Gankplank",
+      "enemyName": "Gankplank",
+      "patch": "26.17",
+      "rank": "Emerald",
+      "division": "4",
+      "lp": 67,
+      "region": null,
+      "result": null
+    },
     {
       "id": "ENOYPFHK39I",
       "title": "Nunu Top vs Darius | Unranked to Master : Emerald 4 37lp | Patch 26.17",
