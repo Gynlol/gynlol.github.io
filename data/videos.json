@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.18.1",
-    "updated": "2026-09-09T21:16:10Z"
+    "updated": "2026-09-10T11:10:46Z"
   },
   "videos": [
+    {
+      "id": "1T0T22r_hfY",
+      "title": "Nunu Top vs Jayce | Unranked to Master : Emerald 4 87lp | Patch 26.17",
+      "published": "2026-09-10T10:00:13+00:00",
+      "role": "top",
+      "enemy": "Jayce",
+      "enemyName": "Jayce",
+      "patch": "26.17",
+      "rank": "Emerald",
+      "division": "4",
+      "lp": 87,
+      "region": null,
+      "result": null
+    },
     {
       "id": "SNUmhkzNmPg",
       "title": "Nunu Top vs Gankplank | Unranked to Master : Emerald 4 67lp | Patch 26.17",
