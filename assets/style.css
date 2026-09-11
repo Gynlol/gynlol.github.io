@@ -583,7 +583,13 @@ main { flex: 1; padding-top: 28px; padding-bottom: 48px; }
   color: var(--muted);
   line-height: 2;
 }
-.matchup-links a { color: var(--muted); white-space: nowrap; }
+.matchup-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--muted);
+  white-space: nowrap;
+}
 .matchup-links a:hover { color: var(--accent); }
 .footer-inner {
   display: flex;
@@ -660,9 +666,9 @@ main { flex: 1; padding-top: 28px; padding-bottom: 48px; }
 
 
 /* ---------- Difficulté du matchup ----------
-   Facile / Moyen / Dur / Très dur : affiché en tête du matchup ouvert
+   Facile / Moyen / Difficile / Très difficile : affiché en tête du matchup ouvert
    seulement — les tuiles de la grille restent nues. Texte foncé sur aplat
-   plein (contraste AA), sauf « Très dur » qui inverse. */
+   plein (contraste AA), sauf « Très difficile » qui inverse. */
 .level-badge {
   font-family: var(--font-display);
   font-weight: 700;
@@ -682,7 +688,7 @@ main { flex: 1; padding-top: 28px; padding-bottom: 48px; }
 .lvl-facile { background: var(--lvl-facile); }
 .lvl-moyen { background: var(--lvl-moyen); }
 .lvl-dur { background: var(--lvl-dur); }
-/* Cran au-dessus de « Dur » : rouge sombre, donc texte clair pour rester lisible. */
+/* Cran au-dessus de « Difficile » : rouge sombre, donc texte clair pour rester lisible. */
 .lvl-tresdur { background: var(--lvl-tresdur); color: #ffe3e6; }
 
 /* ---------- Runes & build ----------
