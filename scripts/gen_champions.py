@@ -192,6 +192,10 @@ ALIASES = {
     "tf": "TwistedFate",
     "mf": "MissFortune",
     "gp": "Gangplank",
+    # Fautes de frappe vues dans des titres YouTube : elles restent des
+    # alias de compatibilité, mais la fiche canonique reste Gangplank.
+    "gankplank": "Gangplank",
+    "gankplack": "Gangplank",
     "tk": "TahmKench",
     "kog": "KogMaw",
     "willump": "Nunu",

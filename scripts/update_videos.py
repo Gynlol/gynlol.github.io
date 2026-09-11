@@ -3,6 +3,8 @@
 
 - Lit le flux public (aucune clé API) : titres, ids, dates.
 - Parse chaque titre « Nunu <rôle> vs <champion> … » ; hors gabarit = ignoré.
+- Corrige les fautes de champion connues dans le titre archivé et le
+  rattachement de la vidéo.
 - Fusionne avec le fichier existant : le flux RSS ne contient que les ~15
   dernières vidéos, le JSON committé est donc la base persistante — on ne
   supprime jamais une entrée simplement parce qu'elle a quitté le flux.
@@ -67,6 +69,10 @@ TITLE_RE = re.compile(
     re.IGNORECASE,
 )
 
+# Le titre YouTube reste la source de la fiche, mais ces deux fautes connues
+# doivent être corrigées dans la copie affichée par le site.
+TITLE_CHAMPION_FIX_RE = re.compile(r"\b(?:gankplack|gankplank)\b", re.IGNORECASE)
+
 
 def strip_accents(s):
     """Translittère les lettres accentuées (Séraphine -> Seraphine)."""
@@ -77,6 +83,11 @@ def strip_accents(s):
 def norm(s):
     """Normalise un nom pour la comparaison : minuscules, alphanumérique."""
     return re.sub(r"[^a-z0-9]", "", strip_accents(s).lower())
+
+
+def canonicalize_title(title):
+    """Corrige les fautes de Gangplank dans le titre archivé et affiché."""
+    return TITLE_CHAMPION_FIX_RE.sub("Gangplank", title)
 
 
 def load_json(path):
@@ -329,7 +340,8 @@ def main():
     entries = fetch_feed()
     added, updated, ignored = [], [], []
     for e in entries:
-        parsed = parse_title(e["title"], name_index, names)
+        title = canonicalize_title(e["title"])
+        parsed = parse_title(title, name_index, names)
         if parsed is None:
             ignored.append(e["title"])
             # Titre corrigé dans l'autre sens (matchait avant, plus maintenant)
@@ -339,7 +351,7 @@ def main():
             continue
         record = {
             "id": e["id"],
-            "title": e["title"],
+            "title": title,
             "published": e["published"],
             **parsed,
         }

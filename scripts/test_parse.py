@@ -9,7 +9,8 @@ if hasattr(sys.stdout, "reconfigure"):
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from update_videos import (CHAMPIONS_PATH, RANK_ORDER, build_name_index,
-                           display_names, load_json, parse_rank, parse_title)
+                           canonicalize_title, display_names, load_json,
+                           parse_rank, parse_title)
 
 CASES = [
     # (titre, attendu) — attendu : None = hors gabarit (ignoré), sinon un
@@ -71,6 +72,12 @@ CASES = [
     # Accents : orthographe FR d'un champion connu
     ("Nunu ADC vs Séraphine EUW Master 12 LP",
      {"role": "adc", "enemy": "Seraphine"}),
+    # Fautes de frappe historiques : elles doivent rester sur la fiche
+    # officielle, et ne jamais fabriquer un champion fantôme.
+    ("Nunu Top vs Gankplank | Unranked to Master : Emerald 4 67lp | Patch 26.17",
+     {"role": "top", "enemy": "Gangplank", "enemyName": "Gangplank"}),
+    ("Nunu Top vs GankPlack | Unranked to Master : Emerald 4 67lp | Patch 26.17",
+     {"role": "top", "enemy": "Gangplank", "enemyName": "Gangplank"}),
     # Champion inconnu de la base (futur champion) : deviné, pas ignoré
     ("Nunu ADC vs Zorblax EUW Master 12 LP | Patch 27.1",
      {"role": "adc", "enemy": "Zorblax", "rank": "Master"}),
@@ -134,6 +141,9 @@ def check_ranks():
 
 
 def main():
+    title = "Nunu Top vs GankPlack | Unranked to Master : Emerald 4 67lp | Patch 26.17"
+    assert canonicalize_title(title).startswith("Nunu Top vs Gangplank"), \
+        "la normalisation du titre Gangplank a échoué"
     champs = load_json(CHAMPIONS_PATH)
     index = build_name_index(champs)
     names = display_names(champs)
