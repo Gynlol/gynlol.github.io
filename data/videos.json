@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.18.1",
-    "updated": "2026-09-10T11:10:46Z"
+    "updated": "2026-09-11T10:02:14Z"
   },
   "videos": [
+    {
+      "id": "IlSjY8aMYls",
+      "title": "Nunu Top vs Teemo | Unranked to Master : Emerald 3 47lp | Patch 26.17",
+      "published": "2026-09-11T10:00:17+00:00",
+      "role": "top",
+      "enemy": "Teemo",
+      "enemyName": "Teemo",
+      "patch": "26.17",
+      "rank": "Emerald",
+      "division": "3",
+      "lp": 47,
+      "region": null,
+      "result": null
+    },
     {
       "id": "1T0T22r_hfY",
       "title": "Nunu Top vs Jayce | Unranked to Master : Emerald 4 87lp | Patch 26.17",
