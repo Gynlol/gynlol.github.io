@@ -60,7 +60,7 @@
       backToMatchupsShort: "Matchups",
       notesTitle: "À savoir",
       levelTitle: "Difficulté",
-      levels: { facile: "Facile", moyen: "Moyen", dur: "Difficile", tresdur: "Très difficile" },
+      levels: { facile: "Facile", moyen: "Moyen", dur: "Difficile", tresdur: "Très dur" },
       ban: "BAN",
       banTitle: "Ban permanent",
       banSub: "Ban permanent — pas de replay, et il n'y en aura pas",
@@ -589,7 +589,7 @@
     var panelLvl = levelFor(state.role, entry.id);
     if (panelLvl) {
       sub.appendChild(levelBadge(panelLvl, "level-badge"));
-      sub.appendChild(document.createTextNode(" "));  // sinon « Très difficile1 replay » à la lecture d'écran
+      sub.appendChild(document.createTextNode(" "));  // sinon « Très dur1 replay » à la lecture d'écran
     }
     sub.appendChild(document.createTextNode(entry.videos.length
       ? t().matchupSub(entry.videos.length)

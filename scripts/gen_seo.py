@@ -156,7 +156,7 @@ LEVEL_ALIASES = {
     "dur": "dur", "dure": "dur", "difficile": "dur", "hard": "dur",
     "tresdur": "tresdur", "tresdure": "tresdur", "veryhard": "tresdur", "enfer": "tresdur",
 }
-LEVEL_LABELS = {"facile": "Facile", "moyen": "Moyen", "dur": "Difficile", "tresdur": "Très difficile"}
+LEVEL_LABELS = {"facile": "Facile", "moyen": "Moyen", "dur": "Difficile", "tresdur": "Très dur"}
 
 BANS, NOTES, LEVELS = {}, {}, {}
 

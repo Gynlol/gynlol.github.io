@@ -666,9 +666,9 @@ main { flex: 1; padding-top: 28px; padding-bottom: 48px; }
 
 
 /* ---------- Difficulté du matchup ----------
-   Facile / Moyen / Difficile / Très difficile : affiché en tête du matchup ouvert
+   Facile / Moyen / Difficile / Très dur : affiché en tête du matchup ouvert
    seulement — les tuiles de la grille restent nues. Texte foncé sur aplat
-   plein (contraste AA), sauf « Très difficile » qui inverse. */
+   plein (contraste AA), sauf « Très dur » qui inverse. */
 .level-badge {
   font-family: var(--font-display);
   font-weight: 700;
