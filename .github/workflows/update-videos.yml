@@ -1,75 +1,57 @@
 name: Mise à jour des vidéos
 
 on:
+  push:
+    branches: [main]
   schedule:
-    # GitHub ne tient PAS la promesse d'un cron horaire : les passages observés
-    # sont espacés de 2 à 3 h, avec des trous de 24 h. On demande donc quatre
-    # créneaux par heure — il en passe assez pour tenir le rythme réel — et on
-    # insiste autour de 10 h UTC, l'heure de publication des replays.
-    - cron: "8,23,38,53 * * * *"
-    - cron: "2,12,17,27,32,42,47,57 10-12 * * *"
-  workflow_dispatch: {}     # bouton « Run workflow » pour lancer à la main
+    # Un cron isolé peut être retardé ou supprimé par GitHub. Ces quatre seeds
+    # relancent la veille si la chaîne auto-réarmée s'est arrêtée.
+    - cron: "17 0,6,12,18 * * *"
+  workflow_dispatch:
+    inputs:
+      watch_minutes:
+        description: "Durée de la fenêtre de surveillance"
+        required: false
+        default: "330"
+        type: string
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: update-videos
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   update:
     runs-on: ubuntu-latest
+    timeout-minutes: 350
+    env:
+      WATCH_MINUTES: ${{ inputs.watch_minutes || '330' }}
+      POLL_SECONDS: "300"
+      SETUP_EVERY: "12"
+      GH_TOKEN: ${{ github.token }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
 
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
-      - name: Lire le flux RSS et mettre à jour videos.json
-        run: python scripts/update_videos.py
+      - name: Surveiller le flux et publier chaque changement
+        run: bash scripts/watch_videos.sh
 
-      - name: Regénérer les pages de référencement
-        id: seo
-        # Une panne de génération SEO ne doit pas empêcher la vidéo fraîche
-        # d'être publiée dans data/videos.json et dans l'interface principale.
-        continue-on-error: true
-        run: python scripts/gen_seo.py
-
-      # setup.json est écrit à la main : le job ne fait que le résoudre contre
-      # Data Dragon, pour qu'une modification à la main soit en ligne dans l'heure
-      # sans rien lancer côté PC.
-      - name: Résoudre les runes et les builds
-        id: setup
-        # Data Dragon est une dépendance externe : s'il tombe, on committe
-        # quand même le nouveau replay et on laisse le job signaler l'échec.
-        continue-on-error: true
-        run: python scripts/gen_setup.py
-
-      - name: Committer si changement
+      - name: Réarmer la prochaine fenêtre de surveillance
         if: always()
         run: |
-          git add data/videos.json data/setup-built.json matchups sitemap.xml
-          if git diff --cached --quiet; then
-            echo "Aucun changement."
-          else
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git commit -m "MAJ automatique des vidéos"
-            # Un commit humain a pu arriver entre le checkout et le push :
-            # on se resynchronise et on réessaie au lieu d'échouer.
-            for i in 1 2 3; do
-              if git push; then
-                exit 0
-              fi
-              git pull --rebase origin main || { git rebase --abort; exit 1; }
-            done
-            git push
-          fi
-
-      - name: Signaler une génération auxiliaire en échec
-        if: always() && (steps.seo.outcome == 'failure' || steps.setup.outcome == 'failure')
-        run: |
-          echo "Une génération auxiliaire a échoué ; les données vidéo ont tout de même été publiées."
-          exit 1
+          # workflow_dispatch est l'exception documentée qui peut être déclenchée
+          # par GITHUB_TOKEN. Le seed planifié reste le filet de sécurité si cette
+          # étape ou le runner disparaît.
+          gh workflow run update-videos.yml \
+            --repo "$GITHUB_REPOSITORY" \
+            --ref main \
+            -f watch_minutes="$WATCH_MINUTES"

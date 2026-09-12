@@ -16,6 +16,12 @@ CASES = [
     # (titre, attendu) — attendu : None = hors gabarit (ignoré), sinon un
     # dict dont chaque clé est vérifiée (role/enemy au minimum, métadonnées
     # incluses pour attraper les régressions du découpage).
+    ("Nunu Top vs Riven | Unranked to Master : Emerald 2 7lp | Patch 26.17",
+     {"role": "top", "enemy": "Riven", "rank": "Emerald", "division": "2",
+      "lp": 7, "patch": "26.17"}),
+    ("Nunu Jungle vs Ivern EUW Master 42 LP | Patch 26.17",
+     {"role": "jungle", "enemy": "Ivern", "rank": "Master", "lp": 42,
+      "region": "EUW", "patch": "26.17"}),
     ("Nunu ADC vs Ziggs EUW Master 80 LP | Patch 26.15",
      {"role": "adc", "enemy": "Ziggs", "patch": "26.15", "rank": "Master", "lp": 80, "region": "EUW"}),
     ("Nunu ADC vs Sivir EUW Master 64 LP | Patch 26.15",
