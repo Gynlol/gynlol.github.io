@@ -737,7 +737,7 @@
     if (state.setupState === "loading" || state.setupState === "ok") return;
     state.setupState = "loading";
     renderSetup();
-    fetch("data/setup-built.json", FRESH)
+    fetch(freshDataUrl("data/setup-built.json"), FRESH)
       .then(function (r) {
         if (!r.ok) throw new Error("HTTP " + r.status);
         return r.json();
@@ -1317,17 +1317,21 @@
     return;
   }
 
-  // « no-cache » = on revalide toujours auprès du serveur (304 si rien n'a
-  // changé) : sinon les 10 minutes de cache de GitHub Pages font afficher
-  // d'anciennes données après une mise à jour.
-  var FRESH = { cache: "no-cache" };
+  // GitHub Pages/CDN peut encore servir une ancienne réponse malgré « no-cache ».
+  // Une query unique force la lecture de la donnée réellement publiée à chaque
+  // ouverture ; no-store évite aussi de la conserver dans le cache navigateur.
+  function freshDataUrl(path) {
+    return path + "?v=" + Date.now();
+  }
+
+  var FRESH = { cache: "no-store" };
 
   Promise.all([
-    fetch("data/champions.json", FRESH).then(function (r) { return r.json(); }),
-    fetch("data/videos.json", FRESH).then(function (r) { return r.json(); }),
+    fetch(freshDataUrl("data/champions.json"), FRESH).then(function (r) { return r.json(); }),
+    fetch(freshDataUrl("data/videos.json"), FRESH).then(function (r) { return r.json(); }),
     // Fichier annexe écrit à la main : s'il manque ou s'il est mal formé, le
     // site s'affiche quand même — sans les notes ni les bans.
-    fetch("data/notes.json", FRESH).then(function (r) { return r.ok ? r.json() : {}; })
+    fetch(freshDataUrl("data/notes.json"), FRESH).then(function (r) { return r.ok ? r.json() : {}; })
       .catch(function () { return {}; })
   ]).then(function (results) {
     state.champs = results[0];
