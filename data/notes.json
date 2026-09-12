@@ -29,6 +29,7 @@
     "top/Darius": "moyen",
     "top/DrMundo": "facile",
     "top/Fiora": "tresdur",
+    "top/Riven": "tresdur",
     "top/Gangplank": "facile",
     "top/Gwen": "facile",
     "top/Irelia": "dur",
@@ -57,6 +58,13 @@
       "fr": [
         {
           "d": "Matchup quasiment impossible si la Fiora joue bien. Donc regarde un peu comment elle joue. Si elle joue bien, prends ton niveau 3 et roam."
+        }
+      ]
+    },
+    "top/Riven": {
+      "fr": [
+        {
+          "d": "Matchup quasiment impossible si la Riven joue bien. Donc regarde un peu comment elle joue. Si elle joue bien, prends ton niveau 3 et roam."
         }
       ]
     },
