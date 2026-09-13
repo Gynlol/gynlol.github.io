@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.18.1",
-    "updated": "2026-09-12T12:40:59Z"
+    "updated": "2026-09-13T10:11:58Z"
   },
   "videos": [
+    {
+      "id": "k6vQMqNtCBQ",
+      "title": "Nunu Top vs Renekton | Unranked to Master : Emerald 2 37lp | Patch 26.17",
+      "published": "2026-09-13T10:00:35+00:00",
+      "role": "top",
+      "enemy": "Renekton",
+      "enemyName": "Renekton",
+      "patch": "26.17",
+      "rank": "Emerald",
+      "division": "2",
+      "lp": 37,
+      "region": null,
+      "result": null
+    },
     {
       "id": "1_14kw3T8po",
       "title": "Nunu Top vs Riven | Unranked to Master : Emerald 2 7lp | Patch 26.17",
