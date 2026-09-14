@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.18.1",
-    "updated": "2026-09-13T10:11:58Z"
+    "updated": "2026-09-14T10:04:04Z"
   },
   "videos": [
+    {
+      "id": "YQAkzflIUs8",
+      "title": "Nunu Top vs Sion | Unranked to Master : Emerald 2 47lp | Patch 26.17",
+      "published": "2026-09-14T10:00:35+00:00",
+      "role": "top",
+      "enemy": "Sion",
+      "enemyName": "Sion",
+      "patch": "26.17",
+      "rank": "Emerald",
+      "division": "2",
+      "lp": 47,
+      "region": null,
+      "result": null
+    },
     {
       "id": "k6vQMqNtCBQ",
       "title": "Nunu Top vs Renekton | Unranked to Master : Emerald 2 37lp | Patch 26.17",
