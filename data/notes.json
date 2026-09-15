@@ -35,6 +35,7 @@
     "top/Irelia": "dur",
     "top/Mordekaiser": "facile",
     "top/Nasus": "moyen",
+    "top/Sion": "tresdur",
     "top/Teemo": "facile",
     "top/Urgot": "moyen",
     "top/Volibear": "dur",
@@ -117,6 +118,16 @@
         {
           "d": "Je conseille l'Hexflash pour le bonus de vitesse afin de le surprendre et qu'il rate son bump.",
           "link": "#setup/runes"
+        }
+      ]
+    },
+    "top/Sion": {
+      "fr": [
+        {
+          "d": "S'il joue bien, il tankera toutes les snowball avec le shield et t'auras jamais les dégâts pour le tuer."
+        },
+        {
+          "d": "S'il joue mal et que tu gagnes la lane, il aura toujours la tempo sur toi dans tous les cas à cause de son passif."
         }
       ]
     }
