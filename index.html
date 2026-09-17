@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
   <title>Gyn Replays — Matchups Nunu</title>
   <meta name="description" content="Tous les matchups Nunu en replay, classés par rôle et par champion ennemi. Mis à jour automatiquement depuis la chaîne YouTube Gyn Replays.">
   <link rel="canonical" href="https://gynlol.github.io/">
@@ -11,6 +12,12 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://gynlol.github.io/">
   <meta property="og:image" content="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Nunu_0.jpg">
+  <meta property="og:image:alt" content="Nunu — Gyn Replays Matchups">
+  <meta property="og:site_name" content="Gyn Replays — Matchups Nunu">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Gyn Replays — Matchups Nunu">
+  <meta name="twitter:description" content="Trouve le replay du matchup exact que tu vas affronter : Top, Mid, ADC, Support.">
+  <meta name="twitter:image" content="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Nunu_0.jpg">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Gyn Replays — Matchups Nunu","url":"https://gynlol.github.io/","description":"Tous les matchups Nunu en replay, classés par rôle et par champion ennemi.","inLanguage":["fr","en"]}</script>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2v28M4 9l24 14M4 23L28 9M16 8l-4-4m4 4 4-4M16 24l-4 4m4-4 4 4M7 12l-5 1m5 7-5-1m23-7 5 1m-5 7 5-1' stroke='%236fd3ff' stroke-width='2.4' stroke-linecap='round' fill='none'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,7 +26,7 @@
        la page s'affiche quand même avec les polices système. -->
   <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
-  <link rel="stylesheet" href="assets/style.css?v=20260912a">
+  <link rel="stylesheet" href="assets/style.css?v=20260917a">
 </head>
 <body>
   <header class="topbar">
@@ -34,7 +41,7 @@
       <div class="topbar-actions">
         <button class="setup-link" id="setup-toggle" type="button">Runes &amp; build</button>
         <button id="lang-toggle" type="button" aria-label="Switch language"></button>
-        <a class="yt-link" href="https://www.youtube.com/@GynReplays" target="_blank" rel="noopener" aria-label="YouTube">
+        <a class="yt-link" href="https://www.youtube.com/@GynReplays" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M23 7.2s-.2-1.6-.9-2.3c-.9-.9-1.9-.9-2.4-1C16.6 3.6 12 3.6 12 3.6s-4.6 0-7.7.3c-.5.1-1.5.1-2.4 1-.7.7-.9 2.3-.9 2.3S.8 9.1.8 11v1.8c0 1.9.2 3.8.2 3.8s.2 1.6.9 2.3c.9.9 2 .9 2.5 1 1.8.2 7.6.3 7.6.3s4.6 0 7.7-.4c.5-.1 1.5-.1 2.4-1 .7-.7.9-2.3.9-2.3s.2-1.9.2-3.8V11c0-1.9-.2-3.8-.2-3.8zM9.7 14.9V8.5l6.3 3.2-6.3 3.2z"/></svg>
           <span>YouTube</span>
         </a>
@@ -122,8 +129,13 @@
   <footer class="footer">
     <nav class="shell matchup-links" id="matchup-links" aria-label="Pages matchups"></nav>
     <div class="shell footer-inner">
-      <p><span data-i18n="footerAuto">Mis à jour automatiquement depuis la chaîne</span> <a href="https://www.youtube.com/@GynReplays" target="_blank" rel="noopener">@GynReplays</a> · <span id="footer-updated"></span></p>
-      <a class="subscribe" href="https://www.youtube.com/@GynReplays?sub_confirmation=1" target="_blank" rel="noopener" data-i18n="subscribe">Abonne-toi ❄</a>
+      <p><span data-i18n="footerAuto">Mis à jour automatiquement depuis la chaîne</span> <a href="https://www.youtube.com/@GynReplays" target="_blank" rel="noopener noreferrer">@GynReplays</a> · <span id="footer-updated"></span></p>
+      <nav class="footer-links" aria-label="Informations du site">
+        <a href="confidentialite.html">Confidentialité</a>
+        <a href="mentions.html">Informations</a>
+        <a href="cgu.html">CGU</a>
+      </nav>
+      <a class="subscribe" href="https://www.youtube.com/@GynReplays?sub_confirmation=1" target="_blank" rel="noopener noreferrer" data-i18n="subscribe">Abonne-toi ❄</a>
     </div>
   </footer>
 
@@ -131,14 +143,21 @@
     <p class="noscript">Ce site a besoin de JavaScript pour afficher les matchups. / This site needs JavaScript to display matchups.</p>
   </noscript>
 
-  <script src="assets/app.js?v=20260912a"></script>
-  <!-- GoatCounter : compteur de visites sans cookies (pas de bandeau RGPD).
-       Le hash (#adc/ziggs) est compté comme une page pour voir les matchups consultés. -->
+  <script src="assets/app.js?v=20260917a"></script>
+  <!-- GoatCounter : statistiques agrégées et événements vidéo sans données saisies. -->
   <script>
-    window.goatcounter = { path: function () { return location.pathname + location.search + location.hash; } };
+    function analyticsPath() {
+      var path = location.pathname;
+      var raw = (location.hash || "").replace(/^#/, "").toLowerCase();
+      var matchup = raw.match(/^(top|mid|adc|support)(?:\/([a-z0-9_-]+))?$/);
+      if (matchup) return path + "#" + matchup[1] + (matchup[2] ? "/" + matchup[2] : "");
+      var setup = raw.match(/^setup\/(runes|builds|tips)$/);
+      return setup ? path + "#setup/" + setup[1] : path;
+    }
+    window.goatcounter = { path: analyticsPath };
     window.addEventListener("hashchange", function () {
       if (window.goatcounter.count) {
-        window.goatcounter.count({ path: location.pathname + location.search + location.hash });
+        window.goatcounter.count({ path: analyticsPath() });
       }
     });
   </script>
@@ -147,6 +166,7 @@
       var goatcounterScript = document.createElement("script");
       goatcounterScript.dataset.goatcounter = "https://gyn.goatcounter.com/count";
       goatcounterScript.async = true;
+      goatcounterScript.referrerPolicy = "no-referrer";
       goatcounterScript.src = "//gc.zgo.at/count.js";
       document.body.appendChild(goatcounterScript);
     }

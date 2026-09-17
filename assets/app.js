@@ -204,6 +204,36 @@
     return "https://www.youtube.com/watch?v=" + encodeURIComponent(videoId);
   }
 
+  // GoatCounter reçoit uniquement l'identifiant public de la vidéo. Le chemin
+  // est volontairement borné : aucune query, aucun hash libre et aucune donnée
+  // saisie par le visiteur ne peut entrer dans l'événement.
+  function analyticsVideoPath(videoId) {
+    var id = String(videoId || "");
+    return /^[A-Za-z0-9_-]{1,64}$/.test(id) ? "video-click/" + id : "";
+  }
+
+  function trackVideoClick(videoId) {
+    var path = analyticsVideoPath(videoId);
+    if (!path) return;
+    var payload = {
+      path: path,
+      title: "Clic vidéo YouTube",
+      event: true,
+      no_session: true,
+      referrer: ""
+    };
+    var attempts = 0;
+    function send() {
+      if (window.goatcounter && typeof window.goatcounter.count === "function") {
+        window.goatcounter.count(payload);
+        return;
+      }
+      attempts += 1;
+      if (attempts < 8) window.setTimeout(send, 100);
+    }
+    send();
+  }
+
   function normName(s) {
     return s.toLowerCase().normalize("NFD").replace(/[^a-z0-9]/g, "");
   }
@@ -456,11 +486,13 @@
       a.className = "latest-card";
       a.href = watchUrl(v.id);
       a.target = "_blank";
-      a.rel = "noopener";
+      a.rel = "noopener noreferrer";
+      a.dataset.videoId = v.id;
       var img = withFallback(document.createElement("img"), FALLBACK_THUMB);
       img.src = thumbUrl(v.id);
       img.alt = "";
       img.loading = "lazy";
+      img.referrerPolicy = "no-referrer";
       var meta = document.createElement("div");
       meta.className = "latest-meta";
       var title = document.createElement("span");
@@ -608,11 +640,13 @@
         a.className = "video-card";
         a.href = watchUrl(v.id);
         a.target = "_blank";
-        a.rel = "noopener";
+        a.rel = "noopener noreferrer";
+        a.dataset.videoId = v.id;
         var img = withFallback(document.createElement("img"), FALLBACK_THUMB);
         img.src = thumbUrl(v.id);
         img.alt = "";
         img.loading = "lazy";
+        img.referrerPolicy = "no-referrer";
         var meta = document.createElement("div");
         meta.className = "video-meta";
         var title = document.createElement("span");
@@ -1202,6 +1236,18 @@
   /* ---------- Événements ---------- */
 
   function bind() {
+    document.addEventListener("click", function (e) {
+      var node = e.target;
+      while (node && node !== document) {
+        if (node.nodeType === 1 && node.tagName.toLowerCase() === "a" &&
+            node.dataset && node.dataset.videoId) {
+          trackVideoClick(node.dataset.videoId);
+          return;
+        }
+        node = node.parentNode;
+      }
+    });
+
     $("lang-toggle").addEventListener("click", function () {
       state.lang = state.lang === "fr" ? "en" : "fr";
       try { localStorage.setItem("gyn-lang", state.lang); } catch (e) { /* stockage bloqué */ }

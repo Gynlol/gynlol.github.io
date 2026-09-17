@@ -31,7 +31,7 @@ body{background:#0a0e14;color:#e9f0f7;font:15px/1.5 'Segoe UI',system-ui,sans-se
 a{color:#6fd3ff;text-decoration:none}a:hover{color:#a5e3ff}
 .shell{max-width:860px;margin:0 auto;padding:0 20px}
 header{border-bottom:1px solid #1d2735;padding:14px 0}
-.brand{font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#e9f0f7}
+.brand{display:inline-flex;align-items:center;min-height:44px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#e9f0f7}
 .brand span{color:#6fd3ff}
 main{padding:28px 0 48px}
 h1{font-size:26px;letter-spacing:.04em;text-transform:uppercase;margin-bottom:6px}
@@ -40,7 +40,7 @@ h1 .vs{color:#6fd3ff}
 .card{display:flex;gap:14px;background:#101722;border:1px solid #1d2735;border-radius:8px;overflow:hidden;color:#e9f0f7;margin-bottom:12px}
 .card:hover{border-color:#6fd3ff}
 .card img{width:200px;aspect-ratio:16/9;object-fit:cover;flex:none}
-.card .meta{padding:12px 14px 12px 0;min-width:0}
+.card .meta{display:flex;flex-direction:column;align-items:flex-start;padding:12px 14px 12px 0;min-width:0}
 .card .title{font-weight:600;font-size:14.5px;line-height:1.4}
 .card .chips{color:#9db0c4;font-size:12.5px;margin-top:8px}
 .rk{border-radius:4px;padding:1px 7px;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
@@ -51,15 +51,19 @@ h1 .vs{color:#6fd3ff}
 .note{position:relative;border-bottom:1px solid #1d2735;padding:10px 0 10px 28px}
 .note:before{content:"—";position:absolute;left:0;top:9px;color:#6fd3ff;font-weight:700}
 .note p{font-size:13px;line-height:1.5;color:#9db0c4}
-.note-link{position:relative;display:inline-flex;align-items:center;min-height:0;margin-top:4px;padding:3px 6px;border:1px solid rgba(111,211,255,.28);border-radius:4px;background:transparent;color:#8593a5;font:500 10px/1.2 'Segoe UI',system-ui,sans-serif;letter-spacing:.02em}
+.note-link{position:relative;display:inline-flex;align-items:center;min-height:44px;margin-top:4px;padding:10px 6px;border:1px solid rgba(111,211,255,.28);border-radius:4px;background:transparent;color:#8593a5;font:500 10px/1.2 'Segoe UI',system-ui,sans-serif;letter-spacing:.02em}
 .note-link:before{content:"";position:absolute;inset:-12px -8px}
 .note-link:hover{border-color:#6fd3ff;color:#a5e3ff}
 .note.ban{background:transparent}
 .lvl{display:inline-block;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#0a0e14;border-radius:4px;font-size:12.5px;line-height:1;padding:5px 9px;margin-right:10px;vertical-align:middle}
 .lvl-facile{background:#39d98a}.lvl-moyen{background:#ffab3d}.lvl-dur{background:#ff5a5a}
 .lvl-tresdur{background:#8d0f1c;color:#ffe3e6}
-.cta{display:inline-block;border:1px solid #6fd3ff;border-radius:6px;padding:11px 18px;margin:18px 12px 0 0;font-weight:600;font-size:13px;letter-spacing:.06em;text-transform:uppercase}
+.cta{display:inline-flex;align-items:center;min-height:44px;border:1px solid #6fd3ff;border-radius:6px;padding:10px 18px;margin:18px 12px 0 0;font-weight:600;font-size:13px;letter-spacing:.06em;text-transform:uppercase}
 footer{border-top:1px solid #1d2735;color:#8593a5;font-size:13px;padding:18px 0}
+footer p a{display:inline-flex;align-items:center;min-width:44px;min-height:44px}
+.footer-links{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:8px}
+.footer-links a{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;color:#8593a5}
+.footer-links a:hover{color:#6fd3ff}
 @media(max-width:640px){.card{flex-direction:column}.card img{width:100%}.card .meta{padding:0 14px 12px}}
 """.strip()
 
@@ -224,8 +228,10 @@ def matchup_page(role, enemy_id, enemy_name, videos):
         ] if x.strip())
         cards.append(
             f'<a class="card" href="https://www.youtube.com/watch?v={esc(v["id"])}" '
-            f'target="_blank" rel="noopener">'
-            f'<img src="https://i.ytimg.com/vi/{esc(v["id"])}/mqdefault.jpg" alt="" loading="lazy">'
+            f'target="_blank" rel="noopener noreferrer" '
+            f'data-goatcounter-click="video-click/{esc(v["id"])}" '
+            f'data-goatcounter-no-session="1" data-goatcounter-title="Clic vidéo YouTube">'
+            f'<img src="https://i.ytimg.com/vi/{esc(v["id"])}/mqdefault.jpg" alt="" loading="lazy" referrerpolicy="no-referrer">'
             f'<span class="meta"><span class="title">{esc(v["title"])}</span>'
             f'<span class="chips">{chips}</span></span></a>'
         )
@@ -235,6 +241,7 @@ def matchup_page(role, enemy_id, enemy_name, videos):
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(desc)}">
 <link rel="canonical" href="{esc(url)}">
@@ -243,6 +250,12 @@ def matchup_page(role, enemy_id, enemy_name, videos):
 <meta property="og:type" content="website">
 <meta property="og:url" content="{esc(url)}">
 <meta property="og:image" content="https://i.ytimg.com/vi/{esc(latest['id'])}/hqdefault.jpg">
+<meta property="og:image:alt" content="Nunu {esc(role_name)} contre {esc(enemy_name)}">
+<meta property="og:site_name" content="Gyn Replays — Matchups Nunu">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{esc(title)}">
+<meta name="twitter:description" content="{esc(desc)}">
+<meta name="twitter:image" content="https://i.ytimg.com/vi/{esc(latest['id'])}/hqdefault.jpg">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2v28M4 9l24 14M4 23L28 9' stroke='%236fd3ff' stroke-width='2.4' stroke-linecap='round' fill='none'/%3E%3C/svg%3E">
 <style>{PAGE_CSS}</style>
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>
@@ -255,13 +268,15 @@ def matchup_page(role, enemy_id, enemy_name, videos):
 {notes}
 {"".join(cards)}
 <a class="cta" href="{SITE}/#{role}/{esc(enemy_id.lower())}">Tous les matchups Nunu</a>
-<a class="cta" href="https://www.youtube.com/@GynReplays?sub_confirmation=1">S'abonner à la chaîne</a>
+<a class="cta" href="https://www.youtube.com/@GynReplays?sub_confirmation=1" rel="noopener noreferrer">S'abonner à la chaîne</a>
 </main>
-<footer><div class="shell">Mis à jour automatiquement depuis la chaîne <a href="https://www.youtube.com/@GynReplays">@GynReplays</a>.</div></footer>
+<footer><div class="shell"><p>Mis à jour automatiquement depuis la chaîne <a href="https://www.youtube.com/@GynReplays" rel="noopener noreferrer">@GynReplays</a>.</p><nav class="footer-links" aria-label="Informations du site"><a href="/confidentialite.html">Confidentialité</a><a href="/mentions.html">Informations</a><a href="/cgu.html">CGU</a></nav></div></footer>
 <script>if (location.hostname !== "localhost" && location.hostname !== "127.0.0.1") {{
+  window.goatcounter = {{ path: function () {{ return location.pathname; }} }};
   var goatcounterScript = document.createElement("script");
   goatcounterScript.dataset.goatcounter = "https://gyn.goatcounter.com/count";
   goatcounterScript.async = true;
+  goatcounterScript.referrerPolicy = "no-referrer";
   goatcounterScript.src = "//gc.zgo.at/count.js";
   document.body.appendChild(goatcounterScript);
 }}</script>
@@ -304,6 +319,11 @@ def main():
     home_lastmod = max(all_dates) if all_dates else ""
     entries = [f"  <url><loc>{SITE}/</loc>" +
                (f"<lastmod>{home_lastmod}</lastmod>" if home_lastmod else "") + "</url>"]
+    entries.extend([
+        f"  <url><loc>{SITE}/confidentialite.html</loc></url>",
+        f"  <url><loc>{SITE}/mentions.html</loc></url>",
+        f"  <url><loc>{SITE}/cgu.html</loc></url>",
+    ])
     for loc, lastmod in urls:
         entries.append(f"  <url><loc>{esc(loc)}</loc>" +
                        (f"<lastmod>{lastmod}</lastmod>" if lastmod else "") + "</url>")

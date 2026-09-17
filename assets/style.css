@@ -609,6 +609,22 @@ main { flex: 1; padding-top: 28px; padding-bottom: 48px; }
   min-height: 44px;
   vertical-align: middle;
 }
+.footer-links {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+}
+.footer-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.footer-links a:hover { color: var(--accent); }
 .subscribe {
   font-family: var(--font-display);
   font-size: 12px;
