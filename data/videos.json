@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.18.1",
-    "updated": "2026-09-17T10:05:28Z"
+    "updated": "2026-09-18T10:11:53Z"
   },
   "videos": [
+    {
+      "id": "4VUEq0cdCSQ",
+      "title": "Nunu Top vs Aurora | Unranked to Master : Emerald 1 37lp | Patch 26.17",
+      "published": "2026-09-18T10:00:13+00:00",
+      "role": "top",
+      "enemy": "Aurora",
+      "enemyName": "Aurora",
+      "patch": "26.17",
+      "rank": "Emerald",
+      "division": "1",
+      "lp": 37,
+      "region": null,
+      "result": null
+    },
     {
       "id": "4UCEGvHQ6fw",
       "title": "Nunu Top vs Garen | Unranked to Master : Emerald 2 77lp | Patch 26.17",
