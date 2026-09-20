@@ -45,6 +45,7 @@
       tipsTitle: "Conseils généraux",
       watchShort: "Voir le short Hexflash ↗",
       viewRunes: "Voir les runes",
+      viewShort: "Voir ce short ↗",
       mineRunes: "Ma page",
       mineBuild: "Mon build",
       altLabel: "Variante",
@@ -102,6 +103,7 @@
       tipsTitle: "General tips",
       watchShort: "Watch the Hexflash short ↗",
       viewRunes: "View runes",
+      viewShort: "Watch this short ↗",
       mineRunes: "My page",
       mineBuild: "My build",
       altLabel: "Variant",
@@ -673,12 +675,17 @@
     p.className = "note-text";
     p.textContent = text;
     card.appendChild(p);
-    if (link && /^#/.test(link)) {
+    if (link && (/^#/.test(link) || /^https?:\/\//i.test(link))) {
       var a = document.createElement("a");
       a.className = "note-link";
       a.href = link;
-      a.textContent = t().viewRunes;
-      a.setAttribute("aria-label", t().viewRunes);
+      var external = /^https?:\/\//i.test(link);
+      a.textContent = external ? t().viewShort : t().viewRunes;
+      a.setAttribute("aria-label", a.textContent);
+      if (external) {
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+      }
       card.appendChild(a);
     }
     return card;

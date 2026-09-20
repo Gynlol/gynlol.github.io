@@ -24,6 +24,7 @@
 
     "top/Aatrox": "moyen",
     "top/Akali": "moyen",
+    "top/Aurora": "facile",
     "top/Camille": "moyen",
     "top/Chogath": "tresdur",
     "top/Darius": "moyen",
@@ -36,6 +37,7 @@
     "top/Mordekaiser": "facile",
     "top/Nasus": "moyen",
     "top/Sion": "dur",
+    "top/Sett": "moyen",
     "top/Teemo": "facile",
     "top/Urgot": "moyen",
     "top/Volibear": "dur",
@@ -55,6 +57,14 @@
   },
 
   "notes": {
+    "top/Aurora": {
+      "fr": [
+        {
+          "d": "Pour tuer une Aurora facilement au niveau 6, il suffit de flash à l'arrivée de la tp de son R puis la combo.",
+          "link": "https://youtube.com/shorts/6a_S_li4yXw?feature=share"
+        }
+      ]
+    },
     "top/Fiora": {
       "fr": [
         {

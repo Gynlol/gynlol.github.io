@@ -177,11 +177,17 @@ def notes_block(role, enemy_id, enemy_name, banned):
         if not text:
             continue
         link = str(n.get("link") or "")
+        external = bool(re.match(r"^https?://", link, re.I))
         if link.startswith("#"):
             link = SITE + "/" + link
-        elif not re.match(r"^https?://", link, re.I):
+        elif not external:
             link = ""
-        link_html = f'<a class="note-link" href="{esc(link)}">Voir les runes</a>' if link else ""
+        if link:
+            label = "Voir ce short ↗" if external else "Voir les runes"
+            attrs = ' target="_blank" rel="noopener noreferrer"' if external else ""
+            link_html = f'<a class="note-link" href="{esc(link)}"{attrs}>{label}</a>'
+        else:
+            link_html = ""
         cards.append(f'<div class="note"><p>{esc(str(text))}</p>{link_html}</div>')
     if not cards:
         return ""
