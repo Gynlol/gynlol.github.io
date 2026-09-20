@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.18.1",
-    "updated": "2026-09-19T10:12:08Z"
+    "updated": "2026-09-20T10:03:14Z"
   },
   "videos": [
+    {
+      "id": "s8pjhazAbvU",
+      "title": "Nunu Top vs Dr. Mundo | Unranked to Master : Diamond 4 54lp | Patch 26.17",
+      "published": "2026-09-20T10:00:10+00:00",
+      "role": "top",
+      "enemy": "DrMundo",
+      "enemyName": "Dr. Mundo",
+      "patch": "26.17",
+      "rank": "Diamond",
+      "division": "4",
+      "lp": 54,
+      "region": null,
+      "result": null
+    },
     {
       "id": "BTBZpIv8A68",
       "title": "Nunu Top vs Dr. Mundo | Unranked to Master : Emerald 1 67lp | Patch 26.17",
