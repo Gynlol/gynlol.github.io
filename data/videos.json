@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.18.1",
-    "updated": "2026-09-20T10:03:14Z"
+    "updated": "2026-09-22T10:20:11Z"
   },
   "videos": [
+    {
+      "id": "YOyz9YThzCU",
+      "title": "Nunu Support vs Anivia | Unranked to Master : Diamond 4 87lp | Patch 26.17",
+      "published": "2026-09-22T10:00:26+00:00",
+      "role": "support",
+      "enemy": "Anivia",
+      "enemyName": "Anivia",
+      "patch": "26.17",
+      "rank": "Diamond",
+      "division": "4",
+      "lp": 87,
+      "region": null,
+      "result": null
+    },
     {
       "id": "s8pjhazAbvU",
       "title": "Nunu Top vs Dr. Mundo | Unranked to Master : Diamond 4 54lp | Patch 26.17",
