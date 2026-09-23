@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.18.1",
-    "updated": "2026-09-22T10:20:11Z"
+    "updated": "2026-09-23T10:08:13Z"
   },
   "videos": [
+    {
+      "id": "OW9v8nX-Ofk",
+      "title": "Nunu Top vs Olaf | Unranked to Master : Diamond 3 57lp | Patch 26.17",
+      "published": "2026-09-23T10:00:35+00:00",
+      "role": "top",
+      "enemy": "Olaf",
+      "enemyName": "Olaf",
+      "patch": "26.17",
+      "rank": "Diamond",
+      "division": "3",
+      "lp": 57,
+      "region": null,
+      "result": null
+    },
     {
       "id": "YOyz9YThzCU",
       "title": "Nunu Support vs Anivia | Unranked to Master : Diamond 4 87lp | Patch 26.17",
