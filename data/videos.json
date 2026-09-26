@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.19.1",
-    "updated": "2026-09-24T10:16:23Z"
+    "updated": "2026-09-26T10:02:35Z"
   },
   "videos": [
+    {
+      "id": "RH4yvZU8hA0",
+      "title": "Nunu Top vs Cassiopeia | Unranked to Master : Diamond 2 34lp | Patch 26.17",
+      "published": "2026-09-26T10:00:27+00:00",
+      "role": "top",
+      "enemy": "Cassiopeia",
+      "enemyName": "Cassiopeia",
+      "patch": "26.17",
+      "rank": "Diamond",
+      "division": "2",
+      "lp": 34,
+      "region": null,
+      "result": null
+    },
     {
       "id": "1x_lRWltpCQ",
       "title": "Nunu Top vs Yorick | Unranked to Master : Diamond 2 17lp | Patch 26.17",
