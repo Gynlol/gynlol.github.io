@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.19.1",
-    "updated": "2026-09-27T10:08:42Z"
+    "updated": "2026-09-28T10:14:22Z"
   },
   "videos": [
+    {
+      "id": "-RO8FS_9ChI",
+      "title": "Nunu Top vs Gangplank | Unranked to Master : Diamond 2 67lp | Patch 26.18",
+      "published": "2026-09-28T10:00:05+00:00",
+      "role": "top",
+      "enemy": "Gangplank",
+      "enemyName": "Gangplank",
+      "patch": "26.18",
+      "rank": "Diamond",
+      "division": "2",
+      "lp": 67,
+      "region": null,
+      "result": null
+    },
     {
       "id": "FrgPZPnfYfw",
       "title": "Nunu Top vs Gragas | Unranked to Master : Diamond 2 84lp | Patch 26.18",
