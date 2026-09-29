@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.19.1",
-    "updated": "2026-09-28T10:14:22Z"
+    "updated": "2026-09-29T10:07:17Z"
   },
   "videos": [
+    {
+      "id": "Yo0g3IpCkSg",
+      "title": "Nunu Top vs Sylas | Unranked to Master : Diamond 1 45lp | Patch 26.18",
+      "published": "2026-09-29T10:00:12+00:00",
+      "role": "top",
+      "enemy": "Sylas",
+      "enemyName": "Sylas",
+      "patch": "26.18",
+      "rank": "Diamond",
+      "division": "1",
+      "lp": 45,
+      "region": null,
+      "result": null
+    },
     {
       "id": "-RO8FS_9ChI",
       "title": "Nunu Top vs Gangplank | Unranked to Master : Diamond 2 67lp | Patch 26.18",
