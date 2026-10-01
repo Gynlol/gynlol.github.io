@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.19.1",
-    "updated": "2026-09-30T10:02:19Z"
+    "updated": "2026-10-01T10:03:14Z"
   },
   "videos": [
+    {
+      "id": "qmumjZB08YA",
+      "title": "Nunu Top vs Jax | Unranked to Master : Diamond 1 60lp | Patch 26.18",
+      "published": "2026-10-01T10:00:09+00:00",
+      "role": "top",
+      "enemy": "Jax",
+      "enemyName": "Jax",
+      "patch": "26.18",
+      "rank": "Diamond",
+      "division": "1",
+      "lp": 60,
+      "region": null,
+      "result": null
+    },
     {
       "id": "PxelI0r_SZc",
       "title": "Nunu Top vs Udyr | Unranked to Master : Diamond 1 32lp | Patch 26.18",
