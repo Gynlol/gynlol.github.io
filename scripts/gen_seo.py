@@ -67,6 +67,12 @@ footer p a{display:inline-flex;align-items:center;min-width:44px;min-height:44px
 @media(max-width:640px){.card{flex-direction:column}.card img{width:100%}.card .meta{padding:0 14px 12px}}
 """.strip()
 
+VIDEO_NOTE_CSS = """
+.video-entry{margin-bottom:12px}
+.video-entry .card{margin-bottom:0}
+.video-note{border-left:2px solid #6fd3ff;color:#9db0c4;font-size:13px;line-height:1.5;margin:8px 0 0 12px;padding:4px 10px}
+""".strip()
+
 
 
 # Les 10 paliers, mêmes teintes que le SPA (assets/style.css) : la couleur
@@ -139,7 +145,7 @@ def load_notes():
     try:
         raw = load("notes.json")
     except (OSError, ValueError):
-        return {}, {}, {}
+        return {}, {}, {}, {}
     bans = {}
     for role, names in (raw.get("bans") or {}).items():
         if role in ROLE_NAMES:
@@ -151,7 +157,7 @@ def load_notes():
         if lvl and len(parts) == 2:
             # Clé normalisée : « top/Dr. Mundo » et « top/DrMundo » se valent.
             levels[parts[0].strip().lower() + "/" + re.sub(r"[^a-z0-9]", "", parts[1].lower())] = lvl
-    return bans, raw.get("notes") or {}, levels
+    return bans, raw.get("notes") or {}, levels, raw.get("video_notes") or {}
 
 
 LEVEL_ALIASES = {
@@ -162,7 +168,7 @@ LEVEL_ALIASES = {
 }
 LEVEL_LABELS = {"facile": "Facile", "moyen": "Moyen", "dur": "Difficile", "tresdur": "Très dur"}
 
-BANS, NOTES, LEVELS = {}, {}, {}
+BANS, NOTES, LEVELS, VIDEO_NOTES = {}, {}, {}, {}
 
 
 def notes_block(role, enemy_id, enemy_name, banned):
@@ -232,7 +238,7 @@ def matchup_page(role, enemy_id, enemy_name, videos):
              if rk else ""),
             esc(fmt_date_fr(v.get("published", ""))),
         ] if x.strip())
-        cards.append(
+        card_html = (
             f'<a class="card" href="https://www.youtube.com/watch?v={esc(v["id"])}" '
             f'target="_blank" rel="noopener noreferrer" '
             f'data-goatcounter-click="video-click/{esc(v["id"])}" '
@@ -241,6 +247,20 @@ def matchup_page(role, enemy_id, enemy_name, videos):
             f'<span class="meta"><span class="title">{esc(v["title"])}</span>'
             f'<span class="chips">{chips}</span></span></a>'
         )
+        video_note = VIDEO_NOTES.get(v["id"])
+        note_html = (
+            f'<p class="video-note">{esc(str(video_note))}</p>'
+            if isinstance(video_note, str) and video_note.strip() else ""
+        )
+        cards.append(
+            f'<div class="video-entry">{card_html}{note_html}</div>'
+            if note_html else card_html
+        )
+
+    has_video_note = any(
+        isinstance(VIDEO_NOTES.get(v["id"]), str) and VIDEO_NOTES[v["id"]].strip()
+        for v in videos
+    )
 
     return f"""<!doctype html>
 <html lang="fr">
@@ -263,7 +283,7 @@ def matchup_page(role, enemy_id, enemy_name, videos):
 <meta name="twitter:description" content="{esc(desc)}">
 <meta name="twitter:image" content="https://i.ytimg.com/vi/{esc(latest['id'])}/hqdefault.jpg">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2v28M4 9l24 14M4 23L28 9' stroke='%236fd3ff' stroke-width='2.4' stroke-linecap='round' fill='none'/%3E%3C/svg%3E">
-<style>{PAGE_CSS}</style>
+<style>{PAGE_CSS}{VIDEO_NOTE_CSS if has_video_note else ''}</style>
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>
 </head>
 <body>
@@ -292,8 +312,8 @@ def matchup_page(role, enemy_id, enemy_name, videos):
 
 
 def main():
-    global BANS, NOTES, LEVELS
-    BANS, NOTES, LEVELS = load_notes()
+    global BANS, NOTES, LEVELS, VIDEO_NOTES
+    BANS, NOTES, LEVELS, VIDEO_NOTES = load_notes()
     champs = load("champions.json")
     data = load("videos.json")
     names = {c["id"]: c["name"] for c in champs["champions"]}

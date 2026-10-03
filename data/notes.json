@@ -9,6 +9,7 @@
     "         'en' est facultatif : sans traduction, la version fr est affichee aux deux langues.",
     "niveaux: cle '<role>/<ChampionId>' -> 'facile' | 'moyen' | 'dur'.",
     "         Le niveau reste distinct des conseils et se traduit tout seul en anglais.",
+    "video_notes: cle '<YouTubeVideoId>' -> texte affiche sous la video concernee.",
     "L'id du champion est celui de data/champions.json (Chogath, MonkeyKing, KSante...).",
     "Les notes s'ecrivent en FRANCAIS uniquement : le site propose un bouton de",
     "traduction quand le visiteur passe en anglais."
@@ -54,6 +55,10 @@
     "adc/Viktor": "facile",
     "adc/Xerath": "facile",
     "adc/Ziggs": "facile"
+  },
+
+  "video_notes": {
+    "xuy_0TmcHSo": "game très nulle, mais c'était le passage master donc obligé de la mettre.."
   },
 
   "notes": {
