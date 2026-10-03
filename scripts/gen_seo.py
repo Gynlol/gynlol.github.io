@@ -68,9 +68,7 @@ footer p a{display:inline-flex;align-items:center;min-width:44px;min-height:44px
 """.strip()
 
 VIDEO_NOTE_CSS = """
-.video-entry{margin-bottom:12px}
-.video-entry .card{margin-bottom:0}
-.video-note{border-left:2px solid #6fd3ff;color:#9db0c4;font-size:13px;line-height:1.5;margin:8px 0 0 12px;padding:4px 10px}
+.video-note{display:block;border-left:2px solid #6fd3ff;color:#9db0c4;font-size:12.5px;font-weight:400;line-height:1.4;margin-top:8px;padding-left:8px}
 """.strip()
 
 
@@ -238,6 +236,11 @@ def matchup_page(role, enemy_id, enemy_name, videos):
              if rk else ""),
             esc(fmt_date_fr(v.get("published", ""))),
         ] if x.strip())
+        video_note = VIDEO_NOTES.get(v["id"])
+        note_html = (
+            f'<span class="video-note">{esc(str(video_note))}</span>'
+            if isinstance(video_note, str) and video_note.strip() else ""
+        )
         card_html = (
             f'<a class="card" href="https://www.youtube.com/watch?v={esc(v["id"])}" '
             f'target="_blank" rel="noopener noreferrer" '
@@ -245,17 +248,9 @@ def matchup_page(role, enemy_id, enemy_name, videos):
             f'data-goatcounter-no-session="1" data-goatcounter-title="Clic vidéo YouTube">'
             f'<img src="https://i.ytimg.com/vi/{esc(v["id"])}/mqdefault.jpg" alt="" loading="lazy" referrerpolicy="no-referrer">'
             f'<span class="meta"><span class="title">{esc(v["title"])}</span>'
-            f'<span class="chips">{chips}</span></span></a>'
+            f'<span class="chips">{chips}</span>{note_html}</span></a>'
         )
-        video_note = VIDEO_NOTES.get(v["id"])
-        note_html = (
-            f'<p class="video-note">{esc(str(video_note))}</p>'
-            if isinstance(video_note, str) and video_note.strip() else ""
-        )
-        cards.append(
-            f'<div class="video-entry">{card_html}{note_html}</div>'
-            if note_html else card_html
-        )
+        cards.append(card_html)
 
     has_video_note = any(
         isinstance(VIDEO_NOTES.get(v["id"]), str) and VIDEO_NOTES[v["id"]].strip()
