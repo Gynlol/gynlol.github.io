@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.19.1",
-    "updated": "2026-10-02T10:12:27Z"
+    "updated": "2026-10-03T10:02:13Z"
   },
   "videos": [
+    {
+      "id": "xuy_0TmcHSo",
+      "title": "Nunu Top vs Gnar | Unranked to Master : Master 9lp | Patch 26.18",
+      "published": "2026-10-03T10:00:31+00:00",
+      "role": "top",
+      "enemy": "Gnar",
+      "enemyName": "Gnar",
+      "patch": "26.18",
+      "rank": "Master",
+      "division": null,
+      "lp": 9,
+      "region": null,
+      "result": null
+    },
     {
       "id": "mPuU7sYrRww",
       "title": "Nunu Top vs Gangplank | Unranked to Master : Diamond 1 86lp | Patch 26.18",
