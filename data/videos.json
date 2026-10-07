@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.20.1",
-    "updated": "2026-10-06T21:22:20Z"
+    "updated": "2026-10-07T10:07:04Z"
   },
   "videos": [
+    {
+      "id": "EGiosDsms50",
+      "title": "Nunu ADC vs Ezreal Master 38lp | Patch 26.18",
+      "published": "2026-10-07T10:00:05+00:00",
+      "role": "adc",
+      "enemy": "Ezreal",
+      "enemyName": "Ezreal",
+      "patch": "26.18",
+      "rank": "Master",
+      "division": null,
+      "lp": 38,
+      "region": null,
+      "result": null
+    },
     {
       "id": "h1GNjUYl3Lw",
       "title": "Nunu Top vs Sylas Master 0lp | Patch 26.18",
