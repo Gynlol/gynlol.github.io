@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.20.1",
-    "updated": "2026-10-07T10:07:04Z"
+    "updated": "2026-10-08T10:03:11Z"
   },
   "videos": [
+    {
+      "id": "qa4OATvmsDE",
+      "title": "Nunu ADC vs Tristana Master 53lp | Patch 26.18",
+      "published": "2026-10-08T10:00:01+00:00",
+      "role": "adc",
+      "enemy": "Tristana",
+      "enemyName": "Tristana",
+      "patch": "26.18",
+      "rank": "Master",
+      "division": null,
+      "lp": 53,
+      "region": null,
+      "result": null
+    },
     {
       "id": "EGiosDsms50",
       "title": "Nunu ADC vs Ezreal Master 38lp | Patch 26.18",
