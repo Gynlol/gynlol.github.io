@@ -3,9 +3,37 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.20.1",
-    "updated": "2026-10-08T10:03:11Z"
+    "updated": "2026-10-10T11:06:56Z"
   },
   "videos": [
+    {
+      "id": "4ggFsLBTC5E",
+      "title": "Nunu and Willump Mid vs Garen Master 893lp | Patch 26.19",
+      "published": "2026-10-10T10:00:00+00:00",
+      "role": "mid",
+      "enemy": "Garen",
+      "enemyName": "Garen",
+      "patch": "26.19",
+      "rank": "Master",
+      "division": null,
+      "lp": 893,
+      "region": null,
+      "result": null
+    },
+    {
+      "id": "ioTszwIWVew",
+      "title": "Nunu and Willump Mid vs Ahri Master 30lp | Patch 26.18",
+      "published": "2026-10-09T10:00:38+00:00",
+      "role": "mid",
+      "enemy": "Ahri",
+      "enemyName": "Ahri",
+      "patch": "26.18",
+      "rank": "Master",
+      "division": null,
+      "lp": 30,
+      "region": null,
+      "result": null
+    },
     {
       "id": "qa4OATvmsDE",
       "title": "Nunu ADC vs Tristana Master 53lp | Patch 26.18",

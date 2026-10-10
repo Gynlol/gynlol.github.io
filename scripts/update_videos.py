@@ -62,7 +62,7 @@ STOPWORDS = {
 }
 
 TITLE_RE = re.compile(
-    r"^\W*nunu(?:\s*&\s*willump)?\s+"
+    r"^\W*nunu(?:\s*&\s*willump|\s+and\s+willump)?\s+"
     r"(?P<role>[a-z]+)\s+"
     r"vs\.?\s+"
     r"(?P<tail>.+)$",
