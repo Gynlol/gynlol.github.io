@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.20.1",
-    "updated": "2026-10-10T11:06:56Z"
+    "updated": "2026-10-12T10:11:17Z"
   },
   "videos": [
+    {
+      "id": "_Qg3nMIwZbw",
+      "title": "Nunu and Willump Mid vs Zed Master 522lp | Patch 26.19",
+      "published": "2026-10-12T10:00:12+00:00",
+      "role": "mid",
+      "enemy": "Zed",
+      "enemyName": "Zed",
+      "patch": "26.19",
+      "rank": "Master",
+      "division": null,
+      "lp": 522,
+      "region": null,
+      "result": null
+    },
     {
       "id": "4ggFsLBTC5E",
       "title": "Nunu and Willump Mid vs Garen Master 893lp | Patch 26.19",
