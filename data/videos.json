@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.20.1",
-    "updated": "2026-10-13T10:33:24Z"
+    "updated": "2026-10-14T12:49:44Z"
   },
   "videos": [
+    {
+      "id": "4aq6Eg5Xmzo",
+      "title": "Nunu and Willump Mid vs Vex Master 201lp | Patch 26.19",
+      "published": "2026-10-14T12:41:45+00:00",
+      "role": "mid",
+      "enemy": "Vex",
+      "enemyName": "Vex",
+      "patch": "26.19",
+      "rank": "Master",
+      "division": null,
+      "lp": 201,
+      "region": null,
+      "result": null
+    },
     {
       "id": "dAICEh2_0-M",
       "title": "Nunu and Willump Mid vs Akali Master 70p | Patch 26.19",
