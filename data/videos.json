@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.20.1",
-    "updated": "2026-10-14T12:49:44Z"
+    "updated": "2026-10-16T10:06:36Z"
   },
   "videos": [
+    {
+      "id": "zxgwHPv-G_s",
+      "title": "Nunu and Willump Mid vs Aurora Master 261lp | Patch 26.19",
+      "published": "2026-10-16T10:00:22+00:00",
+      "role": "mid",
+      "enemy": "Aurora",
+      "enemyName": "Aurora",
+      "patch": "26.19",
+      "rank": "Master",
+      "division": null,
+      "lp": 261,
+      "region": null,
+      "result": null
+    },
     {
       "id": "4aq6Eg5Xmzo",
       "title": "Nunu and Willump Mid vs Vex Master 201lp | Patch 26.19",
