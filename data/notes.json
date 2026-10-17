@@ -163,6 +163,13 @@
           "d": "S'il joue mal et que tu gagnes la lane, il aura toujours la tempo sur toi dans tous les cas à cause de son passif."
         }
       ]
+    },
+    "mid/Garen": {
+      "fr": [
+        {
+          "d": "Si il tank la snowball avec son W tu ne le tueras jamais"
+        }
+      ]
     }
   }
 }
