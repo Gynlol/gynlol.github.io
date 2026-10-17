@@ -170,6 +170,13 @@
           "d": "Si il tank la snowball avec son W tu ne le tueras jamais"
         }
       ]
+    },
+    "mid/Yasuo": {
+      "fr": [
+        {
+          "d": "Son passif rend le match up dur et te force à utiliser beaucoup de mana. Si il joue Bone plating + exhaust t'es dans la merde"
+        }
+      ]
     }
   }
 }
