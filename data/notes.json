@@ -139,7 +139,10 @@
     "top/Volibear": {
       "fr": [
         {
-          "d": "Le matchup est dur du niveau 1 à 5, et si t'as pas un lead avant le niveau 6, c'est plus jouable à cause de son R. Il a beaucoup de dégâts en early et peut facilement dodge la snowball avec son boost de movespeed. Donc il faut faire attention."
+          "d": "Le matchup est dur du niveau 1 à 5, et si t'as pas un lead avant le niveau 6, c'est plus jouable à cause de son R."
+        },
+        {
+          "d": "Il a beaucoup de dégâts en early et peut facilement dodge la snowball avec son boost de movespeed, donc il faut faire attention."
         }
       ]
     },
