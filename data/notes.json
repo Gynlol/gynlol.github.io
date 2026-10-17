@@ -39,6 +39,7 @@
     "top/Nasus": "moyen",
     "top/Sion": "dur",
     "top/Sett": "moyen",
+    "top/Singed": "tresdur",
     "top/Teemo": "facile",
     "top/Urgot": "moyen",
     "top/Volibear": "dur",
@@ -143,6 +144,16 @@
         },
         {
           "d": "Il a beaucoup de dégâts en early et peut facilement dodge la snowball avec son boost de movespeed, donc il faut faire attention."
+        }
+      ]
+    },
+    "top/Singed": {
+      "fr": [
+        {
+          "d": "Son W cancel la snowball, elle est donc inutilisable dans ce match up."
+        },
+        {
+          "d": "Tu peux pas le r à cause de son e. (Bonne chance)"
         }
       ]
     },
