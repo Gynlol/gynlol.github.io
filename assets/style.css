@@ -652,7 +652,7 @@ main { flex: 1; padding-top: 28px; padding-bottom: 48px; }
   .search { width: 100%; }
   .role-title { font-size: 21px; }
   .latest-row { grid-auto-columns: 240px; }
-  .grid { grid-template-columns: repeat(auto-fill, minmax(74px, 1fr)); gap: 8px; }
+  .grid { grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); gap: 8px; }
   .tile img, .tile .tile-letter { width: 48px; height: 48px; }
   .video-card { flex-direction: column; }
   .video-card img { width: 100%; }

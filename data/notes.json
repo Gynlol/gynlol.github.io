@@ -45,7 +45,13 @@
     "top/Yone": "dur",
     "top/Yorick": "tresdur",
 
+    "mid/Ahri": "moyen",
+    "mid/Akali": "moyen",
+    "mid/Aurora": "moyen",
+    "mid/Vex": "moyen",
     "mid/Viktor": "facile",
+    "mid/Yasuo": "dur",
+    "mid/Zed": "moyen",
 
     "adc/Ezreal": "facile",
     "adc/Kalista": "dur",
