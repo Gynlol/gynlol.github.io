@@ -148,6 +148,16 @@
         }
       ]
     },
+    "top/DrMundo": {
+      "fr": [
+        {
+          "d": "Mundo n'est pas un danger pour Nunu jusqu'au niveau 11, à partir de là il t'a outscale."
+        },
+        {
+          "d": "Soit il reste sous tour et t'as la prio, soit il joue et tu le tues."
+        }
+      ]
+    },
     "top/Singed": {
       "fr": [
         {
