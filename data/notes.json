@@ -30,6 +30,7 @@
     "top/Chogath": "tresdur",
     "top/Darius": "moyen",
     "top/DrMundo": "facile",
+    "top/Garen": "dur",
     "top/Fiora": "tresdur",
     "top/Riven": "tresdur",
     "top/Gangplank": "facile",
@@ -154,6 +155,13 @@
         },
         {
           "d": "Tu peux pas le r à cause de son e. (Bonne chance)"
+        }
+      ]
+    },
+    "top/Garen": {
+      "fr": [
+        {
+          "d": "Si il tank la snowball avec son W tu ne le tueras jamais"
         }
       ]
     },
