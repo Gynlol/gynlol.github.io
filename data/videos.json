@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.20.1",
-    "updated": "2026-10-17T10:24:23Z"
+    "updated": "2026-10-18T10:10:22Z"
   },
   "videos": [
+    {
+      "id": "MG8G3vulDwE",
+      "title": "Nunu and Willump Mid vs Katarina Master 32lp | Patch 26.19",
+      "published": "2026-10-18T10:00:15+00:00",
+      "role": "mid",
+      "enemy": "Katarina",
+      "enemyName": "Katarina",
+      "patch": "26.19",
+      "rank": "Master",
+      "division": null,
+      "lp": 32,
+      "region": null,
+      "result": null
+    },
     {
       "id": "cqU647yOkF4",
       "title": "Nunu and Willump Mid vs Yasuo Master 32lp | Patch 26.19",
