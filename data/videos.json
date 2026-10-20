@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.20.1",
-    "updated": "2026-10-19T14:10:58Z"
+    "updated": "2026-10-20T10:15:40Z"
   },
   "videos": [
+    {
+      "id": "x2jyvLaERf0",
+      "title": "Nunu and Willump Top vs Gragas Master 256 LP | 9/0/14 Perfect KDA | Patch 26.20",
+      "published": "2026-10-20T10:00:28+00:00",
+      "role": "top",
+      "enemy": "Gragas",
+      "enemyName": "Gragas",
+      "patch": "26.20",
+      "rank": "Master",
+      "division": null,
+      "lp": 256,
+      "region": null,
+      "result": null
+    },
     {
       "id": "Evmt47xQvi0",
       "title": "Nunu and Willump Mid vs Vladimir Master 68lp | Patch 26.19",
