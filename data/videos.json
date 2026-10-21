@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.21.1",
-    "updated": "2026-10-20T22:46:42Z"
+    "updated": "2026-10-21T10:09:33Z"
   },
   "videos": [
+    {
+      "id": "GafnBdUMxvE",
+      "title": "Nunu and Willump Mid vs Lissandra Master 96LP  | Patch 26.20",
+      "published": "2026-10-21T10:00:11+00:00",
+      "role": "mid",
+      "enemy": "Lissandra",
+      "enemyName": "Lissandra",
+      "patch": "26.20",
+      "rank": "Master",
+      "division": null,
+      "lp": 96,
+      "region": null,
+      "result": null
+    },
     {
       "id": "x2jyvLaERf0",
       "title": "Nunu and Willump Top vs Gragas Master 256 LP | 9/0/14 Perfect KDA | Patch 26.20",
