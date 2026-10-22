@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.21.1",
-    "updated": "2026-10-21T10:09:33Z"
+    "updated": "2026-10-22T10:08:51Z"
   },
   "videos": [
+    {
+      "id": "Pv0p7tfi7Bg",
+      "title": "Nunu and Willump Mid vs Yasuo Master 192LP  | Patch 26.20",
+      "published": "2026-10-22T10:00:31+00:00",
+      "role": "mid",
+      "enemy": "Yasuo",
+      "enemyName": "Yasuo",
+      "patch": "26.20",
+      "rank": "Master",
+      "division": null,
+      "lp": 192,
+      "region": null,
+      "result": null
+    },
     {
       "id": "GafnBdUMxvE",
       "title": "Nunu and Willump Mid vs Lissandra Master 96LP  | Patch 26.20",
