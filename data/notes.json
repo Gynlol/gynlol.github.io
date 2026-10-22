@@ -51,6 +51,7 @@
     "mid/Akali": "moyen",
     "mid/Aurora": "moyen",
     "mid/Garen": "tresdur",
+    "mid/TwistedFate": "facile",
     "mid/Vex": "moyen",
     "mid/Viktor": "facile",
     "mid/Yasuo": "dur",
@@ -200,6 +201,13 @@
       "fr": [
         {
           "d": "Si il tank la snowball avec son W tu ne le tueras jamais"
+        }
+      ]
+    },
+    "mid/TwistedFate": {
+      "fr": [
+        {
+          "d": "Dès qu'il n'a plus son Flash, c'est un free kill."
         }
       ]
     },
