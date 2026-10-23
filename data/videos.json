@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.21.1",
-    "updated": "2026-10-22T10:08:51Z"
+    "updated": "2026-10-23T10:09:51Z"
   },
   "videos": [
+    {
+      "id": "aL6QWx_0tEo",
+      "title": "Nunu Mid vs Twisted Fate   Master 286 LP   Patch 26 19",
+      "published": "2026-10-23T10:00:07+00:00",
+      "role": "mid",
+      "enemy": "TwistedFate",
+      "enemyName": "Twisted Fate",
+      "patch": "26",
+      "rank": "Master",
+      "division": null,
+      "lp": 286,
+      "region": null,
+      "result": null
+    },
     {
       "id": "Pv0p7tfi7Bg",
       "title": "Nunu and Willump Mid vs Yasuo Master 192LP  | Patch 26.20",
