@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.21.1",
-    "updated": "2026-10-24T11:12:58Z"
+    "updated": "2026-10-24T11:28:41Z"
   },
   "videos": [
+    {
+      "id": "WPyruIcPXpw",
+      "title": "Nunu and Willump Mid vs Orianna Master 286LP  | Patch 26.20",
+      "published": "2026-10-24T11:10:00+00:00",
+      "role": "mid",
+      "enemy": "Orianna",
+      "enemyName": "Orianna",
+      "patch": "26.20",
+      "rank": "Master",
+      "division": null,
+      "lp": 286,
+      "region": null,
+      "result": null
+    },
     {
       "id": "aL6QWx_0tEo",
       "title": "Nunu and Willump Mid vs Twisted Fate Master 286LP  | Patch 26.20",
