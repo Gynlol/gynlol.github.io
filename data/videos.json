@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.21.1",
-    "updated": "2026-10-24T11:28:41Z"
+    "updated": "2026-10-25T13:19:10Z"
   },
   "videos": [
+    {
+      "id": "rY8xDGmqIw8",
+      "title": "Nunu and Willump Mid vs Ryze Master 265LP  | Patch 26.21",
+      "published": "2026-10-25T13:07:06+00:00",
+      "role": "mid",
+      "enemy": "Ryze",
+      "enemyName": "Ryze",
+      "patch": "26.21",
+      "rank": "Master",
+      "division": null,
+      "lp": 265,
+      "region": null,
+      "result": null
+    },
     {
       "id": "WPyruIcPXpw",
       "title": "Nunu and Willump Mid vs Orianna Master 286LP  | Patch 26.20",
