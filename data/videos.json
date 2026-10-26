@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.21.1",
-    "updated": "2026-10-25T13:19:10Z"
+    "updated": "2026-10-26T11:10:07Z"
   },
   "videos": [
+    {
+      "id": "M2otuTP2_38",
+      "title": "Nunu and Willump Mid vs Volibear Master 379LP  | Patch 26.21",
+      "published": "2026-10-26T11:00:28+00:00",
+      "role": "mid",
+      "enemy": "Volibear",
+      "enemyName": "Volibear",
+      "patch": "26.21",
+      "rank": "Master",
+      "division": null,
+      "lp": 379,
+      "region": null,
+      "result": null
+    },
     {
       "id": "rY8xDGmqIw8",
       "title": "Nunu and Willump Mid vs Ryze Master 265LP  | Patch 26.21",
