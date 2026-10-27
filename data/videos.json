@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.21.1",
-    "updated": "2026-10-27T11:17:35Z"
+    "updated": "2026-10-27T23:04:29Z"
   },
   "videos": [
+    {
+      "id": "0d8MHemA3P0",
+      "title": "Nunu and Willump Top vs Jax Master 40LP  | Patch 26.20",
+      "published": "2026-10-27T23:00:11+00:00",
+      "role": "top",
+      "enemy": "Jax",
+      "enemyName": "Jax",
+      "patch": "26.20",
+      "rank": "Master",
+      "division": null,
+      "lp": 40,
+      "region": null,
+      "result": null
+    },
     {
       "id": "cJdjleCteJo",
       "title": "Nunu and Willump Mid vs Zed Master 346LP  | Patch 26.21",
