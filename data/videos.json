@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.21.1",
-    "updated": "2026-10-26T11:10:07Z"
+    "updated": "2026-10-27T00:05:41Z"
   },
   "videos": [
+    {
+      "id": "USY0sCtS90I",
+      "title": "Nunu and Willump Top vs Zed Master 256LP  | Patch 26.21",
+      "published": "2026-10-26T23:00:02+00:00",
+      "role": "top",
+      "enemy": "Zed",
+      "enemyName": "Zed",
+      "patch": "26.21",
+      "rank": "Master",
+      "division": null,
+      "lp": 256,
+      "region": null,
+      "result": null
+    },
     {
       "id": "M2otuTP2_38",
       "title": "Nunu and Willump Mid vs Volibear Master 379LP  | Patch 26.21",
