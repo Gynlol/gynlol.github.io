@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.21.1",
-    "updated": "2026-10-28T16:23:01Z"
+    "updated": "2026-10-28T23:07:19Z"
   },
   "videos": [
+    {
+      "id": "gCVo5OV3nZQ",
+      "title": "Nunu and Willump Top vs Gwen Master 70LP  | Patch 26.20",
+      "published": "2026-10-28T23:00:10+00:00",
+      "role": "top",
+      "enemy": "Gwen",
+      "enemyName": "Gwen",
+      "patch": "26.20",
+      "rank": "Master",
+      "division": null,
+      "lp": 70,
+      "region": null,
+      "result": null
+    },
     {
       "id": "Tf5tqlhDfUM",
       "title": "Nunu and Willump Mid vs Katarina Master 409LP  | Patch 26.21",
