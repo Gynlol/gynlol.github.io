@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.21.1",
-    "updated": "2026-10-27T23:04:29Z"
+    "updated": "2026-10-28T11:12:32Z"
   },
   "videos": [
+    {
+      "id": "Tf5tqlhDfUM",
+      "title": "Nunu Mid vs Katarina   Master 409 LP   Patch 20 21",
+      "published": "2026-10-28T11:00:32+00:00",
+      "role": "mid",
+      "enemy": "Katarina",
+      "enemyName": "Katarina",
+      "patch": "20",
+      "rank": "Master",
+      "division": null,
+      "lp": 409,
+      "region": null,
+      "result": null
+    },
     {
       "id": "0d8MHemA3P0",
       "title": "Nunu and Willump Top vs Jax Master 40LP  | Patch 26.20",
