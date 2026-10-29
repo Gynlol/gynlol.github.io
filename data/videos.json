@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.21.1",
-    "updated": "2026-10-29T11:12:27Z"
+    "updated": "2026-10-29T23:15:54Z"
   },
   "videos": [
+    {
+      "id": "oBnEEAuNkv4",
+      "title": "Nunu and Willump Top vs Irelia Master 307LP  | Patch 26.20",
+      "published": "2026-10-29T23:00:07+00:00",
+      "role": "top",
+      "enemy": "Irelia",
+      "enemyName": "Irelia",
+      "patch": "26.20",
+      "rank": "Master",
+      "division": null,
+      "lp": 307,
+      "region": null,
+      "result": null
+    },
     {
       "id": "6b-9icfjEag",
       "title": "Nunu and Willump Adc vs Miss fortune Master 373LP  | Patch 26.21",
