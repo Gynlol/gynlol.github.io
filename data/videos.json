@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.21.1",
-    "updated": "2026-10-28T23:07:19Z"
+    "updated": "2026-10-29T11:12:27Z"
   },
   "videos": [
+    {
+      "id": "6b-9icfjEag",
+      "title": "Nunu and Willump Adc vs Miss fortune Master 373LP  | Patch 26.21",
+      "published": "2026-10-29T11:00:16+00:00",
+      "role": "adc",
+      "enemy": "MissFortune",
+      "enemyName": "Miss Fortune",
+      "patch": "26.21",
+      "rank": "Master",
+      "division": null,
+      "lp": 373,
+      "region": null,
+      "result": null
+    },
     {
       "id": "gCVo5OV3nZQ",
       "title": "Nunu and Willump Top vs Gwen Master 70LP  | Patch 26.20",
