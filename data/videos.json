@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.21.1",
-    "updated": "2026-10-30T11:03:51Z"
+    "updated": "2026-10-30T23:00:47Z"
   },
   "videos": [
+    {
+      "id": "ga9EJ44MwPY",
+      "title": "Nunu and Willump Mid vs Syndra Master 150LP  | Patch 26.20",
+      "published": "2026-10-30T23:00:26+00:00",
+      "role": "mid",
+      "enemy": "Syndra",
+      "enemyName": "Syndra",
+      "patch": "26.20",
+      "rank": "Master",
+      "division": null,
+      "lp": 150,
+      "region": null,
+      "result": null
+    },
     {
       "id": "eAsN9bX7hws",
       "title": "Nunu and Willump Mid vs Azir Master 322LP  | Patch 26.21",
