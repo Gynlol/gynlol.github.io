@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.21.1",
-    "updated": "2026-10-29T23:15:54Z"
+    "updated": "2026-10-30T11:03:51Z"
   },
   "videos": [
+    {
+      "id": "eAsN9bX7hws",
+      "title": "Nunu and Willump Mid vs Azir Master 322LP  | Patch 26.21",
+      "published": "2026-10-30T11:00:08+00:00",
+      "role": "mid",
+      "enemy": "Azir",
+      "enemyName": "Azir",
+      "patch": "26.21",
+      "rank": "Master",
+      "division": null,
+      "lp": 322,
+      "region": null,
+      "result": null
+    },
     {
       "id": "oBnEEAuNkv4",
       "title": "Nunu and Willump Top vs Irelia Master 307LP  | Patch 26.20",
