@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.21.1",
-    "updated": "2026-10-31T11:13:42Z"
+    "updated": "2026-10-31T23:01:02Z"
   },
   "videos": [
+    {
+      "id": "7Ieo0NiViPU",
+      "title": "Nunu and Willump Mid vs Zoe Master 226LP  | Patch 26.21",
+      "published": "2026-10-31T23:00:08+00:00",
+      "role": "mid",
+      "enemy": "Zoe",
+      "enemyName": "Zoe",
+      "patch": "26.21",
+      "rank": "Master",
+      "division": null,
+      "lp": 226,
+      "region": null,
+      "result": null
+    },
     {
       "id": "UfiaKLVn9uw",
       "title": "Nunu Mid vs ChoGath EUW Master 163 LP Patch 26 19",
