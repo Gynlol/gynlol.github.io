@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.21.1",
-    "updated": "2026-10-30T23:00:47Z"
+    "updated": "2026-10-31T11:13:42Z"
   },
   "videos": [
+    {
+      "id": "UfiaKLVn9uw",
+      "title": "Nunu Mid vs ChoGath EUW Master 163 LP Patch 26 19",
+      "published": "2026-10-31T11:00:08+00:00",
+      "role": "mid",
+      "enemy": "Chogath",
+      "enemyName": "Cho'Gath",
+      "patch": "26",
+      "rank": "Master",
+      "division": null,
+      "lp": 163,
+      "region": "EUW",
+      "result": null
+    },
     {
       "id": "ga9EJ44MwPY",
       "title": "Nunu and Willump Mid vs Syndra Master 150LP  | Patch 26.20",
