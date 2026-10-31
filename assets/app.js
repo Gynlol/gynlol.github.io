@@ -20,7 +20,10 @@
       noVideo: "Pas encore de replay",
       nVideos: function (n) { return n > 1 ? n + " replays" : "1 replay"; },
       tileLabel: function (name, n) { return n > 0 ? name + " — " + (n > 1 ? n + " replays" : "1 replay") : name + " — pas encore de replay"; },
-      matchupSub: function (n) { return n > 1 ? n + " replays, du plus récent au plus ancien" : "1 replay"; },
+      matchupSub: function (n) { return n > 1 ? n + " replays" : "1 replay"; },
+      sortBy: "Trier par",
+      sortRank: "Rang",
+      sortDate: "Date",
       footerAuto: "Mis à jour automatiquement depuis la chaîne",
       subscribe: "Abonne-toi ❄",
       updatedAt: function (d) { return "dernière mise à jour : " + d; },
@@ -78,7 +81,10 @@
       noVideo: "No replay yet",
       nVideos: function (n) { return n > 1 ? n + " replays" : "1 replay"; },
       tileLabel: function (name, n) { return n > 0 ? name + " — " + (n > 1 ? n + " replays" : "1 replay") : name + " — no replay yet"; },
-      matchupSub: function (n) { return n > 1 ? n + " replays, newest first" : "1 replay"; },
+      matchupSub: function (n) { return n > 1 ? n + " replays" : "1 replay"; },
+      sortBy: "Sort by",
+      sortRank: "Rank",
+      sortDate: "Date",
       footerAuto: "Automatically updated from the channel",
       subscribe: "Subscribe ❄",
       updatedAt: function (d) { return "last update: " + d; },
@@ -628,16 +634,19 @@
     sub.appendChild(document.createTextNode(entry.videos.length
       ? t().matchupSub(entry.videos.length)
       : (isBanned(state.role, entry.id) ? t().banSub : t().noVideo)));
+    $("video-sort").hidden = entry.videos.length === 0;
+    $("videos-col").hidden = entry.videos.length === 0;
     $("panel-close").setAttribute("aria-label", t().close);
 
     renderNotes(entry);
 
     var list = $("video-list");
     list.innerHTML = "";
-    entry.videos
-      .slice()
-      .sort(function (a, b) { return a.published < b.published ? 1 : -1; })
-      .forEach(function (v) {
+    var sortHelper = window.NunuMatchupSort;
+    var sortedVideos = sortHelper
+      ? sortHelper.sortVideos(entry.videos, sortHelper.getMode())
+      : entry.videos.slice().sort(function (a, b) { return a.published < b.published ? 1 : -1; });
+    sortedVideos.forEach(function (v) {
         var a = document.createElement("a");
         a.className = "video-card";
         a.href = watchUrl(v.id);
@@ -1243,6 +1252,10 @@
   /* ---------- Événements ---------- */
 
   function bind() {
+    document.addEventListener("matchup-sort-change", function () {
+      if (state.view === "matchups" && state.champ) renderPanel(false);
+    });
+
     document.addEventListener("click", function (e) {
       var node = e.target;
       while (node && node !== document) {

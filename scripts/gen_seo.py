@@ -43,6 +43,15 @@ h1 .vs{color:#6fd3ff}
 .card .meta{display:flex;flex-direction:column;align-items:flex-start;padding:12px 14px 12px 0;min-width:0}
 .card .title{font-weight:600;font-size:14.5px;line-height:1.4}
 .card .chips{color:#9db0c4;font-size:12.5px;margin-top:8px}
+.replay-sort{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin:22px 0 12px}
+.replay-sort-label{color:#8593a5;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.replay-sort-options{display:inline-flex;flex:none;overflow:hidden;border:1px solid #1d2735;border-radius:5px}
+.replay-sort-button{appearance:none;display:inline-flex;align-items:center;justify-content:center;min-width:64px;min-height:44px;padding:8px 12px;border:0;background:transparent;color:#8593a5;font:600 12px/1.2 'Segoe UI',system-ui,sans-serif;letter-spacing:.04em;cursor:pointer}
+.replay-sort-button+.replay-sort-button{border-left:1px solid #1d2735}
+.replay-sort-button:hover{color:#e9f0f7}
+.replay-sort-button[aria-pressed="true"]{color:#6fd3ff;background:rgba(111,211,255,.14);box-shadow:inset 0 -2px #6fd3ff}
+.replay-sort-button:focus-visible{position:relative;z-index:1;outline:2px solid #6fd3ff;outline-offset:2px}
+.replay-list{display:flex;flex-direction:column}
 .rk{border-radius:4px;padding:1px 7px;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
 {RANK_CSS}
 .ban{display:inline-block;background:#ff5a5a;color:#1a0508;font-size:11px;font-weight:700;letter-spacing:.1em;padding:4px 6px;border-radius:4px;vertical-align:middle;margin-left:6px}
@@ -230,6 +239,10 @@ def matchup_page(role, enemy_id, enemy_name, videos):
     cards = []
     for v in videos:
         rk = rank_label(v)
+        rank_tier = esc(str(v.get("rank") or ""))
+        rank_division = esc(str(v.get("division") if v.get("division") is not None else ""))
+        rank_lp = esc(str(v.get("lp") if v.get("lp") is not None else ""))
+        sort_date = esc(str(v.get("published") or ""))
         chips = " · ".join(x for x in [
             esc(f"Patch {v['patch']}") if v.get("patch") else "",
             (f'<span class="rk rk-{esc(v["rank"].lower())}">{esc(rk)}</span>'
@@ -242,7 +255,9 @@ def matchup_page(role, enemy_id, enemy_name, videos):
             if isinstance(video_note, str) and video_note.strip() else ""
         )
         card_html = (
-            f'<a class="card" href="https://www.youtube.com/watch?v={esc(v["id"])}" '
+            f'<a class="card" data-sort-item data-rank-tier="{rank_tier}" '
+            f'data-rank-division="{rank_division}" data-rank-lp="{rank_lp}" '
+            f'data-sort-date="{sort_date}" href="https://www.youtube.com/watch?v={esc(v["id"])}" '
             f'target="_blank" rel="noopener noreferrer" '
             f'data-goatcounter-click="video-click/{esc(v["id"])}" '
             f'data-goatcounter-no-session="1" data-goatcounter-title="Clic vidéo YouTube">'
@@ -279,15 +294,25 @@ def matchup_page(role, enemy_id, enemy_name, videos):
 <meta name="twitter:image" content="https://i.ytimg.com/vi/{esc(latest['id'])}/hqdefault.jpg">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2v28M4 9l24 14M4 23L28 9' stroke='%236fd3ff' stroke-width='2.4' stroke-linecap='round' fill='none'/%3E%3C/svg%3E">
 <style>{PAGE_CSS}{VIDEO_NOTE_CSS if has_video_note else ''}</style>
+<script src="/assets/matchup-sort.js?v=20261031a" defer></script>
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>
 </head>
 <body>
 <header><div class="shell"><a class="brand" href="{SITE}/">Gyn Replays <span>— Matchups Nunu</span></a></div></header>
 <main class="shell">
 <h1>Nunu {esc(role_name)} <span class="vs">vs</span> {esc(enemy_name)}{'<span class="ban">BAN</span>' if banned else ''}</h1>
-<p class="sub">{level_badge}{n} replay{"s" if n > 1 else ""} complet{"s" if n > 1 else ""} du matchup, du plus récent au plus ancien — gameplay réel en {esc(rank)}, aucune sélection de moments.</p>
+<p class="sub">{level_badge}{n} replay{"s" if n > 1 else ""} complet{"s" if n > 1 else ""} du matchup — gameplay réel en {esc(rank)}, aucune sélection de moments.</p>
 {notes}
+<div class="replay-sort" role="group" aria-labelledby="replay-sort-label">
+  <span class="replay-sort-label" id="replay-sort-label">Trier par</span>
+  <div class="replay-sort-options">
+    <button class="replay-sort-button" type="button" data-sort-mode="rank" aria-pressed="false">Rang</button>
+    <button class="replay-sort-button" type="button" data-sort-mode="date" aria-pressed="true">Date</button>
+  </div>
+</div>
+<div class="replay-list" data-sort-list>
 {"".join(cards)}
+</div>
 <a class="cta" href="{SITE}/#{role}/{esc(enemy_id.lower())}">Tous les matchups Nunu</a>
 <a class="cta" href="https://www.youtube.com/@GynReplays?sub_confirmation=1" rel="noopener noreferrer">S'abonner à la chaîne</a>
 </main>

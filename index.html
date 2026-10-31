@@ -26,7 +26,7 @@
        la page s'affiche quand même avec les polices système. -->
   <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
-  <link rel="stylesheet" href="assets/style.css?v=20261017a">
+  <link rel="stylesheet" href="assets/style.css?v=20261031c">
 </head>
 <body>
   <header class="topbar">
@@ -117,7 +117,16 @@
         <button class="panel-close" id="panel-close" type="button" aria-label="Fermer">✕</button>
       </div>
       <div class="panel-body">
-        <div class="video-list" id="video-list"></div>
+        <div class="videos-col" id="videos-col">
+          <div class="replay-sort video-sort" id="video-sort" role="group" aria-labelledby="video-sort-label" hidden>
+            <span class="replay-sort-label" id="video-sort-label" data-i18n="sortBy">Trier par</span>
+            <div class="replay-sort-options">
+              <button class="replay-sort-button" type="button" data-sort-mode="rank" data-i18n="sortRank" aria-pressed="false">Rang</button>
+              <button class="replay-sort-button" type="button" data-sort-mode="date" data-i18n="sortDate" aria-pressed="true">Date</button>
+            </div>
+          </div>
+          <div class="video-list" id="video-list"></div>
+        </div>
         <aside class="notes-col" id="notes-col" hidden>
           <h3 class="notes-title" id="notes-title">À savoir</h3>
           <div class="notes-grid" id="notes-grid"></div>
@@ -143,7 +152,8 @@
     <p class="noscript">Ce site a besoin de JavaScript pour afficher les matchups. / This site needs JavaScript to display matchups.</p>
   </noscript>
 
-  <script src="assets/app.js?v=20260920a"></script>
+  <script src="assets/matchup-sort.js?v=20261031a"></script>
+  <script src="assets/app.js?v=20261031c"></script>
   <!-- GoatCounter : statistiques agrégées et événements vidéo sans données saisies. -->
   <script>
     function analyticsPath() {
