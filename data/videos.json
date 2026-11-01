@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.21.1",
-    "updated": "2026-11-01T11:20:37Z"
+    "updated": "2026-11-01T23:11:39Z"
   },
   "videos": [
+    {
+      "id": "BU1EZ8GUXHE",
+      "title": "Nunu and Willump Mid vs Ekko Master 30LP  | Patch 26.21",
+      "published": "2026-11-01T23:00:14+00:00",
+      "role": "mid",
+      "enemy": "Ekko",
+      "enemyName": "Ekko",
+      "patch": "26.21",
+      "rank": "Master",
+      "division": null,
+      "lp": 30,
+      "region": null,
+      "result": null
+    },
     {
       "id": "_p1QMOi5SDs",
       "title": "Nunu and Willump Top vs Kayle Master 466LP  | Patch 26.21",
