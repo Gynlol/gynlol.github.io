@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.21.1",
-    "updated": "2026-10-31T23:01:02Z"
+    "updated": "2026-11-01T11:20:37Z"
   },
   "videos": [
+    {
+      "id": "_p1QMOi5SDs",
+      "title": "Nunu and Willump Top vs Kayle Master 466LP  | Patch 26.21",
+      "published": "2026-11-01T11:00:29+00:00",
+      "role": "top",
+      "enemy": "Kayle",
+      "enemyName": "Kayle",
+      "patch": "26.21",
+      "rank": "Master",
+      "division": null,
+      "lp": 466,
+      "region": null,
+      "result": null
+    },
     {
       "id": "7Ieo0NiViPU",
       "title": "Nunu and Willump Mid vs Zoe Master 226LP  | Patch 26.21",
