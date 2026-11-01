@@ -40,9 +40,11 @@
     "top/Mordekaiser": "facile",
     "top/Nasus": "moyen",
     "top/Olaf": "tresdur",
+    "top/Renekton": "moyen",
     "top/Sion": "dur",
     "top/Sett": "moyen",
     "top/Singed": "tresdur",
+    "top/Sylas": "dur",
     "top/Teemo": "facile",
     "top/Urgot": "moyen",
     "top/Volibear": "dur",
@@ -136,6 +138,13 @@
         {
           "d": "Elle a beaucoup de vitesse de déplacement : privilégie Hexflash et achète tes bottes plus tôt que d'habitude dans ce matchup.",
           "link": "#setup/runes"
+        }
+      ]
+    },
+    "top/Sylas": {
+      "fr": [
+        {
+          "d": "Il peut sidestep ta snowball avec son E, donc c'est dur de gagner les trades. Il te faut un lead pour pouvoir jouer cette lane."
         }
       ]
     },
