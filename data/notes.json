@@ -64,12 +64,14 @@
     "adc/Ezreal": "facile",
     "adc/Kalista": "dur",
     "adc/Karthus": "facile",
+    "adc/MissFortune": "facile",
     "adc/Sivir": "moyen",
     "adc/Twitch": "facile",
     "adc/Tristana": "moyen",
     "adc/Viktor": "facile",
     "adc/Xerath": "facile",
-    "adc/Ziggs": "facile"
+    "adc/Ziggs": "facile",
+    "support/Anivia": "tresdur"
   },
 
   "video_notes": {
@@ -241,6 +243,13 @@
       "fr": [
         {
           "d": "Son passif rend le match up dur et te force à utiliser beaucoup de mana. Si il joue Bone plating + exhaust t'es dans la merde"
+        }
+      ]
+    },
+    "support/Anivia": {
+      "fr": [
+        {
+          "d": "Prends ton niveau 3, puis roam. Si elle roam aussi, joue là où elle n'est pas."
         }
       ]
     }
