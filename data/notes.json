@@ -38,6 +38,7 @@
     "top/Irelia": "dur",
     "top/Mordekaiser": "facile",
     "top/Nasus": "moyen",
+    "top/Olaf": "tresdur",
     "top/Sion": "dur",
     "top/Sett": "moyen",
     "top/Singed": "tresdur",
@@ -119,6 +120,13 @@
       "fr": [
         {
           "d": "Matchup très facile du niveau 1 à 5, mais à partir du niveau 6, il t'outscale, peu importe l'avance que t'as : c'est quasiment impossible de gagner."
+        }
+      ]
+    },
+    "top/Olaf": {
+      "fr": [
+        {
+          "d": "Matchup très dur en early et injouable à partir du niveau 6. Si tu n'as pas de lead avant le niveau 6, ne remets plus un pied sur la lane. S'il rush l'Hexdrinker, ignore-le au plus vite."
         }
       ]
     },
