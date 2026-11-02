@@ -55,6 +55,7 @@
     "mid/Akali": "moyen",
     "mid/Aurora": "moyen",
     "mid/Azir": "facile",
+    "mid/Chogath": "tresdur",
     "mid/Ekko": "moyen",
     "mid/Garen": "tresdur",
     "mid/Lissandra": "moyen",
@@ -184,6 +185,16 @@
         }
       ]
     },
+    "mid/Volibear": {
+      "fr": [
+        {
+          "d": "Le matchup est dur du niveau 1 à 5, et si t'as pas un lead avant le niveau 6, c'est plus jouable à cause de son R."
+        },
+        {
+          "d": "Il a beaucoup de dégâts en early et peut facilement dodge la snowball avec son boost de movespeed, donc il faut faire attention."
+        }
+      ]
+    },
     "top/DrMundo": {
       "fr": [
         {
@@ -212,6 +223,17 @@
       ]
     },
     "top/Chogath": {
+      "fr": [
+        {
+          "d": "Il peut cancel la snowball très facilement grâce à son bump et a deux moyens différents de cancel ton R (bump + silence). Sans grosse erreur du Cho'Gath, le matchup est très dur, mais jouable avec un lead."
+        },
+        {
+          "d": "Je conseille l'Hexflash pour le bonus de vitesse afin de le surprendre et qu'il rate son bump.",
+          "link": "#setup/runes"
+        }
+      ]
+    },
+    "mid/Chogath": {
       "fr": [
         {
           "d": "Il peut cancel la snowball très facilement grâce à son bump et a deux moyens différents de cancel ton R (bump + silence). Sans grosse erreur du Cho'Gath, le matchup est très dur, mais jouable avec un lead."
