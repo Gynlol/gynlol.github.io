@@ -3,7 +3,7 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.21.1",
-    "updated": "2026-11-02T11:16:43Z"
+    "updated": "2026-11-02T17:14:27Z"
   },
   "videos": [
     {
@@ -64,16 +64,16 @@
     },
     {
       "id": "UfiaKLVn9uw",
-      "title": "Nunu Mid vs ChoGath EUW Master 163 LP Patch 26 19",
+      "title": "Nunu and Willump Mid vs Cho'gath Master 163LP  | Patch 26.20",
       "published": "2026-10-31T11:00:08+00:00",
       "role": "mid",
       "enemy": "Chogath",
       "enemyName": "Cho'Gath",
-      "patch": "26",
+      "patch": "26.20",
       "rank": "Master",
       "division": null,
       "lp": 163,
-      "region": "EUW",
+      "region": null,
       "result": null
     },
     {
