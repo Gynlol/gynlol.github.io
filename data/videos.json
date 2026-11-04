@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.22.1",
-    "updated": "2026-11-03T22:28:46Z"
+    "updated": "2026-11-04T01:07:31Z"
   },
   "videos": [
+    {
+      "id": "M8NwZh57FzA",
+      "title": "Nunu and Willump Top vs K'sante Master 30LP  | Patch 26.20",
+      "published": "2026-11-03T23:00:15+00:00",
+      "role": "top",
+      "enemy": "KSante",
+      "enemyName": "K'Sante",
+      "patch": "26.20",
+      "rank": "Master",
+      "division": null,
+      "lp": 30,
+      "region": null,
+      "result": null
+    },
     {
       "id": "NgcGwVQLUd8",
       "title": "Nunu and Willump Mid vs Leblanc Master 70LP  | Patch 26.21",
