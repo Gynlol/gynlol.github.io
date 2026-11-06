@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.22.1",
-    "updated": "2026-11-05T19:00:25Z"
+    "updated": "2026-11-06T13:15:30Z"
   },
   "videos": [
+    {
+      "id": "25fuypVoZKI",
+      "title": "Nunu and Willump Mid vs Syndra Diamond 2 85LP | Patch 26.21",
+      "published": "2026-11-06T13:00:05+00:00",
+      "role": "mid",
+      "enemy": "Syndra",
+      "enemyName": "Syndra",
+      "patch": "26.21",
+      "rank": "Diamond",
+      "division": "2",
+      "lp": 85,
+      "region": null,
+      "result": null
+    },
     {
       "id": "CTPirlGEpIk",
       "title": "Nunu and Willump Mid vs Ekko Diamond 2  25LP | Patch 26.21",
