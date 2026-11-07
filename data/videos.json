@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.22.1",
-    "updated": "2026-11-06T13:15:30Z"
+    "updated": "2026-11-07T16:31:29Z"
   },
   "videos": [
+    {
+      "id": "N3xH_RWOBaE",
+      "title": "Nunu and Willump Mid vs Ahri Master 381LP | Patch 26.21",
+      "published": "2026-11-07T16:19:16+00:00",
+      "role": "mid",
+      "enemy": "Ahri",
+      "enemyName": "Ahri",
+      "patch": "26.21",
+      "rank": "Master",
+      "division": null,
+      "lp": 381,
+      "region": null,
+      "result": null
+    },
     {
       "id": "25fuypVoZKI",
       "title": "Nunu and Willump Mid vs Syndra Diamond 2 85LP | Patch 26.21",
