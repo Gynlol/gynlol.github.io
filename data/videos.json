@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.22.1",
-    "updated": "2026-11-08T12:09:15Z"
+    "updated": "2026-11-09T11:11:29Z"
   },
   "videos": [
+    {
+      "id": "sEN-0jsVHKU",
+      "title": "Nunu and Willump Mid vs Leblanc Master 21LP | Patch 26.20",
+      "published": "2026-11-09T11:00:04+00:00",
+      "role": "mid",
+      "enemy": "Leblanc",
+      "enemyName": "LeBlanc",
+      "patch": "26.20",
+      "rank": "Master",
+      "division": null,
+      "lp": 21,
+      "region": null,
+      "result": null
+    },
     {
       "id": "hhrnFQ3F9Ns",
       "title": "Nunu and Willump Mid vs Aurelion Sol Master 371LP | Patch 26.20",
