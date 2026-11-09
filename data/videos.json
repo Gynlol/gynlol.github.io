@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.22.1",
-    "updated": "2026-11-09T11:11:29Z"
+    "updated": "2026-11-09T23:36:56Z"
   },
   "videos": [
+    {
+      "id": "EJCmcgWq6Fo",
+      "title": "Nunu and Willump Mid vs Yasuo Diamond 1 55LP | Patch 26.20",
+      "published": "2026-11-09T23:30:02+00:00",
+      "role": "mid",
+      "enemy": "Yasuo",
+      "enemyName": "Yasuo",
+      "patch": "26.20",
+      "rank": "Diamond",
+      "division": "1",
+      "lp": 55,
+      "region": null,
+      "result": null
+    },
     {
       "id": "sEN-0jsVHKU",
       "title": "Nunu and Willump Mid vs Leblanc Master 21LP | Patch 26.20",
