@@ -26,7 +26,7 @@
        la page s'affiche quand même avec les polices système. -->
   <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
-  <link rel="stylesheet" href="assets/style.css?v=20261031c">
+  <link rel="stylesheet" href="assets/style.css?v=20261110a">
   <link rel="stylesheet" href="assets/twitch-status.css?v=20261110a">
   <script src="assets/twitch-status.js?v=20261110a" defer></script>
 </head>
@@ -107,9 +107,24 @@
       <div class="setup-panel" id="tips-panel" role="tabpanel" aria-labelledby="setup-tab-tips" hidden>
         <div class="setup-block tips-block" id="tips-block" hidden>
           <div class="tips-head">
-            <h2 class="section-title" id="tips-title">Conseils généraux</h2>
+            <h2 class="section-title" id="tips-title">Conseils — Top</h2>
           </div>
-          <ol class="tips-list" id="tips-list"></ol>
+          <nav class="setup-switcher tips-role-switcher" id="tips-role-switcher"
+            aria-label="Conseils par rôle" role="tablist">
+            <button class="setup-tab" id="tips-role-top" type="button" role="tab"
+              data-tip-role="top" aria-controls="tips-role-panel" aria-selected="true" tabindex="0">Top</button>
+            <button class="setup-tab" id="tips-role-mid" type="button" role="tab"
+              data-tip-role="mid" aria-controls="tips-role-panel" aria-selected="false" tabindex="-1">Mid</button>
+            <button class="setup-tab" id="tips-role-adc" type="button" role="tab"
+              data-tip-role="adc" aria-controls="tips-role-panel" aria-selected="false" tabindex="-1">ADC</button>
+            <button class="setup-tab" id="tips-role-support" type="button" role="tab"
+              data-tip-role="support" aria-controls="tips-role-panel" aria-selected="false" tabindex="-1">Support</button>
+          </nav>
+          <div class="tips-role-panel" id="tips-role-panel" role="tabpanel"
+            aria-labelledby="tips-role-top" tabindex="0">
+            <p class="tips-empty" id="tips-empty" hidden></p>
+            <ol class="tips-list" id="tips-list"></ol>
+          </div>
         </div>
       </div>
     </section>
@@ -160,7 +175,7 @@
   </noscript>
 
   <script src="assets/matchup-sort.js?v=20261031a"></script>
-  <script src="assets/app.js?v=20261031c"></script>
+  <script src="assets/app.js?v=20261110a"></script>
   <!-- GoatCounter : statistiques agrégées et événements vidéo sans données saisies. -->
   <script>
     function analyticsPath() {

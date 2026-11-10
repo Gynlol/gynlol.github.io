@@ -36,7 +36,7 @@
       setupNav: "Runes & build",
       setupNavShort: "Runes",
       setupTitle: "Mes runes et mes builds",
-      setupIntro: "Runes, builds et conseils généraux, chacun dans son onglet.",
+      setupIntro: "Runes, builds et conseils classés par rôle.",
       setupRunesTab: "Runes",
       setupBuildsTab: "Builds",
       setupTipsTab: "Conseils",
@@ -45,7 +45,9 @@
       spellOrderMax: "Max",
       runesTitle: "Pages de runes",
       buildsTitle: "Builds",
-      tipsTitle: "Conseils généraux",
+      tipsTitle: "Conseils",
+      tipsRolesLabel: "Conseils par rôle",
+      tipsEmpty: "Pas encore de conseil pour ce rôle.",
       watchShort: "Voir le short Hexflash ↗",
       viewRunes: "Voir les runes",
       viewShort: "Voir ce short ↗",
@@ -97,7 +99,7 @@
       setupNav: "Runes & build",
       setupNavShort: "Runes",
       setupTitle: "My runes and builds",
-      setupIntro: "Runes, builds and general tips, each in its own tab.",
+      setupIntro: "Runes, builds and tips organized by role.",
       setupRunesTab: "Runes",
       setupBuildsTab: "Builds",
       setupTipsTab: "Tips",
@@ -106,7 +108,9 @@
       spellOrderMax: "Max",
       runesTitle: "Rune pages",
       buildsTitle: "Builds",
-      tipsTitle: "General tips",
+      tipsTitle: "Tips",
+      tipsRolesLabel: "Tips by role",
+      tipsEmpty: "No tips for this role yet.",
       watchShort: "Watch the Hexflash short ↗",
       viewRunes: "View runes",
       viewShort: "Watch this short ↗",
@@ -153,6 +157,7 @@
     view: "matchups",  // "matchups" | "setup" (runes & build, hors matchups)
     setup: null,       // data/setup-built.json, chargé à la première ouverture
     setupState: "idle", // idle | loading | ok | error
+    tipsRole: "top",
     setupSection: "runes" // "runes" | "builds" | "tips"
   };
 
@@ -1020,12 +1025,27 @@
     return card;
   }
 
-  function tipsContent() {
+  function tipsRoleContent(role) {
     var raw = state.setup && state.setup.conseils;
     if (!raw) return null;
-    var content = raw[state.lang] || raw.fr || raw.en;
+    var roles = raw.roles;
+    if (!roles && (raw.fr || raw.en)) roles = { top: raw };
+    var roleData = roles && roles[role];
+    if (!roleData) return null;
+    var content = roleData[state.lang] || roleData.fr || roleData.en;
     if (!content || !Array.isArray(content.items)) return null;
     return content;
+  }
+
+  function tipsContent() {
+    return tipsRoleContent(state.tipsRole);
+  }
+
+  function hasAnyTips() {
+    return ROLES.some(function (role) {
+      var content = tipsRoleContent(role);
+      return !!content && content.items.length > 0;
+    });
   }
 
   function spellSequenceEl(sequence) {
@@ -1091,15 +1111,24 @@
   function renderTips() {
     var block = $("tips-block");
     var list = $("tips-list");
-    if (!block || !list) return;
+    var empty = $("tips-empty");
+    var panel = $("tips-role-panel");
+    if (!block || !list || !empty || !panel) return;
     list.innerHTML = "";
+    var activeTab = null;
+    Array.prototype.forEach.call(document.querySelectorAll("[data-tip-role]"), function (tab) {
+      var role = tab.getAttribute("data-tip-role");
+      var selected = role === state.tipsRole;
+      tab.textContent = t().roleNames[role] || role;
+      tab.setAttribute("aria-selected", selected ? "true" : "false");
+      tab.tabIndex = selected ? 0 : -1;
+      if (selected) activeTab = tab;
+    });
+    if (activeTab) panel.setAttribute("aria-labelledby", activeTab.id);
+    $("tips-role-switcher").setAttribute("aria-label", t().tipsRolesLabel);
+    $("tips-title").textContent = t().tipsTitle + " — " + (t().roleNames[state.tipsRole] || state.tipsRole);
     var content = tipsContent();
-    if (!content) {
-      block.hidden = true;
-      return;
-    }
-    $("tips-title").textContent = content.titre || "";
-    content.items.forEach(function (tip) {
+    if (content) content.items.forEach(function (tip) {
       if (!tip || (!tip.t && !tip.d && !Array.isArray(tip.points) && !tip.spellSequence)) return;
       var item = document.createElement("li");
       item.className = "tips-item";
@@ -1127,7 +1156,11 @@
       if (sequence) item.appendChild(sequence);
       list.appendChild(item);
     });
-    block.hidden = list.children.length === 0;
+    var hasItems = list.children.length > 0;
+    empty.textContent = t().tipsEmpty;
+    empty.hidden = hasItems;
+    list.hidden = !hasItems;
+    block.hidden = false;
   }
 
   function renderSetup() {
@@ -1170,7 +1203,7 @@
     }
     var runePages = (state.setup.runes && state.setup.runes.pages) || [];
     var buildPages = (state.setup.builds && state.setup.builds.pages) || [];
-    var hasTips = !!tipsContent() && tipsContent().items.length > 0;
+    var hasTips = hasAnyTips();
     var hasRunes = runePages.length > 0;
     var hasBuilds = buildPages.length > 0;
     if (state.setupSection === "runes" && !hasRunes) {
@@ -1313,6 +1346,24 @@
       });
     });
 
+    document.querySelectorAll("[data-tip-role]").forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        state.tipsRole = tab.getAttribute("data-tip-role");
+        renderTips();
+      });
+      tab.addEventListener("keydown", function (e) {
+        if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+        var tabs = Array.prototype.slice.call(document.querySelectorAll("[data-tip-role]"));
+        var index = tabs.indexOf(tab);
+        if (index === -1 || tabs.length < 2) return;
+        e.preventDefault();
+        var next = e.key === "ArrowRight"
+          ? tabs[(index + 1) % tabs.length]
+          : tabs[(index - 1 + tabs.length) % tabs.length];
+        next.focus();
+        next.click();
+      });
+    });
     $("search").addEventListener("input", function (e) {
       state.search = e.target.value;
       renderGrid();

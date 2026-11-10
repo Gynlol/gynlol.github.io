@@ -826,8 +826,18 @@ main { flex: 1; padding-top: 28px; padding-bottom: 48px; }
 }
 .setup-panel { min-width: 0; }
 .setup-block { margin-bottom: 36px; }
+.tips-role-switcher { margin: 0 0 18px; }
+.tips-role-panel { min-width: 0; }
+.tips-empty {
+  margin: 0;
+  padding: 22px 0;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 22px;
+}
 
-/* Conseils généraux : une liste éditoriale, pas une rangée de cartes clonées.
+/* Conseils par rôle : des listes éditoriales, pas une rangée de cartes clonées.
    Ils vivent dans leur onglet, loin de la page de runes. */
 .tips-block {
   max-width: none;
