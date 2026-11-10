@@ -1,0 +1,94 @@
+.twitch-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 8px 11px;
+  border: 1px solid rgba(145, 70, 255, 0.28);
+  border-radius: 6px;
+  background: transparent;
+  color: #9aa8b9;
+  font: 600 11px/1 "Chakra Petch", "Segoe UI", system-ui, sans-serif;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: border-color 140ms ease, color 140ms ease, background-color 140ms ease;
+}
+
+.twitch-mark {
+  display: block;
+  width: 18px;
+  height: 18px;
+  flex: none;
+  color: #8b97a8;
+}
+
+.twitch-state-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  flex: none;
+  border-radius: 50%;
+  background: #8894a4;
+}
+
+.twitch-link.is-live {
+  border-color: rgba(145, 70, 255, 0.68);
+  background: rgba(145, 70, 255, 0.1);
+  color: #f0e8ff;
+}
+
+.twitch-link.is-live .twitch-mark { color: #a970ff; }
+.twitch-link.is-live .twitch-state-dot {
+  background: #ff4868;
+  box-shadow: 0 0 0 3px rgba(255, 72, 104, 0.14);
+}
+
+.twitch-link.is-offline { color: #8c99aa; }
+.twitch-link.is-offline .twitch-state-dot { background: #687587; }
+
+.twitch-link.is-unavailable {
+  border-color: rgba(255, 171, 61, 0.38);
+  color: #c7b28f;
+}
+
+.twitch-link.is-unavailable .twitch-state-dot { background: #ffab3d; }
+.twitch-link:hover { border-color: #a970ff; color: #f2ebff; }
+.twitch-link:focus-visible { outline: 2px solid #6fd3ff; outline-offset: 2px; }
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+@media (max-width: 720px) {
+  .twitch-link {
+    position: relative;
+    width: 44px;
+    min-width: 44px;
+    padding: 8px;
+    gap: 0;
+  }
+
+  .twitch-link .twitch-status { display: none; }
+  .twitch-link .twitch-state-dot {
+    position: absolute;
+    right: 4px;
+    bottom: 4px;
+    width: 7px;
+    height: 7px;
+    border: 1.5px solid #0a0e14;
+  }
+
+  .site-header { gap: 8px; }
+  .site-header .brand span { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .twitch-link { transition: none; }
+}

@@ -294,11 +294,13 @@ def matchup_page(role, enemy_id, enemy_name, videos):
 <meta name="twitter:image" content="https://i.ytimg.com/vi/{esc(latest['id'])}/hqdefault.jpg">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2v28M4 9l24 14M4 23L28 9' stroke='%236fd3ff' stroke-width='2.4' stroke-linecap='round' fill='none'/%3E%3C/svg%3E">
 <style>{PAGE_CSS}{VIDEO_NOTE_CSS if has_video_note else ''}</style>
+<link rel="stylesheet" href="/assets/twitch-status.css?v=20261110a">
 <script src="/assets/matchup-sort.js?v=20261031a" defer></script>
+<script src="/assets/twitch-status.js?v=20261110a" defer></script>
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>
 </head>
 <body>
-<header><div class="shell"><a class="brand" href="{SITE}/">Gyn Replays <span>— Matchups Nunu</span></a></div></header>
+<header><div class="shell site-header"><a class="brand" href="{SITE}/">Gyn Replays <span>— Matchups Nunu</span></a><a class="twitch-link is-checking" id="twitch-link" href="https://www.twitch.tv/gyn_lol" target="_blank" rel="noopener noreferrer" aria-label="Vérification du direct Twitch"><svg class="twitch-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3h17v12l-4 4h-4l-3 3v-3H4V3Zm2 2v12h6v2.2l2.2-2.2h2l2.8-2.8V5H6Zm3 2h2v5H9V7Zm5 0h2v5h-2V7Z" fill="currentColor"/></svg><span class="twitch-state-dot" aria-hidden="true"></span><span class="twitch-status" id="twitch-status" aria-live="polite">Vérification…</span></a></div></header>
 <main class="shell">
 <h1>Nunu {esc(role_name)} <span class="vs">vs</span> {esc(enemy_name)}{'<span class="ban">BAN</span>' if banned else ''}</h1>
 <p class="sub">{level_badge}{n} replay{"s" if n > 1 else ""} complet{"s" if n > 1 else ""} du matchup — gameplay réel en {esc(rank)}, aucune sélection de moments.</p>
