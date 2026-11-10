@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.22.1",
-    "updated": "2026-11-09T23:36:56Z"
+    "updated": "2026-11-10T11:09:21Z"
   },
   "videos": [
+    {
+      "id": "Dk5Y-sNaHvo",
+      "title": "Nunu and Willump Mid vs Sylas Master 474LP | Patch 26.21",
+      "published": "2026-11-10T11:00:40+00:00",
+      "role": "mid",
+      "enemy": "Sylas",
+      "enemyName": "Sylas",
+      "patch": "26.21",
+      "rank": "Master",
+      "division": null,
+      "lp": 474,
+      "region": null,
+      "result": null
+    },
     {
       "id": "EJCmcgWq6Fo",
       "title": "Nunu and Willump Mid vs Yasuo Diamond 1 55LP | Patch 26.20",
