@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.22.1",
-    "updated": "2026-11-11T11:03:10Z"
+    "updated": "2026-11-11T23:00:59Z"
   },
   "videos": [
+    {
+      "id": "sMM8kPcTPjc",
+      "title": "Nunu Mid vs Briar Master 110 LP Patch 26 21",
+      "published": "2026-11-11T23:00:06+00:00",
+      "role": "mid",
+      "enemy": "Briar",
+      "enemyName": "Briar",
+      "patch": "26",
+      "rank": "Master",
+      "division": null,
+      "lp": 110,
+      "region": null,
+      "result": null
+    },
     {
       "id": "a0VgDTRLnJs",
       "title": "Nunu and Willump Mid vs Galio Master 338LP | Patch 26.21",
