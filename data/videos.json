@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.22.1",
-    "updated": "2026-11-10T23:09:46Z"
+    "updated": "2026-11-11T11:03:10Z"
   },
   "videos": [
+    {
+      "id": "a0VgDTRLnJs",
+      "title": "Nunu and Willump Mid vs Galio Master 338LP | Patch 26.21",
+      "published": "2026-11-11T11:00:29+00:00",
+      "role": "mid",
+      "enemy": "Galio",
+      "enemyName": "Galio",
+      "patch": "26.21",
+      "rank": "Master",
+      "division": null,
+      "lp": 338,
+      "region": null,
+      "result": null
+    },
     {
       "id": "DhFBzjsCz6E",
       "title": "Nunu and Willump Mid vs Cho'Gath Diamond 1 55LP | Patch 26.20",
