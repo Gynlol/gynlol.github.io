@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.22.1",
-    "updated": "2026-11-11T23:00:59Z"
+    "updated": "2026-11-12T11:13:10Z"
   },
   "videos": [
+    {
+      "id": "HC5ku8IDVHo",
+      "title": "Nunu Mid vs Aurelion Sol   Master 458 LP   Patch 26 21",
+      "published": "2026-11-12T11:00:24+00:00",
+      "role": "mid",
+      "enemy": "AurelionSol",
+      "enemyName": "Aurelion Sol",
+      "patch": "26",
+      "rank": "Master",
+      "division": null,
+      "lp": 458,
+      "region": null,
+      "result": null
+    },
     {
       "id": "sMM8kPcTPjc",
       "title": "Nunu Mid vs Briar Master 110 LP Patch 26 21",
