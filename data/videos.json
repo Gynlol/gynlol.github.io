@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.22.1",
-    "updated": "2026-11-12T11:13:10Z"
+    "updated": "2026-11-12T23:00:35Z"
   },
   "videos": [
+    {
+      "id": "4IYca6J0Ohg",
+      "title": "Nunu and Willump Mid vs Irelia Master 226LP | Patch 26.21",
+      "published": "2026-11-12T23:00:23+00:00",
+      "role": "mid",
+      "enemy": "Irelia",
+      "enemyName": "Irelia",
+      "patch": "26.21",
+      "rank": "Master",
+      "division": null,
+      "lp": 226,
+      "region": null,
+      "result": null
+    },
     {
       "id": "HC5ku8IDVHo",
       "title": "Nunu Mid vs Aurelion Sol   Master 458 LP   Patch 26 21",
