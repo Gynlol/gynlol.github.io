@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.22.1",
-    "updated": "2026-11-13T11:10:08Z"
+    "updated": "2026-11-13T23:14:04Z"
   },
   "videos": [
+    {
+      "id": "LqhAMvkevnY",
+      "title": "Nunu and Willump Top vs Sett Diamond 1 67LP | Patch 26.20",
+      "published": "2026-11-13T23:00:00+00:00",
+      "role": "top",
+      "enemy": "Sett",
+      "enemyName": "Sett",
+      "patch": "26.20",
+      "rank": "Diamond",
+      "division": "1",
+      "lp": 67,
+      "region": null,
+      "result": null
+    },
     {
       "id": "Zo0n9jK8hxY",
       "title": "Nunu and Willump Mid vs Zed Master 475LP | Patch 26.21",
