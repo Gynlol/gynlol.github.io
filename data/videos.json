@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.22.1",
-    "updated": "2026-11-15T11:20:19Z"
+    "updated": "2026-11-15T23:06:43Z"
   },
   "videos": [
+    {
+      "id": "HU-IVqACN58",
+      "title": "Nunu and Willump Mid vs Yone Diamant 1 77LP | Patch 26.20",
+      "published": "2026-11-15T23:00:13+00:00",
+      "role": "mid",
+      "enemy": "Yone",
+      "enemyName": "Yone",
+      "patch": "26.20",
+      "rank": "Diamond",
+      "division": "1",
+      "lp": 77,
+      "region": null,
+      "result": null
+    },
     {
       "id": "VakDdjzkTPk",
       "title": "Nunu and Willump Mid vs Akali Master 593LP | Patch 26.21",
