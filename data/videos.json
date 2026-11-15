@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.22.1",
-    "updated": "2026-11-14T23:15:45Z"
+    "updated": "2026-11-15T11:20:19Z"
   },
   "videos": [
+    {
+      "id": "VakDdjzkTPk",
+      "title": "Nunu and Willump Mid vs Akali Master 593LP | Patch 26.21",
+      "published": "2026-11-15T11:00:15+00:00",
+      "role": "mid",
+      "enemy": "Akali",
+      "enemyName": "Akali",
+      "patch": "26.21",
+      "rank": "Master",
+      "division": null,
+      "lp": 593,
+      "region": null,
+      "result": null
+    },
     {
       "id": "tc-PwwN1AUY",
       "title": "Nunu and Willump Mid vs Zed Master 235LP | Patch 26.21",
