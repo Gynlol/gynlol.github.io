@@ -26,7 +26,7 @@
        la page s'affiche quand même avec les polices système. -->
   <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
-  <link rel="stylesheet" href="assets/style.css?v=20261110a">
+  <link rel="stylesheet" href="assets/style.css?v=20261111b">
   <link rel="stylesheet" href="assets/twitch-status.css?v=20261110a">
   <script src="assets/twitch-status.js?v=20261110a" defer></script>
 </head>
@@ -65,9 +65,12 @@
 
     <section class="matchups">
       <div class="matchups-head">
-        <div>
-          <h1 class="role-title" id="role-title"></h1>
-          <p class="coverage" id="coverage-line"></p>
+        <div class="role-heading">
+          <div>
+            <h1 class="role-title" id="role-title"></h1>
+            <p class="coverage" id="coverage-line"></p>
+          </div>
+          <button class="advice-trigger" id="advice-trigger" type="button">Conseils Top</button>
         </div>
         <input type="search" id="search" class="search" autocomplete="off">
       </div>
@@ -85,8 +88,6 @@
           data-setup-section="runes" aria-controls="runes-panel" aria-selected="true">Runes</button>
         <button class="setup-tab" id="setup-tab-builds" type="button" role="tab"
           data-setup-section="builds" aria-controls="builds-panel" aria-selected="false">Builds</button>
-        <button class="setup-tab" id="setup-tab-tips" type="button" role="tab"
-          data-setup-section="tips" aria-controls="tips-panel" aria-selected="false">Conseils</button>
       </nav>
 
       <div class="setup-panel" id="runes-panel" role="tabpanel" aria-labelledby="setup-tab-runes" hidden>
@@ -104,27 +105,32 @@
         </div>
       </div>
 
-      <div class="setup-panel" id="tips-panel" role="tabpanel" aria-labelledby="setup-tab-tips" hidden>
-        <div class="setup-block tips-block" id="tips-block" hidden>
-          <div class="tips-head">
-            <h2 class="section-title" id="tips-title">Conseils — Top</h2>
-          </div>
-          <nav class="setup-switcher tips-role-switcher" id="tips-role-switcher"
-            aria-label="Conseils par rôle" role="tablist">
-            <button class="setup-tab" id="tips-role-top" type="button" role="tab"
-              data-tip-role="top" aria-controls="tips-role-panel" aria-selected="true" tabindex="0">Top</button>
-            <button class="setup-tab" id="tips-role-mid" type="button" role="tab"
-              data-tip-role="mid" aria-controls="tips-role-panel" aria-selected="false" tabindex="-1">Mid</button>
-            <button class="setup-tab" id="tips-role-adc" type="button" role="tab"
-              data-tip-role="adc" aria-controls="tips-role-panel" aria-selected="false" tabindex="-1">ADC</button>
-            <button class="setup-tab" id="tips-role-support" type="button" role="tab"
-              data-tip-role="support" aria-controls="tips-role-panel" aria-selected="false" tabindex="-1">Support</button>
-          </nav>
-          <div class="tips-role-panel" id="tips-role-panel" role="tabpanel"
-            aria-labelledby="tips-role-top" tabindex="0">
-            <p class="tips-empty" id="tips-empty" hidden></p>
-            <ol class="tips-list" id="tips-list"></ol>
-          </div>
+    </section>
+
+    <section class="advice-view" id="advice-view" hidden>
+      <header class="advice-head">
+        <div>
+          <h1 class="setup-title" id="tips-title">Conseils — Top</h1>
+          <p class="setup-intro" id="advice-intro"></p>
+        </div>
+        <button class="setup-link advice-back" id="advice-back" type="button">Retour aux matchups Top</button>
+      </header>
+      <div class="tips-block" id="tips-block">
+        <nav class="setup-switcher tips-role-switcher" id="tips-role-switcher"
+          aria-label="Conseils par rôle" role="tablist">
+          <button class="setup-tab" id="tips-role-top" type="button" role="tab"
+            data-tip-role="top" aria-controls="tips-role-panel" aria-selected="true" tabindex="0">Top</button>
+          <button class="setup-tab" id="tips-role-mid" type="button" role="tab"
+            data-tip-role="mid" aria-controls="tips-role-panel" aria-selected="false" tabindex="-1">Mid</button>
+          <button class="setup-tab" id="tips-role-adc" type="button" role="tab"
+            data-tip-role="adc" aria-controls="tips-role-panel" aria-selected="false" tabindex="-1">ADC</button>
+          <button class="setup-tab" id="tips-role-support" type="button" role="tab"
+            data-tip-role="support" aria-controls="tips-role-panel" aria-selected="false" tabindex="-1">Support</button>
+        </nav>
+        <div class="tips-role-panel" id="tips-role-panel" role="tabpanel"
+          aria-labelledby="tips-role-top" tabindex="0">
+          <p class="tips-empty" id="tips-empty" hidden></p>
+          <ol class="tips-list" id="tips-list"></ol>
         </div>
       </div>
     </section>
@@ -144,7 +150,7 @@
             <span class="replay-sort-label" id="video-sort-label" data-i18n="sortBy">Trier par</span>
             <div class="replay-sort-options">
               <button class="replay-sort-button" type="button" data-sort-mode="rank" data-i18n="sortRank" aria-pressed="false">Rang</button>
-              <button class="replay-sort-button" type="button" data-sort-mode="date" data-i18n="sortDate" aria-pressed="true">Date</button>
+              <button class="replay-sort-button" type="button" data-sort-mode="patch" data-i18n="sortPatch" aria-pressed="true">Patch</button>
             </div>
           </div>
           <div class="video-list" id="video-list"></div>
@@ -174,8 +180,8 @@
     <p class="noscript">Ce site a besoin de JavaScript pour afficher les matchups. / This site needs JavaScript to display matchups.</p>
   </noscript>
 
-  <script src="assets/matchup-sort.js?v=20261031a"></script>
-  <script src="assets/app.js?v=20261110a"></script>
+  <script src="assets/matchup-sort.js?v=20261111a"></script>
+  <script src="assets/app.js?v=20261111b"></script>
   <!-- GoatCounter : statistiques agrégées et événements vidéo sans données saisies. -->
   <script>
     function analyticsPath() {
@@ -183,7 +189,11 @@
       var raw = (location.hash || "").replace(/^#/, "").toLowerCase();
       var matchup = raw.match(/^(top|mid|adc|support)(?:\/([a-z0-9_-]+))?$/);
       if (matchup) return path + "#" + matchup[1] + (matchup[2] ? "/" + matchup[2] : "");
-      var setup = raw.match(/^setup\/(runes|builds|tips)$/);
+      var advice = raw.match(/^(?:conseils|advice)\/(top|mid|adc|support)$/);
+      if (advice) return path + "#conseils/" + advice[1];
+      var legacyAdvice = raw === "tips" || raw === "conseils" || raw === "setup/tips" || raw === "setup/conseils";
+      if (legacyAdvice) return path + "#conseils/top";
+      var setup = raw.match(/^setup\/(runes|builds)$/);
       return setup ? path + "#setup/" + setup[1] : path;
     }
     window.goatcounter = { path: analyticsPath };

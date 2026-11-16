@@ -143,6 +143,7 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
   overflow-x: auto;
   scrollbar-width: none;
 }
+.roles[hidden] { display: none; }
 .roles::-webkit-scrollbar { display: none; }
 
 .role-tab {
@@ -252,6 +253,31 @@ main { flex: 1; padding-top: 28px; padding-bottom: 48px; }
   margin-bottom: 16px;
   flex-wrap: wrap;
 }
+.role-heading {
+  display: flex;
+  align-items: flex-end;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.role-heading > div { min-width: 0; }
+.advice-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid rgba(111, 211, 255, 0.3);
+  border-radius: 6px;
+  color: var(--accent);
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.advice-trigger:hover { border-color: var(--accent); background: var(--accent-dim); }
+.advice-trigger:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
 .role-title {
   font-family: var(--font-display);
@@ -687,6 +713,7 @@ main { flex: 1; padding-top: 28px; padding-bottom: 48px; }
   .yt-link span { display: none; }
   .topbar-row { padding-top: 10px; }
   .matchups-head { align-items: stretch; flex-direction: column; }
+  .role-heading { width: 100%; justify-content: space-between; }
   .search { width: 100%; }
   .role-title { font-size: 21px; }
   .latest-row { grid-auto-columns: 240px; }
@@ -709,7 +736,7 @@ main { flex: 1; padding-top: 28px; padding-bottom: 48px; }
 /* ---------- Motion ---------- */
 
 .tile, .video-card, .latest-card, .role-tab, .yt-link, #lang-toggle, .subscribe, .panel-close,
-.setup-link, .note-link {
+.setup-link, .note-link, .advice-trigger {
   transition: border-color 140ms ease, color 140ms ease, background-color 140ms ease;
 }
 
@@ -779,6 +806,15 @@ main { flex: 1; padding-top: 28px; padding-bottom: 48px; }
 /* 15 px × 1,5 = 22,5 px : sur téléphone l'intro passe à trois lignes et le
    demi-pixel redescend sur la page de runes. Interligne entier, ici aussi. */
 .setup-intro { color: var(--muted); max-width: 62ch; margin: 8px 0 28px; line-height: 24px; }
+.advice-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+.advice-head .setup-intro { margin-bottom: 0; }
+.advice-back { flex: none; margin-top: 2px; }
 .setup-status { color: var(--muted); padding: 24px 0; }
 .build-notice {
   max-width: 64ch;
@@ -1234,6 +1270,8 @@ main { flex: 1; padding-top: 28px; padding-bottom: 48px; }
 
 @media (max-width: 720px) {
   .setup-title { font-size: 20px; }
+  .advice-head { flex-direction: column; gap: 8px; }
+  .advice-back { margin-top: 0; }
   .setup-card { padding: 16px; }
   .tips-head { display: block; }
   .tips-list { grid-template-columns: 1fr; grid-template-rows: none; }

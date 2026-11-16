@@ -23,7 +23,7 @@
       matchupSub: function (n) { return n > 1 ? n + " replays" : "1 replay"; },
       sortBy: "Trier par",
       sortRank: "Rang",
-      sortDate: "Date",
+      sortPatch: "Patch",
       footerAuto: "Mis à jour automatiquement depuis la chaîne",
       subscribe: "Abonne-toi ❄",
       updatedAt: function (d) { return "dernière mise à jour : " + d; },
@@ -36,10 +36,9 @@
       setupNav: "Runes & build",
       setupNavShort: "Runes",
       setupTitle: "Mes runes et mes builds",
-      setupIntro: "Runes, builds et conseils classés par rôle.",
+      setupIntro: "Pages de runes et builds pour Nunu.",
       setupRunesTab: "Runes",
       setupBuildsTab: "Builds",
-      setupTipsTab: "Conseils",
       setupTabsLabel: "Contenu du guide",
       spellOrderLearn: "Prends",
       spellOrderMax: "Max",
@@ -47,7 +46,10 @@
       buildsTitle: "Builds",
       tipsTitle: "Conseils",
       tipsRolesLabel: "Conseils par rôle",
+      tipsIntro: "Les conseils généraux pour jouer Nunu à chaque poste.",
       tipsEmpty: "Pas encore de conseil pour ce rôle.",
+      adviceTrigger: function (role) { return "Conseils " + role; },
+      adviceBack: function (role) { return "Retour aux matchups " + role; },
       watchShort: "Voir le short Hexflash ↗",
       viewRunes: "Voir les runes",
       viewShort: "Voir ce short ↗",
@@ -86,7 +88,7 @@
       matchupSub: function (n) { return n > 1 ? n + " replays" : "1 replay"; },
       sortBy: "Sort by",
       sortRank: "Rank",
-      sortDate: "Date",
+      sortPatch: "Patch",
       footerAuto: "Automatically updated from the channel",
       subscribe: "Subscribe ❄",
       updatedAt: function (d) { return "last update: " + d; },
@@ -99,10 +101,9 @@
       setupNav: "Runes & build",
       setupNavShort: "Runes",
       setupTitle: "My runes and builds",
-      setupIntro: "Runes, builds and tips organized by role.",
+      setupIntro: "Rune pages and Nunu builds.",
       setupRunesTab: "Runes",
       setupBuildsTab: "Builds",
-      setupTipsTab: "Tips",
       setupTabsLabel: "Guide sections",
       spellOrderLearn: "Take",
       spellOrderMax: "Max",
@@ -110,7 +111,10 @@
       buildsTitle: "Builds",
       tipsTitle: "Tips",
       tipsRolesLabel: "Tips by role",
+      tipsIntro: "General tips for playing Nunu in each role.",
       tipsEmpty: "No tips for this role yet.",
+      adviceTrigger: function (role) { return role + " tips"; },
+      adviceBack: function (role) { return "Back to " + role + " matchups"; },
       watchShort: "Watch the Hexflash short ↗",
       viewRunes: "View runes",
       viewShort: "Watch this short ↗",
@@ -154,11 +158,11 @@
     byRole: {},      // role -> { champId -> [videos] }
     rosters: {},     // role -> [{id, name, videos}] triés
     tabs: {},        // role -> bouton d'onglet (construits une seule fois)
-    view: "matchups",  // "matchups" | "setup" (runes & build, hors matchups)
+    view: "matchups",  // "matchups" | "setup" | "advice"
     setup: null,       // data/setup-built.json, chargé à la première ouverture
     setupState: "idle", // idle | loading | ok | error
     tipsRole: "top",
-    setupSection: "runes" // "runes" | "builds" | "tips"
+    setupSection: "runes" // "runes" | "builds"
   };
 
   // Secours locaux (data URI) si Data Dragon ou i.ytimg sont injoignables.
@@ -374,9 +378,8 @@
 
   /* ---------- Hash routing ---------- */
 
-  // #setup, #runes, #build, #tips : plusieurs portes vers la même vue, parce qu'un
-  // lien partagé de mémoire ne tombe jamais toujours sur le même mot exact.
-  var SETUP_HASHES = ["setup", "runes", "build", "builds", "tips", "conseils"];
+  // Les anciennes routes #setup/tips et #tips continuent d'ouvrir les conseils.
+  var SETUP_HASHES = ["setup", "runes", "build", "builds"];
 
   function readHash() {
     var h;
@@ -387,11 +390,14 @@
     }
     if (!h) return { view: null, role: null, champ: null };
     var parts = h.split("/");
+    if (parts[0] === "conseils" || parts[0] === "advice" || parts[0] === "tips" ||
+        (parts[0] === "setup" && (parts[1] === "tips" || parts[1] === "conseils"))) {
+      var adviceRole = ROLES.indexOf(parts[1]) !== -1 ? parts[1] : "top";
+      return { view: "advice", role: adviceRole, tipsRole: adviceRole, champ: null };
+    }
     if (SETUP_HASHES.indexOf(parts[0]) !== -1) {
-      var section = (parts[0] === "tips" || parts[0] === "conseils" ||
-        parts[1] === "tips" || parts[1] === "conseils") ? "tips" :
-        ((parts[0] === "build" || parts[0] === "builds" || parts[1] === "builds")
-          ? "builds" : "runes");
+      var section = (parts[0] === "build" || parts[0] === "builds" || parts[1] === "builds")
+        ? "builds" : "runes";
       return { view: "setup", role: null, champ: null, setupSection: section };
     }
     var role = ROLES.indexOf(parts[0]) !== -1 ? parts[0] : null;
@@ -410,9 +416,9 @@
 
   function writeHash() {
     var h = "";
-    if (state.view === "setup") {
-      var section = state.setupSection === "tips" ? "tips" :
-        (state.setupSection === "builds" ? "builds" : "runes");
+    if (state.view === "advice") h = "#conseils/" + state.tipsRole;
+    else if (state.view === "setup") {
+      var section = state.setupSection === "builds" ? "builds" : "runes";
       h = "#setup/" + section;
     }
     else if (state.role) h = "#" + state.role + (state.champ ? "/" + state.champ.toLowerCase() : "");
@@ -532,6 +538,7 @@
         t().banLine(bannedNames.join(", "), t().roleNames[state.role]) + "</span>";
     }
     $("coverage-line").innerHTML = cov;
+    $("advice-trigger").textContent = t().adviceTrigger(t().roleNames[state.role]);
 
     var grid = $("grid");
     grid.innerHTML = "";
@@ -801,10 +808,12 @@
         state.setup = data;
         state.setupState = "ok";
         renderSetup();
+        renderTips();
       })
       .catch(function (err) {
         state.setupState = "error";
         renderSetup();
+        renderTips();
         if (window.console) console.error(err);
       });
   }
@@ -1127,6 +1136,15 @@
     if (activeTab) panel.setAttribute("aria-labelledby", activeTab.id);
     $("tips-role-switcher").setAttribute("aria-label", t().tipsRolesLabel);
     $("tips-title").textContent = t().tipsTitle + " — " + (t().roleNames[state.tipsRole] || state.tipsRole);
+    $("advice-intro").textContent = t().tipsIntro;
+    $("advice-back").textContent = t().adviceBack(t().roleNames[state.role]);
+    if (state.setupState !== "ok") {
+      empty.textContent = state.setupState === "error" ? t().setupError : t().setupLoading;
+      empty.hidden = false;
+      list.hidden = true;
+      block.hidden = false;
+      return;
+    }
     var content = tipsContent();
     if (content) content.items.forEach(function (tip) {
       if (!tip || (!tip.t && !tip.d && !Array.isArray(tip.points) && !tip.spellSequence)) return;
@@ -1169,11 +1187,9 @@
     $("setup-intro").textContent = t().setupIntro;
     $("setup-tab-runes").textContent = t().setupRunesTab;
     $("setup-tab-builds").textContent = t().setupBuildsTab;
-    $("setup-tab-tips").textContent = t().setupTipsTab;
     $("setup-switcher").setAttribute("aria-label", t().setupTabsLabel);
     $("runes-title").textContent = t().runesTitle;
     $("builds-title").textContent = t().buildsTitle;
-    $("tips-title").textContent = t().tipsTitle;
     var buildNotice = $("build-notice");
     var buildData = state.setup && state.setup.builds;
     var notice = buildData && (state.lang === "en" ? (buildData.noticeEn || buildData.notice) : buildData.notice);
@@ -1191,10 +1207,8 @@
     if (state.setupState !== "ok") {
       $("runes-block").hidden = true;
       $("builds-block").hidden = true;
-      $("tips-block").hidden = true;
       $("runes-panel").hidden = true;
       $("builds-panel").hidden = true;
-      $("tips-panel").hidden = true;
       $("setup-switcher").hidden = true;
       if (buildNotice) buildNotice.hidden = true;
       status.hidden = state.setupState === "idle";
@@ -1203,37 +1217,27 @@
     }
     var runePages = (state.setup.runes && state.setup.runes.pages) || [];
     var buildPages = (state.setup.builds && state.setup.builds.pages) || [];
-    var hasTips = hasAnyTips();
     var hasRunes = runePages.length > 0;
     var hasBuilds = buildPages.length > 0;
     if (state.setupSection === "runes" && !hasRunes) {
-      state.setupSection = hasBuilds ? "builds" : (hasTips ? "tips" : "runes");
+      state.setupSection = hasBuilds ? "builds" : "runes";
     }
     if (state.setupSection === "builds" && !hasBuilds) {
-      state.setupSection = hasRunes ? "runes" : (hasTips ? "tips" : "builds");
-    }
-    if (state.setupSection === "tips" && !hasTips) {
-      state.setupSection = hasRunes ? "runes" : (hasBuilds ? "builds" : "tips");
+      state.setupSection = hasRunes ? "runes" : "builds";
     }
     var showRunes = state.setupSection === "runes";
     var showBuilds = state.setupSection === "builds";
-    var showTips = state.setupSection === "tips";
 
-    $("setup-switcher").hidden = !hasRunes && !hasBuilds && !hasTips;
+    $("setup-switcher").hidden = !hasRunes && !hasBuilds;
     $("setup-tab-runes").hidden = !hasRunes;
     $("setup-tab-builds").hidden = !hasBuilds;
-    $("setup-tab-tips").hidden = !hasTips;
     $("setup-tab-runes").setAttribute("aria-selected", showRunes ? "true" : "false");
     $("setup-tab-builds").setAttribute("aria-selected", showBuilds ? "true" : "false");
-    $("setup-tab-tips").setAttribute("aria-selected", showTips ? "true" : "false");
     $("runes-panel").hidden = !showRunes || !hasRunes;
     $("builds-panel").hidden = !showBuilds || !hasBuilds;
-    $("tips-panel").hidden = !showTips || !hasTips;
     $("runes-block").hidden = !hasRunes;
     $("builds-block").hidden = !hasBuilds;
-    $("tips-block").hidden = !hasTips;
-    renderTips();
-    if (!hasRunes && !hasBuilds && !hasTips) {
+    if (!hasRunes && !hasBuilds) {
       status.hidden = false;
       status.textContent = t().setupEmpty;
       return;
@@ -1247,10 +1251,14 @@
   // fonction, et elle seule, qui décide ce qui est visible.
   function renderView() {
     var setupOn = state.view === "setup";
+    var adviceOn = state.view === "advice";
+    var auxiliaryOn = setupOn || adviceOn;
     $("setup-view").hidden = !setupOn;
-    document.querySelector(".matchups").hidden = setupOn;
-    $("matchup-links").hidden = setupOn;
-    if (setupOn) {
+    $("advice-view").hidden = !adviceOn;
+    $("role-tabs").hidden = adviceOn;
+    document.querySelector(".matchups").hidden = auxiliaryOn;
+    $("matchup-links").hidden = auxiliaryOn;
+    if (auxiliaryOn) {
       $("latest-section").hidden = true;
       $("matchup-panel").hidden = true;
     }
@@ -1279,6 +1287,7 @@
     renderPanel(false);
     renderMatchupLinks();
     renderSetup();
+    renderTips();
     renderView();
   }
 
@@ -1318,13 +1327,31 @@
       window.scrollTo({ top: 0 });
     });
 
+    $("advice-trigger").addEventListener("click", function () {
+      state.view = "advice";
+      state.tipsRole = state.role;
+      state.champ = null;
+      loadSetup();
+      writeHash();
+      renderAll();
+      window.scrollTo({ top: 0, behavior: prefersReducedMotion() ? "auto" : "smooth" });
+    });
+
+    $("advice-back").addEventListener("click", function () {
+      state.view = "matchups";
+      state.role = state.tipsRole;
+      state.champ = null;
+      writeHash();
+      renderAll();
+      window.scrollTo({ top: 0, behavior: prefersReducedMotion() ? "auto" : "smooth" });
+    });
+
     document.querySelectorAll("[data-setup-section]").forEach(function (tab) {
       tab.addEventListener("click", function () {
         var section = tab.getAttribute("data-setup-section");
         state.view = "setup";
         state.champ = null;
-        state.setupSection = section === "tips" ? "tips" :
-          (section === "builds" ? "builds" : "runes");
+        state.setupSection = section === "builds" ? "builds" : "runes";
         loadSetup();
         writeHash();
         renderAll();
@@ -1349,7 +1376,10 @@
     document.querySelectorAll("[data-tip-role]").forEach(function (tab) {
       tab.addEventListener("click", function () {
         state.tipsRole = tab.getAttribute("data-tip-role");
-        renderTips();
+        state.role = state.tipsRole;
+        state.view = "advice";
+        writeHash();
+        renderAll();
       });
       tab.addEventListener("keydown", function (e) {
         if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
@@ -1391,6 +1421,15 @@
 
     window.addEventListener("hashchange", function () {
       var wanted = readHash();
+      if (wanted.view === "advice") {
+        state.view = "advice";
+        state.role = wanted.tipsRole;
+        state.tipsRole = wanted.tipsRole;
+        state.champ = null;
+        loadSetup();
+        renderAll();
+        return;
+      }
       if (wanted.view === "setup") {
         state.view = "setup";
         state.champ = null;
@@ -1458,13 +1497,14 @@
     buildIndexes();
     buildTabs();
     var wanted = readHash();
-    state.view = wanted.view === "setup" ? "setup" : "matchups";
+    state.view = wanted.view === "setup" || wanted.view === "advice" ? wanted.view : "matchups";
     state.role = wanted.role || defaultRole();
+    state.tipsRole = wanted.tipsRole || state.role;
     state.champ = wanted.champ;
     state.setupSection = wanted.setupSection || "runes";
     bind();
     renderAll();
-    if (state.view === "setup") loadSetup();
+    if (state.view === "setup" || state.view === "advice") loadSetup();
   }).catch(function (err) {
     fatal("Erreur de chargement des données — recharge la page.<br>Data loading error — reload the page.");
     if (window.console) console.error(err);

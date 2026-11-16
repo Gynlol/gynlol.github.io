@@ -242,6 +242,7 @@ def matchup_page(role, enemy_id, enemy_name, videos):
         rank_tier = esc(str(v.get("rank") or ""))
         rank_division = esc(str(v.get("division") if v.get("division") is not None else ""))
         rank_lp = esc(str(v.get("lp") if v.get("lp") is not None else ""))
+        sort_patch = esc(str(v.get("patch") or ""))
         sort_date = esc(str(v.get("published") or ""))
         chips = " · ".join(x for x in [
             esc(f"Patch {v['patch']}") if v.get("patch") else "",
@@ -257,7 +258,7 @@ def matchup_page(role, enemy_id, enemy_name, videos):
         card_html = (
             f'<a class="card" data-sort-item data-rank-tier="{rank_tier}" '
             f'data-rank-division="{rank_division}" data-rank-lp="{rank_lp}" '
-            f'data-sort-date="{sort_date}" href="https://www.youtube.com/watch?v={esc(v["id"])}" '
+            f'data-sort-patch="{sort_patch}" data-sort-date="{sort_date}" href="https://www.youtube.com/watch?v={esc(v["id"])}" '
             f'target="_blank" rel="noopener noreferrer" '
             f'data-goatcounter-click="video-click/{esc(v["id"])}" '
             f'data-goatcounter-no-session="1" data-goatcounter-title="Clic vidéo YouTube">'
@@ -295,7 +296,7 @@ def matchup_page(role, enemy_id, enemy_name, videos):
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2v28M4 9l24 14M4 23L28 9' stroke='%236fd3ff' stroke-width='2.4' stroke-linecap='round' fill='none'/%3E%3C/svg%3E">
 <style>{PAGE_CSS}{VIDEO_NOTE_CSS if has_video_note else ''}</style>
 <link rel="stylesheet" href="/assets/twitch-status.css?v=20261110a">
-<script src="/assets/matchup-sort.js?v=20261031a" defer></script>
+<script src="/assets/matchup-sort.js?v=20261111a" defer></script>
 <script src="/assets/twitch-status.js?v=20261110a" defer></script>
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>
 </head>
@@ -309,7 +310,7 @@ def matchup_page(role, enemy_id, enemy_name, videos):
   <span class="replay-sort-label" id="replay-sort-label">Trier par</span>
   <div class="replay-sort-options">
     <button class="replay-sort-button" type="button" data-sort-mode="rank" aria-pressed="false">Rang</button>
-    <button class="replay-sort-button" type="button" data-sort-mode="date" aria-pressed="true">Date</button>
+    <button class="replay-sort-button" type="button" data-sort-mode="patch" aria-pressed="true">Patch</button>
   </div>
 </div>
 <div class="replay-list" data-sort-list>
