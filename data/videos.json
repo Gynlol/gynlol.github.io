@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.22.1",
-    "updated": "2026-11-15T23:06:43Z"
+    "updated": "2026-11-16T11:16:22Z"
   },
   "videos": [
+    {
+      "id": "Qj_sHBEXwm4",
+      "title": "Nunu and Willump Top vs Vayne Master 525LP | Patch 26.22",
+      "published": "2026-11-16T11:00:13+00:00",
+      "role": "top",
+      "enemy": "Vayne",
+      "enemyName": "Vayne",
+      "patch": "26.22",
+      "rank": "Master",
+      "division": null,
+      "lp": 525,
+      "region": null,
+      "result": null
+    },
     {
       "id": "HU-IVqACN58",
       "title": "Nunu and Willump Mid vs Yone Diamant 1 77LP | Patch 26.20",
