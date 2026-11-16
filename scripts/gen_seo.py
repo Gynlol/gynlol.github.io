@@ -66,6 +66,7 @@ h1 .vs{color:#6fd3ff}
 .note.ban{background:transparent}
 .lvl{display:inline-block;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#0a0e14;border-radius:4px;font-size:12.5px;line-height:1;padding:5px 9px;margin-right:10px;vertical-align:middle}
 .lvl-facile{background:#39d98a}.lvl-moyen{background:#ffab3d}.lvl-dur{background:#ff5a5a}
+.lvl-freewin{background:#6fd3ff}
 .lvl-tresdur{background:#8d0f1c;color:#ffe3e6}
 .cta{display:inline-flex;align-items:center;min-height:44px;border:1px solid #6fd3ff;border-radius:6px;padding:10px 18px;margin:18px 12px 0 0;font-weight:600;font-size:13px;letter-spacing:.06em;text-transform:uppercase}
 footer{border-top:1px solid #1d2735;color:#8593a5;font-size:13px;padding:18px 0}
@@ -171,9 +172,10 @@ LEVEL_ALIASES = {
     "facile": "facile", "easy": "facile", "ez": "facile",
     "moyen": "moyen", "moyenne": "moyen", "medium": "moyen", "moy": "moyen",
     "dur": "dur", "dure": "dur", "difficile": "dur", "hard": "dur",
+    "freewin": "freewin",
     "tresdur": "tresdur", "tresdure": "tresdur", "veryhard": "tresdur", "enfer": "tresdur",
 }
-LEVEL_LABELS = {"facile": "Facile", "moyen": "Moyen", "dur": "Difficile", "tresdur": "Très dur"}
+LEVEL_LABELS = {"freewin": "Free win", "facile": "Facile", "moyen": "Moyen", "dur": "Difficile", "tresdur": "Très dur"}
 
 BANS, NOTES, LEVELS, VIDEO_NOTES = {}, {}, {}, {}
 

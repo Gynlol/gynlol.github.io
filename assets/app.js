@@ -68,7 +68,7 @@
       backToMatchupsShort: "Matchups",
       notesTitle: "À savoir",
       levelTitle: "Difficulté",
-      levels: { facile: "Facile", moyen: "Moyen", dur: "Difficile", tresdur: "Très dur" },
+      levels: { freewin: "Free win", facile: "Facile", moyen: "Moyen", dur: "Difficile", tresdur: "Très dur" },
       ban: "BAN",
       banTitle: "Ban permanent",
       banSub: "Ban permanent — pas de replay, et il n'y en aura pas",
@@ -133,7 +133,7 @@
       backToMatchupsShort: "Matchups",
       notesTitle: "Good to know",
       levelTitle: "Difficulty",
-      levels: { facile: "Easy", moyen: "Medium", dur: "Hard", tresdur: "Very hard" },
+      levels: { freewin: "Free win", facile: "Easy", moyen: "Medium", dur: "Hard", tresdur: "Very hard" },
       ban: "BAN",
       banTitle: "Permanent ban",
       banSub: "Permanent ban — no replay, and there won't be one",
@@ -152,7 +152,7 @@
     data: null,
     champs: null,
     notes: {},       // "role/ChampId" -> { fr: [...], en: [...] }
-    levels: {},      // "role/ChampId" -> "facile" | "moyen" | "dur"
+    levels: {},      // "role/ChampId" -> "freewin" | "facile" | "moyen" | "dur" | "tresdur"
     bans: {},        // role -> { champId: true } — bans de rôle, écrits à la main
     banNames: {},    // role -> [noms] — un ban peut ne pas figurer dans la grille du rôle
     byRole: {},      // role -> { champId -> [videos] }
@@ -283,11 +283,12 @@
   }
 
   // Difficulté écrite à la main dans data/notes.json (clé « niveaux ») :
-  // facile / moyen / dur, tolérant sur la casse, les accents et l'anglais.
+  // freewin / facile / moyen / dur / tresdur, tolérant sur la casse et l'anglais.
   var LEVEL_ALIASES = {
     facile: "facile", easy: "facile", ez: "facile",
     moyen: "moyen", moyenne: "moyen", medium: "moyen", moy: "moyen",
     dur: "dur", dure: "dur", difficile: "dur", hard: "dur",
+    freewin: "freewin",
     tresdur: "tresdur", tresdure: "tresdur", veryhard: "tresdur", enfer: "tresdur"
   };
 

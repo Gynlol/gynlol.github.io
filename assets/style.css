@@ -20,6 +20,7 @@
   --lvl-moyen: #ffab3d;
   --lvl-dur: #ff5a5a;
   --lvl-tresdur: #8d0f1c;
+  --lvl-freewin: #6fd3ff;
   --font-display: "Chakra Petch", "Segoe UI", sans-serif;
   --font-body: "Inter", "Segoe UI", sans-serif;
 }
@@ -747,7 +748,7 @@ main { flex: 1; padding-top: 28px; padding-bottom: 48px; }
 
 
 /* ---------- Difficulté du matchup ----------
-   Facile / Moyen / Difficile / Très dur : affiché en tête du matchup ouvert
+   Free win / Facile / Moyen / Difficile / Très dur : affiché en tête du matchup ouvert
    seulement — les tuiles de la grille restent nues. Texte foncé sur aplat
    plein (contraste AA), sauf « Très dur » qui inverse. */
 .level-badge {
@@ -769,6 +770,7 @@ main { flex: 1; padding-top: 28px; padding-bottom: 48px; }
 .lvl-facile { background: var(--lvl-facile); }
 .lvl-moyen { background: var(--lvl-moyen); }
 .lvl-dur { background: var(--lvl-dur); }
+.lvl-freewin { background: var(--lvl-freewin); }
 /* Cran au-dessus de « Difficile » : rouge sombre, donc texte clair pour rester lisible. */
 .lvl-tresdur { background: var(--lvl-tresdur); color: #ffe3e6; }
 

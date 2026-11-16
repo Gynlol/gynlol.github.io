@@ -7,7 +7,7 @@
     "         Chaque conseil = { d: le texte complet du tiret }.",
     "         Les conseils sont affiches sous forme de tirets, sans code couleur.",
     "         'en' est facultatif : sans traduction, la version fr est affichee aux deux langues.",
-    "niveaux: cle '<role>/<ChampionId>' -> 'facile' | 'moyen' | 'dur'.",
+    "niveaux: cle '<role>/<ChampionId>' -> 'freewin' | 'facile' | 'moyen' | 'dur' | 'tresdur'.",
     "         Le niveau reste distinct des conseils et se traduit tout seul en anglais.",
     "video_notes: cle '<YouTubeVideoId>' -> texte affiche dans la carte de la video concernee.",
     "L'id du champion est celui de data/champions.json (Chogath, MonkeyKing, KSante...).",
@@ -27,6 +27,7 @@
     "top/Akali": "moyen",
     "top/Aurora": "facile",
     "top/Camille": "moyen",
+    "top/Cassiopeia": "moyen",
     "top/Chogath": "tresdur",
     "top/Darius": "moyen",
     "top/DrMundo": "facile",
@@ -34,6 +35,8 @@
     "top/Fiora": "tresdur",
     "top/Riven": "tresdur",
     "top/Gangplank": "facile",
+    "top/Gnar": "dur",
+    "top/Gragas": "moyen",
     "top/Gwen": "facile",
     "top/Irelia": "dur",
     "top/Kayle": "facile",
@@ -47,26 +50,33 @@
     "top/Sylas": "dur",
     "top/Teemo": "facile",
     "top/Urgot": "moyen",
+    "top/Vayne": "dur",
     "top/Volibear": "dur",
     "top/Yone": "dur",
     "top/Yorick": "tresdur",
+    "top/Zed": "moyen",
 
     "mid/Ahri": "moyen",
     "mid/Akali": "moyen",
+    "mid/AurelionSol": "freewin",
     "mid/Aurora": "moyen",
     "mid/Azir": "facile",
     "mid/Chogath": "tresdur",
     "mid/Ekko": "moyen",
+    "mid/Galio": "moyen",
     "mid/Garen": "tresdur",
     "mid/Leblanc": "dur",
     "mid/Lissandra": "moyen",
+    "mid/Orianna": "facile",
+    "mid/Ryze": "facile",
     "mid/Syndra": "dur",
     "mid/TwistedFate": "facile",
     "mid/Vex": "moyen",
-    "mid/Viktor": "facile",
+    "mid/Viktor": "moyen",
     "mid/Vladimir": "facile",
     "mid/Volibear": "dur",
     "mid/Yasuo": "dur",
+    "mid/Yone": "dur",
     "mid/Zed": "moyen",
     "mid/Zoe": "dur",
 
@@ -259,6 +269,13 @@
       "fr": [
         {
           "d": "Si il tank la snowball avec son W tu ne le tueras jamais"
+        }
+      ]
+    },
+    "mid/Galio": {
+      "fr": [
+        {
+          "d": "Il faut le tuer avant son premier recall, sinon il achète de la résistance magique et c'est fini."
         }
       ]
     },
