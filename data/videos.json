@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.22.1",
-    "updated": "2026-11-16T11:16:22Z"
+    "updated": "2026-11-17T11:11:53Z"
   },
   "videos": [
+    {
+      "id": "2-VURNLD9tc",
+      "title": "Nunu and Willump Top vs Aurelion Sol Master 666LP | Patch 26.22",
+      "published": "2026-11-17T11:00:29+00:00",
+      "role": "top",
+      "enemy": "AurelionSol",
+      "enemyName": "Aurelion Sol",
+      "patch": "26.22",
+      "rank": "Master",
+      "division": null,
+      "lp": 666,
+      "region": null,
+      "result": null
+    },
     {
       "id": "Qj_sHBEXwm4",
       "title": "Nunu and Willump Top vs Vayne Master 525LP | Patch 26.22",
