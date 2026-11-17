@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.23.1",
-    "updated": "2026-11-17T21:29:40Z"
+    "updated": "2026-11-17T23:10:55Z"
   },
   "videos": [
+    {
+      "id": "Ewlyxs4OmIg",
+      "title": "Nunu and Willump Top vs Leblanc Master 664LP | Patch 26.22",
+      "published": "2026-11-17T23:00:24+00:00",
+      "role": "top",
+      "enemy": "Leblanc",
+      "enemyName": "LeBlanc",
+      "patch": "26.22",
+      "rank": "Master",
+      "division": null,
+      "lp": 664,
+      "region": null,
+      "result": null
+    },
     {
       "id": "2-VURNLD9tc",
       "title": "Nunu and Willump Top vs Aurelion Sol Master 666LP | Patch 26.22",
