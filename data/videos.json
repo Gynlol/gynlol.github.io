@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.23.1",
-    "updated": "2026-11-17T23:10:55Z"
+    "updated": "2026-11-18T11:11:54Z"
   },
   "videos": [
+    {
+      "id": "mDPnSVm-QYU",
+      "title": "Nunu and Willump Top vs Renekton Master 719LP | Patch 26.22",
+      "published": "2026-11-18T11:00:32+00:00",
+      "role": "top",
+      "enemy": "Renekton",
+      "enemyName": "Renekton",
+      "patch": "26.22",
+      "rank": "Master",
+      "division": null,
+      "lp": 719,
+      "region": null,
+      "result": null
+    },
     {
       "id": "Ewlyxs4OmIg",
       "title": "Nunu and Willump Top vs Leblanc Master 664LP | Patch 26.22",
