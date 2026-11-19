@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.23.1",
-    "updated": "2026-11-18T11:11:54Z"
+    "updated": "2026-11-19T11:03:04Z"
   },
   "videos": [
+    {
+      "id": "SHdLv8M5ui8",
+      "title": "Nunu Mid vs Ahri Master 691 LP   Patch 26 21",
+      "published": "2026-11-19T11:00:36+00:00",
+      "role": "mid",
+      "enemy": "Ahri",
+      "enemyName": "Ahri",
+      "patch": "26",
+      "rank": "Master",
+      "division": null,
+      "lp": 691,
+      "region": null,
+      "result": null
+    },
     {
       "id": "mDPnSVm-QYU",
       "title": "Nunu and Willump Top vs Renekton Master 719LP | Patch 26.22",
