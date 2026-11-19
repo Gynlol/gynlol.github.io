@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.23.1",
-    "updated": "2026-11-19T16:17:42Z"
+    "updated": "2026-11-19T23:18:41Z"
   },
   "videos": [
+    {
+      "id": "wDo_uDd22jM",
+      "title": "Nunu and Willump Mid vs Smolder Master 341LP | Patch 26.21",
+      "published": "2026-11-19T23:00:16+00:00",
+      "role": "mid",
+      "enemy": "Smolder",
+      "enemyName": "Smolder",
+      "patch": "26.21",
+      "rank": "Master",
+      "division": null,
+      "lp": 341,
+      "region": null,
+      "result": null
+    },
     {
       "id": "SHdLv8M5ui8",
       "title": "Nunu and Willump Mid vs Ahri Master 691LP | Patch 26.22",
