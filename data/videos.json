@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.23.1",
-    "updated": "2026-11-20T11:09:24Z"
+    "updated": "2026-11-20T23:13:29Z"
   },
   "videos": [
+    {
+      "id": "ijvzOAxf9sw",
+      "title": "Nunu Top vs Sion Master 249 LP",
+      "published": "2026-11-20T23:00:07+00:00",
+      "role": "top",
+      "enemy": "Sion",
+      "enemyName": "Sion",
+      "patch": null,
+      "rank": "Master",
+      "division": null,
+      "lp": 249,
+      "region": null,
+      "result": null
+    },
     {
       "id": "th7w16tFbXQ",
       "title": "Nunu and Willump Mid vs Yone Master 773LP | Patch 26.22",
