@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.23.1",
-    "updated": "2026-11-19T23:18:41Z"
+    "updated": "2026-11-20T11:09:24Z"
   },
   "videos": [
+    {
+      "id": "th7w16tFbXQ",
+      "title": "Nunu and Willump Mid vs Yone Master 773LP | Patch 26.22",
+      "published": "2026-11-20T11:00:16+00:00",
+      "role": "mid",
+      "enemy": "Yone",
+      "enemyName": "Yone",
+      "patch": "26.22",
+      "rank": "Master",
+      "division": null,
+      "lp": 773,
+      "region": null,
+      "result": null
+    },
     {
       "id": "wDo_uDd22jM",
       "title": "Nunu and Willump Mid vs Smolder Master 341LP | Patch 26.21",
