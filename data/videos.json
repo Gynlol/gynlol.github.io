@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.23.1",
-    "updated": "2026-11-20T23:34:37Z"
+    "updated": "2026-11-21T23:02:46Z"
   },
   "videos": [
+    {
+      "id": "EVsWoFaumbc",
+      "title": "Nunu and Willump Top vs Fiora Master 813LP | Patch 26.23",
+      "published": "2026-11-21T23:00:01+00:00",
+      "role": "top",
+      "enemy": "Fiora",
+      "enemyName": "Fiora",
+      "patch": "26.23",
+      "rank": "Master",
+      "division": null,
+      "lp": 813,
+      "region": null,
+      "result": null
+    },
     {
       "id": "ijvzOAxf9sw",
       "title": "Nunu and Willump Top vs Sion Master 249LP | Patch 26.21",
