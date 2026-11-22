@@ -25,6 +25,7 @@
 
     "top/Aatrox": "moyen",
     "top/Akali": "moyen",
+    "top/AurelionSol": "freewin",
     "top/Aurora": "facile",
     "top/Camille": "moyen",
     "top/Cassiopeia": "moyen",
@@ -39,6 +40,8 @@
     "top/Gragas": "moyen",
     "top/Gwen": "facile",
     "top/Irelia": "dur",
+    "top/Jayce": "moyen",
+    "top/KSante": "tresdur",
     "top/Kayle": "facile",
     "top/Mordekaiser": "facile",
     "top/Nasus": "moyen",
@@ -58,6 +61,7 @@
 
     "mid/Ahri": "moyen",
     "mid/Akali": "moyen",
+    "mid/Ambessa": "dur",
     "mid/AurelionSol": "freewin",
     "mid/Aurora": "moyen",
     "mid/Azir": "facile",
@@ -65,11 +69,15 @@
     "mid/Ekko": "moyen",
     "mid/Galio": "moyen",
     "mid/Garen": "tresdur",
+    "mid/Irelia": "dur",
+    "mid/Katarina": "moyen",
     "mid/Leblanc": "dur",
     "mid/Lissandra": "moyen",
     "mid/Orianna": "facile",
     "mid/Ryze": "facile",
+    "mid/Smolder": "facile",
     "mid/Syndra": "dur",
+    "mid/Sylas": "moyen",
     "mid/TwistedFate": "facile",
     "mid/Vex": "moyen",
     "mid/Viktor": "moyen",
@@ -90,7 +98,8 @@
     "adc/Viktor": "facile",
     "adc/Xerath": "facile",
     "adc/Ziggs": "facile",
-    "support/Anivia": "tresdur"
+    "support/Anivia": "tresdur",
+    "support/Brand": "facile"
   },
 
   "video_notes": {
