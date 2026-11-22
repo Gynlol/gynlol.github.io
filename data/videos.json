@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.23.1",
-    "updated": "2026-11-22T02:16:49Z"
+    "updated": "2026-11-22T11:08:42Z"
   },
   "videos": [
+    {
+      "id": "d7ji8MRQ-L8",
+      "title": "Nunu and Willump Mid vs Ryze Master 843LP | Patch 26.23",
+      "published": "2026-11-22T11:00:23+00:00",
+      "role": "mid",
+      "enemy": "Ryze",
+      "enemyName": "Ryze",
+      "patch": "26.23",
+      "rank": "Master",
+      "division": null,
+      "lp": 843,
+      "region": null,
+      "result": null
+    },
     {
       "id": "EVsWoFaumbc",
       "title": "Nunu and Willump Top vs Fiora Master 813LP | Patch 26.23",
