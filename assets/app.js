@@ -19,7 +19,7 @@
       coverage: function (a, b) { return "<strong>" + a + "</strong>/" + b + " matchups couverts"; },
       noVideo: "Pas encore de replay",
       nVideos: function (n) { return n > 1 ? n + " replays" : "1 replay"; },
-      tileLabel: function (name, n) { return n > 0 ? name + " — " + (n > 1 ? n + " replays" : "1 replay") : name + " — pas encore de replay"; },
+      tileLabel: function (name, n) { return n > 0 ? name : name + " — pas encore de replay"; },
       matchupSub: function (n) { return n > 1 ? n + " replays" : "1 replay"; },
       sortBy: "Trier par",
       sortRank: "Rang",
@@ -84,7 +84,7 @@
       coverage: function (a, b) { return "<strong>" + a + "</strong>/" + b + " matchups covered"; },
       noVideo: "No replay yet",
       nVideos: function (n) { return n > 1 ? n + " replays" : "1 replay"; },
-      tileLabel: function (name, n) { return n > 0 ? name + " — " + (n > 1 ? n + " replays" : "1 replay") : name + " — no replay yet"; },
+      tileLabel: function (name, n) { return n > 0 ? name : name + " — no replay yet"; },
       matchupSub: function (n) { return n > 1 ? n + " replays" : "1 replay"; },
       sortBy: "Sort by",
       sortRank: "Rank",
@@ -578,11 +578,6 @@
         flag.className = "tile-ban";
         flag.textContent = t().ban;
         tile.appendChild(flag);
-      } else if (c.videos.length > 1) {
-        var badge = document.createElement("span");
-        badge.className = "tile-count";
-        badge.textContent = String(c.videos.length);
-        tile.appendChild(badge);
       }
 
       var name = document.createElement("span");
