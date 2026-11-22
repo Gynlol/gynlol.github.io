@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.23.1",
-    "updated": "2026-11-22T11:08:42Z"
+    "updated": "2026-11-22T23:06:47Z"
   },
   "videos": [
+    {
+      "id": "C1ch9dLSshY",
+      "title": "Nunu and Willump Mid vs Locke Master 488LP | Patch 26.22",
+      "published": "2026-11-22T23:00:28+00:00",
+      "role": "mid",
+      "enemy": "Locke",
+      "enemyName": "Locke",
+      "patch": "26.22",
+      "rank": "Master",
+      "division": null,
+      "lp": 488,
+      "region": null,
+      "result": null
+    },
     {
       "id": "d7ji8MRQ-L8",
       "title": "Nunu and Willump Mid vs Ryze Master 843LP | Patch 26.23",
