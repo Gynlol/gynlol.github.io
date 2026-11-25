@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.23.1",
-    "updated": "2026-11-23T23:07:55Z"
+    "updated": "2026-11-25T11:03:58Z"
   },
   "videos": [
+    {
+      "id": "57V6ou5QfPQ",
+      "title": "Nunu and Willump Mid vs Sylas Master 637LP | Patch 26.23",
+      "published": "2026-11-25T11:00:15+00:00",
+      "role": "mid",
+      "enemy": "Sylas",
+      "enemyName": "Sylas",
+      "patch": "26.23",
+      "rank": "Master",
+      "division": null,
+      "lp": 637,
+      "region": null,
+      "result": null
+    },
     {
       "id": "okJgpfKzrHU",
       "title": "Nunu and Willump Mid vs Locke Master 517LP | Patch 26.22",
