@@ -3,7 +3,7 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.23.1",
-    "updated": "2026-11-27T11:07:40Z"
+    "updated": "2026-11-27T17:42:31Z"
   },
   "videos": [
     {
@@ -17,8 +17,8 @@
       "rank": "Diamond",
       "division": "3",
       "lp": 48,
-      "region": null,
-      "result": null
+      "region": "EUW",
+      "result": "loss"
     },
     {
       "id": "57V6ou5QfPQ",
@@ -31,8 +31,8 @@
       "rank": "Master",
       "division": null,
       "lp": 637,
-      "region": null,
-      "result": null
+      "region": "EUW",
+      "result": "win"
     },
     {
       "id": "okJgpfKzrHU",
@@ -45,8 +45,8 @@
       "rank": "Master",
       "division": null,
       "lp": 517,
-      "region": null,
-      "result": null
+      "region": "EUW",
+      "result": "win"
     },
     {
       "id": "C1ch9dLSshY",
@@ -59,8 +59,8 @@
       "rank": "Master",
       "division": null,
       "lp": 488,
-      "region": null,
-      "result": null
+      "region": "EUW",
+      "result": "win"
     },
     {
       "id": "d7ji8MRQ-L8",
@@ -73,8 +73,8 @@
       "rank": "Master",
       "division": null,
       "lp": 843,
-      "region": null,
-      "result": null
+      "region": "EUW",
+      "result": "win"
     },
     {
       "id": "EVsWoFaumbc",
@@ -87,8 +87,8 @@
       "rank": "Master",
       "division": null,
       "lp": 813,
-      "region": null,
-      "result": null
+      "region": "EUW",
+      "result": "win"
     },
     {
       "id": "ijvzOAxf9sw",
@@ -101,7 +101,7 @@
       "rank": "Master",
       "division": null,
       "lp": 249,
-      "region": null,
+      "region": "EUW",
       "result": null
     },
     {
@@ -115,7 +115,7 @@
       "rank": "Master",
       "division": null,
       "lp": 773,
-      "region": null,
+      "region": "EUW",
       "result": null
     },
     {
@@ -129,8 +129,8 @@
       "rank": "Master",
       "division": null,
       "lp": 341,
-      "region": null,
-      "result": null
+      "region": "EUW",
+      "result": "loss"
     },
     {
       "id": "SHdLv8M5ui8",
@@ -143,8 +143,8 @@
       "rank": "Master",
       "division": null,
       "lp": 691,
-      "region": null,
-      "result": null
+      "region": "EUW",
+      "result": "win"
     },
     {
       "id": "mDPnSVm-QYU",
@@ -157,8 +157,8 @@
       "rank": "Master",
       "division": null,
       "lp": 719,
-      "region": null,
-      "result": null
+      "region": "EUW",
+      "result": "win"
     },
     {
       "id": "Ewlyxs4OmIg",
@@ -171,8 +171,8 @@
       "rank": "Master",
       "division": null,
       "lp": 664,
-      "region": null,
-      "result": null
+      "region": "EUW",
+      "result": "win"
     },
     {
       "id": "2-VURNLD9tc",
@@ -185,8 +185,8 @@
       "rank": "Master",
       "division": null,
       "lp": 666,
-      "region": null,
-      "result": null
+      "region": "EUW",
+      "result": "win"
     },
     {
       "id": "Qj_sHBEXwm4",
@@ -199,7 +199,7 @@
       "rank": "Master",
       "division": null,
       "lp": 525,
-      "region": null,
+      "region": "EUW",
       "result": null
     },
     {
@@ -213,8 +213,8 @@
       "rank": "Diamond",
       "division": "1",
       "lp": 77,
-      "region": null,
-      "result": null
+      "region": "EUW",
+      "result": "win"
     },
     {
       "id": "VakDdjzkTPk",
