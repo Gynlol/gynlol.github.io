@@ -3,7 +3,7 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.23.1",
-    "updated": "2026-11-27T17:42:31Z"
+    "updated": "2026-11-27T17:59:35Z"
   },
   "videos": [
     {
@@ -18,7 +18,7 @@
       "division": "3",
       "lp": 48,
       "region": "EUW",
-      "result": "loss"
+      "result": null
     },
     {
       "id": "57V6ou5QfPQ",
@@ -32,7 +32,7 @@
       "division": null,
       "lp": 637,
       "region": "EUW",
-      "result": "win"
+      "result": null
     },
     {
       "id": "okJgpfKzrHU",
@@ -46,7 +46,7 @@
       "division": null,
       "lp": 517,
       "region": "EUW",
-      "result": "win"
+      "result": null
     },
     {
       "id": "C1ch9dLSshY",
@@ -60,7 +60,7 @@
       "division": null,
       "lp": 488,
       "region": "EUW",
-      "result": "win"
+      "result": null
     },
     {
       "id": "d7ji8MRQ-L8",
@@ -74,7 +74,7 @@
       "division": null,
       "lp": 843,
       "region": "EUW",
-      "result": "win"
+      "result": null
     },
     {
       "id": "EVsWoFaumbc",
@@ -88,7 +88,7 @@
       "division": null,
       "lp": 813,
       "region": "EUW",
-      "result": "win"
+      "result": null
     },
     {
       "id": "ijvzOAxf9sw",
@@ -130,7 +130,7 @@
       "division": null,
       "lp": 341,
       "region": "EUW",
-      "result": "loss"
+      "result": null
     },
     {
       "id": "SHdLv8M5ui8",
@@ -144,7 +144,7 @@
       "division": null,
       "lp": 691,
       "region": "EUW",
-      "result": "win"
+      "result": null
     },
     {
       "id": "mDPnSVm-QYU",
@@ -158,7 +158,7 @@
       "division": null,
       "lp": 719,
       "region": "EUW",
-      "result": "win"
+      "result": null
     },
     {
       "id": "Ewlyxs4OmIg",
@@ -172,7 +172,7 @@
       "division": null,
       "lp": 664,
       "region": "EUW",
-      "result": "win"
+      "result": null
     },
     {
       "id": "2-VURNLD9tc",
@@ -186,7 +186,7 @@
       "division": null,
       "lp": 666,
       "region": "EUW",
-      "result": "win"
+      "result": null
     },
     {
       "id": "Qj_sHBEXwm4",
@@ -214,7 +214,7 @@
       "division": "1",
       "lp": 77,
       "region": "EUW",
-      "result": "win"
+      "result": null
     },
     {
       "id": "VakDdjzkTPk",
