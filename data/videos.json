@@ -3,9 +3,23 @@
     "channelId": "UCbCzW8Qt_rDveIhHsVyOGUA",
     "channelUrl": "https://www.youtube.com/@GynReplays",
     "ddragonVersion": "16.23.1",
-    "updated": "2026-11-25T11:03:58Z"
+    "updated": "2026-11-27T11:07:40Z"
   },
   "videos": [
+    {
+      "id": "AdLWBhFPotc",
+      "title": "Nunu and Willump ADC vs Yunara Diamond 3 48LP | Patch 26.23",
+      "published": "2026-11-27T11:00:08+00:00",
+      "role": "adc",
+      "enemy": "Yunara",
+      "enemyName": "Yunara",
+      "patch": "26.23",
+      "rank": "Diamond",
+      "division": "3",
+      "lp": 48,
+      "region": null,
+      "result": null
+    },
     {
       "id": "57V6ou5QfPQ",
       "title": "Nunu and Willump Mid vs Sylas Master 637LP | Patch 26.23",
