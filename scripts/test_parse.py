@@ -10,7 +10,7 @@ if hasattr(sys.stdout, "reconfigure"):
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from update_videos import (CHAMPIONS_PATH, RANK_ORDER, build_name_index,
                            canonicalize_title, display_names, load_json,
-                           parse_rank, parse_title)
+                           parse_rank, parse_title, parse_video)
 
 CASES = [
     # (titre, attendu) — attendu : None = hors gabarit (ignoré), sinon un
@@ -145,6 +145,66 @@ def check_ranks():
         len(RANK_CASES) - failures, len(RANK_CASES)))
     return failures
 
+YUNARA_DESC = """❄️ Nunu ADC vs Yunara — 7/3/9 (DEFEAT) | EUW Diamond 3 48 LP
+
+🏆 Game ELO: Diamond 3 48 LP (EUW)
+
+📊 Match detail:
+
+Duration: 23:37 (Defeat by surrender)
+Game ELO: Diamond 3 48 LP
+ADC: Nunu & Willump vs Yunara
+Region: EUW | Patch: 26.21
+
+⏱️ Timeline:
+
+00:00 Clip starts (game 00:25) — Nunu ADC vs Yunara
+"""
+RYZE_DESC = """❄️ Nunu mid into Ryze on EUW Master 843 LP: 14/3/2, ending with an enemy surrender at 15:45.
+
+🏆 Game ELO: Master 843 LP (EUW)
+
+Duration: 15:45 (enemy surrender, 4–0 vote)
+Game ELO: Master 843 LP
+Mid lane: Nunu & Willump vs Twisted Fate
+Region: EUW | Patch: 26.21
+"""
+# Titres SANS matchup ni LP (gabarit depuis le 27/11/2026) : tout vient de
+# la description, sauf le patch du titre.
+DESC_CASES = [
+    ("Nunu ADC Gameplay | Patch 26.23", YUNARA_DESC,
+     {"role": "adc", "enemy": "Yunara", "rank": "Diamond", "division": "3",
+      "lp": 48, "region": "EUW", "patch": "26.23", "result": "loss"}),
+    ("Je deviens fou en Master", RYZE_DESC,
+     {"role": "mid", "enemy": "TwistedFate", "rank": "Master", "division": None,
+      "lp": 843, "region": "EUW", "patch": "26.21", "result": "win"}),
+    # La description prime sur le titre pour le matchup et les LP.
+    ("Nunu Mid vs Ahri Master 10LP | Patch 26.22", RYZE_DESC,
+     {"role": "mid", "enemy": "TwistedFate", "lp": 843, "patch": "26.22"}),
+    # Description hors gabarit : repli sur le titre (anciennes vidéos).
+    ("Nunu Top vs Jax Master 40LP | Patch 26.20", "Merci d'avoir regardé !",
+     {"role": "top", "enemy": "Jax", "lp": 40, "patch": "26.20"}),
+    # Un « Nunu vs X » dans la timeline n'est pas un matchup.
+    ("Best-of du stream",
+     "Stream du soir\n\n12:00 Nunu Mid vs Ahri — gros outplay\n",
+     None),
+]
+
+
+def check_descriptions(index, names):
+    failures = 0
+    for title, desc, want in DESC_CASES:
+        got = parse_video(title, desc, index, names)
+        if want is None:
+            ok = got is None
+        else:
+            ok = got is not None and all(got.get(k) == v for k, v in want.items())
+        if not ok:
+            failures += 1
+        print(f"{'OK ' if ok else 'FAIL'} desc {title!r} -> {got and (got['role'], got['enemy'], got['rank'], got['lp'], got['patch'], got['result'])}")
+    print(f"\n{len(DESC_CASES) - failures}/{len(DESC_CASES)} cas de description passent")
+    return failures
+
 
 def main():
     title = "Nunu Top vs GankPlack | Unranked to Master : Emerald 4 67lp | Patch 26.17"
@@ -176,6 +236,7 @@ def main():
         print(f"{mark} {title!r} -> {detail}")
     print(f"\n{len(CASES) - failures}/{len(CASES)} cas de titre passent")
     failures += check_ranks()
+    failures += check_descriptions(index, names)
     sys.exit(1 if failures else 0)
 
 

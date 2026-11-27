@@ -2,7 +2,10 @@
 """Met à jour data/videos.json depuis le flux RSS de la chaîne YouTube.
 
 - Lit le flux public (aucune clé API) : titres, ids, dates.
-- Parse chaque titre « Nunu <rôle> vs <champion> … » ; hors gabarit = ignoré.
+- Lit le matchup, le rang et les LP dans la DESCRIPTION (lignes
+  « ADC: Nunu & Willump vs X », « Game ELO: … LP ») ; le titre « Nunu <rôle>
+  vs <champion> … » ne sert plus que de repli (anciennes vidéos) et pour le
+  patch. Ni l'un ni l'autre = ignoré.
 - Corrige les fautes de champion connues dans le titre archivé et le
   rattachement de la vidéo.
 - Fusionne avec le fichier existant : le flux RSS ne contient que les ~15
@@ -36,6 +39,7 @@ CHAMPIONS_PATH = os.path.join(DATA_DIR, "champions.json")
 
 NS = {
     "atom": "http://www.w3.org/2005/Atom",
+    "media": "http://search.yahoo.com/mrss/",
     "yt": "http://www.youtube.com/xml/schemas/2015",
 }
 
@@ -279,6 +283,107 @@ def parse_title(title, name_index, names):
     }
 
 
+# --- Description (source principale depuis le 27/11/2026) -------------------
+# Le titre ne porte plus le matchup ni les LP : on les lit dans la
+# description, qui suit le gabarit « Match detail ». Lignes utilisées :
+#   « ADC: Nunu & Willump vs Yunara »      (ou « Mid lane: … »)
+#   « 🏆 Game ELO: Diamond 3 48 LP (EUW) » (ou « Game ELO: Master 637 LP »)
+#   « Region: EUW | Patch: 26.21 »
+#   1re ligne « ❄️ Nunu ADC vs Yunara — 7/3/9 (DEFEAT) | EUW Diamond 3 48 LP »
+# Seules ces lignes structurées comptent : un « Nunu vs X » cité dans la
+# timeline ou le texte libre n'est jamais lu comme matchup.
+DESC_ROLE_LINE_RE = re.compile(
+    r"^\W*(?P<role>[a-z]+)(?:\s+lane)?\s*:\s*"
+    r"nunu(?:\s*(?:&|and)\s*willump)?\s+vs\.?\s+(?P<enemy>.+?)\s*$",
+    re.IGNORECASE | re.MULTILINE)
+DESC_ELO_RE = re.compile(r"^\W*(?:game\s+)?elo\s*:\s*(?P<rest>.+)$",
+                         re.IGNORECASE | re.MULTILINE)
+DESC_REGION_RE = re.compile(r"^\W*region\s*:\s*([A-Z]{2,4})\b",
+                            re.IGNORECASE | re.MULTILINE)
+DESC_PATCH_RE = re.compile(r"\bpatch\s*:?\s*(\d+\.\d+)", re.IGNORECASE)
+
+
+def parse_description(desc, name_index, names):
+    """Champs lus dans la description, ou None si elle ne donne pas le
+    matchup. Peut ne contenir que role/enemy si le reste manque."""
+    if not desc:
+        return None
+    lines = [l for l in desc.splitlines() if l.strip()]
+    first = parse_title(lines[0], name_index, names) if lines else None
+
+    base = None
+    m = DESC_ROLE_LINE_RE.search(desc)
+    if m and ROLE_TOKENS.get(m.group("role").lower()):
+        base = parse_title("Nunu %s vs %s" % (m.group("role"), m.group("enemy")),
+                           name_index, names)
+    if base is None:
+        base = first
+    if base is None:
+        return None
+    out = {"role": base["role"], "enemy": base["enemy"],
+           "enemyName": base["enemyName"]}
+
+    em = DESC_ELO_RE.search(desc)
+    rank = division = lp = None
+    if em:
+        rank, division, lp = parse_rank(em.group("rest"))
+    if rank is None and lp is None and first:
+        rank, division, lp = first["rank"], first["division"], first["lp"]
+    out.update({"rank": rank, "division": division, "lp": lp})
+
+    rm = DESC_REGION_RE.search(desc)
+    region = rm.group(1).upper() if rm else None
+    if region is None and em:
+        gm = re.search(r"\b(EUW|EUNE|NA|KR|OCE|BR|LAN|LAS|TR|RU|JP|VN|SEA|ME)\b",
+                       em.group("rest"))
+        region = gm.group(1) if gm else None
+    if region is None and first:
+        region = first["region"]
+    out["region"] = region
+
+    pm = DESC_PATCH_RE.search(desc)
+    out["patch"] = pm.group(1) if pm else None
+    result = first["result"] if first else None
+    if result is None:
+        dm = re.search(r"^\W*duration\s*:(.*)$", desc, re.IGNORECASE | re.MULTILINE)
+        d = dm.group(1).lower() if dm else ""
+        if re.search(r"defeat|loss|lose", d):
+            result = "loss"
+        elif re.search(r"victory|win|enemy surrender|enemy nexus", d):
+            result = "win"
+    out["result"] = result
+    return out
+
+
+def parse_video(title, desc, name_index, names):
+    """Description d'abord pour le matchup, le rang et les LP ; le titre
+    complète (patch, résultat) et sert seul pour les anciennes vidéos dont la
+    description n'a pas le gabarit. None = ni l'un ni l'autre : ignoré."""
+    from_title = parse_title(title, name_index, names)
+    from_desc = parse_description(desc, name_index, names)
+    if from_desc is None:
+        return from_title
+    rec = dict(from_desc)
+    # Le patch reste dans le titre même sans matchup (« … | Patch 26.23 »).
+    tp = re.search(r"patch\s+(\d+\.\d+)", title, re.IGNORECASE)
+    if tp:
+        rec["patch"] = tp.group(1)
+    if from_title:
+        # Le patch du titre est saisi à chaque vidéo ; celui de la
+        # description est souvent un reste du gabarit. Le titre gagne.
+        for key in ("patch", "result"):
+            if from_title.get(key):
+                rec[key] = from_title[key]
+        for key in ("rank", "division", "lp", "region"):
+            if rec.get(key) is None and from_title.get(key) is not None:
+                if key == "division" and rec.get("rank") not in (None, from_title.get("rank")):
+                    continue
+                rec[key] = from_title[key]
+    return {k: rec.get(k) for k in
+            ("role", "enemy", "enemyName", "patch", "rank", "division",
+             "lp", "region", "result")}
+
+
 def fetch(url, tries=4):
     """Lecture réseau avec reprises.
 
@@ -312,8 +417,10 @@ def fetch_feed():
         vid = e.findtext("yt:videoId", default=None, namespaces=NS)
         title = e.findtext("atom:title", default="", namespaces=NS)
         published = e.findtext("atom:published", default="", namespaces=NS)
+        desc = e.findtext("media:group/media:description", default="", namespaces=NS)
         if vid and title:
-            entries.append({"id": vid, "title": title.strip(), "published": published})
+            entries.append({"id": vid, "title": title.strip(), "published": published,
+                            "description": desc or ""})
     return entries
 
 
@@ -341,7 +448,8 @@ def main():
     added, updated, ignored = [], [], []
     for e in entries:
         title = canonicalize_title(e["title"])
-        parsed = parse_title(title, name_index, names)
+        desc = canonicalize_title(e.get("description", ""))
+        parsed = parse_video(title, desc, name_index, names)
         if parsed is None:
             ignored.append(e["title"])
             # Titre corrigé dans l'autre sens (matchait avant, plus maintenant)
