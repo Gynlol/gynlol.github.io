@@ -44,7 +44,7 @@ push_pending() {
 }
 
 commit_and_push() {
-  git add data/videos.json data/setup-built.json matchups sitemap.xml
+  git add data/videos.json data/patches.json data/setup-built.json matchups sitemap.xml
   if git diff --cached --quiet; then
     echo "aucun artefact à publier."
     return 0

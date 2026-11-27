@@ -10,7 +10,8 @@ if hasattr(sys.stdout, "reconfigure"):
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from update_videos import (CHAMPIONS_PATH, RANK_ORDER, build_name_index,
                            canonicalize_title, display_names, load_json,
-                           parse_rank, parse_title, parse_video)
+                           parse_rank, parse_title, parse_video,
+                           PATCHES_PATH, ddragon_to_patch, patch_for_date)
 
 CASES = [
     # (titre, attendu) — attendu : None = hors gabarit (ignoré), sinon un
@@ -174,10 +175,10 @@ Region: EUW | Patch: 26.21
 DESC_CASES = [
     ("Nunu ADC Gameplay | Patch 26.23", YUNARA_DESC,
      {"role": "adc", "enemy": "Yunara", "rank": "Diamond", "division": "3",
-      "lp": 48, "region": "EUW", "patch": "26.23", "result": "loss"}),
+      "lp": 48, "region": "EUW", "patch": "26.23", "result": None}),
     ("Je deviens fou en Master", RYZE_DESC,
      {"role": "mid", "enemy": "TwistedFate", "rank": "Master", "division": None,
-      "lp": 843, "region": "EUW", "patch": "26.21", "result": "win"}),
+      "lp": 843, "region": "EUW", "patch": "26.21", "result": None}),
     # La description prime sur le titre pour le matchup et les LP.
     ("Nunu Mid vs Ahri Master 10LP | Patch 26.22", RYZE_DESC,
      {"role": "mid", "enemy": "TwistedFate", "lp": 843, "patch": "26.22"}),
@@ -189,6 +190,34 @@ DESC_CASES = [
      "Stream du soir\n\n12:00 Nunu Mid vs Ahri — gros outplay\n",
      None),
 ]
+
+
+PATCH_CASES = [
+    # (date de publication, patch attendu) — table officielle Riot.
+    ("2026-11-27", "26.23"),
+    ("2026-11-18", "26.23"),   # jour de sortie : déjà le nouveau patch
+    ("2026-11-17", "26.22"),
+    ("2026-12-09", "26.24"),
+    ("2026-01-08", "26.1"),
+    ("2025-12-31", None),      # avant la table : rien
+]
+
+
+def check_patches():
+    patches = load_json(PATCHES_PATH)["patches"]
+    failures = 0
+    for day, want in PATCH_CASES:
+        got = patch_for_date(day, patches)
+        ok = got == want
+        failures += not ok
+        print(f"{'OK ' if ok else 'FAIL'} patch {day} -> {got!r} (attendu {want!r})")
+    for version, want in (("16.23.1", "26.23"), ("17.1.1", "27.1"), ("x", None)):
+        got = ddragon_to_patch(version)
+        ok = got == want
+        failures += not ok
+        print(f"{'OK ' if ok else 'FAIL'} ddragon {version} -> {got!r}")
+    print(f"\n{len(PATCH_CASES) + 3 - failures}/{len(PATCH_CASES) + 3} cas de patch passent")
+    return failures
 
 
 def check_descriptions(index, names):
@@ -237,6 +266,7 @@ def main():
     print(f"\n{len(CASES) - failures}/{len(CASES)} cas de titre passent")
     failures += check_ranks()
     failures += check_descriptions(index, names)
+    failures += check_patches()
     sys.exit(1 if failures else 0)
 
 

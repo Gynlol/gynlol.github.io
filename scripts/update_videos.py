@@ -36,6 +36,11 @@ DDRAGON_VERSIONS = "https://ddragon.leagueoflegends.com/api/versions.json"
 DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data")
 VIDEOS_PATH = os.path.join(DATA_DIR, "videos.json")
 CHAMPIONS_PATH = os.path.join(DATA_DIR, "champions.json")
+PATCHES_PATH = os.path.join(DATA_DIR, "patches.json")
+# À partir de ce jour (date de publication UTC), le patch d'une vidéo est
+# celui qui était en ligne le jour de sa sortie, lu dans data/patches.json —
+# plus celui écrit dans le titre. Les vidéos plus anciennes ne bougent pas.
+PATCH_BY_DATE_FROM = "2026-11-27"
 
 NS = {
     "atom": "http://www.w3.org/2005/Atom",
@@ -343,15 +348,9 @@ def parse_description(desc, name_index, names):
 
     pm = DESC_PATCH_RE.search(desc)
     out["patch"] = pm.group(1) if pm else None
-    result = first["result"] if first else None
-    if result is None:
-        dm = re.search(r"^\W*duration\s*:(.*)$", desc, re.IGNORECASE | re.MULTILINE)
-        d = dm.group(1).lower() if dm else ""
-        if re.search(r"defeat|loss|lose", d):
-            result = "loss"
-        elif re.search(r"victory|win|enemy surrender|enemy nexus", d):
-            result = "win"
-    out["result"] = result
+    # Le résultat (WIN/DEFEAT) n'est volontairement pas lu : pas de pastille
+    # victoire/défaite sur le site pour les vidéos lues par la description.
+    out["result"] = None
     return out
 
 
@@ -371,9 +370,8 @@ def parse_video(title, desc, name_index, names):
     if from_title:
         # Le patch du titre est saisi à chaque vidéo ; celui de la
         # description est souvent un reste du gabarit. Le titre gagne.
-        for key in ("patch", "result"):
-            if from_title.get(key):
-                rec[key] = from_title[key]
+        if from_title.get("patch"):
+            rec["patch"] = from_title["patch"]
         for key in ("rank", "division", "lp", "region"):
             if rec.get(key) is None and from_title.get(key) is not None:
                 if key == "division" and rec.get("rank") not in (None, from_title.get("rank")):
@@ -382,6 +380,42 @@ def parse_video(title, desc, name_index, names):
     return {k: rec.get(k) for k in
             ("role", "enemy", "enemyName", "patch", "rank", "division",
              "lp", "region", "result")}
+
+
+def patch_key(p):
+    major, minor = p.split(".")
+    return int(major), int(minor)
+
+
+def ddragon_to_patch(version):
+    """« 16.23.1 » (Data Dragon) -> « 26.23 » (nom public du patch)."""
+    m = re.match(r"^(\d+)\.(\d+)\.", version or "")
+    return "%d.%d" % (int(m.group(1)) + 10, int(m.group(2))) if m else None
+
+
+def patch_for_date(day, patches):
+    """Patch en ligne le jour `day` (AAAA-MM-JJ) : le dernier sorti ce
+    jour-là ou avant. None si la table ne couvre pas cette date."""
+    best = None
+    for p, released in patches.items():
+        if released <= day and (best is None or patch_key(p) > patch_key(best)):
+            best = p
+    return best
+
+
+def update_patch_table(dd_version, today):
+    """Ajoute le patch courant de Data Dragon s'il manque à la table, daté du
+    jour où le robot le voit pour la première fois (le robot tourne en
+    continu, donc à quelques minutes près du jour de sortie)."""
+    doc = load_json(PATCHES_PATH) if os.path.exists(PATCHES_PATH) else {"patches": {}}
+    current = ddragon_to_patch(dd_version)
+    if current and current not in doc["patches"]:
+        doc["patches"][current] = today
+        with open(PATCHES_PATH, "w", encoding="utf-8", newline="\n") as f:
+            json.dump(doc, f, ensure_ascii=False, indent=2)
+            f.write("\n")
+        print(f"nouveau patch {current} daté du {today}")
+    return doc["patches"]
 
 
 def fetch(url, tries=4):
@@ -445,6 +479,9 @@ def main():
     by_id = {v["id"]: v for v in old.get("videos", [])}
 
     entries = fetch_feed()
+    dd_version = fetch_ddragon_version(old.get("meta", {}).get("ddragonVersion", "15.1.1"))
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    patches = update_patch_table(dd_version, today)
     added, updated, ignored = [], [], []
     for e in entries:
         title = canonicalize_title(e["title"])
@@ -457,6 +494,9 @@ def main():
             if e["id"] in by_id:
                 del by_id[e["id"]]
             continue
+        day = e["published"][:10]
+        if day >= PATCH_BY_DATE_FROM:
+            parsed["patch"] = patch_for_date(day, patches) or parsed.get("patch")
         record = {
             "id": e["id"],
             "title": title,
@@ -471,7 +511,6 @@ def main():
             updated.append(e["title"])
 
     videos = sorted(by_id.values(), key=lambda v: v["published"], reverse=True)
-    dd_version = fetch_ddragon_version(old.get("meta", {}).get("ddragonVersion", "15.1.1"))
 
     new = {
         "meta": {
